@@ -1,54 +1,65 @@
-# MCP Calculator Server (Python)
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "f4733f39c05c58e0cf0eee0a8ae7e9a2",
+  "translation_date": "2025-10-17T20:04:06+00:00",
+  "source_file": "03-GettingStarted/samples/python/README.md",
+  "language_code": "zh"
+}
+-->
+# MCP计算器服务器 (Python)
 
+一个简单的模型上下文协议 (MCP) 服务器的Python实现，提供基本的计算器功能。
 
+## 安装
 
-A simple Model Context Protocol (MCP) server implementation in Python that provides basic calculator functionality.
-
-
-## Installation
-
-Install the required dependencies:
+安装所需的依赖项：
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Or install the MCP Python SDK directly:
+或者直接安装MCP Python SDK：
 
 ```bash
 pip install mcp>=1.18.0
 ```
 
-## Usage
+## 使用方法
 
-### Running the Server
+### 启动服务器
 
-The server is designed to be used by MCP clients (like Claude Desktop). To start the server:
+该服务器设计用于MCP客户端（例如Claude Desktop）。启动服务器：
 
 ```bash
 python mcp_calculator_server.py
 ```
 
-**Note**: When run directly in a terminal, you'll see JSON-RPC validation errors. This is normal behavior - the server is waiting for properly formatted MCP client messages.
+**注意**：直接在终端运行时，您可能会看到JSON-RPC验证错误。这是正常现象——服务器正在等待格式正确的MCP客户端消息。
 
-### Testing the Functions
+### 测试功能
 
-To test that the calculator functions work correctly:
+测试计算器功能是否正常工作：
 
 ```bash
 python test_calculator.py
 ```
 
-## Troubleshooting
+## 故障排除
 
-### Import Errors
+### 导入错误
 
-If you see `ModuleNotFoundError: No module named 'mcp'`, install the MCP Python SDK:
+如果您看到`ModuleNotFoundError: No module named 'mcp'`，请安装MCP Python SDK：
 
 ```bash
 pip install mcp>=1.18.0
 ```
 
-### JSON-RPC Errors When Running Directly
+### 直接运行时的JSON-RPC错误
 
-Errors like "Invalid JSON: EOF while parsing a value" when running the server directly are expected. The server needs MCP client messages, not direct terminal input.
+直接运行服务器时出现类似“Invalid JSON: EOF while parsing a value”的错误是预期的。服务器需要MCP客户端消息，而不是直接的终端输入。
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。

@@ -1,26 +1,34 @@
-# Basic Calculator MCP Service
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "ed9cab32cc67c12d8969b407aa47100a",
+  "translation_date": "2025-07-13T17:52:22+00:00",
+  "source_file": "03-GettingStarted/01-first-server/solution/java/README.md",
+  "language_code": "zh"
+}
+-->
+# 基础计算器 MCP 服务
 
-This service provides basic calculator operations through the Model Context Protocol (MCP) using Spring Boot with WebFlux transport. It's designed as a simple example for beginners learning about MCP implementations.
+该服务通过使用 Spring Boot 和 WebFlux 传输的模型上下文协议（MCP）提供基础计算器操作。它被设计为初学者学习 MCP 实现的简单示例。
 
-For more information, see the [MCP Server Boot Starter](https://docs.spring.io/spring-ai/reference/api/mcp/mcp-server-boot-starter-docs.html) reference documentation.
+更多信息，请参阅 [MCP Server Boot Starter](https://docs.spring.io/spring-ai/reference/api/mcp/mcp-server-boot-starter-docs.html) 参考文档。
 
+## 使用该服务
 
-## Using the Service
+该服务通过 MCP 协议暴露以下 API 端点：
 
-The service exposes the following API endpoints through the MCP protocol:
+- `add(a, b)`：将两个数字相加
+- `subtract(a, b)`：用第一个数字减去第二个数字
+- `multiply(a, b)`：将两个数字相乘
+- `divide(a, b)`：用第一个数字除以第二个数字（带零值检查）
+- `power(base, exponent)`：计算幂
+- `squareRoot(number)`：计算平方根（带负数检查）
+- `modulus(a, b)`：计算除法余数
+- `absolute(number)`：计算绝对值
 
-- `add(a, b)`: Add two numbers together
-- `subtract(a, b)`: Subtract the second number from the first
-- `multiply(a, b)`: Multiply two numbers
-- `divide(a, b)`: Divide the first number by the second (with zero check)
-- `power(base, exponent)`: Calculate the power of a number
-- `squareRoot(number)`: Calculate the square root (with negative number check)
-- `modulus(a, b)`: Calculate the remainder when dividing
-- `absolute(number)`: Calculate the absolute value
+## 依赖项
 
-## Dependencies
-
-The project requires the following key dependencies:
+该项目需要以下关键依赖：
 
 ```xml
 <dependency>
@@ -29,39 +37,42 @@ The project requires the following key dependencies:
 </dependency>
 ```
 
-## Building the Project
+## 构建项目
 
-Build the project using Maven:
+使用 Maven 构建项目：
 ```bash
 ./mvnw clean install -DskipTests
 ```
 
-## Running the Server
+## 运行服务器
 
-### Using Java
+### 使用 Java
 
 ```bash
 java -jar target/calculator-server-0.0.1-SNAPSHOT.jar
 ```
 
-### Using MCP Inspector
+### 使用 MCP Inspector
 
-The MCP Inspector is a helpful tool for interacting with MCP services. To use it with this calculator service:
+MCP Inspector 是一个用于与 MCP 服务交互的实用工具。使用该计算器服务时：
 
-1. **Install and run MCP Inspector** in a new terminal window:
+1. **安装并运行 MCP Inspector**，在新终端窗口中执行：
    ```bash
    npx @modelcontextprotocol/inspector
    ```
 
-2. **Access the web UI** by clicking the URL displayed by the app (typically http://localhost:6274)
+2. **通过点击应用显示的 URL 访问网页界面**（通常是 http://localhost:6274）
 
-3. **Configure the connection**:
-   - Set the transport type to "SSE"
-   - Set the URL to your running server's SSE endpoint: `http://localhost:8080/sse`
-   - Click "Connect"
+3. **配置连接**：
+   - 将传输类型设置为 “SSE”
+   - 将 URL 设置为正在运行服务器的 SSE 端点：`http://localhost:8080/sse`
+   - 点击 “Connect”
 
-4. **Use the tools**:
-   - Click "List Tools" to see available calculator operations
-   - Select a tool and click "Run Tool" to execute an operation
+4. **使用工具**：
+   - 点击 “List Tools” 查看可用的计算器操作
+   - 选择一个工具并点击 “Run Tool” 执行操作
 
-![MCP Inspector Screenshot](images/tool.png)
+![MCP Inspector Screenshot](../../../../translated_images/tool.40e180a7b0d0fe2067cf96435532b01f63f7f8619d6b0132355a04b426b669ac.zh.png)
+
+**免责声明**：  
+本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。虽然我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始语言的原文应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用本翻译而产生的任何误解或误释承担责任。

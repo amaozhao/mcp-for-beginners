@@ -1,34 +1,43 @@
-# Multi-Modal Integration
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "e1d142978227a4bfc468bb0accab62e2",
+  "translation_date": "2025-07-16T20:56:47+00:00",
+  "source_file": "05-AdvancedTopics/mcp-multi-modality/README.md",
+  "language_code": "zh"
+}
+-->
+# 多模态集成
 
-Multi-modal applications are becoming increasingly important in AI, enabling richer interactions and more complex tasks. The Model Context Protocol (MCP) provides a framework for building multi-modal applications that can handle various types of data, such as text, images, and audio.
+多模态应用在人工智能中变得越来越重要，能够实现更丰富的交互和更复杂的任务。Model Context Protocol (MCP) 提供了一个构建多模态应用的框架，能够处理各种类型的数据，如文本、图像和音频。
 
-MCP supports not just text-based interactions but also multi-modal capabilities, allowing models to work with images, audio, and other data types.
+MCP 不仅支持基于文本的交互，还支持多模态功能，使模型能够处理图像、音频及其他数据类型。
 
-## Introduction
+## 介绍
 
-In this lesson, you'll learn how to build a multi modal application.
+在本课中，你将学习如何构建一个多模态应用。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lesson, you will be able to:
+完成本课后，你将能够：
 
-- Understand multi modal choices
-- Implement a multi modal app.
+- 理解多模态的选择
+- 实现一个多模态应用
 
-## Architecture for Multi-Modal Support
+## 多模态支持的架构
 
-Multi-modal MCP implementations typically involve:
+多模态 MCP 实现通常包括：
 
-- **Modal-Specific Parsers**: Components that convert different media types into formats the model can process.
-- **Modal-Specific Tools**: Special tools designed to handle specific modalities (image analysis, audio processing)
-- **Unified Context Management**: System to maintain context across different modalities
-- **Response Generation**: Capability to generate responses that may include multiple modalities.
+- **特定模态解析器**：将不同媒体类型转换为模型可处理格式的组件。
+- **特定模态工具**：专门处理特定模态（图像分析、音频处理）的工具。
+- **统一上下文管理**：跨不同模态维护上下文的系统。
+- **响应生成**：能够生成包含多种模态的响应。
 
-## Multi-Modal Example: Image Analysis
+## 多模态示例：图像分析
 
-In the below example, we will analyze an image and extract information.
+下面的示例中，我们将分析一张图像并提取信息。
 
-### C# Implementation
+### C# 实现
 
 ```csharp
 using ModelContextProtocol.SDK.Server;
@@ -160,19 +169,19 @@ namespace MultiModalMcpExample
 }
 ```
 
-In the preceding example, we've:
+在上述示例中，我们：
 
-- Created an `ImageAnalysisTool` that can analyze images using a hypothetical `IImageAnalysisService`.
-- Configured the MCP server to handle larger requests and support image content types.
-- Registered the image analysis tool with the server.
-- Implemented a method to download images from a URL and analyze them based on the requested type (objects, text, faces, etc.).
-- Returned structured results in a format compliant with the MCP specification.
+- 创建了一个 `ImageAnalysisTool`，使用假设的 `IImageAnalysisService` 来分析图像。
+- 配置了 MCP 服务器以处理更大请求并支持图像内容类型。
+- 将图像分析工具注册到服务器。
+- 实现了一个方法，从 URL 下载图像并根据请求类型（对象、文本、面部等）进行分析。
+- 返回符合 MCP 规范的结构化结果。
 
-## Multi-Modal Example: Audio Processing
+## 多模态示例：音频处理
 
-Audio processing is another common modality in multi-modal applications. Below is an example of how to implement an audio transcription tool that can handle audio files and return transcriptions.
+音频处理是多模态应用中另一种常见的模态。下面是一个实现音频转录工具的示例，该工具可以处理音频文件并返回转录文本。
 
-### Java Implementation
+### Java 实现
 
 ```java
 package com.example.mcp.multimodal;
@@ -300,20 +309,20 @@ public class MultiModalApplication {
 }
 ```
 
-In the preceding example, we've:
+在上述示例中，我们：
 
-- Created an `AudioTranscriptionTool` that can transcribe audio files. 
-- Defined the tool's schema to accept either a URL or base64-encoded audio data.
-- Implemented the `execute` method to handle audio processing and transcription.
-- Configured the MCP server to handle multi-modal requests, including audio and image processing.
-- Registered the audio transcription tool with the server.
-- Implemented a method to download audio files from a URL or decode base64 audio data.
-- Used an `AudioProcessor` service to handle the actual transcription logic.
-- Started the MCP server to listen for requests.
+- 创建了一个 `AudioTranscriptionTool`，能够转录音频文件。
+- 定义了工具的 schema，接受 URL 或 base64 编码的音频数据。
+- 实现了 `execute` 方法来处理音频处理和转录。
+- 配置了 MCP 服务器以处理多模态请求，包括音频和图像处理。
+- 将音频转录工具注册到服务器。
+- 实现了一个方法，从 URL 下载音频文件或解码 base64 音频数据。
+- 使用 `AudioProcessor` 服务来处理实际的转录逻辑。
+- 启动 MCP 服务器以监听请求。
 
-### Multi-Modal Example: Multi-Modal Response Generation
+### 多模态示例：多模态响应生成
 
-### Python Implementation
+### Python 实现
 
 ```python
 from mcp_server import McpServer
@@ -461,6 +470,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## What's next
+## 接下来
 
 - [5.3 Oauth 2](../mcp-oauth2-demo/README.md)
+
+**免责声明**：  
+本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。虽然我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始文件的母语版本应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用本翻译而产生的任何误解或误释承担责任。

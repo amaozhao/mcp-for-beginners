@@ -19,15 +19,15 @@
 
 #### 模块 02 (Security)
 ```
-![MCP安全最佳实践](../../../translated_images/03.175aed6dedae133f9d41e49cefd0f0a9a39c3317e1eaa7ef7182696af7534308.zh.png)
+![MCP安全最佳实践](../translated_images/03.175aed6dedae133f9d41e49cefd0f0a9a39c3317e1eaa7ef7182696af7534308.zh.png)
 ```
 - 引用 translated_images 中的图片
 - 路径为相对路径 (../../../translated_images)
 
 #### 模块 10 (AI Toolkit Workshops)
 ```
-![Model Catalog](../../../../translated_images/aimodel.263ed2be013d8fb0e2265c4f742cfe490f6f00eca5e132ec50438c8e826e34ed.zh.png)
-![Playground Setup](../../../../translated_images/playground.dd6f5141344878ca4d4f3de819775da7b113518941accf37c291117c602f85db.zh.png)
+![Model Catalog](../../translated_images/aimodel.263ed2be013d8fb0e2265c4f742cfe490f6f00eca5e132ec50438c8e826e34ed.zh.png)
+![Playground Setup](../../translated_images/playground.dd6f5141344878ca4d4f3de819775da7b113518941accf37c291117c602f85db.zh.png)
 ```
 - 大量图片引用翻译后的版本
 - 每个图片对应多语言版本

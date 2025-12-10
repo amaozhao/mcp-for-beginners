@@ -1,95 +1,104 @@
-# Environment Setup
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "ec1d9eafbe697ada412ee4fd102ce5b8",
+  "translation_date": "2025-09-30T12:41:44+00:00",
+  "source_file": "11-MCPServerHandsOnLabs/03-Setup/README.md",
+  "language_code": "zh"
+}
+-->
+# 环境设置
 
-## 🎯 What This Lab Covers
+## 🎯 本实验内容
 
-This hands-on lab guides you through setting up a complete development environment for building MCP servers with PostgreSQL integration. You'll configure all necessary tools, deploy Azure resources, and validate your setup before proceeding with implementation.
+本动手实验将指导您设置一个完整的开发环境，用于构建与PostgreSQL集成的MCP服务器。您将配置所有必要的工具，部署Azure资源，并在实施之前验证您的设置。
 
-## Overview
+## 概述
 
-A proper development environment is crucial for successful MCP server development. This lab provides step-by-step instructions for setting up Docker, Azure services, development tools, and validating that everything works correctly together.
+一个适当的开发环境对于成功开发MCP服务器至关重要。本实验提供了逐步指导，帮助您设置Docker、Azure服务、开发工具，并验证所有组件是否正确协同工作。
 
-By the end of this lab, you'll have a fully functional development environment ready for building the Zava Retail MCP server.
+完成本实验后，您将拥有一个完全功能化的开发环境，准备好构建Zava Retail MCP服务器。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lab, you will be able to:
+完成本实验后，您将能够：
 
-- **Install and configure** all required development tools
-- **Deploy Azure resources** needed for the MCP server
-- **Set up Docker containers** for PostgreSQL and the MCP server
-- **Validate** your environment setup with test connections
-- **Troubleshoot** common setup issues and configuration problems
-- **Understand** the development workflow and file structure
+- **安装和配置**所有必需的开发工具
+- **部署Azure资源**以支持MCP服务器
+- **设置Docker容器**用于PostgreSQL和MCP服务器
+- **验证**您的环境设置是否通过测试连接
+- **排查**常见的设置问题和配置问题
+- **理解**开发工作流程和文件结构
 
-## 📋 Prerequisites Check
+## 📋 前置条件检查
 
-Before starting, ensure you have:
+在开始之前，请确保您具备以下条件：
 
-### Required Knowledge
-- Basic command line usage (Windows Command Prompt/PowerShell)
-- Understanding of environment variables
-- Familiarity with Git version control
-- Basic Docker concepts (containers, images, volumes)
+### 必需知识
+- 基本命令行使用（Windows命令提示符/PowerShell）
+- 环境变量的基本理解
+- 熟悉Git版本控制
+- 基本Docker概念（容器、镜像、卷）
 
-### System Requirements
-- **Operating System**: Windows 10/11, macOS, or Linux
-- **RAM**: Minimum 8GB (16GB recommended)
-- **Storage**: At least 10GB free space
-- **Network**: Internet connection for downloads and Azure deployment
+### 系统要求
+- **操作系统**：Windows 10/11、macOS或Linux
+- **内存**：最低8GB（推荐16GB）
+- **存储**：至少10GB可用空间
+- **网络**：用于下载和Azure部署的互联网连接
 
-### Account Requirements
-- **Azure Subscription**: Free tier is sufficient
-- **GitHub Account**: For repository access
-- **Docker Hub Account**: (Optional) For custom image publishing
+### 账户要求
+- **Azure订阅**：免费层即可满足需求
+- **GitHub账户**：用于访问代码库
+- **Docker Hub账户**：（可选）用于发布自定义镜像
 
-## 🛠️ Tool Installation
+## 🛠️ 工具安装
 
-### 1. Install Docker Desktop
+### 1. 安装Docker Desktop
 
-Docker provides the containerized environment for our development setup.
+Docker提供了容器化的开发环境。
 
-#### Windows Installation
+#### Windows安装
 
-1. **Download Docker Desktop**:
+1. **下载Docker Desktop**：
    ```cmd
    # Visit https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe
    # Or use Windows Package Manager
    winget install Docker.DockerDesktop
    ```
 
-2. **Install and Configure**:
-   - Run the installer as Administrator
-   - Enable WSL 2 integration when prompted
-   - Restart your computer when installation completes
+2. **安装和配置**：
+   - 以管理员身份运行安装程序
+   - 在提示时启用WSL 2集成
+   - 安装完成后重启计算机
 
-3. **Verify Installation**:
+3. **验证安装**：
    ```cmd
    docker --version
    docker-compose --version
    ```
 
-#### macOS Installation
+#### macOS安装
 
-1. **Download and Install**:
+1. **下载并安装**：
    ```bash
    # Download from https://desktop.docker.com/mac/stable/Docker.dmg
    # Or use Homebrew
    brew install --cask docker
    ```
 
-2. **Start Docker Desktop**:
-   - Launch Docker Desktop from Applications
-   - Complete the initial setup wizard
+2. **启动Docker Desktop**：
+   - 从应用程序中启动Docker Desktop
+   - 完成初始设置向导
 
-3. **Verify Installation**:
+3. **验证安装**：
    ```bash
    docker --version
    docker-compose --version
    ```
 
-#### Linux Installation
+#### Linux安装
 
-1. **Install Docker Engine**:
+1. **安装Docker Engine**：
    ```bash
    # Ubuntu/Debian
    curl -fsSL https://get.docker.com -o get-docker.sh
@@ -99,17 +108,17 @@ Docker provides the containerized environment for our development setup.
    # Log out and back in for group changes to take effect
    ```
 
-2. **Install Docker Compose**:
+2. **安装Docker Compose**：
    ```bash
    sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
    sudo chmod +x /usr/local/bin/docker-compose
    ```
 
-### 2. Install Azure CLI
+### 2. 安装Azure CLI
 
-The Azure CLI enables Azure resource deployment and management.
+Azure CLI用于部署和管理Azure资源。
 
-#### Windows Installation
+#### Windows安装
 
 ```cmd
 # Using Windows Package Manager
@@ -118,7 +127,7 @@ winget install Microsoft.AzureCLI
 # Or download MSI from: https://aka.ms/installazurecliwindows
 ```
 
-#### macOS Installation
+#### macOS安装
 
 ```bash
 # Using Homebrew
@@ -128,7 +137,7 @@ brew install azure-cli
 curl -L https://aka.ms/InstallAzureCli | bash
 ```
 
-#### Linux Installation
+#### Linux安装
 
 ```bash
 # Ubuntu/Debian
@@ -139,7 +148,7 @@ sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo dnf install azure-cli
 ```
 
-#### Verify and Authenticate
+#### 验证和认证
 
 ```bash
 # Check installation
@@ -153,9 +162,9 @@ az account list --output table
 az account set --subscription "Your-Subscription-Name"
 ```
 
-### 3. Install Git
+### 3. 安装Git
 
-Git is required for cloning the repository and version control.
+Git是用于克隆代码库和版本控制的必需工具。
 
 #### Windows
 
@@ -183,11 +192,11 @@ sudo apt update && sudo apt install git
 sudo dnf install git
 ```
 
-### 4. Install VS Code
+### 4. 安装VS Code
 
-Visual Studio Code provides the integrated development environment with MCP support.
+Visual Studio Code提供了支持MCP开发的集成开发环境。
 
-#### Installation
+#### 安装
 
 ```cmd
 # Windows
@@ -200,9 +209,9 @@ brew install --cask visual-studio-code
 sudo snap install code --classic
 ```
 
-#### Required Extensions
+#### 必需扩展
 
-Install these VS Code extensions:
+安装以下VS Code扩展：
 
 ```bash
 # Install via command line
@@ -212,18 +221,18 @@ code --install-extension ms-azuretools.vscode-docker
 code --install-extension ms-vscode.azure-account
 ```
 
-Or install through VS Code:
-1. Open VS Code
-2. Go to Extensions (Ctrl+Shift+X)
-3. Install:
-   - **Python** (Microsoft)
-   - **Docker** (Microsoft)
-   - **Azure Account** (Microsoft)
-   - **JSON** (Microsoft)
+或者通过VS Code安装：
+1. 打开VS Code
+2. 转到扩展（Ctrl+Shift+X）
+3. 安装：
+   - **Python**（Microsoft）
+   - **Docker**（Microsoft）
+   - **Azure Account**（Microsoft）
+   - **JSON**（Microsoft）
 
-### 5. Install Python
+### 5. 安装Python
 
-Python 3.8+ is required for MCP server development.
+MCP服务器开发需要Python 3.8及以上版本。
 
 #### Windows
 
@@ -251,16 +260,16 @@ sudo apt update && sudo apt install python3.11 python3.11-pip python3.11-venv
 sudo dnf install python3.11 python3.11-pip
 ```
 
-#### Verify Installation
+#### 验证安装
 
 ```bash
 python --version  # Should show Python 3.11.x
 pip --version      # Should show pip version
 ```
 
-## 🚀 Project Setup
+## 🚀 项目设置
 
-### 1. Clone the Repository
+### 1. 克隆代码库
 
 ```bash
 # Clone the main repository
@@ -273,7 +282,7 @@ cd MCP-Server-and-PostgreSQL-Sample-Retail
 ls -la
 ```
 
-### 2. Create Python Virtual Environment
+### 2. 创建Python虚拟环境
 
 ```bash
 # Create virtual environment
@@ -290,7 +299,7 @@ source mcp-env/bin/activate
 python -m pip install --upgrade pip
 ```
 
-### 3. Install Python Dependencies
+### 3. 安装Python依赖项
 
 ```bash
 # Install development dependencies
@@ -302,22 +311,22 @@ pip list | grep asyncpg
 pip list | grep azure
 ```
 
-## ☁️ Azure Resource Deployment
+## ☁️ Azure资源部署
 
-### 1. Understand Resource Requirements
+### 1. 了解资源需求
 
-Our MCP server requires these Azure resources:
+我们的MCP服务器需要以下Azure资源：
 
-| **Resource** | **Purpose** | **Estimated Cost** |
-|--------------|-------------|-------------------|
-| **Azure AI Foundry** | AI model hosting and management | $10-50/month |
-| **OpenAI Deployment** | Text embedding model (text-embedding-3-small) | $5-20/month |
-| **Application Insights** | Monitoring and telemetry | $5-15/month |
-| **Resource Group** | Resource organization | Free |
+| **资源** | **用途** | **预计成本** |
+|----------|----------|-------------|
+| **Azure AI Foundry** | AI模型托管和管理 | $10-50/月 |
+| **OpenAI部署** | 文本嵌入模型（text-embedding-3-small） | $5-20/月 |
+| **Application Insights** | 监控和遥测 | $5-15/月 |
+| **资源组** | 资源组织 | 免费 |
 
-### 2. Deploy Azure Resources
+### 2. 部署Azure资源
 
-#### Option A: Automated Deployment (Recommended)
+#### 选项A：自动化部署（推荐）
 
 ```bash
 # Navigate to infrastructure directory
@@ -330,17 +339,17 @@ cd infra
 ./deploy.sh
 ```
 
-The deployment script will:
-1. Create a unique resource group
-2. Deploy Azure AI Foundry resources
-3. Deploy the text-embedding-3-small model
-4. Configure Application Insights
-5. Create a service principal for authentication
-6. Generate `.env` file with configuration
+部署脚本将：
+1. 创建一个唯一的资源组
+2. 部署Azure AI Foundry资源
+3. 部署text-embedding-3-small模型
+4. 配置Application Insights
+5. 创建用于认证的服务主体
+6. 生成包含配置的`.env`文件
 
-#### Option B: Manual Deployment
+#### 选项B：手动部署
 
-If you prefer manual control or the automated script fails:
+如果您更喜欢手动控制或自动脚本失败：
 
 ```bash
 # Set variables
@@ -359,7 +368,7 @@ az deployment group create \
   --parameters resourcePrefix="zava-mcp"
 ```
 
-### 3. Verify Azure Deployment
+### 3. 验证Azure部署
 
 ```bash
 # Check resource group
@@ -374,9 +383,9 @@ az cognitiveservices account show \
   --resource-group $RESOURCE_GROUP
 ```
 
-### 4. Configure Environment Variables
+### 4. 配置环境变量
 
-After deployment, you should have a `.env` file. Verify it contains:
+部署完成后，您应该有一个`.env`文件。验证其内容是否包含：
 
 ```bash
 # .env file contents
@@ -396,11 +405,11 @@ POSTGRES_USER=postgres
 POSTGRES_PASSWORD=your-secure-password
 ```
 
-## 🐳 Docker Environment Setup
+## 🐳 Docker环境设置
 
-### 1. Understand Docker Composition
+### 1. 了解Docker组成
 
-Our development environment uses Docker Compose:
+我们的开发环境使用Docker Compose：
 
 ```yaml
 # docker-compose.yml overview
@@ -429,7 +438,7 @@ services:
       - .env
 ```
 
-### 2. Start the Development Environment
+### 2. 启动开发环境
 
 ```bash
 # Ensure you're in the project root directory
@@ -445,7 +454,7 @@ docker-compose ps
 docker-compose logs -f
 ```
 
-### 3. Verify Database Setup
+### 3. 验证数据库设置
 
 ```bash
 # Connect to PostgreSQL container
@@ -463,7 +472,7 @@ SELECT COUNT(*) FROM retail.orders;
 \q
 ```
 
-### 4. Test MCP Server
+### 4. 测试MCP服务器
 
 ```bash
 # Check MCP server health
@@ -476,11 +485,11 @@ curl -X POST http://localhost:8000/mcp \
   -d '{"method": "tools/list", "params": {}}'
 ```
 
-## 🔧 VS Code Configuration
+## 🔧 VS Code配置
 
-### 1. Configure MCP Integration
+### 1. 配置MCP集成
 
-Create VS Code MCP configuration:
+创建VS Code MCP配置：
 
 ```json
 // .vscode/mcp.json
@@ -506,7 +515,7 @@ Create VS Code MCP configuration:
 }
 ```
 
-### 2. Configure Python Environment
+### 2. 配置Python环境
 
 ```json
 // .vscode/settings.json
@@ -525,27 +534,27 @@ Create VS Code MCP configuration:
 }
 ```
 
-### 3. Test VS Code Integration
+### 3. 测试VS Code集成
 
-1. **Open the project in VS Code**:
+1. **在VS Code中打开项目**：
    ```bash
    code .
    ```
 
-2. **Open AI Chat**:
-   - Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (macOS)
-   - Type "AI Chat" and select "AI Chat: Open Chat"
+2. **打开AI聊天**：
+   - 按`Ctrl+Shift+P`（Windows/Linux）或`Cmd+Shift+P`（macOS）
+   - 输入"AI Chat"，选择"AI Chat: Open Chat"
 
-3. **Test MCP Server Connection**:
-   - In AI Chat, type `#zava` and select one of the configured servers
-   - Ask: "What tables are available in the database?"
-   - You should receive a response listing the retail database tables
+3. **测试MCP服务器连接**：
+   - 在AI聊天中输入`#zava`并选择一个配置的服务器
+   - 提问："数据库中有哪些表？"
+   - 您应该收到一个列出零售数据库表的响应
 
-## ✅ Environment Validation
+## ✅ 环境验证
 
-### 1. Comprehensive System Check
+### 1. 综合系统检查
 
-Run this validation script to verify your setup:
+运行此验证脚本以检查您的设置：
 
 ```bash
 # Create validation script
@@ -720,39 +729,39 @@ EOF
 python validate_setup.py
 ```
 
-### 2. Manual Validation Checklist
+### 2. 手动验证清单
 
-**✅ Basic Tools**
-- [ ] Docker version 20.10+ installed and running
-- [ ] Azure CLI 2.40+ installed and authenticated
-- [ ] Python 3.8+ with pip installed
-- [ ] Git 2.30+ installed
-- [ ] VS Code with required extensions
+**✅ 基本工具**
+- [ ] Docker版本20.10+已安装并运行
+- [ ] Azure CLI 2.40+已安装并认证
+- [ ] Python 3.8+已安装并带有pip
+- [ ] Git 2.30+已安装
+- [ ] VS Code已安装所需扩展
 
-**✅ Azure Resources**
-- [ ] Resource group created successfully
-- [ ] AI Foundry project deployed
-- [ ] OpenAI text-embedding-3-small model deployed
-- [ ] Application Insights configured
-- [ ] Service principal created with proper permissions
+**✅ Azure资源**
+- [ ] 成功创建资源组
+- [ ] 部署了AI Foundry项目
+- [ ] 部署了OpenAI text-embedding-3-small模型
+- [ ] 配置了Application Insights
+- [ ] 创建了具有适当权限的服务主体
 
-**✅ Environment Configuration**
-- [ ] `.env` file created with all required variables
-- [ ] Azure credentials working (test with `az account show`)
-- [ ] PostgreSQL container running and accessible
-- [ ] Sample data loaded in database
+**✅ 环境配置**
+- [ ] `.env`文件已创建并包含所有必需变量
+- [ ] Azure凭据正常工作（使用`az account show`测试）
+- [ ] PostgreSQL容器正在运行并可访问
+- [ ] 数据库中已加载示例数据
 
-**✅ VS Code Integration**
-- [ ] `.vscode/mcp.json` configured
-- [ ] Python interpreter set to virtual environment
-- [ ] MCP servers appear in AI Chat
-- [ ] Can execute test queries through AI Chat
+**✅ VS Code集成**
+- [ ] `.vscode/mcp.json`已配置
+- [ ] Python解释器设置为虚拟环境
+- [ ] MCP服务器在AI聊天中显示
+- [ ] 可以通过AI聊天执行测试查询
 
-## 🛠️ Troubleshooting Common Issues
+## 🛠️ 常见问题排查
 
-### Docker Issues
+### Docker问题
 
-**Problem**: Docker containers won't start
+**问题**：Docker容器无法启动  
 ```bash
 # Check Docker service status
 docker info
@@ -768,7 +777,7 @@ docker system prune -f
 sudo systemctl restart docker
 ```
 
-**Problem**: PostgreSQL connection fails
+**问题**：PostgreSQL连接失败  
 ```bash
 # Check container logs
 docker-compose logs postgres
@@ -780,9 +789,9 @@ docker-compose ps
 docker-compose exec postgres psql -U postgres -d zava -c "SELECT 1;"
 ```
 
-### Azure Deployment Issues
+### Azure部署问题
 
-**Problem**: Azure deployment fails
+**问题**：Azure部署失败  
 ```bash
 # Check Azure CLI authentication
 az account show
@@ -795,7 +804,7 @@ az provider register --namespace Microsoft.CognitiveServices
 az provider register --namespace Microsoft.Insights
 ```
 
-**Problem**: AI service authentication fails
+**问题**：AI服务认证失败  
 ```bash
 # Test service principal
 az login --service-principal \
@@ -807,9 +816,9 @@ az login --service-principal \
 az cognitiveservices account list --query "[].{Name:name,Kind:kind,Location:location}"
 ```
 
-### Python Environment Issues
+### Python环境问题
 
-**Problem**: Package installation fails
+**问题**：包安装失败  
 ```bash
 # Upgrade pip and setuptools
 python -m pip install --upgrade pip setuptools wheel
@@ -823,7 +832,7 @@ pip install asyncpg
 pip install azure-ai-projects
 ```
 
-**Problem**: VS Code can't find Python interpreter
+**问题**：VS Code找不到Python解释器  
 ```bash
 # Show Python interpreter paths
 which python  # macOS/Linux
@@ -837,43 +846,48 @@ mcp-env\Scripts\activate     # Windows
 code .
 ```
 
-## 🎯 Key Takeaways
+## 🎯 关键收获
 
-After completing this lab, you should have:
+完成本实验后，您应该具备：
 
-✅ **Complete Development Environment**: All tools installed and configured  
-✅ **Azure Resources Deployed**: AI services and supporting infrastructure  
-✅ **Docker Environment Running**: PostgreSQL and MCP server containers  
-✅ **VS Code Integration**: MCP servers configured and accessible  
-✅ **Validated Setup**: All components tested and working together  
-✅ **Troubleshooting Knowledge**: Common issues and solutions  
+✅ **完整的开发环境**：所有工具已安装并配置  
+✅ **已部署的Azure资源**：AI服务和支持基础设施  
+✅ **运行中的Docker环境**：PostgreSQL和MCP服务器容器  
+✅ **VS Code集成**：MCP服务器已配置并可访问  
+✅ **验证的设置**：所有组件已测试并协同工作  
+✅ **问题排查知识**：常见问题及解决方案  
 
-## 🚀 What's Next
+## 🚀 下一步
 
-With your environment ready, continue to **[Lab 04: Database Design and Schema](../04-Database/README.md)** to:
+环境准备好后，请继续**[实验04：数据库设计和架构](../04-Database/README.md)**以：
 
-- Explore the retail database schema in detail
-- Understand multi-tenant data modeling
-- Learn about Row Level Security implementation
-- Work with sample retail data
+- 详细探索零售数据库架构
+- 了解多租户数据建模
+- 学习行级安全性实现
+- 使用零售数据样本进行操作
 
-## 📚 Additional Resources
+## 📚 额外资源
 
-### Development Tools
-- [Docker Documentation](https://docs.docker.com/) - Complete Docker reference
-- [Azure CLI Reference](https://docs.microsoft.com/cli/azure/) - Azure CLI commands
-- [VS Code Documentation](https://code.visualstudio.com/docs) - Editor configuration and extensions
+### 开发工具
+- [Docker文档](https://docs.docker.com/) - 完整的Docker参考
+- [Azure CLI参考](https://docs.microsoft.com/cli/azure/) - Azure CLI命令
+- [VS Code文档](https://code.visualstudio.com/docs) - 编辑器配置和扩展
 
-### Azure Services
-- [Azure AI Foundry Documentation](https://docs.microsoft.com/azure/ai-foundry/) - AI service configuration
-- [Azure OpenAI Service](https://docs.microsoft.com/azure/cognitive-services/openai/) - AI model deployment
-- [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Monitoring setup
+### Azure服务
+- [Azure AI Foundry文档](https://docs.microsoft.com/azure/ai-foundry/) - AI服务配置
+- [Azure OpenAI服务](https://docs.microsoft.com/azure/cognitive-services/openai/) - AI模型部署
+- [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/app-insights-overview) - 监控设置
 
-### Python Development
-- [Python Virtual Environments](https://docs.python.org/3/tutorial/venv.html) - Environment management
-- [AsyncIO Documentation](https://docs.python.org/3/library/asyncio.html) - Async programming patterns
-- [FastAPI Documentation](https://fastapi.tiangolo.com/) - Web framework patterns
+### Python开发
+- [Python虚拟环境](https://docs.python.org/3/tutorial/venv.html) - 环境管理
+- [AsyncIO文档](https://docs.python.org/3/library/asyncio.html) - 异步编程模式
+- [FastAPI文档](https://fastapi.tiangolo.com/) - Web框架模式
 
 ---
 
-**Next**: Environment ready? Continue with [Lab 04: Database Design and Schema](../04-Database/README.md)
+**下一步**：环境准备好了吗？继续学习[实验04：数据库设计和架构](../04-Database/README.md)
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保准确性，但请注意，自动翻译可能包含错误或不准确之处。应以原始语言的文档作为权威来源。对于关键信息，建议使用专业人工翻译。我们对因使用本翻译而引起的任何误解或误读不承担责任。

@@ -1,29 +1,38 @@
-# Testing and Debugging
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "ad02c1223d7861292651ffce2f52bb28",
+  "translation_date": "2025-09-30T12:40:08+00:00",
+  "source_file": "11-MCPServerHandsOnLabs/08-Testing/README.md",
+  "language_code": "zh"
+}
+-->
+# 测试与调试
 
-## 🎯 What This Lab Covers
+## 🎯 本实验内容
 
-This lab provides comprehensive guidance on testing and debugging MCP servers in production environments. You'll learn to implement robust testing strategies, debug complex issues, and ensure your MCP server performs reliably under various conditions.
+本实验提供了关于在生产环境中测试和调试 MCP 服务器的全面指导。您将学习如何实施可靠的测试策略、调试复杂问题，并确保 MCP 服务器在各种条件下可靠运行。
 
-## Overview
+## 概述
 
-Testing MCP servers requires a multi-layered approach covering unit tests, integration tests, performance validation, and real-world scenario testing. This lab covers the complete testing lifecycle from development to production monitoring.
+测试 MCP 服务器需要采用多层次的方法，包括单元测试、集成测试、性能验证以及真实场景测试。本实验涵盖了从开发到生产监控的完整测试生命周期。
 
-Our testing strategy emphasizes reliability, security, and performance, ensuring your MCP server can handle production workloads while maintaining data integrity and user experience quality.
+我们的测试策略强调可靠性、安全性和性能，确保您的 MCP 服务器能够处理生产工作负载，同时保持数据完整性和用户体验质量。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lab, you will be able to:
+完成本实验后，您将能够：
 
-- **Implement** comprehensive unit and integration test suites
-- **Design** effective testing strategies for MCP tools and database operations
-- **Debug** complex issues using advanced debugging techniques
-- **Validate** performance under load with realistic testing scenarios
-- **Monitor** production systems with effective alerting and observability
-- **Automate** testing workflows for continuous integration
+- **实施**全面的单元测试和集成测试套件  
+- **设计**针对 MCP 工具和数据库操作的有效测试策略  
+- **调试**复杂问题，使用高级调试技术  
+- **验证**负载下的性能，采用真实的测试场景  
+- **监控**生产系统，使用有效的警报和可观测性工具  
+- **自动化**测试工作流，实现持续集成  
 
-## 🧪 Testing Architecture
+## 🧪 测试架构
 
-### Testing Strategy Overview
+### 测试策略概述
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -59,7 +68,7 @@ By the end of this lab, you will be able to:
 └─────────────────────────────────────────────────┘
 ```
 
-### Test Environment Setup
+### 测试环境设置
 
 ```python
 # tests/conftest.py
@@ -283,9 +292,9 @@ class TestDataHelper:
         return product_id
 ```
 
-## 🔧 Unit Testing
+## 🔧 单元测试
 
-### Tool Testing Framework
+### 工具测试框架
 
 ```python
 # tests/test_tools.py
@@ -495,7 +504,7 @@ class TestSchemaIntrospectionTool:
             assert expected_table in table_names
 ```
 
-### Database Testing
+### 数据库测试
 
 ```python
 # tests/test_database.py
@@ -626,9 +635,9 @@ class TestDatabaseProvider:
         assert health_status['status'] == 'healthy'
 ```
 
-## 🚀 Integration Testing
+## 🚀 集成测试
 
-### End-to-End Workflow Testing
+### 端到端工作流测试
 
 ```python
 # tests/test_integration.py
@@ -829,9 +838,9 @@ class TestErrorHandling:
         assert 'validation failed' in result['error'].lower()
 ```
 
-## 📊 Performance Testing
+## 📊 性能测试
 
-### Load Testing Framework
+### 负载测试框架
 
 ```python
 # tests/test_performance.py
@@ -1055,9 +1064,9 @@ class TestScalability:
             assert time_val < 1.0  # All queries under 1 second
 ```
 
-## 🔍 Debugging Tools
+## 🔍 调试工具
 
-### Advanced Debugging Framework
+### 高级调试框架
 
 ```python
 # mcp_server/debugging/debug_tools.py
@@ -1401,44 +1410,49 @@ class DebugTool:
         return await self.debugger.analyze_performance_bottlenecks()
 ```
 
-## 🎯 Key Takeaways
+## 🎯 关键收获
 
-After completing this lab, you should have:
+完成本实验后，您应该具备以下能力：
 
-✅ **Comprehensive Testing Framework**: Unit, integration, and performance tests for all components  
-✅ **Advanced Debugging Tools**: Sophisticated debugging utilities with execution tracing  
-✅ **Performance Validation**: Load testing and scalability analysis capabilities  
-✅ **Security Testing**: SQL injection prevention and RLS validation  
-✅ **Monitoring Integration**: Performance metrics and bottleneck analysis  
-✅ **CI/CD Ready**: Automated testing workflows for continuous integration  
+✅ **全面的测试框架**：针对所有组件的单元测试、集成测试和性能测试  
+✅ **高级调试工具**：复杂的调试工具，支持执行追踪  
+✅ **性能验证**：负载测试和可扩展性分析能力  
+✅ **安全测试**：防止 SQL 注入和验证行级安全（RLS）  
+✅ **监控集成**：性能指标和瓶颈分析能力  
+✅ **CI/CD 准备**：自动化测试工作流，支持持续集成  
 
-## 🚀 What's Next
+## 🚀 下一步
 
-Continue with **[Lab 09: VS Code Integration](../09-VS-Code/README.md)** to:
+继续学习 **[实验 09：VS Code 集成](../09-VS-Code/README.md)**，内容包括：
 
-- Configure VS Code for MCP server development
-- Set up debugging environments in VS Code
-- Integrate MCP server with VS Code Chat
-- Test the complete VS Code workflow
+- 配置 VS Code 以进行 MCP 服务器开发  
+- 在 VS Code 中设置调试环境  
+- 将 MCP 服务器与 VS Code Chat 集成  
+- 测试完整的 VS Code 工作流  
 
-## 📚 Additional Resources
+## 📚 额外资源
 
-### Testing Frameworks
-- [pytest Documentation](https://docs.pytest.org/) - Python testing framework
-- [AsyncPG Testing](https://magicstack.github.io/asyncpg/current/index.html) - Async PostgreSQL testing
-- [FastAPI Testing](https://fastapi.tiangolo.com/tutorial/testing/) - API testing patterns
+### 测试框架
+- [pytest 文档](https://docs.pytest.org/) - Python 测试框架  
+- [AsyncPG 测试](https://magicstack.github.io/asyncpg/current/index.html) - 异步 PostgreSQL 测试  
+- [FastAPI 测试](https://fastapi.tiangolo.com/tutorial/testing/) - API 测试模式  
 
-### Performance Testing
-- [Load Testing Best Practices](https://docs.python.org/3/library/asyncio.html) - Async performance testing
-- [Database Performance Testing](https://www.postgresql.org/docs/current/performance-tips.html) - PostgreSQL optimization
-- [Memory Profiling](https://docs.python.org/3/library/tracemalloc.html) - Python memory analysis
+### 性能测试
+- [负载测试最佳实践](https://docs.python.org/3/library/asyncio.html) - 异步性能测试  
+- [数据库性能测试](https://www.postgresql.org/docs/current/performance-tips.html) - PostgreSQL 优化  
+- [内存分析](https://docs.python.org/3/library/tracemalloc.html) - Python 内存分析  
 
-### Debugging Tools
-- [Python Debugging](https://docs.python.org/3/library/pdb.html) - Python debugger
-- [Async Debugging](https://docs.python.org/3/library/asyncio-dev.html) - Asyncio debugging
-- [SQL Debugging](https://www.postgresql.org/docs/current/runtime-config-logging.html) - PostgreSQL logging
+### 调试工具
+- [Python 调试](https://docs.python.org/3/library/pdb.html) - Python 调试器  
+- [异步调试](https://docs.python.org/3/library/asyncio-dev.html) - Asyncio 调试  
+- [SQL 调试](https://www.postgresql.org/docs/current/runtime-config-logging.html) - PostgreSQL 日志  
 
 ---
 
-**Previous**: [Lab 07: Semantic Search Integration](../07-Semantic-Search/README.md)  
-**Next**: [Lab 09: VS Code Integration](../09-VS-Code/README.md)
+**上一节**: [实验 07：语义搜索集成](../07-Semantic-Search/README.md)  
+**下一节**: [实验 09：VS Code 集成](../09-VS-Code/README.md)  
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。

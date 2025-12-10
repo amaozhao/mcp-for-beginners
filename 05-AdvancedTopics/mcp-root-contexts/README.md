@@ -1,38 +1,47 @@
-# MCP Root Contexts
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "ebdb86db46113f1cbd59ce4c74caaa79",
+  "translation_date": "2025-07-16T20:54:50+00:00",
+  "source_file": "05-AdvancedTopics/mcp-root-contexts/README.md",
+  "language_code": "zh"
+}
+-->
+# MCP 根上下文
 
-Root contexts are a fundamental concept in the Model Context Protocol that provide a persistent layer for maintaining conversation history and shared state across multiple requests and sessions.
+根上下文是模型上下文协议中的一个基本概念，提供了一个持久层，用于在多个请求和会话之间维护对话历史和共享状态。
 
-## Introduction
+## 介绍
 
-In this lesson, we will explore how to create, manage, and utilize root contexts in MCP. 
+在本课中，我们将探讨如何在 MCP 中创建、管理和使用根上下文。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lesson, you will be able to:
+完成本课后，您将能够：
 
-- Understand the purpose and structure of root contexts
-- Create and manage root contexts using MCP client libraries
-- Implement root contexts in .NET, Java, JavaScript, and Python applications
-- Utilize root contexts for multi-turn conversations and state management
-- Implement best practices for root context management
+- 理解根上下文的目的和结构
+- 使用 MCP 客户端库创建和管理根上下文
+- 在 .NET、Java、JavaScript 和 Python 应用中实现根上下文
+- 利用根上下文进行多轮对话和状态管理
+- 实施根上下文管理的最佳实践
 
-## Understanding Root Contexts
+## 理解根上下文
 
-Root contexts serve as containers that hold the history and state for a series of related interactions. They enable:
+根上下文作为容器，保存一系列相关交互的历史和状态。它们支持：
 
-- **Conversation Persistence**: Maintaining coherent multi-turn conversations
-- **Memory Management**: Storing and retrieving information across interactions
-- **State Management**: Tracking progress in complex workflows
-- **Context Sharing**: Allowing multiple clients to access the same conversation state
+- **对话持久性**：保持连贯的多轮对话
+- **记忆管理**：跨交互存储和检索信息
+- **状态管理**：跟踪复杂工作流的进展
+- **上下文共享**：允许多个客户端访问相同的对话状态
 
-In MCP, root contexts have these key characteristics:
+在 MCP 中，根上下文具有以下关键特性：
 
-- Each root context has a unique identifier.
-- They can contain conversation history, user preferences, and other metadata.
-- They can be created, accessed, and archived as needed.
-- They support fine-grained access control and permissions.
+- 每个根上下文都有唯一标识符。
+- 可以包含对话历史、用户偏好及其他元数据。
+- 可以根据需要创建、访问和归档。
+- 支持细粒度的访问控制和权限管理。
 
-## Root Context Lifecycle
+## 根上下文生命周期
 
 ```mermaid
 flowchart TD
@@ -43,11 +52,11 @@ flowchart TD
     D --> E[Archive Context When Complete]
 ```
 
-## Working with Root Contexts
+## 使用根上下文
 
-Here's an example of how to create and manage root contexts. 
+下面是一个创建和管理根上下文的示例。
 
-### C# Implementation
+### C# 实现
 
 ```csharp
 // .NET Example: Root Context Management
@@ -122,19 +131,19 @@ public class RootContextExample
 }
 ```
 
-In the preceding code we've:
+在上述代码中，我们：
 
-1. Created a root context for a customer support session.
-1. Sent multiple messages within that context, allowing the model to maintain state.
-1. Updated the context with relevant metadata based on the conversation.
-1. Retrieved context information to understand the conversation history.
-1. Archived the context when the conversation was complete.
+1. 为客户支持会话创建了一个根上下文。
+2. 在该上下文中发送了多条消息，使模型能够维护状态。
+3. 根据对话更新了相关元数据。
+4. 检索了上下文信息以了解对话历史。
+5. 在对话完成后归档了该上下文。
 
-## Example: Root Context Implementation for financial analysis
+## 示例：金融分析的根上下文实现
 
-In this example, we will create a root context for a financial analysis session, demonstrating how to maintain state across multiple interactions.
+在此示例中，我们将为金融分析会话创建根上下文，演示如何在多次交互中维护状态。
 
-### Java Implementation
+### Java 实现
 
 ```java
 // Java Example: Root Context Implementation
@@ -220,19 +229,19 @@ public class RootContextsDemo {
 }
 ```
 
-In the preceding code, we've:
+在上述代码中，我们：
 
-1. Created a root context for a financial analysis session.
-2. Sent multiple messages within that context, allowing the model to maintain state.
-3. Updated the context with relevant metadata based on the conversation.
-4. Generated a summary of the analysis session and stored it in the context metadata.
-5. Archived the context when the conversation was complete.
+1. 为金融分析会话创建了一个根上下文。
+2. 在该上下文中发送了多条消息，使模型能够维护状态。
+3. 根据对话更新了相关元数据。
+4. 生成了分析会话的摘要并存储在上下文元数据中。
+5. 在对话完成后归档了该上下文。
 
-## Example: Root Context Management
+## 示例：根上下文管理
 
-Managing root contexts effectively is crucial for maintaining conversation history and state. Below is an example of how to implement root context management.
+有效管理根上下文对于维护对话历史和状态至关重要。以下是实现根上下文管理的示例。
 
-### JavaScript Implementation
+### JavaScript 实现
 
 ```javascript
 // JavaScript Example: Managing MCP Root Contexts
@@ -473,25 +482,25 @@ async function demonstrateContextSession() {
 demonstrateContextSession();
 ```
 
-In the preceding code we've:
+在上述代码中，我们：
 
-1. Created a root context for a product support conversation with the function `createConversationContext`. In this case, the context is about database performance issues.
+1. 使用函数 `createConversationContext` 创建了一个关于数据库性能问题的产品支持对话根上下文。
 
-1. Sent multiple messages within that context, allowing the model to maintain state with the function `sendMessage`. The messages being sent are about slow query performance and index configuration.
+2. 使用函数 `sendMessage` 在该上下文中发送了多条消息，使模型能够维护状态。发送的消息涉及查询性能缓慢和索引配置。
 
-1. Updated the context with relevant metadata based on the conversation.
+3. 根据对话更新了相关元数据。
 
-1. Generated a summary of the conversation and stored it in the context metadata with the function `generateContextSummary`.
+4. 使用函数 `generateContextSummary` 生成了对话摘要并存储在上下文元数据中。
 
-1. Archived the context when the conversation was complete with the function `archiveContext`.
+5. 使用函数 `archiveContext` 在对话完成后归档了该上下文。
 
-1. Handled errors gracefully to ensure robustness.
+6. 优雅地处理了错误，确保系统的健壮性。
 
-## Root Context for Multi-Turn Assistance
+## 多轮辅助的根上下文
 
-In this example, we will create a root context for a multi-turn assistance session, demonstrating how to maintain state across multiple interactions.
+在此示例中，我们将为多轮辅助会话创建根上下文，演示如何在多次交互中维护状态。
 
-### Python Implementation
+### Python 实现
 
 ```python
 # Python Example: Root Context for Multi-Turn Assistance
@@ -618,36 +627,39 @@ if __name__ == "__main__":
     asyncio.run(demo_assistant_session())
 ```
 
-In the preceding code we've:
+在上述代码中，我们：
 
-1. Created a root context for a technical support session with the function `create_session`. The context includes user information such as name and technical level.
+1. 使用函数 `create_session` 为技术支持会话创建了根上下文。上下文包含用户信息，如姓名和技术水平。
 
-1. Sent multiple messages within that context, allowing the model to maintain state with the function `send_message`. The messages being sent are about issues with the auto-scaling feature.
+2. 使用函数 `send_message` 在该上下文中发送了多条消息，使模型能够维护状态。发送的消息涉及自动扩展功能的问题。
 
-1. Retrieved conversation history using the function `get_conversation_history`, which provides context information and messages.
+3. 使用函数 `get_conversation_history` 检索了对话历史，获取上下文信息和消息。
 
-1. Ended the session by archiving the context and generating a summary with the function `end_session`. The summary captures key points from the conversation.
+4. 使用函数 `end_session` 结束会话，归档上下文并生成摘要。摘要捕捉了对话的关键点。
 
-## Root Context Best Practices
+## 根上下文最佳实践
 
-Here are some best practices for managing root contexts effectively:
+以下是有效管理根上下文的一些最佳实践：
 
-- **Create Focused Contexts**: Create separate root contexts for different conversation purposes or domains to maintain clarity.
+- **创建专注的上下文**：针对不同的对话目的或领域创建独立的根上下文，以保持清晰。
 
-- **Set Expiration Policies**: Implement policies to archive or delete old contexts to manage storage and comply with data retention policies.
+- **设置过期策略**：实施归档或删除旧上下文的策略，以管理存储并遵守数据保留政策。
 
-- **Store Relevant Metadata**: Use context metadata to store important information about the conversation that might be useful later.
+- **存储相关元数据**：利用上下文元数据存储对话中可能后续有用的重要信息。
 
-- **Use Context IDs Consistently**: Once a context is created, use its ID consistently for all related requests to maintain continuity.
+- **一致使用上下文 ID**：创建上下文后，所有相关请求都应一致使用该 ID，以保持连续性。
 
-- **Generate Summaries**: When a context grows large, consider generating summaries to capture essential information while managing context size.
+- **生成摘要**：当上下文变大时，考虑生成摘要以捕捉关键信息，同时控制上下文大小。
 
-- **Implement Access Control**: For multi-user systems, implement proper access controls to ensure privacy and security of conversation contexts.
+- **实施访问控制**：对于多用户系统，实施适当的访问控制，确保对话上下文的隐私和安全。
 
-- **Handle Context Limitations**: Be aware of context size limitations and implement strategies for handling very long conversations.
+- **处理上下文限制**：注意上下文大小限制，并制定策略应对超长对话。
 
-- **Archive When Complete**: Archive contexts when conversations are complete to free resources while preserving the conversation history.
+- **完成时归档**：对话完成后归档上下文，释放资源，同时保留对话历史。
 
-## What's next
+## 接下来
 
 - [5.5 Routing](../mcp-routing/README.md)
+
+**免责声明**：  
+本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。虽然我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始文件的母语版本应被视为权威来源。对于重要信息，建议采用专业人工翻译。对于因使用本翻译而产生的任何误解或误释，我们概不负责。

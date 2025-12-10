@@ -1,107 +1,116 @@
-# Consuming a server from the AI Toolkit extension for Visual Studio Code
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "98bcd044860716da5819e31c152813b7",
+  "translation_date": "2025-08-11T09:40:53+00:00",
+  "source_file": "03-GettingStarted/07-aitk/README.md",
+  "language_code": "zh"
+}
+-->
+# 使用 Visual Studio Code 的 AI Toolkit 扩展连接服务器
 
-When you’re building an AI agent, it’s not just about generating smart responses; it’s also about giving your agent the ability to take action. That’s where the Model Context Protocol (MCP) comes in. MCP makes it easy for agents to access external tools and services in a consistent way. Think of it like plugging your agent into a toolbox it can *actually* use.
+在构建 AI 代理时，不仅仅是生成智能响应，还需要赋予代理执行操作的能力。这就是模型上下文协议（MCP）的作用所在。MCP 使代理能够以一致的方式访问外部工具和服务。可以将其想象为将代理连接到一个它可以实际使用的工具箱。
 
-Let’s say you connect an agent to your calculator MCP server. Suddenly, your agent can perform math operations just by receiving a prompt like “What’s 47 times 89?”—no need to hardcode logic or build custom APIs.
+假设你将代理连接到一个计算器 MCP 服务器。这样，代理就可以通过接收类似“47 乘以 89 等于多少？”的提示来执行数学运算，而无需硬编码逻辑或构建自定义 API。
 
-## Overview
+## 概述
 
-This lesson covers how to connect a calculator MCP server to an agent with the [AI Toolkit](https://aka.ms/AIToolkit) extension in Visual Studio Code, enabling your agent to perform math operations such as addition, subtraction, multiplication, and division through natural language.
+本课程介绍如何通过 Visual Studio Code 的 [AI Toolkit](https://aka.ms/AIToolkit) 扩展将计算器 MCP 服务器连接到代理，使代理能够通过自然语言执行加法、减法、乘法和除法等数学运算。
 
-AI Toolkit is a powerful extension for Visual Studio Code that streamlines agent development. AI Engineers can easily build AI applications by developing and testing generative AI models—locally or in the cloud. The extension supports most major generative models available today.
+AI Toolkit 是一个功能强大的 Visual Studio Code 扩展，可以简化代理开发。AI 工程师可以轻松地通过本地或云端开发和测试生成式 AI 模型来构建 AI 应用程序。该扩展支持目前大多数主流的生成式模型。
 
-*Note*: The AI Toolkit currently supports Python and TypeScript.
+*注意*：AI Toolkit 当前支持 Python 和 TypeScript。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lesson, you will be able to:
+完成本课程后，你将能够：
 
-- Consume an MCP server via the AI Toolkit.
-- Configure an agent configuration to enable it to discover and utilize tools provided by the MCP server.
-- Utilize MCP tools via natural language.
+- 使用 AI Toolkit 消耗 MCP 服务器。
+- 配置代理以发现并使用 MCP 服务器提供的工具。
+- 通过自然语言使用 MCP 工具。
 
-## Approach
+## 方法
 
-Here's how we need to approach this at a high level:
+以下是我们需要采用的总体方法：
 
-- Create an agent and define its system prompt.
-- Create a MCP server with calculator tools.
-- Connect the Agent Builder to the MCP server.
-- Test the agent's tool invocation via natural language.
+- 创建代理并定义其系统提示。
+- 创建一个带有计算器工具的 MCP 服务器。
+- 将代理构建器连接到 MCP 服务器。
+- 通过自然语言测试代理的工具调用。
 
-Great, now that we understand the flow, let's configure an AI agent to leverage external tools through MCP, enhancing its capabilities!
+很好，现在我们已经了解了流程，接下来让我们配置一个 AI 代理，通过 MCP 利用外部工具，增强其能力！
 
-## Prerequisites
+## 前提条件
 
 - [Visual Studio Code](https://code.visualstudio.com/)
-- [AI Toolkit for Visual Studio Code](https://aka.ms/AIToolkit)
+- [Visual Studio Code 的 AI Toolkit](https://aka.ms/AIToolkit)
 
-## Exercise: Consuming a server
+## 练习：连接服务器
 
 > [!WARNING]
-> Note for macOS Users. We're currently investigating an issue affecting dependency installation on macOS. As a result, macOS users won’t be able to complete this tutorial at this time. We’ll update the instructions as soon as a fix is available. Thank you for your patience and understanding!
+> macOS 用户注意：我们目前正在调查一个影响 macOS 上依赖项安装的问题。因此，macOS 用户暂时无法完成本教程。我们会在修复后更新说明。感谢你的耐心和理解！
 
-In this exercise, you will build, run, and enhance an AI agent with tools from a MCP server inside Visual Studio Code using the AI Toolkit.
+在本练习中，你将使用 AI Toolkit 在 Visual Studio Code 中构建、运行并增强一个带有 MCP 服务器工具的 AI 代理。
 
-### -0- Prestep, add the OpenAI GPT-4o model to My Models
+### -0- 预备步骤，将 OpenAI GPT-4o 模型添加到“我的模型”
 
-The exercise leverages the **GPT-4o** model. The model should be added to **My Models** before creating the agent.
+本练习使用 **GPT-4o** 模型。在创建代理之前，应将该模型添加到 **我的模型**。
 
-![Screenshot of a model selection interface in Visual Studio Code's AI Toolkit extension. The heading reads "Find the right model for your AI Solution" with a subtitle encouraging users to discover, test, and deploy AI models. Below, under “Popular Models,” six model cards are displayed: DeepSeek-R1 (GitHub-hosted), OpenAI GPT-4o, OpenAI GPT-4.1, OpenAI o1, Phi 4 Mini (CPU - Small, Fast), and DeepSeek-R1 (Ollama-hosted). Each card includes options to “Add” the model or “Try in Playground](./assets/aitk-model-catalog.png)
+![Visual Studio Code 的 AI Toolkit 扩展中模型选择界面的截图。标题为“为你的 AI 解决方案找到合适的模型”，副标题鼓励用户发现、测试和部署 AI 模型。下方“热门模型”部分显示六个模型卡片：DeepSeek-R1（GitHub 托管）、OpenAI GPT-4o、OpenAI GPT-4.1、OpenAI o1、Phi 4 Mini（CPU - 小型、快速）和 DeepSeek-R1（Ollama 托管）。每个卡片包括“添加”模型或“在 Playground 中试用”的选项。](../../translated_images/aitk-model-catalog.2acd38953bb9c119aa629fe74ef34cc56e4eed35e7f5acba7cd0a59e614ab335.zh.png)
 
-1. Open the **AI Toolkit** extension from the **Activity Bar**.
-1. In the **Catalog** section, select **Models** to open the **Model Catalog**. Selecting **Models** opens the **Model Catalog** in a new editor tab.
-1. In the **Model Catalog** search bar, enter **OpenAI GPT-4o**.
-1. Click **+ Add** to add the model to your **My Models** list. Ensure that you've selected the model that's **Hosted by GitHub**.
-1. In the **Activity Bar**, confirm that the **OpenAI GPT-4o** model appears in the list.
+1. 从 **活动栏** 打开 **AI Toolkit** 扩展。
+1. 在 **目录** 部分选择 **模型**，以打开 **模型目录**。选择 **模型** 会在新的编辑器标签中打开 **模型目录**。
+1. 在 **模型目录** 搜索栏中输入 **OpenAI GPT-4o**。
+1. 点击 **+ 添加** 将模型添加到你的 **我的模型** 列表中。确保选择的是 **GitHub 托管** 的模型。
+1. 在 **活动栏** 中确认 **OpenAI GPT-4o** 模型出现在列表中。
 
-### -1- Create an agent
+### -1- 创建代理
 
-The **Agent (Prompt) Builder** enables you to create and customize your own AI-powered agents. In this section, you’ll create a new agent and assign a model to power the conversation.
+**代理（提示）构建器** 使你能够创建和自定义自己的 AI 驱动代理。在本节中，你将创建一个新代理并分配一个模型来支持对话。
 
-![Screenshot of the "Calculator Agent" builder interface in the AI Toolkit extension for Visual Studio Code. On the left panel, the model selected is "OpenAI GPT-4o (via GitHub)." A system prompt reads "You are a professor in university teaching math," and the user prompt says, "Explain to me the Fourier equation in simple terms." Additional options include buttons for adding tools, enabling MCP Server, and selecting structured output. A blue “Run” button is at the bottom. On the right panel, under "Get Started with Examples," three sample agents are listed: Web Developer (with MCP Server, Second-Grade Simplifier, and Dream Interpreter, each with brief descriptions of their functions.](./assets/aitk-agent-builder.png)
+![Visual Studio Code 的 AI Toolkit 扩展中“计算器代理”构建器界面的截图。左侧面板中选择的模型是“OpenAI GPT-4o（通过 GitHub）”。系统提示为“你是一名教授，教授大学数学”，用户提示为“用简单的术语向我解释傅里叶方程”。其他选项包括添加工具、启用 MCP 服务器和选择结构化输出的按钮。底部有一个蓝色“运行”按钮。右侧面板中，“通过示例开始”下列出了三个示例代理：Web 开发者（带 MCP 服务器）、二年级简化器和梦境解释器，每个都有简短的功能描述。](../../translated_images/aitk-agent-builder.901e3a2960c3e4774b29a23024ff5bec2d4232f57fae2a418b2aaae80f81c05f.zh.png)
 
-1. Open the **AI Toolkit** extension from the **Activity Bar**.
-1. In the **Tools** section, select **Agent (Prompt) Builder**. Selecting **Agent (Prompt) Builder** opens the **Agent (Prompt) Builder** in a new editor tab.
-1. Click the **+ New Agent** button. The extension will launch a setup wizard via the **Command Palette**.
-1. Enter the name **Calculator Agent** and press **Enter**.
-1. In the **Agent (Prompt) Builder**, for the **Model** field, select the **OpenAI GPT-4o (via GitHub)** model.
+1. 从 **活动栏** 打开 **AI Toolkit** 扩展。
+1. 在 **工具** 部分选择 **代理（提示）构建器**。选择 **代理（提示）构建器** 会在新的编辑器标签中打开 **代理（提示）构建器**。
+1. 点击 **+ 新代理** 按钮。扩展会通过 **命令面板** 启动设置向导。
+1. 输入名称 **计算器代理** 并按 **Enter**。
+1. 在 **代理（提示）构建器** 中的 **模型** 字段，选择 **OpenAI GPT-4o（通过 GitHub）** 模型。
 
-### -2- Create a system prompt for the agent
+### -2- 为代理创建系统提示
 
-With the agent scaffolded, it’s time to define its personality and purpose. In this section, you’ll use the **Generate system prompt** feature to describe the agent’s intended behavior—in this case, a calculator agent—and have the model write the system prompt for you.
+代理框架搭建完成后，是时候定义其个性和用途了。在本节中，你将使用 **生成系统提示** 功能来描述代理的预期行为（例如一个计算器代理），并让模型为你编写系统提示。
 
-![Screenshot of the "Calculator Agent" interface in the AI Toolkit for Visual Studio Code with a modal window open titled "Generate a prompt." The modal explains that a prompt template can be generated by sharing basic details and includes a text box with the sample system prompt: "You are a helpful and efficient math assistant. When given a problem involving basic arithmetic, you respond with the correct result." Below the text box are "Close" and "Generate" buttons. In the background, part of the agent configuration is visible, including the selected model "OpenAI GPT-4o (via GitHub)" and fields for system and user prompts.](./assets/aitk-generate-prompt.png)
+![Visual Studio Code 的 AI Toolkit 扩展中“计算器代理”界面的截图，显示一个标题为“生成提示”的模态窗口。模态窗口解释了可以通过分享基本信息生成提示模板，并包括一个文本框，示例系统提示为：“你是一个乐于助人且高效的数学助手。当遇到涉及基本算术的问题时，你会提供正确的结果。”文本框下方有“关闭”和“生成”按钮。背景中部分代理配置可见，包括选定的模型“OpenAI GPT-4o（通过 GitHub）”以及系统和用户提示字段。](../../translated_images/aitk-generate-prompt.ba9e69d3d2bbe2a26444d0c78775540b14196061eee32c2054e9ee68c4f51f3a.zh.png)
 
-1. For the **Prompts** section, click the **Generate system prompt** button. This button opens in the prompt builder which leverages AI to generate a system prompt for the agent.
-1. In the **Generate a prompt** window, enter the following: `You are a helpful and efficient math assistant. When given a problem involving basic arithmetic, you respond with the correct result.`
-1. Click the **Generate** button. A notification will appear in the bottom-right corner confirming that the system prompt is being generated. Once the prompt generation is complete, the prompt will appear in the **System prompt** field of the **Agent (Prompt) Builder**.
-1. Review the **System prompt** and modify if necessary.
+1. 在 **提示** 部分，点击 **生成系统提示** 按钮。此按钮会打开提示构建器，利用 AI 为代理生成系统提示。
+1. 在 **生成提示** 窗口中输入以下内容：`你是一个乐于助人且高效的数学助手。当遇到涉及基本算术的问题时，你会提供正确的结果。`
+1. 点击 **生成** 按钮。右下角会出现通知，确认系统提示正在生成。提示生成完成后，提示会出现在 **代理（提示）构建器** 的 **系统提示** 字段中。
+1. 审核 **系统提示** 并根据需要进行修改。
 
-### -3- Create a MCP server
+### -3- 创建 MCP 服务器
 
-Now that you've defined your agent's system prompt—guiding its behavior and responses—it's time to equip the agent with practical capabilities. In this section, you’ll create a calculator MCP server with tools to execute addition, subtraction, multiplication, and division calculations. This server will enable your agent to perform real-time math operations in response to natural language prompts.
+现在你已经定义了代理的系统提示，指导其行为和响应，是时候为代理配备实际功能了。在本节中，你将创建一个带有加法、减法、乘法和除法计算工具的计算器 MCP 服务器。此服务器将使代理能够通过自然语言提示执行实时数学运算。
 
-!["Screenshot of the lower section of the Calculator Agent interface in the AI Toolkit extension for Visual Studio Code. It shows expandable menus for “Tools” and “Structure output,” along with a dropdown menu labeled “Choose output format” set to “text.” To the right, there is a button labeled “+ MCP Server” for adding a Model Context Protocol server. An image icon placeholder is shown above the Tools section.](./assets/aitk-add-mcp-server.png)
+![Visual Studio Code 的 AI Toolkit 扩展中“计算器代理”界面底部的截图。显示“工具”和“结构化输出”的可展开菜单，以及一个设置为“文本”的下拉菜单“选择输出格式”。右侧有一个标记为“+ MCP 服务器”的按钮，用于添加模型上下文协议服务器。工具部分上方显示一个图像图标占位符。](../../translated_images/aitk-add-mcp-server.9742cfddfe808353c0caf9cc0a7ed3e80e13abf4d2ebde315c81c3cb02a2a449.zh.png)
 
-AI Toolkit is equipped with templates for ease of creating your own MCP server. We'll use the Python template for creating the calculator MCP server.
+AI Toolkit 配备了模板，便于创建自己的 MCP 服务器。我们将使用 Python 模板来创建计算器 MCP 服务器。
 
-*Note*: The AI Toolkit currently supports Python and TypeScript.
+*注意*：AI Toolkit 当前支持 Python 和 TypeScript。
 
-1. In the **Tools** section of the **Agent (Prompt) Builder**, click the **+ MCP Server** button. The extension will launch a setup wizard via the **Command Palette**.
-1. Select **+ Add Server**.
-1. Select **Create a New MCP Server**.
-1. Select **python-weather** as the template.
-1. Select **Default folder** to save the MCP server template.
-1. Enter the following name for the server: **Calculator**
-1. A new Visual Studio Code window will open. Select **Yes, I trust the authors**.
-1. Using the terminal (**Terminal** > **New Terminal**), create a virtual environment: `python -m venv .venv`
-1. Using the terminal, activate the virtual environment:
+1. 在 **代理（提示）构建器** 的 **工具** 部分，点击 **+ MCP 服务器** 按钮。扩展会通过 **命令面板** 启动设置向导。
+1. 选择 **+ 添加服务器**。
+1. 选择 **创建一个新的 MCP 服务器**。
+1. 选择 **python-weather** 作为模板。
+1. 选择 **默认文件夹** 保存 MCP 服务器模板。
+1. 输入以下服务器名称：**计算器**
+1. 一个新的 Visual Studio Code 窗口会打开。选择 **是，我信任作者**。
+1. 使用终端（**终端** > **新终端**），创建虚拟环境：`python -m venv .venv`
+1. 使用终端激活虚拟环境：
     1. Windows - `.venv\Scripts\activate`
     1. macOS/Linux - `source .venv/bin/activate`
-1. Using the terminal, install the dependencies: `pip install -e .[dev]`
-1. In the **Explorer** view of the **Activity Bar**, expand the **src** directory and select **server.py** to open the file in the editor.
-1. Replace the code in the **server.py** file with the following and save:
+1. 使用终端安装依赖项：`pip install -e .[dev]`
+1. 在 **活动栏** 的 **资源管理器** 视图中，展开 **src** 目录并选择 **server.py**，在编辑器中打开文件。
+1. 将 **server.py** 文件中的代码替换为以下内容并保存：
 
     ```python
     """
@@ -144,46 +153,49 @@ AI Toolkit is equipped with templates for ease of creating your own MCP server. 
         return a / b
     ```
 
-### -4- Run the agent with the calculator MCP server
+### -4- 使用计算器 MCP 服务器运行代理
 
-Now that your agent has tools, it's time to use them! In this section, you'll submit prompts to the agent to test and validate whether the agent leverages the appropriate tool from the calculator MCP server.
+现在代理已经拥有工具，是时候使用它们了！在本节中，你将向代理提交提示，以测试并验证代理是否正确调用计算器 MCP 服务器中的工具。
 
-![Screenshot of the Calculator Agent interface in the AI Toolkit extension for Visual Studio Code. On the left panel, under “Tools,” an MCP server named local-server-calculator_server is added, showing four available tools: add, subtract, multiply, and divide. A badge shows that four tools are active. Below is a collapsed “Structure output” section and a blue “Run” button. On the right panel, under “Model Response,” the agent invokes the multiply and subtract tools with inputs {"a": 3, "b": 25} and {"a": 75, "b": 20} respectively. The final “Tool Response” is shown as 75.0. A “View Code” button appears at the bottom.](./assets/aitk-agent-response-with-tools.png)
+![Visual Studio Code 的 AI Toolkit 扩展中“计算器代理”界面的截图。左侧面板中，“工具”下添加了一个名为 local-server-calculator_server 的 MCP 服务器，显示四个可用工具：加法、减法、乘法和除法。一个徽章显示四个工具已激活。下方是一个折叠的“结构化输出”部分和一个蓝色“运行”按钮。右侧面板中，“模型响应”显示代理调用了乘法和减法工具，输入分别为 {"a": 3, "b": 25} 和 {"a": 75, "b": 20}。最终“工具响应”显示为 75.0。底部有一个“查看代码”按钮。](../../translated_images/aitk-agent-response-with-tools.e7c781869dc8041a25f9903ed4f7e8e0c7e13d7d94f6786a6c51b1e172f56866.zh.png)
 
-You will run the calculator MCP server on your local dev machine via the **Agent Builder** as the MCP client.
+你将在本地开发机器上通过 **代理构建器** 运行计算器 MCP 服务器作为 MCP 客户端。
 
-1. Press `F5` to start debugging the MCP server. The **Agent (Prompt) Builder** will open in a new editor tab. The status of the server is visible in the terminal.
-1. In the **User prompt** field of the **Agent (Prompt) Builder**, enter the following prompt: `I bought 3 items priced at $25 each, and then used a $20 discount. How much did I pay?`
-1. Click the **Run** button to generate the agent's response.
-1. Review the agent output. The model should conclude that you paid **$55**.
-1. Here's a breakdown of what should occur:
-    - The agent selects the **multiply** and **substract** tools to aid in the calculation.
-    - The respective `a` and `b` values are assigned for the **multiply** tool.
-    - The respective `a` and `b` values are assigned for the **subtract** tool.
-    - The response from each tool is provided in the respective **Tool Response**.
-    - The final output from the model is provided in the final **Model Response**.
-1. Submit additional prompts to further test the agent. You can modify the existing prompt in the **User prompt** field by clicking into the field and replacing the existing prompt.
-1. Once you're done testing the agent, you can stop the server via the **terminal** by entering **CTRL/CMD+C** to quit.
+1. 按 `F5` 启动 MCP 服务器调试。**代理（提示）构建器** 会在新的编辑器标签中打开。服务器状态在终端中可见。
+1. 在 **代理（提示）构建器** 的 **用户提示** 字段中输入以下提示：`我买了 3 件每件价格为 $25 的商品，然后用了 $20 的折扣。我花了多少钱？`
+1. 点击 **运行** 按钮生成代理的响应。
+1. 审核代理输出。模型应得出你花了 **$55**。
+1. 以下是应该发生的情况：
+    - 代理选择 **乘法** 和 **减法** 工具来协助计算。
+    - 分别为 **乘法** 工具分配 `a` 和 `b` 值。
+    - 分别为 **减法** 工具分配 `a` 和 `b` 值。
+    - 每个工具的响应在各自的 **工具响应** 中提供。
+    - 模型的最终输出在 **模型响应** 中提供。
+1. 提交其他提示以进一步测试代理。你可以通过点击 **用户提示** 字段并替换现有提示来修改提示。
+1. 测试完成后，可以通过 **终端** 输入 **CTRL/CMD+C** 停止服务器。
 
-## Assignment
+## 作业
 
-Try adding an additional tool entry to your **server.py** file (ex: return the square root of a number). Submit additional prompts that would require the agent to leverage your new tool (or existing tools). Be sure to restart the server to load newly added tools.
+尝试向你的 **server.py** 文件添加一个额外的工具条目（例如：返回一个数字的平方根）。提交需要代理使用新工具（或现有工具）的额外提示。确保重新启动服务器以加载新添加的工具。
 
-## Solution
+## 解决方案
 
-[Solution](./solution/README.md)
+[解决方案](./solution/README.md)
 
-## Key Takeaways
+## 关键要点
 
-The takeaways from this chapter is the following:
+本章的关键要点如下：
 
-- The AI Toolkit extension is a great client that lets you consume MCP Servers and their tools.
-- You can add new tools to MCP servers, expanding the agent's capabilities to meet evolving requirements.
-- The AI Toolkit includes templates (e.g., Python MCP server templates) to simplify the creation of custom tools.
+- AI Toolkit 扩展是一个很棒的客户端，可以让你使用 MCP 服务器及其工具。
+- 你可以向 MCP 服务器添加新工具，扩展代理的能力以满足不断变化的需求。
+- AI Toolkit 包括模板（例如 Python MCP 服务器模板），简化了自定义工具的创建。
 
-## Additional Resources
+## 其他资源
 
-- [AI Toolkit docs](https://aka.ms/AIToolkit/doc)
+- [AI Toolkit 文档](https://aka.ms/AIToolkit/doc)
 
-## What's Next
-- Next: [Testing & Debugging](../08-testing/README.md)
+## 下一步
+- 下一章：[测试与调试](../08-testing/README.md)
+
+**免责声明**：  
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。应以原始语言的文档作为权威来源。对于重要信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。

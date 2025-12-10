@@ -1,29 +1,38 @@
-# Monitoring and Observability
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "a603abf726c7d946f0b0f05a3a42d8ac",
+  "translation_date": "2025-09-30T12:50:21+00:00",
+  "source_file": "11-MCPServerHandsOnLabs/11-Monitoring/README.md",
+  "language_code": "zh"
+}
+-->
+# 监控与可观测性
 
-## 🎯 What This Lab Covers
+## 🎯 本实验内容
 
-This lab provides comprehensive guidance for implementing monitoring, observability, and alerting for your MCP server in production environments. You'll learn to set up Application Insights, create meaningful dashboards, implement effective alerting, and establish troubleshooting workflows for operational excellence.
+本实验提供了全面的指导，帮助您在生产环境中为 MCP 服务器实施监控、可观测性和告警。您将学习如何设置 Application Insights，创建有意义的仪表盘，实施有效的告警，并建立故障排除工作流程以实现卓越的运营。
 
-## Overview
+## 概述
 
-Effective monitoring and observability are crucial for maintaining reliable MCP servers in production. This lab covers the three pillars of observability—metrics, logs, and traces—and shows you how to implement comprehensive monitoring that enables proactive issue detection and rapid problem resolution.
+有效的监控与可观测性对于维护生产环境中的 MCP 服务器的可靠性至关重要。本实验涵盖了可观测性的三大支柱——指标、日志和追踪，并展示了如何实施全面的监控，以实现主动问题检测和快速问题解决。
 
-You'll learn to transform raw telemetry data into actionable insights that help you understand system behavior, optimize performance, and ensure high availability.
+您将学习如何将原始遥测数据转化为可操作的洞察，帮助您理解系统行为、优化性能并确保高可用性。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lab, you will be able to:
+完成本实验后，您将能够：
 
-- **Implement** comprehensive Application Insights integration for MCP servers
-- **Design** structured logging patterns for effective troubleshooting
-- **Create** performance metrics collection and analysis systems
-- **Configure** intelligent alerting with actionable notifications
-- **Build** operational dashboards for real-time monitoring
-- **Establish** effective troubleshooting workflows and runbooks
+- **实施** MCP 服务器的全面 Application Insights 集成
+- **设计**结构化日志模式以便于故障排除
+- **创建**性能指标收集与分析系统
+- **配置**智能告警并发送可操作的通知
+- **构建**实时监控的运营仪表盘
+- **建立**有效的故障排除工作流程和运行手册
 
-## 📊 Application Insights Integration
+## 📊 Application Insights 集成
 
-### Setting Up Application Insights
+### 设置 Application Insights
 
 ```python
 # mcp_server/monitoring.py
@@ -213,7 +222,7 @@ telemetry_manager = MCPTelemetryManager(
 )
 ```
 
-### Enhanced Logging with Structured Data
+### 使用结构化数据增强日志记录
 
 ```python
 # mcp_server/logging_config.py
@@ -413,7 +422,7 @@ class MCPLogger:
 mcp_logger = MCPLogger("mcp_server")
 ```
 
-### Custom Metrics Collection
+### 自定义指标收集
 
 ```python
 # mcp_server/metrics_collector.py
@@ -581,9 +590,9 @@ class MetricsCollector:
 metrics_collector = MetricsCollector()
 ```
 
-## 🔔 Alert Configuration
+## 🔔 告警配置
 
-### Intelligent Alerting System
+### 智能告警系统
 
 ```python
 # mcp_server/alerting.py
@@ -907,9 +916,9 @@ class TeamsNotifier:
 alert_manager = AlertManager()
 ```
 
-## 📈 Dashboard Creation
+## 📈 仪表盘创建
 
-### Azure Monitor Workbooks
+### Azure Monitor 工作簿
 
 ```json
 {
@@ -998,7 +1007,7 @@ alert_manager = AlertManager()
 }
 ```
 
-### Custom Dashboard Implementation
+### 自定义仪表盘实施
 
 ```python
 # mcp_server/dashboard.py
@@ -1167,9 +1176,9 @@ async def get_active_alerts():
     }
 ```
 
-## 🔍 Troubleshooting Workflows
+## 🔍 故障排除工作流程
 
-### Automated Diagnostics
+### 自动化诊断
 
 ```python
 # mcp_server/diagnostics.py
@@ -1447,7 +1456,7 @@ async def run_diagnostics():
     }
 ```
 
-### Operational Runbooks
+### 运营运行手册
 
 ```yaml
 # operational-runbooks.yml
@@ -1537,44 +1546,49 @@ runbooks:
           - "top -p $(pgrep postgres)"
 ```
 
-## 🎯 Key Takeaways
+## 🎯 关键收获
 
-After completing this lab, you should have:
+完成本实验后，您应该具备以下能力：
 
-✅ **Application Insights Integration**: Complete telemetry and monitoring setup  
-✅ **Structured Logging**: Production-ready logging with correlation and context  
-✅ **Custom Metrics**: Business and technical metrics collection and analysis  
-✅ **Intelligent Alerting**: Proactive alerting with multiple notification channels  
-✅ **Operational Dashboards**: Real-time monitoring and business insights  
-✅ **Troubleshooting Workflows**: Automated diagnostics and operational runbooks  
+✅ **Application Insights 集成**：完整的遥测和监控设置  
+✅ **结构化日志记录**：生产环境就绪的日志记录，包含关联性和上下文信息  
+✅ **自定义指标**：业务和技术指标的收集与分析  
+✅ **智能告警**：多通知渠道的主动告警  
+✅ **运营仪表盘**：实时监控和业务洞察  
+✅ **故障排除工作流程**：自动化诊断和运营运行手册  
 
-## 🚀 What's Next
+## 🚀 下一步
 
-Continue with **[Lab 12: Best Practices and Optimization](../12-Best-Practices/README.md)** to:
+继续学习 **[实验 12：最佳实践与优化](../12-Best-Practices/README.md)**，以：
 
-- Apply performance optimization techniques
-- Implement comprehensive security hardening
-- Learn production deployment best practices
-- Establish cost optimization strategies
+- 应用性能优化技术
+- 实施全面的安全加固
+- 学习生产环境部署的最佳实践
+- 建立成本优化策略
 
-## 📚 Additional Resources
+## 📚 额外资源
 
 ### Azure Monitor
-- [Application Insights Documentation](https://docs.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Complete monitoring guide
-- [KQL Query Reference](https://docs.microsoft.com/azure/data-explorer/kql-quick-reference) - Query language for Application Insights
-- [Azure Monitor Workbooks](https://docs.microsoft.com/azure/azure-monitor/visualize/workbooks-overview) - Custom dashboard creation
+- [Application Insights 文档](https://docs.microsoft.com/azure/azure-monitor/app/app-insights-overview) - 完整的监控指南
+- [KQL 查询参考](https://docs.microsoft.com/azure/data-explorer/kql-quick-reference) - Application Insights 的查询语言
+- [Azure Monitor 工作簿](https://docs.microsoft.com/azure/azure-monitor/visualize/workbooks-overview) - 自定义仪表盘创建
 
 ### OpenTelemetry
-- [OpenTelemetry Python](https://opentelemetry.io/docs/instrumentation/python/) - Instrumentation guide
-- [Distributed Tracing](https://opentelemetry.io/docs/concepts/observability-primer/#distributed-traces) - Tracing concepts
-- [Metrics Collection](https://opentelemetry.io/docs/concepts/observability-primer/#reliability--metrics) - Metrics best practices
+- [OpenTelemetry Python](https://opentelemetry.io/docs/instrumentation/python/) - 仪器化指南
+- [分布式追踪](https://opentelemetry.io/docs/concepts/observability-primer/#distributed-traces) - 追踪概念
+- [指标收集](https://opentelemetry.io/docs/concepts/observability-primer/#reliability--metrics) - 指标最佳实践
 
-### Operational Excellence
-- [SRE Handbook](https://sre.google/sre-book/table-of-contents/) - Site Reliability Engineering principles
-- [Monitoring Best Practices](https://cloud.google.com/architecture/framework/reliability/monitoring-alerting-logging) - Industry best practices
-- [Incident Response](https://response.pagerduty.com/) - Incident management guide
+### 运营卓越
+- [SRE 手册](https://sre.google/sre-book/table-of-contents/) - 网站可靠性工程原则
+- [监控最佳实践](https://cloud.google.com/architecture/framework/reliability/monitoring-alerting-logging) - 行业最佳实践
+- [事件响应](https://response.pagerduty.com/) - 事件管理指南
 
 ---
 
-**Previous**: [Lab 10: Deployment Strategies](../10-Deployment/README.md)  
-**Next**: [Lab 12: Best Practices and Optimization](../12-Best-Practices/README.md)
+**上一节**: [实验 10：部署策略](../10-Deployment/README.md)  
+**下一节**: [实验 12：最佳实践与优化](../12-Best-Practices/README.md)
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们尽力确保准确性，但请注意，自动翻译可能包含错误或不准确之处。应以原始语言的文档作为权威来源。对于关键信息，建议使用专业人工翻译。因使用本翻译而引起的任何误解或误读，我们概不负责。

@@ -1,84 +1,93 @@
-# Introduction to MCP Database Integration
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "1d375ae049e52c89287d533daa4ba348",
+  "translation_date": "2025-09-30T12:51:45+00:00",
+  "source_file": "11-MCPServerHandsOnLabs/00-Introduction/README.md",
+  "language_code": "zh"
+}
+-->
+# MCP数据库集成简介
 
-## 🎯 What This Lab Covers
+## 🎯 本实验内容
 
-This introduction lab provides a comprehensive overview of building Model Context Protocol (MCP) servers with database integration. You'll understand the business case, technical architecture, and real-world applications through the Zava Retail analytics use case at https://github.com/microsoft/MCP-Server-and-PostgreSQL-Sample-Retail.
+本入门实验全面介绍了如何构建与数据库集成的模型上下文协议（MCP）服务器。通过Zava零售分析案例（https://github.com/microsoft/MCP-Server-and-PostgreSQL-Sample-Retail），您将了解业务场景、技术架构以及实际应用。
 
-## Overview
+## 概述
 
-**Model Context Protocol (MCP)** enables AI assistants to securely access and interact with external data sources in real-time. When combined with database integration, MCP unlocks powerful capabilities for data-driven AI applications.
+**模型上下文协议（MCP）**使得AI助手能够安全地实时访问和交互外部数据源。结合数据库集成后，MCP为数据驱动的AI应用解锁了强大的功能。
 
-This learning path teaches you to build production-ready MCP servers that connect AI assistants to retail sales data through PostgreSQL, implementing enterprise patterns like Row Level Security, semantic search, and multi-tenant data access.
+本学习路径将教您构建生产级MCP服务器，通过PostgreSQL将AI助手连接到零售销售数据，同时实现企业模式，如行级安全性、语义搜索和多租户数据访问。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lab, you will be able to:
+完成本实验后，您将能够：
 
-- **Define** Model Context Protocol and its core benefits for database integration
-- **Identify** key components of an MCP server architecture with databases
-- **Understand** the Zava Retail use case and its business requirements
-- **Recognize** enterprise patterns for secure, scalable database access
-- **List** the tools and technologies used throughout this learning path
+- **定义**模型上下文协议及其数据库集成的核心优势
+- **识别**MCP服务器架构中与数据库相关的关键组件
+- **理解**Zava零售案例及其业务需求
+- **认识**安全、可扩展的数据库访问的企业模式
+- **列举**学习路径中使用的工具和技术
 
-## 🧭 The Challenge: AI Meets Real-World Data
+## 🧭 挑战：AI与现实世界数据的结合
 
-### Traditional AI Limitations
+### 传统AI的局限性
 
-Modern AI assistants are incredibly powerful but face significant limitations when working with real-world business data:
+现代AI助手功能强大，但在处理现实世界业务数据时面临显著局限：
 
-| **Challenge** | **Description** | **Business Impact** |
-|---------------|-----------------|-------------------|
-| **Static Knowledge** | AI models trained on fixed datasets can't access current business data | Outdated insights, missed opportunities |
-| **Data Silos** | Information locked in databases, APIs, and systems AI can't reach | Incomplete analysis, fragmented workflows |
-| **Security Constraints** | Direct database access raises security and compliance concerns | Limited deployment, manual data preparation |
-| **Complex Queries** | Business users need technical knowledge to extract data insights | Reduced adoption, inefficient processes |
+| **挑战**         | **描述**                             | **业务影响**             |
+|-------------------|-------------------------------------|--------------------------|
+| **静态知识**     | AI模型基于固定数据集训练，无法访问当前业务数据 | 过时的洞察，错失机会     |
+| **数据孤岛**     | 信息锁定在数据库、API和AI无法访问的系统中 | 分析不完整，工作流程分散 |
+| **安全限制**     | 直接数据库访问带来安全和合规问题       | 部署受限，数据需手动准备 |
+| **复杂查询**     | 业务用户需要技术知识才能提取数据洞察   | 采用率降低，流程低效     |
 
-### The MCP Solution
+### MCP解决方案
 
-Model Context Protocol addresses these challenges by providing:
+模型上下文协议通过以下方式解决这些挑战：
 
-- **Real-time Data Access**: AI assistants query live databases and APIs
-- **Secure Integration**: Controlled access with authentication and permissions
-- **Natural Language Interface**: Business users ask questions in plain English
-- **Standardized Protocol**: Works across different AI platforms and tools
+- **实时数据访问**：AI助手查询实时数据库和API
+- **安全集成**：通过认证和权限控制访问
+- **自然语言界面**：业务用户可用简单英语提问
+- **标准化协议**：适用于不同AI平台和工具
 
-## 🏪 Meet Zava Retail: Our Learning Case Study https://github.com/microsoft/MCP-Server-and-PostgreSQL-Sample-Retail
+## 🏪 认识Zava零售：我们的学习案例 https://github.com/microsoft/MCP-Server-and-PostgreSQL-Sample-Retail
 
-Throughout this learning path, we'll build an MCP server for **Zava Retail**, a fictional DIY retail chain with multiple store locations. This realistic scenario demonstrates enterprise-grade MCP implementation.
+在整个学习路径中，我们将为**Zava零售**构建一个MCP服务器，这是一个虚构的DIY零售连锁店，拥有多个门店位置。此场景展示了企业级MCP实施的实际应用。
 
-### Business Context
+### 业务背景
 
-**Zava Retail** operates:
-- **8 physical stores** across Washington state (Seattle, Bellevue, Tacoma, Spokane, Everett, Redmond, Kirkland)
-- **1 online store** for e-commerce sales
-- **Diverse product catalog** including tools, hardware, garden supplies, and building materials
-- **Multi-level management** with store managers, regional managers, and executives
+**Zava零售**运营：
+- **8家实体店**，位于华盛顿州（西雅图、贝尔维尤、塔科马、斯波坎、埃弗里特、雷德蒙德、柯克兰）
+- **1家在线商店**，用于电子商务销售
+- **多样化产品目录**，包括工具、五金、园艺用品和建筑材料
+- **多层管理结构**，包括门店经理、区域经理和高管
 
-### Business Requirements
+### 业务需求
 
-Store managers and executives need AI-powered analytics to:
+门店经理和高管需要AI驱动的分析工具来：
 
-1. **Analyze sales performance** across stores and time periods
-2. **Track inventory levels** and identify restocking needs
-3. **Understand customer behavior** and purchasing patterns
-4. **Discover product insights** through semantic search
-5. **Generate reports** with natural language queries
-6. **Maintain data security** with role-based access control
+1. **分析销售表现**，涵盖各门店和时间段
+2. **跟踪库存水平**，识别补货需求
+3. **了解客户行为**和购买模式
+4. **通过语义搜索发现产品洞察**
+5. **通过自然语言查询生成报告**
+6. **通过基于角色的访问控制维护数据安全**
 
-### Technical Requirements
+### 技术需求
 
-The MCP server must provide:
+MCP服务器必须提供：
 
-- **Multi-tenant data access** where store managers see only their store's data
-- **Flexible querying** supporting complex SQL operations
-- **Semantic search** for product discovery and recommendations
-- **Real-time data** reflecting current business state
-- **Secure authentication** with row-level security
-- **Scalable architecture** supporting multiple concurrent users
+- **多租户数据访问**，门店经理只能看到自己门店的数据
+- **灵活查询**，支持复杂SQL操作
+- **语义搜索**，用于产品发现和推荐
+- **实时数据**，反映当前业务状态
+- **安全认证**，实现行级安全性
+- **可扩展架构**，支持多个并发用户
 
-## 🏗️ MCP Server Architecture Overview
+## 🏗️ MCP服务器架构概述
 
-Our MCP server implements a layered architecture optimized for database integration:
+我们的MCP服务器实现了针对数据库集成优化的分层架构：
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -118,123 +127,123 @@ Our MCP server implements a layered architecture optimized for database integrat
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Key Components
+### 关键组件
 
-#### **1. MCP Server Layer**
-- **FastMCP Framework**: Modern Python MCP server implementation
-- **Tool Registration**: Declarative tool definitions with type safety
-- **Request Context**: User identity and session management
-- **Error Handling**: Robust error management and logging
+#### **1. MCP服务器层**
+- **FastMCP框架**：现代Python MCP服务器实现
+- **工具注册**：声明式工具定义，具有类型安全性
+- **请求上下文**：用户身份和会话管理
+- **错误处理**：强大的错误管理和日志记录
 
-#### **2. Database Integration Layer**
-- **Connection Pooling**: Efficient asyncpg connection management
-- **Schema Provider**: Dynamic table schema discovery
-- **Query Executor**: Secure SQL execution with RLS context
-- **Transaction Management**: ACID compliance and rollback handling
+#### **2. 数据库集成层**
+- **连接池**：高效的asyncpg连接管理
+- **模式提供者**：动态表模式发现
+- **查询执行器**：带RLS上下文的安全SQL执行
+- **事务管理**：ACID合规性和回滚处理
 
-#### **3. Security Layer**
-- **Row Level Security**: PostgreSQL RLS for multi-tenant data isolation
-- **User Identity**: Store manager authentication and authorization
-- **Access Control**: Fine-grained permissions and audit trails
-- **Input Validation**: SQL injection prevention and query validation
+#### **3. 安全层**
+- **行级安全性**：PostgreSQL RLS实现多租户数据隔离
+- **用户身份**：门店经理认证和授权
+- **访问控制**：细粒度权限和审计记录
+- **输入验证**：防止SQL注入和查询验证
 
-#### **4. AI Enhancement Layer**
-- **Semantic Search**: Vector embeddings for product discovery
-- **Azure OpenAI Integration**: Text embedding generation
-- **Similarity Algorithms**: pgvector cosine similarity search
-- **Search Optimization**: Indexing and performance tuning
+#### **4. AI增强层**
+- **语义搜索**：基于向量嵌入的产品发现
+- **Azure OpenAI集成**：生成文本嵌入
+- **相似性算法**：pgvector余弦相似性搜索
+- **搜索优化**：索引和性能调优
 
-## 🔧 Technology Stack
+## 🔧 技术栈
 
-### Core Technologies
+### 核心技术
 
-| **Component** | **Technology** | **Purpose** |
-|---------------|----------------|-------------|
-| **MCP Framework** | FastMCP (Python) | Modern MCP server implementation |
-| **Database** | PostgreSQL 17 + pgvector | Relational data with vector search |
-| **AI Services** | Azure OpenAI | Text embeddings and language models |
-| **Containerization** | Docker + Docker Compose | Development environment |
-| **Cloud Platform** | Microsoft Azure | Production deployment |
-| **IDE Integration** | VS Code | AI Chat and development workflow |
+| **组件**         | **技术**                | **用途**                 |
+|-------------------|-------------------------|--------------------------|
+| **MCP框架**      | FastMCP (Python)        | 现代MCP服务器实现        |
+| **数据库**       | PostgreSQL 17 + pgvector | 关系数据与向量搜索       |
+| **AI服务**       | Azure OpenAI            | 文本嵌入和语言模型       |
+| **容器化**       | Docker + Docker Compose | 开发环境                 |
+| **云平台**       | Microsoft Azure         | 生产部署                 |
+| **IDE集成**      | VS Code                 | AI聊天和开发工作流       |
 
-### Development Tools
+### 开发工具
 
-| **Tool** | **Purpose** |
-|----------|-------------|
-| **asyncpg** | High-performance PostgreSQL driver |
-| **Pydantic** | Data validation and serialization |
-| **Azure SDK** | Cloud service integration |
-| **pytest** | Testing framework |
-| **Docker** | Containerization and deployment |
+| **工具**         | **用途**                 |
+|-------------------|--------------------------|
+| **asyncpg**      | 高性能PostgreSQL驱动     |
+| **Pydantic**     | 数据验证和序列化         |
+| **Azure SDK**    | 云服务集成               |
+| **pytest**       | 测试框架                 |
+| **Docker**       | 容器化和部署             |
 
-### Production Stack
+### 生产栈
 
-| **Service** | **Azure Resource** | **Purpose** |
-|-------------|-------------------|-------------|
-| **Database** | Azure Database for PostgreSQL | Managed database service |
-| **Container** | Azure Container Apps | Serverless container hosting |
-| **AI Services** | Azure AI Foundry | OpenAI models and endpoints |
-| **Monitoring** | Application Insights | Observability and diagnostics |
-| **Security** | Azure Key Vault | Secrets and configuration management |
+| **服务**         | **Azure资源**            | **用途**                 |
+|-------------------|--------------------------|--------------------------|
+| **数据库**       | Azure Database for PostgreSQL | 托管数据库服务         |
+| **容器**         | Azure Container Apps     | 无服务器容器托管         |
+| **AI服务**       | Azure AI Foundry         | OpenAI模型和端点         |
+| **监控**         | Application Insights     | 可观察性和诊断           |
+| **安全**         | Azure Key Vault          | 密钥和配置管理           |
 
-## 🎬 Real-World Usage Scenarios
+## 🎬 实际使用场景
 
-Let's explore how different users interact with our MCP server:
+让我们探索不同用户如何与我们的MCP服务器交互：
 
-### Scenario 1: Store Manager Performance Review
+### 场景1：门店经理绩效评估
 
-**User**: Sarah, Seattle Store Manager  
-**Goal**: Analyze last quarter's sales performance
+**用户**：Sarah，西雅图门店经理  
+**目标**：分析上一季度的销售表现
 
-**Natural Language Query**:
-> "Show me the top 10 products by revenue for my store in Q4 2024"
+**自然语言查询**：
+> "显示我门店在2024年第四季度收入最高的前10种产品"
 
-**What Happens**:
-1. VS Code AI Chat sends query to MCP server
-2. MCP server identifies Sarah's store context (Seattle)
-3. RLS policies filter data to Seattle store only
-4. SQL query generated and executed
-5. Results formatted and returned to AI Chat
-6. AI provides analysis and insights
+**发生了什么**：
+1. VS Code AI聊天将查询发送到MCP服务器
+2. MCP服务器识别Sarah的门店上下文（西雅图）
+3. RLS策略过滤数据，仅显示西雅图门店数据
+4. 生成并执行SQL查询
+5. 格式化结果并返回到AI聊天
+6. AI提供分析和洞察
 
-### Scenario 2: Product Discovery with Semantic Search
+### 场景2：通过语义搜索发现产品
 
-**User**: Mike, Inventory Manager  
-**Goal**: Find products similar to a customer request
+**用户**：Mike，库存经理  
+**目标**：找到与客户需求类似的产品
 
-**Natural Language Query**:
-> "What products do we sell that are similar to 'waterproof electrical connectors for outdoor use'?"
+**自然语言查询**：
+> "我们有哪些产品类似于‘用于户外使用的防水电连接器’？"
 
-**What Happens**:
-1. Query processed by semantic search tool
-2. Azure OpenAI generates embedding vector
-3. pgvector performs similarity search
-4. Related products ranked by relevance
-5. Results include product details and availability
-6. AI suggests alternatives and bundling opportunities
+**发生了什么**：
+1. 查询由语义搜索工具处理
+2. Azure OpenAI生成嵌入向量
+3. pgvector执行相似性搜索
+4. 相关产品按相关性排序
+5. 结果包括产品详情和库存情况
+6. AI建议替代品和捆绑销售机会
 
-### Scenario 3: Cross-Store Analytics
+### 场景3：跨门店分析
 
-**User**: Jennifer, Regional Manager  
-**Goal**: Compare performance across all stores
+**用户**：Jennifer，区域经理  
+**目标**：比较所有门店的销售表现
 
-**Natural Language Query**:
-> "Compare sales by category for all stores in the last 6 months"
+**自然语言查询**：
+> "比较过去6个月所有门店的类别销售情况"
 
-**What Happens**:
-1. RLS context set for regional manager access
-2. Complex multi-store query generated
-3. Data aggregated across store locations
-4. Results include trends and comparisons
-5. AI identifies insights and recommendations
+**发生了什么**：
+1. RLS上下文设置为区域经理访问权限
+2. 生成复杂的多门店查询
+3. 数据在门店位置间聚合
+4. 结果包括趋势和比较
+5. AI识别洞察并提出建议
 
-## 🔒 Security and Multi-Tenancy Deep Dive
+## 🔒 安全性和多租户深度解析
 
-Our implementation prioritizes enterprise-grade security:
+我们的实现优先考虑企业级安全性：
 
-### Row Level Security (RLS)
+### 行级安全性（RLS）
 
-PostgreSQL RLS ensures data isolation:
+PostgreSQL RLS确保数据隔离：
 
 ```sql
 -- Store managers see only their store's data
@@ -248,58 +257,63 @@ CREATE POLICY regional_manager_policy ON retail.orders
   USING (store_id = ANY(get_user_store_list()));
 ```
 
-### User Identity Management
+### 用户身份管理
 
-Each MCP connection includes:
-- **Store Manager ID**: Unique identifier for RLS context
-- **Role Assignment**: Permissions and access levels
-- **Session Management**: Secure authentication tokens
-- **Audit Logging**: Complete access history
+每个MCP连接包括：
+- **门店经理ID**：用于RLS上下文的唯一标识符
+- **角色分配**：权限和访问级别
+- **会话管理**：安全认证令牌
+- **审计日志**：完整的访问历史记录
 
-### Data Protection
+### 数据保护
 
-Multiple layers of security:
-- **Connection Encryption**: TLS for all database connections
-- **SQL Injection Prevention**: Parameterized queries only
-- **Input Validation**: Comprehensive request validation
-- **Error Handling**: No sensitive data in error messages
+多层安全措施：
+- **连接加密**：所有数据库连接使用TLS
+- **SQL注入防护**：仅使用参数化查询
+- **输入验证**：全面的请求验证
+- **错误处理**：错误消息中不包含敏感数据
 
-## 🎯 Key Takeaways
+## 🎯 关键要点
 
-After completing this introduction, you should understand:
+完成本入门后，您应该了解：
 
-✅ **MCP Value Proposition**: How MCP bridges AI assistants and real-world data  
-✅ **Business Context**: Zava Retail's requirements and challenges  
-✅ **Architecture Overview**: Key components and their interactions  
-✅ **Technology Stack**: Tools and frameworks used throughout  
-✅ **Security Model**: Multi-tenant data access and protection  
-✅ **Usage Patterns**: Real-world query scenarios and workflows  
+✅ **MCP价值主张**：MCP如何连接AI助手与现实世界数据  
+✅ **业务背景**：Zava零售的需求和挑战  
+✅ **架构概述**：关键组件及其交互方式  
+✅ **技术栈**：学习路径中使用的工具和框架  
+✅ **安全模型**：多租户数据访问和保护  
+✅ **使用模式**：实际查询场景和工作流程  
 
-## 🚀 What's Next
+## 🚀 下一步
 
-Ready to dive deeper? Continue with:
+准备深入学习了吗？继续学习：
 
-**[Lab 01: Core Architecture Concepts](../01-Architecture/README.md)**
+**[实验01：核心架构概念](../01-Architecture/README.md)**
 
-Learn about MCP server architecture patterns, database design principles, and the detailed technical implementation that powers our retail analytics solution.
+了解MCP服务器架构模式、数据库设计原则以及支持我们零售分析解决方案的详细技术实现。
 
-## 📚 Additional Resources
+## 📚 额外资源
 
-### MCP Documentation
-- [MCP Specification](https://modelcontextprotocol.io/docs/) - Official protocol documentation
-- [MCP for Beginners](https://aka.ms/mcp-for-beginners) - Comprehensive MCP learning guide
-- [FastMCP Documentation](https://github.com/modelcontextprotocol/python-sdk) - Python SDK documentation
+### MCP文档
+- [MCP规范](https://modelcontextprotocol.io/docs/) - 官方协议文档
+- [MCP入门指南](https://aka.ms/mcp-for-beginners) - 全面的MCP学习指南
+- [FastMCP文档](https://github.com/modelcontextprotocol/python-sdk) - Python SDK文档
 
-### Database Integration
-- [PostgreSQL Documentation](https://www.postgresql.org/docs/) - Complete PostgreSQL reference
-- [pgvector Guide](https://github.com/pgvector/pgvector) - Vector extension documentation
-- [Row Level Security](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) - PostgreSQL RLS guide
+### 数据库集成
+- [PostgreSQL文档](https://www.postgresql.org/docs/) - 完整的PostgreSQL参考
+- [pgvector指南](https://github.com/pgvector/pgvector) - 向量扩展文档
+- [行级安全性](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) - PostgreSQL RLS指南
 
-### Azure Services
-- [Azure OpenAI Documentation](https://docs.microsoft.com/azure/cognitive-services/openai/) - AI service integration
-- [Azure Database for PostgreSQL](https://docs.microsoft.com/azure/postgresql/) - Managed database service
-- [Azure Container Apps](https://docs.microsoft.com/azure/container-apps/) - Serverless containers
+### Azure服务
+- [Azure OpenAI文档](https://docs.microsoft.com/azure/cognitive-services/openai/) - AI服务集成
+- [Azure Database for PostgreSQL](https://docs.microsoft.com/azure/postgresql/) - 托管数据库服务
+- [Azure Container Apps](https://docs.microsoft.com/azure/container-apps/) - 无服务器容器
 
 ---
 
-**Disclaimer**: This is a learning exercise using fictional retail data. Always follow your organization's data governance and security policies when implementing similar solutions in production environments.
+**免责声明**：这是一个使用虚构零售数据的学习练习。在生产环境中实施类似解决方案时，请始终遵循您组织的数据治理和安全政策。
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。

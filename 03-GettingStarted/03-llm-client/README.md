@@ -1,52 +1,61 @@
-# Creating a client with LLM
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "4d846ebb88fbb0f00549e2ff8cc3f746",
+  "translation_date": "2025-10-06T13:34:03+00:00",
+  "source_file": "03-GettingStarted/03-llm-client/README.md",
+  "language_code": "zh"
+}
+-->
+# 创建一个带有 LLM 的客户端
 
-So far, you've seen how to create a server and a client. The client have been able to call the server explicitly to list its tools, resources and prompts. However, it's not very practical approach. Your user lives in the agentic era and expects to use prompts and communicate with an LLM to do so. For your user, it doesn't care if you use MCP or not to store your capabilities but they do expect to use natural language to interact. So how do we solve this? The solution is about adding an LLM to the client.
+到目前为止，您已经了解了如何创建服务器和客户端。客户端可以显式调用服务器以列出其工具、资源和提示。然而，这种方法并不太实用。您的用户生活在代理时代，期望通过提示与 LLM 进行交流。对于用户来说，他们并不关心您是否使用 MCP 来存储功能，但他们确实希望通过自然语言进行交互。那么我们该如何解决这个问题呢？解决方案是将 LLM 添加到客户端中。
 
-## Overview
+## 概述
 
-In this lesson we focus on adding an LLM to do your client and show how this provides a much better experience for your user.
+在本课程中，我们将重点讲解如何将 LLM 添加到您的客户端，并展示这如何为用户提供更好的体验。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lesson, you will be able to:
+完成本课程后，您将能够：
 
-- Create a client with an LLM.
-- Seamlessly interact with an MCP server using an LLM.
-- Provide a better end user experience on the client side.
+- 创建一个带有 LLM 的客户端。
+- 使用 LLM 无缝与 MCP 服务器交互。
+- 在客户端侧为最终用户提供更好的体验。
 
-## Approach
+## 方法
 
-Let's try to understand the approach we need to take. Adding an LLM sounds simple, but will we actually do this?
+让我们尝试理解需要采取的方法。添加 LLM 听起来很简单，但我们实际上会怎么做呢？
 
-Here's how the client will interact with the server:
+以下是客户端与服务器交互的方式：
 
-1. Establish connection with server.
+1. 与服务器建立连接。
 
-1. List capabilities, prompts, resources and tools, and save down their schema.
+2. 列出功能、提示、资源和工具，并保存它们的架构。
 
-1. Add an LLM and pass the saved capabilities and their schema in a format the LLM understands.
+3. 添加一个 LLM，并以 LLM 能够理解的格式传递保存的功能及其架构。
 
-1. Handle a user prompt by passing it to the LLM together with the tools listed by the client.
+4. 处理用户提示，将其与客户端列出的工具一起传递给 LLM。
 
-Great, now we understand how we can do this at high level, let's try this out in below exercise.
+很好，现在我们已经从高层次上理解了如何实现这一点，让我们在下面的练习中尝试一下。
 
-## Exercise: Creating a client with an LLM
+## 练习：创建一个带有 LLM 的客户端
 
-In this exercise, we will learn to add an LLM to our client.
+在本练习中，我们将学习如何将 LLM 添加到我们的客户端。
 
-### Authentication using GitHub Personal Access Token
+### 使用 GitHub 个人访问令牌进行身份验证
 
-Creating a GitHub token is a straightforward process. Here’s how you can do it:
+创建 GitHub 令牌是一个简单的过程。以下是操作步骤：
 
-- Go to GitHub Settings – Click on your profile picture in the top right corner and select Settings.
-- Navigate to Developer Settings – Scroll down and click on Developer Settings.
-- Select Personal Access Tokens – Click on Fine-grained tokens and then Generate new token.
-- Configure Your Token – Add a note for reference, set an expiration date, and select the necessary scopes (permissions). In this case be sure to add the Models permission.
-- Generate and Copy the Token – Click Generate token, and make sure to copy it immediately, as you won’t be able to see it again.
+- 进入 GitHub 设置 – 点击右上角的个人头像并选择“设置”。
+- 导航到开发者设置 – 向下滚动并点击“开发者设置”。
+- 选择个人访问令牌 – 点击“细粒度令牌”，然后生成新令牌。
+- 配置您的令牌 – 添加备注以供参考，设置过期日期，并选择必要的权限（Scopes）。在本例中，请确保添加“Models”权限。
+- 生成并复制令牌 – 点击“生成令牌”，并确保立即复制，因为之后无法再次查看。
 
-### -1- Connect to server
+### -1- 连接到服务器
 
-Let's create our client first:
+首先创建我们的客户端：
 
 #### TypeScript
 
@@ -83,11 +92,11 @@ class MCPClient {
 }
 ```
 
-In the preceding code we've:
+在上述代码中，我们：
 
-- Imported the needed libraries
-- Create a class with two members, `client` and `openai` that will help us manage a client and interact with an LLM respectively.
-- Configured our LLM instance to use GitHub Models by setting `baseUrl` to point to the inference API.
+- 导入了所需的库。
+- 创建了一个包含两个成员的类，`client` 和 `openai`，分别用于管理客户端和与 LLM 交互。
+- 配置了我们的 LLM 实例以使用 GitHub Models，将 `baseUrl` 设置为推理 API 的地址。
 
 #### Python
 
@@ -119,10 +128,10 @@ if __name__ == "__main__":
 
 ```
 
-In the preceding code we've:
+在上述代码中，我们：
 
-- Imported the needed libraries for MCP
-- Created a client
+- 导入了 MCP 所需的库。
+- 创建了一个客户端。
 
 #### .NET
 
@@ -147,7 +156,7 @@ await using var mcpClient = await McpClientFactory.CreateAsync(clientTransport);
 
 #### Java
 
-First, you'll need to add the LangChain4j dependencies to your `pom.xml` file. Add these dependencies to enable MCP integration and GitHub Models support:
+首先，您需要将 LangChain4j 依赖项添加到您的 `pom.xml` 文件中。添加这些依赖项以启用 MCP 集成和 GitHub Models 支持：
 
 ```xml
 <properties>
@@ -184,7 +193,7 @@ First, you'll need to add the LangChain4j dependencies to your `pom.xml` file. A
 </dependencies>
 ```
 
-Then create your Java client class:
+然后创建您的 Java 客户端类：
 
 ```java
 import dev.langchain4j.mcp.McpToolProvider;
@@ -226,20 +235,20 @@ public class LangChain4jClient {
 }
 ```
 
-In the preceding code we've:
+在上述代码中，我们：
 
-- **Added LangChain4j dependencies**: Required for MCP integration, OpenAI official client, and GitHub Models support
-- **Imported the LangChain4j libraries**: For MCP integration and OpenAI chat model functionality
-- **Created a `ChatLanguageModel`**: Configured to use GitHub Models with your GitHub token
-- **Set up HTTP transport**: Using Server-Sent Events (SSE) to connect to the MCP server
-- **Created an MCP client**: That will handle communication with the server
-- **Used LangChain4j's built-in MCP support**: Which simplifies integration between LLMs and MCP servers
+- **添加了 LangChain4j 依赖项**：用于 MCP 集成、OpenAI 官方客户端和 GitHub Models 支持。
+- **导入了 LangChain4j 库**：用于 MCP 集成和 OpenAI 聊天模型功能。
+- **创建了一个 `ChatLanguageModel`**：配置为使用 GitHub Models 和您的 GitHub 令牌。
+- **设置了 HTTP 传输**：使用服务器发送事件（SSE）连接到 MCP 服务器。
+- **创建了一个 MCP 客户端**：用于处理与服务器的通信。
+- **使用了 LangChain4j 的内置 MCP 支持**：简化了 LLM 与 MCP 服务器之间的集成。
 
 #### Rust
 
-This example assumes you have a Rust based MCP server running. If you don't have one, refer back to the [01-first-server](../01-first-server/README.md) lesson to create the server.
+此示例假设您有一个基于 Rust 的 MCP 服务器在运行。如果没有，请参考 [01-first-server](../01-first-server/README.md) 课程以创建服务器。
 
-Once you have your Rust MCP server, open a terminal and navigate to the same directory as the server. Then run the following command to create a new LLM client project:
+在您拥有 Rust MCP 服务器后，打开终端并导航到与服务器相同的目录。然后运行以下命令以创建一个新的 LLM 客户端项目：
 
 ```bash
 mkdir calculator-llmclient
@@ -247,7 +256,7 @@ cd calculator-llmclient
 cargo init
 ```
 
-Add the following dependencies to your `Cargo.toml` file:
+将以下依赖项添加到您的 `Cargo.toml` 文件中：
 
 ```toml
 [dependencies]
@@ -258,9 +267,9 @@ tokio = { version = "1.46.1", features = ["rt-multi-thread"] }
 ```
 
 > [!NOTE]
-> There isn't an official Rust library for OpenAI, however, the `async-openai` crate is a [community maintained library](https://platform.openai.com/docs/libraries/rust#rust) that is commonly used.
+> Rust 没有官方的 OpenAI 库，但 `async-openai` crate 是一个 [社区维护的库](https://platform.openai.com/docs/libraries/rust#rust)，常被使用。
 
-Open the `src/main.rs` file and replace its content with the following code:
+打开 `src/main.rs` 文件，并将其内容替换为以下代码：
 
 ```rust
 use async_openai::{Client, config::OpenAIConfig};
@@ -310,20 +319,20 @@ async fn main() -> Result<(), Box<dyn Error>> {
 }
 ```
 
-This code sets up a basic Rust application that will connect to an MCP server and GitHub Models for LLM interactions.
+此代码设置了一个基本的 Rust 应用程序，用于连接 MCP 服务器和 GitHub Models 以进行 LLM 交互。
 
 > [!IMPORTANT]
-> Make sure to set the `OPENAI_API_KEY` environment variable with your GitHub token before running the application.
+> 在运行应用程序之前，请确保使用您的 GitHub 令牌设置 `OPENAI_API_KEY` 环境变量。
 
-Great, for our next step, let's list the capabilities on the server.
+很好，接下来我们将列出服务器上的功能。
 
-### -2- List server capabilities
+### -2- 列出服务器功能
 
-Now we will connect to the server and ask for its capabilities:
+现在我们将连接到服务器并请求其功能：
 
-#### Typescript
+#### TypeScript
 
-In the same class, add the following methods:
+在同一个类中，添加以下方法：
 
 ```typescript
 async connectToServer(transport: Transport) {
@@ -340,10 +349,10 @@ async run() {
 }
 ```
 
-In the preceding code we've:
+在上述代码中，我们：
 
-- Added code for connecting to the server, `connectToServer`.
-- Created a `run` method responsible for handling our app flow. So far it only lists the tools but we will add more to it shortly.
+- 添加了连接到服务器的代码 `connectToServer`。
+- 创建了一个 `run` 方法，负责处理我们的应用程序流程。目前它只列出了工具，但我们很快会添加更多内容。
 
 #### Python
 
@@ -362,9 +371,9 @@ for tool in tools.tools:
     print("Tool", tool.inputSchema["properties"])
 ```
 
-Here's what we added:
+我们添加了以下内容：
 
-- Listing resources and tools and printed them. For tools we also list `inputSchema` which we use later.
+- 列出了资源和工具并打印出来。对于工具，我们还列出了 `inputSchema`，稍后会用到。
 
 #### .NET
 
@@ -389,10 +398,10 @@ async Task<List<ChatCompletionsToolDefinition>> GetMcpTools()
 }
 ```
 
-In the preceding code we've:
+在上述代码中，我们：
 
-- Listed the tools available on the MCP Server
-- For each tool, listed name, description and its schema. The latter is something we will use to call the tools shortly.
+- 列出了 MCP 服务器上可用的工具。
+- 对于每个工具，列出了名称、描述及其架构。后者是我们稍后调用工具时会用到的内容。
 
 #### Java
 
@@ -408,28 +417,28 @@ ToolProvider toolProvider = McpToolProvider.builder()
 // - Managing tool execution and responses
 ```
 
-In the preceding code we've:
+在上述代码中，我们：
 
-- Created a `McpToolProvider` that automatically discovers and registers all tools from the MCP server
-- The tool provider handles the conversion between MCP tool schemas and LangChain4j's tool format internally
-- This approach abstracts away the manual tool listing and conversion process
+- 创建了一个 `McpToolProvider`，自动发现并注册 MCP 服务器上的所有工具。
+- 工具提供者在内部处理 MCP 工具架构与 LangChain4j 工具格式之间的转换。
+- 这种方法抽象了手动工具列出和转换过程。
 
 #### Rust
 
-Retrieving tools from the MCP server is done using the `list_tools` method. In your `main` function, after setting up the MCP client, add the following code:
+从 MCP 服务器检索工具是通过 `list_tools` 方法完成的。在您的 `main` 函数中，在设置 MCP 客户端之后，添加以下代码：
 
 ```rust
 // Get MCP tool listing 
 let tools = mcp_client.list_tools(Default::default()).await?;
 ```
 
-### -3- Convert server capabilities to LLM tools
+### -3- 将服务器功能转换为 LLM 工具
 
-Next step after listing server capabilities is to convert them into a format that the LLM understands. Once we do that, we can provide these capabilities as tools to our LLM.
+列出服务器功能后，下一步是将其转换为 LLM 能够理解的格式。一旦完成，我们就可以将这些功能作为工具提供给 LLM。
 
 #### TypeScript
 
-1. Add the following code to convert response from MCP Server to a tool format the LLM can use:
+1. 添加以下代码，将 MCP 服务器的响应转换为 LLM 可用的工具格式：
 
     ```typescript
     openAiToolAdapter(tool: {
@@ -456,9 +465,9 @@ Next step after listing server capabilities is to convert them into a format tha
 
     ```
 
-    The above code takes a response from the MCP Server and converts that to a tool definition format the LLM can understand.
+    上述代码将 MCP 服务器的响应转换为 LLM 能够理解的工具定义格式。
 
-1. Let's update the `run` method next to list server capabilities:
+2. 接下来更新 `run` 方法以列出服务器功能：
 
     ```typescript
     async run() {
@@ -474,11 +483,11 @@ Next step after listing server capabilities is to convert them into a format tha
     }
     ```
 
-    In the preceding code, we've update the `run` method to map through the result and for each entry call `openAiToolAdapter`.
+    在上述代码中，我们更新了 `run` 方法，遍历结果并为每个条目调用 `openAiToolAdapter`。
 
 #### Python
 
-1. First, let's create the following converter function
+1. 首先创建以下转换器函数：
 
     ```python
     def convert_to_llm_tool(tool):
@@ -498,9 +507,9 @@ Next step after listing server capabilities is to convert them into a format tha
         return tool_schema
     ```
 
-    In the function above `convert_to_llm_tools` we take an MCP tool response and convert it to a format that the LLM can understand.
+    在上述 `convert_to_llm_tools` 函数中，我们将 MCP 工具响应转换为 LLM 能够理解的格式。
 
-1. Next, let's update our client code to leverage this function like so:
+2. 接下来更新客户端代码以利用此函数：
 
     ```python
     for tool in tools.tools:
@@ -509,11 +518,11 @@ Next step after listing server capabilities is to convert them into a format tha
         functions.append(convert_to_llm_tool(tool))
     ```
 
-    Here, we're adding a call to `convert_to_llm_tool` to convert the MCP tool response to something we can feed the LLM later.
+    在这里，我们添加了对 `convert_to_llm_tool` 的调用，将 MCP 工具响应转换为稍后可以传递给 LLM 的内容。
 
 #### .NET
 
-1. Let's add code to convert the MCP tool response to something the LLM can understand
+1. 添加代码将 MCP 工具响应转换为 LLM 能够理解的内容：
 
 ```csharp
 ChatCompletionsToolDefinition ConvertFrom(string name, string description, JsonElement jsonElement)
@@ -536,12 +545,12 @@ ChatCompletionsToolDefinition ConvertFrom(string name, string description, JsonE
 }
 ```
 
-In the preceding code we've:
+在上述代码中，我们：
 
-- Created a function `ConvertFrom` that takes, name, description and input schema.
-- Defined functionality that creates a FunctionDefinition that gets passed to a ChatCompletionsDefinition. The latter is something the LLM can understand.
+- 创建了一个函数 `ConvertFrom`，接收名称、描述和输入架构。
+- 定义了创建 FunctionDefinition 的功能，该功能被传递给 ChatCompletionsDefinition。后者是 LLM 能够理解的内容。
 
-1. Let's see how we can update some existing code to take advantage of this function above:
+2. 更新现有代码以利用上述函数：
 
     ```csharp
     async Task<List<ChatCompletionsToolDefinition>> GetMcpTools()
@@ -599,16 +608,16 @@ Bot bot = AiServices.builder(Bot.class)
         .build();
 ```
 
-In the preceding code we've:
+在上述代码中，我们：
 
-- Defined a simple `Bot` interface for natural language interactions
-- Used LangChain4j's `AiServices` to automatically bind the LLM with the MCP tool provider
-- The framework automatically handles tool schema conversion and function calling behind the scenes
-- This approach eliminates manual tool conversion - LangChain4j handles all the complexity of converting MCP tools to LLM-compatible format
+- 定义了一个简单的 `Bot` 接口，用于自然语言交互。
+- 使用 LangChain4j 的 `AiServices` 自动绑定 LLM 和 MCP 工具提供者。
+- 框架自动处理工具架构转换和函数调用。
+- 这种方法消除了手动工具转换的复杂性——LangChain4j 处理所有 MCP 工具到 LLM 兼容格式的转换。
 
 #### Rust
 
-To convert the MCP tool response to a format that the LLM can understand, we will add a helper function that formats the tools listing. Add the following code to your `main.rs` file below the `main` function. This will be called when making requests to the LLM:
+为了将 MCP 工具响应转换为 LLM 能够理解的格式，我们将添加一个辅助函数，用于格式化工具列表。在您的 `main.rs` 文件中，在 `main` 函数下方添加以下代码。这将在向 LLM 发出请求时调用：
 
 ```rust
 async fn format_tools(tools: &ListToolsResult) -> Result<Vec<Value>, Box<dyn Error>> {
@@ -643,15 +652,15 @@ async fn format_tools(tools: &ListToolsResult) -> Result<Vec<Value>, Box<dyn Err
 }
 ```
 
-Great, we're not set up to handle any user requests, so let's tackle that next.
+很好，我们已经准备好处理任何用户请求，接下来让我们解决这一部分。
 
-### -4- Handle user prompt request
+### -4- 处理用户提示请求
 
-In this part of the code, we will handle user requests.
+在这部分代码中，我们将处理用户请求。
 
 #### TypeScript
 
-1. Add a method that will be used to call our LLM:
+1. 添加一个方法，用于调用我们的 LLM：
 
     ```typescript
     async callTools(
@@ -680,10 +689,10 @@ In this part of the code, we will handle user requests.
     }
     ```
 
-    In the preceding code we:
+    在上述代码中，我们：
 
-    - Added a method `callTools`.
-    - The method takes an LLM response and checks to see what tools have been called, if any:
+    - 添加了一个方法 `callTools`。
+    - 该方法接收 LLM 响应并检查是否调用了工具：
 
         ```typescript
         for (const tool_call of tool_calls) {
@@ -696,7 +705,7 @@ In this part of the code, we will handle user requests.
         }
         ```
 
-    - Calls a tool, if LLM indicates it should be called:
+    - 如果 LLM 指示应调用工具，则调用工具：
 
         ```typescript
         // 2. Call the server's tool 
@@ -711,7 +720,7 @@ In this part of the code, we will handle user requests.
         // TODO  
         ```
 
-1. Update the `run` method to include calls to the LLM and calling `callTools`:
+2. 更新 `run` 方法以包括对 LLM 的调用以及调用 `callTools`：
 
     ```typescript
 
@@ -747,7 +756,7 @@ In this part of the code, we will handle user requests.
     });
     ```
 
-Great, let's list the code in full:
+很好，让我们列出完整代码：
 
 ```typescript
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
@@ -886,7 +895,7 @@ client.connectToServer(transport);
 
 #### Python
 
-1. Let's add some imports needed to call an LLM
+1. 添加一些调用 LLM 所需的导入：
 
     ```python
     # llm
@@ -897,7 +906,7 @@ client.connectToServer(transport);
     import json
     ```
 
-1. Next, let's add the function that will call the LLM:
+2. 接下来添加调用 LLM 的函数：
 
     ```python
     # llm
@@ -947,14 +956,14 @@ client.connectToServer(transport);
         return functions_to_call
     ```
 
-    In the preceding code we've:
+    在上述代码中，我们：
 
-    - Passed our functions, that we found on the MCP server and converted, to the LLM.
-    - Then we called the LLM with said functions.
-    - Then, we're inspecting the result to see what functions we should call, if any.
-    - Finally, we pass an array of functions to call.
+    - 将我们从 MCP 服务器找到并转换的功能传递给 LLM。
+    - 然后使用这些功能调用 LLM。
+    - 接着检查结果以查看是否需要调用任何功能。
+    - 最后传递一个函数数组以供调用。
 
-1. Final step, let's update our main code:
+3. 最后一步，更新主代码：
 
     ```python
     prompt = "Add 2 to 20"
@@ -968,14 +977,14 @@ client.connectToServer(transport);
         print("TOOLS result: ", result.content)
     ```
 
-    There, that was the final step, in the code above we're:
+    在上述代码中，我们：
 
-    - Calling an MCP tool via `call_tool` using a function that the LLM thought we should call based on our prompt.
-    - Printing the result of the tool call to the MCP Server.
+    - 使用 LLM 提示调用 MCP 工具，通过 `call_tool`。
+    - 打印 MCP 服务器工具调用的结果。
 
 #### .NET
 
-1. Let's show some code for doing an LLM prompt request:
+1. 显示一些代码以进行 LLM 提示请求：
 
     ```csharp
     var tools = await GetMcpTools();
@@ -1009,14 +1018,14 @@ client.connectToServer(transport);
 
     ```
 
-    In the preceding code we've:
+    在上述代码中，我们：
 
-    - Fetched tools from the MCP server, `var tools = await GetMcpTools()`.
-    - Defined a user prompt `userMessage`.
-    - Constructor an options object specifying model and tools.
-    - Made a request towards the LLM.
+    - 从 MCP 服务器获取工具 `var tools = await GetMcpTools()`。
+    - 定义了一个用户提示 `userMessage`。
+    - 构造了一个选项对象，指定模型和工具。
+    - 向 LLM 发出了请求。
 
-1. One last step, let's see if the LLM thinks we should call a function:
+2. 最后一步，查看 LLM 是否认为我们应该调用某个函数：
 
     ```csharp
     // 4. Check if the response contains a function call
@@ -1039,12 +1048,12 @@ client.connectToServer(transport);
     }
     ```
 
-    In the preceding code we've:
+    在上述代码中，我们：
 
-    - Looped through a list of function calls.
-    - For each tool call, parse out name and arguments and call the tool on the MCP server using the MCP client. Finally we print the results.
+    - 遍历函数调用列表。
+    - 对于每个工具调用，解析出名称和参数，并使用 MCP 客户端在 MCP 服务器上调用工具。最后打印结果。
 
-Here's the code in full:
+完整代码如下：
 
 ```csharp
 using Azure;
@@ -1189,17 +1198,17 @@ try {
 }
 ```
 
-In the preceding code we've:
+在上述代码中，我们：
 
-- Used simple natural language prompts to interact with the MCP server tools
-- The LangChain4j framework automatically handles:
-  - Converting user prompts to tool calls when needed
-  - Calling the appropriate MCP tools based on the LLM's decision
-  - Managing the conversation flow between the LLM and MCP server
-- The `bot.chat()` method returns natural language responses that may include results from MCP tool executions
-- This approach provides a seamless user experience where users don't need to know about the underlying MCP implementation
+- 使用简单的自然语言提示与 MCP 服务器工具交互。
+- LangChain4j 框架自动处理：
+  - 在需要时将用户提示转换为工具调用。
+  - 根据 LLM 的决策调用适当的 MCP 工具。
+  - 管理 LLM 和 MCP 服务器之间的对话流程。
+- `bot.chat()` 方法返回自然语言响应，其中可能包括 MCP 工具执行的结果。
+- 这种方法提供了无缝的用户体验，用户无需了解底层的 MCP 实现。
 
-Complete code example:
+完整代码示例：
 
 ```java
 public class LangChain4jClient {
@@ -1250,9 +1259,9 @@ public class LangChain4jClient {
 
 #### Rust
 
-Here is where the majority of the work happens. We will call the LLM with the initial user prompt, then process the response to see if any tools need to be called. If so, we will call those tools and continue the conversation with the LLM until no more tool calls are needed and we have a final response.
+这是主要工作发生的地方。我们将使用初始用户提示调用 LLM，然后处理响应以查看是否需要调用任何工具。如果需要，我们将调用这些工具并继续与 LLM 的对话，直到不再需要工具调用并获得最终响应。
 
-We will be making multiple calls to the LLM, so let's define a function that will handle the LLM call. Add the following function to your `main.rs` file:
+我们将多次调用 LLM，因此定义一个函数来处理 LLM 调用。将以下函数添加到您的 `main.rs` 文件中：
 
 ```rust
 async fn call_llm(
@@ -1272,9 +1281,8 @@ async fn call_llm(
 }
 ```
 
-This function takes the LLM client, a list of messages (including the user prompt), tools from the MCP server, and sends a request to the LLM, returning the response.
-
-The response from the LLM will contain an array of `choices`. We will need to process the result to see if any `tool_calls` are present. This let's us know the LLM is requesting a specific tool should be called with arguments. Add the following code to the bottom of your `main.rs` file to define a function to handle the LLM response:
+此函数接收 LLM 客户端、消息列表（包括用户提示）、来自 MCP 服务器的工具，并向 LLM 发送请求，返回响应。
+LLM 的响应将包含一个 `choices` 数组。我们需要处理结果以检查是否存在任何 `tool_calls`。这可以让我们知道 LLM 是否请求调用特定工具并传递参数。将以下代码添加到你的 `main.rs` 文件底部，以定义一个处理 LLM 响应的函数：
 
 ```rust
 async fn process_llm_response(
@@ -1337,9 +1345,9 @@ async fn process_llm_response(
 }
 ```
 
-If `tool_calls` are present, it extracts the tool information, calls the MCP server with the tool request, and adds the results to the conversation messages. It then continues the conversation with the LLM and the messages are updated with the assistant's response and tool call results.
+如果存在 `tool_calls`，它会提取工具信息，使用工具请求调用 MCP 服务器，并将结果添加到对话消息中。然后，它会继续与 LLM 的对话，并将消息更新为助手的响应和工具调用结果。
 
-To extract tool call information that the LLM returns for MCP calls, we will add another helper function to extract everything needed to make the call. Add the following code to the bottom of your `main.rs` file:
+为了提取 LLM 返回的用于 MCP 调用的工具调用信息，我们将添加另一个辅助函数，以提取进行调用所需的所有信息。将以下代码添加到你的 `main.rs` 文件底部：
 
 ```rust
 fn extract_tool_call_info(tool_call: &Value) -> Result<(String, String, String), Box<dyn Error>> {
@@ -1363,7 +1371,7 @@ fn extract_tool_call_info(tool_call: &Value) -> Result<(String, String, String),
 }
 ```
 
-With all the pieces in place, we can now handle the initial user prompt and call the LLM. Update your `main` function to include the following code:
+现在所有部分都已准备好，我们可以处理初始用户提示并调用 LLM。更新你的 `main` 函数以包含以下代码：
 
 ```rust
 // LLM conversation with tool calls
@@ -1378,34 +1386,39 @@ process_llm_response(
 .await?;
 ```
 
-This will query the LLM with the initial user prompt asking for the sum of two numbers, and it will process the response to dynamically handle tool calls.
+这将使用初始用户提示查询 LLM，要求计算两个数字的和，并处理响应以动态处理工具调用。
 
-Great, you did it!
+太棒了，你完成了！
 
-## Assignment
+## 作业
 
-Take the code from the exercise and build out the server with some more tools. Then create a client with an LLM, like in the exercise, and test it out with different prompts to make sure all your server tools gets called dynamically. This way of building a client means the end user will have a great user experience as they're able to use prompts, instead of exact client commands, and be oblivious to any MCP server being called.
+从练习中获取代码并构建服务器，添加更多工具。然后创建一个带有 LLM 的客户端，就像练习中一样，并使用不同的提示进行测试，以确保所有服务器工具都能被动态调用。通过这种方式构建客户端，最终用户将获得极佳的用户体验，因为他们可以使用提示而不是精确的客户端命令，并且完全不需要知道 MCP 服务器的调用过程。
 
-## Solution
+## 解决方案
 
-[Solution](/03-GettingStarted/03-llm-client/solution/README.md)
+[解决方案](/03-GettingStarted/03-llm-client/solution/README.md)
 
-## Key Takeaways
+## 关键点
 
-- Adding an LLM to your client provides a better way for users to interact with MCP Servers.
-- You need to convert the MCP Server response to something the LLM can understand.
+- 在客户端中添加 LLM 为用户与 MCP 服务器交互提供了更好的方式。
+- 需要将 MCP 服务器响应转换为 LLM 可以理解的内容。
 
-## Samples
+## 示例
 
-- [Java Calculator](../samples/java/calculator/README.md)
-- [.Net Calculator](../samples/csharp/)
-- [JavaScript Calculator](../samples/javascript/README.md)
-- [TypeScript Calculator](../samples/typescript/README.md)
-- [Python Calculator](../samples/python/)
-- [Rust Calculator](../samples/rust/)
+- [Java 计算器](../samples/java/calculator/README.md)
+- [.Net 计算器](../../../../03-GettingStarted/samples/csharp)
+- [JavaScript 计算器](../samples/javascript/README.md)
+- [TypeScript 计算器](../samples/typescript/README.md)
+- [Python 计算器](../../../../03-GettingStarted/samples/python)
+- [Rust 计算器](../../../../03-GettingStarted/samples/rust)
 
-## Additional Resources
+## 其他资源
 
-## What's Next
+## 下一步
 
-- Next: [Consuming a server using Visual Studio Code](../04-vscode/README.md)
+- 下一步：[使用 Visual Studio Code 消费服务器](../04-vscode/README.md)
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

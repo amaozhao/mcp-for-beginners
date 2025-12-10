@@ -1,13 +1,22 @@
-# Advanced server usage
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "1de8367745088b9fcd4746ea4cc5a161",
+  "translation_date": "2025-10-06T15:40:55+00:00",
+  "source_file": "03-GettingStarted/10-advanced/README.md",
+  "language_code": "zh"
+}
+-->
+# 高级服务器使用
 
-There are two different types of servers exposes in the MCP SDK, your normal server and the low-level server. Normally, you would use the regular server to add features to it. For some cases though, you want to rely on the low-level server such as:
+MCP SDK 中提供了两种不同类型的服务器：普通服务器和低级服务器。通常情况下，你会使用普通服务器来添加功能。然而，在某些情况下，你可能需要依赖低级服务器，例如：
 
-- Better architecture. It's possible to create a clean architecture with both the regular server and a low-level server but it can be argued that it's slightly easier with a low-level server.
-- Feature avavailability. Some advanced features can only be used with a low-level server. Youiwill see this in later chapters as we add sampling and elicitation.
+- 更好的架构。虽然使用普通服务器和低级服务器都可以创建一个干净的架构，但可以说使用低级服务器稍微容易一些。
+- 功能可用性。一些高级功能只能通过低级服务器使用。在后续章节中，你会看到我们如何添加采样和引导功能。
 
-## Regular server vs low-level server
+## 普通服务器 vs 低级服务器
 
-Here's what the creation of an MCP Server looks like with the regular server
+以下是使用普通服务器创建 MCP 服务器的示例：
 
 **Python**
 
@@ -42,18 +51,18 @@ server.registerTool("add",
 );
 ```
 
-The point being is that you explicitly add each tool, resource or prompt that you want the server to have. Nothing wrong with that.  
+重点在于你需要显式地添加每个工具、资源或提示到服务器中。这种方式没有问题。
 
-### Low-level server approach
+### 低级服务器方法
 
-However, when you use the low-level server approach you need to think about differently namely that instead of registering each tool you instead create two handlers per feature type (tools, resources or prompts). So for example tools then only have two functions like so:
+然而，当你使用低级服务器方法时，需要采用不同的思路。与其注册每个工具，不如为每种功能类型（工具、资源或提示）创建两个处理程序。例如，对于工具，只需要两个函数：
 
-- Listing all tools. One function would be responsible for all attempts to list tools.
-- handle calling all tools. Here also, there's only one function handling calls to a tool
+- 列出所有工具。一个函数负责所有列出工具的尝试。
+- 处理调用所有工具。另一个函数负责处理对工具的调用。
 
-That sounds like potentially less work right? So instead of registering a tool, I just need to make sure the tool is listed when I list all tools and that's it's called when there's an incoming request to call a tool. 
+听起来工作量可能更少，对吧？因此，与其注册一个工具，我只需要确保工具在列出所有工具时被列出，并且在收到调用工具的请求时被调用。
 
-Let's have a look at how the code now looks:
+让我们看看代码是如何实现的：
 
 **Python**
 
@@ -99,7 +108,7 @@ server.setRequestHandler(ListToolsRequestSchema, async (request) => {
 });
 ```
 
-Here we now have a function that returns a list of features. Each entry in the tools list now have fields like `name`, `description` and `inputSchema` to adhere to the return type. This enables us to put our tools and feature definition elsewhere. We can now create all our tools in a tools folder and the same goes for all your features so your project can suddenly be organized like so:
+在这里，我们有一个返回功能列表的函数。工具列表中的每个条目现在都有 `name`、`description` 和 `inputSchema` 等字段，以符合返回类型。这使我们可以将工具和功能定义放在其他地方。我们现在可以在一个工具文件夹中创建所有工具，其他功能也可以这样组织，因此项目可以像这样组织：
 
 ```text
 app
@@ -113,9 +122,9 @@ app
 ----| product-description
 ```
 
-That's great, our architecture can be made to look quite clean.
+这很好，我们的架构可以变得非常干净。
 
-What about calling tools, is it the same idea then, one handler to call a tool, whichever tool? Yes, exactly, here's the code for that:
+那么调用工具呢？是否也是同样的思路，一个处理程序处理所有工具的调用？是的，完全正确，以下是相关代码：
 
 **Python**
 
@@ -133,7 +142,7 @@ async def handle_call_tool(
 
     result = "default"
     try:
-        result = await tool["handler"](arguments)
+        result = await tool["handler"](../../../../03-GettingStarted/10-advanced/arguments)
     except Exception as e:
         raise ValueError(f"Error calling tool {name}: {str(e)}")
 
@@ -166,18 +175,18 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 });
 ```
 
-As you can see from above code, we need to parse out the tool to call, and with what arguments, and then we need to proceed to calling the tool.
+从上面的代码可以看出，我们需要解析出要调用的工具及其参数，然后继续调用该工具。
 
-## Improving the approach with validation
+## 使用验证改进方法
 
-So far, you've seen how all your registrations to add tools, resources and prompts can be replaced with these two handlers per feature type. What else do we need to do? Well, we should add some form of validation to ensure that the tool is called with right arguments. Each runtime have their own solution for this, for example Python uses Pydantic and TypeScript uses Zod. The idea is that we do the following:
+到目前为止，你已经看到如何通过每种功能类型的两个处理程序替换所有工具、资源和提示的注册。那么接下来我们需要做什么呢？我们应该添加某种形式的验证，以确保工具被正确的参数调用。每种运行时都有自己的解决方案，例如 Python 使用 Pydantic，TypeScript 使用 Zod。我们的目标是：
 
-- Move the logic for creating a feature (tool, resource or prompt) to its dedicated folder.
-- Add a way to validate an incoming request asking to for example call a tool.
+- 将创建功能（工具、资源或提示）的逻辑移到专用文件夹。
+- 添加一种验证传入请求的方法，例如调用工具的请求。
 
-### Create a feature
+### 创建功能
 
-To create a feature, we will need to create a file for that feature and make sure it has the mandatory fields requred of that feature. Which fields differ a bit between tools, resources and prompts.
+要创建一个功能，我们需要为该功能创建一个文件，并确保它具有该功能所需的必填字段。这些字段在工具、资源和提示之间略有不同。
 
 **Python**
 
@@ -213,10 +222,10 @@ tool_add = {
 }
 ```
 
-here you can see how we do the following:
+在这里你可以看到我们做了以下事情：
 
-- Create a schema using Pydantic `AddInputModel` with fields `a` and `b` in file *schema.py*.
-- Attempt to parse the incoming request to be of type `AddInputModel`, if there's a mismatch in parameters this will crash:
+- 在文件 *schema.py* 中使用 Pydantic 创建了一个名为 `AddInputModel` 的模式，包含字段 `a` 和 `b`。
+- 尝试将传入请求解析为 `AddInputModel` 类型，如果参数不匹配，将会报错：
 
    ```python
    # add.py
@@ -227,7 +236,7 @@ here you can see how we do the following:
         raise ValueError(f"Invalid input: {str(e)}")
    ```
 
-You can choose whether to put this parsing logic in the tool call itself or in the handler function.
+你可以选择将此解析逻辑放在工具调用本身或处理程序函数中。
 
 **TypeScript**
 
@@ -288,7 +297,7 @@ export default {
 } as Tool;
 ```
 
-- In the handler dealing with all tool calls, we now try to parse the incoming request into the tool's defined schema:
+- 在处理所有工具调用的处理程序中，我们尝试将传入请求解析为工具定义的模式：
 
     ```typescript
     const Schema = tool.rawSchema;
@@ -297,27 +306,27 @@ export default {
        const input = Schema.parse(request.params.arguments);
     ```
 
-    if that works then we proceed to call the actual tool:
+    如果解析成功，我们继续调用实际工具：
 
     ```typescript
     const result = await tool.callback(input);
     ```
 
-As you can see, this approach creates a great architecture as everything has it's place, the *server.ts* is a very small file that only wires up th request handlers and each features is in their respective folder i.e tools/, resources/ or /prompts.
+如你所见，这种方法创建了一个很好的架构，每个部分都有其位置，*server.ts* 文件非常小，仅用于连接请求处理程序，而每个功能都在其各自的文件夹中，例如 tools/、resources/ 或 prompts/。
 
-Great, let's try to build this next. 
+很好，让我们尝试构建这个架构。
 
-## Exercise: Creating a low-level server
+## 练习：创建低级服务器
 
-In this exercise, we will do the following:
+在这个练习中，我们将完成以下任务：
 
-1. Create a low-level server handling listing of tools and calling of tools.
-1. Implement an architecture you can build upon.
-1. Add validation to ensure your tool calls are properly validated.
+1. 创建一个低级服务器，处理工具的列出和调用。
+1. 实现一个可扩展的架构。
+1. 添加验证以确保工具调用得到正确验证。
 
-### -1- Create an architecture
+### -1- 创建架构
 
-The first thing we need to address is an architecture that helps us scale as we add more features, here's what it looks like:
+首先，我们需要解决一个问题：如何设计一个架构以便随着功能的增加能够轻松扩展。以下是架构示例：
 
 **Python**
 
@@ -340,11 +349,11 @@ server.ts
 client.ts
 ```
 
-Now we have set up in architecture that ensures we can easily add new tools in a tools folder. Feel free to follow this to add subdirectories for resources and prompts.
+现在我们已经设置了一个架构，确保我们可以轻松地在工具文件夹中添加新工具。你可以按照这个架构为资源和提示添加子目录。
 
-### -2- Creating a tool
+### -2- 创建工具
 
-Let's see what creating a tool looks like next. First, it needs to be created in its *tool* subdirectory like so:
+接下来，我们看看创建工具的过程。首先，它需要在其 *tool* 子目录中创建，如下所示：
 
 **Python**
 
@@ -371,9 +380,9 @@ tool_add = {
 }
 ```
 
-What we se here is how we define name, description, an input schema using Pydantic and a handler that will be invoked once this tool is being called. Lastly, we expose `tool_add` which is a dictionary holding all these properties.
+我们看到这里定义了工具的名称、描述、使用 Pydantic 定义的输入模式，以及一个处理程序，当工具被调用时会执行。最后，我们暴露了 `tool_add`，它是一个包含所有这些属性的字典。
 
-There's also *schema.py* that's used to define the input schema used by our tool:
+还有一个 *schema.py* 文件，用于定义工具使用的输入模式：
 
 ```python
 from pydantic import BaseModel
@@ -383,7 +392,7 @@ class AddInputModel(BaseModel):
     b: float
 ```
 
-We also need to populate *__init__.py* to ensure the tools directory is treated as a module. Additionally, we need to expose the modules within it like so:
+我们还需要填充 *__init__.py* 文件，以确保工具目录被视为一个模块。此外，我们需要暴露其中的模块，如下所示：
 
 ```python
 from .add import tool_add
@@ -393,7 +402,7 @@ tools = {
 }
 ```
 
-We can keep adding to this file as we add more tools.
+随着工具的增加，我们可以继续向这个文件添加内容。
 
 **TypeScript**
 
@@ -414,14 +423,14 @@ export default {
 } as Tool;
 ```
 
-Here we create a dictionary consisting of properties:
+在这里，我们创建了一个包含以下属性的字典：
 
-- name, this is the name of the tool.
-- rawSchema, this is the Zod schema, it will be used to validate incoming requests to call this tool.
-- inputSchema, this schema will be used by the handler.
-- callback, this is used to invoke the tool.
+- name：工具的名称。
+- rawSchema：这是 Zod 模式，用于验证调用该工具的传入请求。
+- inputSchema：此模式将由处理程序使用。
+- callback：用于调用工具。
 
-There' also `Tool` that's used to convert this dictionary into a type the mcp server handler can accept and it looks like so:
+还有 `Tool`，它用于将这个字典转换为 MCP 服务器处理程序可以接受的类型，如下所示：
 
 ```typescript
 import { z } from 'zod';
@@ -434,7 +443,7 @@ export interface Tool {
 }
 ```
 
-And there's *schema.ts* where we store the input schemas for each tool that looks like so with only one schema at present but as we add tools we can add more entries:
+此外，还有 *schema.ts* 文件，我们在其中存储每个工具的输入模式，目前只有一个模式，但随着工具的增加，我们可以添加更多条目：
 
 ```typescript
 import { z } from 'zod';
@@ -442,11 +451,11 @@ import { z } from 'zod';
 export const MathInputSchema = z.object({ a: z.number(), b: z.number() });
 ```
 
-Great, let's procced to handle the listing of our tools next.
+很好，接下来我们处理工具的列出功能。
 
-### -3- Handle tool listing
+### -3- 处理工具列出
 
-Next, to handle listing our tools, we need to set up a request handler for that. Here's what we need to add to our server file:
+接下来，为了处理工具的列出，我们需要在服务器文件中设置一个请求处理程序。以下是需要添加的内容：
 
 **Python**
 
@@ -470,11 +479,11 @@ async def handle_list_tools() -> list[types.Tool]:
     return tool_list
 ```
 
-Here' we add the decorator `@server.list_tools` and the implementing function `handle_list_tools`. In the latter, we need to produce a list of tools. Note how each tool needs to have a name, description and inputSchema.   
+在这里，我们添加了装饰器 `@server.list_tools` 和实现函数 `handle_list_tools`。在后者中，我们需要生成一个工具列表。注意每个工具需要有名称、描述和输入模式。
 
 **TypeScript**
 
-To set up the request handler for listing tools, we need to call `setRequestHandler` on the server with a schema fitting what we're trying to do, in this case `ListToolsRequestSchema`. 
+为了设置列出工具的请求处理程序，我们需要在服务器上调用 `setRequestHandler`，并使用一个适合我们目标的模式，在这种情况下是 `ListToolsRequestSchema`。
 
 ```typescript
 // index.ts
@@ -499,15 +508,15 @@ server.setRequestHandler(ListToolsRequestSchema, async (request) => {
 });
 ```
 
-Great, now we have solved the piece of listing tools, let's look at how we could be calling tools next.
+很好，现在我们已经解决了列出工具的部分，接下来看看如何调用工具。
 
-### -4- Handle calling a tool
+### -4- 处理工具调用
 
-To call a tool, we need set up another request handler, this time focused on dealing with a request specifying which feature to call and with what arguments.
+为了调用工具，我们需要设置另一个请求处理程序，这次专注于处理指定要调用的功能及其参数的请求。
 
 **Python**
 
-Let's use the decorator `@server.call_tool` and implement it with a function like `handle_call_tool`. Within that function, we need to parse out the tool name, its argument and ensure the arguments are valid for the tool in question. We can either validate the arguments in this function or downstream in the actual tool.
+我们使用装饰器 `@server.call_tool` 并通过函数 `handle_call_tool` 实现。在该函数中，我们需要解析工具名称及其参数，并确保参数对该工具有效。我们可以选择在此函数中或工具的下游验证参数。
 
 ```python
 @server.call_tool()
@@ -524,7 +533,7 @@ async def handle_call_tool(
     result = "default"
     try:
         # invoke the tool
-        result = await tool["handler"](arguments)
+        result = await tool["handler"](../../../../03-GettingStarted/10-advanced/arguments)
     except Exception as e:
         raise ValueError(f"Error calling tool {name}: {str(e)}")
 
@@ -533,22 +542,27 @@ async def handle_call_tool(
     ] 
 ```
 
-Here's what goes on:
+以下是发生的事情：
 
-- Our tool name is already present as the input parameter `name` which is true for our arguments in the form of the `arguments` dictionary.
+- 工具名称已经作为输入参数 `name` 提供，参数以 `arguments` 字典的形式存在。
 
-- The tool is called with `result = await tool["handler"](arguments)`. The validation of the arguments happens in the `handler` property which points to a function, if that fails it will raise an exception. 
+- 工具通过 `result = await tool["handler"](../../../../03-GettingStarted/10-advanced/arguments)` 调用。参数的验证发生在 `handler` 属性指向的函数中，如果验证失败，将抛出异常。
 
-There, now we have a full understanding of listing and calling tools using a low-level server.
+现在我们已经全面了解了如何使用低级服务器列出和调用工具。
 
-See the [full example](./code/README.md) here
+查看[完整示例](./code/README.md)
 
-## Assignment
+## 作业
 
-Extend the code you've been given with a number of tools, resources and prompt and reflect over how you notice that you only need to add files in tools directory and nowhere else. 
+使用给定的代码扩展工具、资源和提示的数量，并思考你是否注意到只需要在工具目录中添加文件，而无需修改其他地方。
 
-*No solution given*
+*不提供解决方案*
 
-## Summary
+## 总结
 
-In this chapter, we saw how low-level server approach worked and how that can help us create a nice architecture we can keep building on. We also discussed validation and you were shown how to work with validation libraries to create schemas for input validation.
+在本章中，我们了解了低级服务器方法的工作原理，以及如何利用它创建一个可以持续扩展的良好架构。我们还讨论了验证，并展示了如何使用验证库创建输入验证模式。
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

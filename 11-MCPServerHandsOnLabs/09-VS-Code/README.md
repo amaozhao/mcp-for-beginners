@@ -1,29 +1,38 @@
-# VS Code Integration
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "769c9794759f416450dce77286e98f00",
+  "translation_date": "2025-09-30T12:48:59+00:00",
+  "source_file": "11-MCPServerHandsOnLabs/09-VS-Code/README.md",
+  "language_code": "zh"
+}
+-->
+# VS Code 集成
 
-## 🎯 What This Lab Covers
+## 🎯 本实验内容
 
-This lab provides comprehensive guidance on integrating your MCP server with VS Code to enable natural language queries through AI Chat. You'll learn to configure VS Code for optimal MCP usage, debug server connections, and leverage the full power of AI-assisted database interactions.
+本实验为您提供全面的指导，帮助您将 MCP 服务器与 VS Code 集成，以通过 AI 聊天实现自然语言查询。您将学习如何配置 VS Code 以优化 MCP 的使用、调试服务器连接，并充分利用 AI 辅助的数据库交互功能。
 
-## Overview
+## 概述
 
-VS Code's MCP integration transforms how developers interact with databases and APIs through natural language. By connecting your retail MCP server to VS Code Chat, you enable intelligent querying of sales data, product catalogs, and business analytics using conversational AI.
+VS Code 的 MCP 集成彻底改变了开发者通过自然语言与数据库和 API 交互的方式。通过将您的零售 MCP 服务器连接到 VS Code Chat，您可以使用对话式 AI 智能查询销售数据、产品目录和业务分析。
 
-This integration allows developers to ask questions like "Show me top selling products this month" or "Find customers who haven't purchased in 90 days" and get structured data responses without writing SQL queries.
+这种集成允许开发者提出诸如“显示本月的畅销产品”或“查找 90 天内未购买的客户”之类的问题，并获得结构化数据响应，而无需编写 SQL 查询。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lab, you will be able to:
+完成本实验后，您将能够：
 
-- **Configure** VS Code MCP settings for your retail server
-- **Integrate** MCP servers with VS Code AI Chat functionality
-- **Debug** MCP server connections and troubleshoot issues
-- **Optimize** natural language query patterns for better results
-- **Customize** VS Code workspace for MCP development
-- **Deploy** multi-server configurations for complex scenarios
+- **配置** VS Code MCP 设置以连接您的零售服务器  
+- **集成** MCP 服务器与 VS Code AI Chat 功能  
+- **调试** MCP 服务器连接并解决问题  
+- **优化** 自然语言查询模式以获得更好的结果  
+- **自定义** VS Code 工作区以支持 MCP 开发  
+- **部署** 多服务器配置以应对复杂场景  
 
-## 🔧 VS Code MCP Configuration
+## 🔧 VS Code MCP 配置
 
-### Initial Setup and Installation
+### 初始设置与安装
 
 ```json
 // .vscode/settings.json
@@ -62,7 +71,7 @@ By the end of this lab, you will be able to:
 }
 ```
 
-### Environment Configuration
+### 环境配置
 
 ```bash
 # .env file for development
@@ -87,7 +96,7 @@ MCP_SERVER_HOST=127.0.0.1
 LOG_LEVEL=INFO
 ```
 
-### Workspace Configuration
+### 工作区配置
 
 ```json
 // .vscode/launch.json
@@ -126,7 +135,7 @@ LOG_LEVEL=INFO
 }
 ```
 
-### Task Configuration
+### 任务配置
 
 ```json
 // .vscode/tasks.json
@@ -218,9 +227,9 @@ LOG_LEVEL=INFO
 }
 ```
 
-## 💬 AI Chat Integration
+## 💬 AI 聊天集成
 
-### Natural Language Query Patterns
+### 自然语言查询模式
 
 ```typescript
 // Example query patterns for VS Code Chat
@@ -294,7 +303,7 @@ const retailQueryPatterns: QueryPattern[] = [
 ];
 ```
 
-### Chat Integration Examples
+### 聊天集成示例
 
 ```markdown
 <!-- Examples of VS Code Chat interactions -->
@@ -341,7 +350,7 @@ const retailQueryPatterns: QueryPattern[] = [
 - Result: KPI dashboard with revenue, customer metrics, top categories, and growth trends
 ```
 
-### Chat Response Formatting
+### 聊天响应格式化
 
 ```python
 # mcp_server/chat/response_formatter.py
@@ -498,9 +507,9 @@ class ChatResponseFormatter:
         return response
 ```
 
-## 🔍 Debugging and Troubleshooting
+## 🔍 调试与故障排除
 
-### VS Code Debug Configuration
+### VS Code 调试配置
 
 ```python
 # mcp_server/debug/vscode_debug.py
@@ -570,7 +579,7 @@ class VSCodeDebugLogger:
 vscode_debug_logger = VSCodeDebugLogger()
 ```
 
-### Connection Troubleshooting
+### 连接故障排除
 
 ```python
 # scripts/debug_mcp_connection.py
@@ -781,9 +790,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## 🚀 Advanced Configuration
+## 🚀 高级配置
 
-### Multi-Server Setup
+### 多服务器设置
 
 ```json
 // .vscode/settings.json - Multiple MCP servers
@@ -840,7 +849,7 @@ if __name__ == "__main__":
 }
 ```
 
-### Custom VS Code Extension
+### 自定义 VS Code 扩展
 
 ```typescript
 // src/extension.ts - Custom MCP retail extension
@@ -933,7 +942,7 @@ async function executeQuickQuery(queryType: string) {
 export function deactivate() {}
 ```
 
-### Extension Package Configuration
+### 扩展包配置
 
 ```json
 // package.json for VS Code extension
@@ -1005,44 +1014,49 @@ export function deactivate() {}
 }
 ```
 
-## 🎯 Key Takeaways
+## 🎯 关键收获
 
-After completing this lab, you should have:
+完成本实验后，您将掌握：
 
-✅ **VS Code MCP Configuration**: Complete setup for optimal MCP integration  
-✅ **AI Chat Integration**: Natural language querying capabilities in VS Code  
-✅ **Debugging Tools**: Comprehensive troubleshooting and connection diagnostics  
-✅ **Multi-Server Setup**: Configuration for multiple MCP server instances  
-✅ **Custom Extensions**: Enhanced VS Code experience with retail-specific features  
-✅ **Production Readiness**: Enterprise-ready VS Code development environment  
+✅ **VS Code MCP 配置**：完成 MCP 集成的最佳设置  
+✅ **AI 聊天集成**：在 VS Code 中实现自然语言查询功能  
+✅ **调试工具**：全面的故障排除和连接诊断能力  
+✅ **多服务器设置**：配置多个 MCP 服务器实例  
+✅ **自定义扩展**：通过零售特定功能增强 VS Code 体验  
+✅ **生产环境准备**：企业级 VS Code 开发环境  
 
-## 🚀 What's Next
+## 🚀 下一步
 
-Continue with **[Lab 10: Deployment Strategies](../10-Deployment/README.md)** to:
+继续学习 **[实验 10：部署策略](../10-Deployment/README.md)**，以了解：
 
-- Deploy MCP servers to production environments
-- Configure cloud infrastructure for scalability
-- Implement CI/CD pipelines for automated deployment
-- Monitor production MCP server performance
+- 将 MCP 服务器部署到生产环境  
+- 配置云基础设施以实现可扩展性  
+- 实现 CI/CD 流水线以自动化部署  
+- 监控生产环境 MCP 服务器性能  
 
-## 📚 Additional Resources
+## 📚 其他资源
 
-### VS Code Development
-- [VS Code Extension API](https://code.visualstudio.com/api) - Official extension development guide
-- [VS Code MCP Documentation](https://code.visualstudio.com/docs/copilot/copilot-extensibility-overview) - MCP integration documentation
-- [TypeScript for VS Code](https://code.visualstudio.com/docs/languages/typescript) - TypeScript development in VS Code
+### VS Code 开发
+- [VS Code Extension API](https://code.visualstudio.com/api) - 官方扩展开发指南  
+- [VS Code MCP 文档](https://code.visualstudio.com/docs/copilot/copilot-extensibility-overview) - MCP 集成文档  
+- [VS Code 的 TypeScript](https://code.visualstudio.com/docs/languages/typescript) - 在 VS Code 中进行 TypeScript 开发  
 
-### MCP Protocol
-- [Model Context Protocol Specification](https://modelcontextprotocol.io/specification) - Official MCP specification
-- [MCP Best Practices](https://modelcontextprotocol.io/docs/best-practices) - Implementation best practices
-- [FastMCP Framework](https://github.com/jlowin/fastmcp) - Python MCP implementation
+### MCP 协议
+- [模型上下文协议规范](https://modelcontextprotocol.io/specification) - 官方 MCP 规范  
+- [MCP 最佳实践](https://modelcontextprotocol.io/docs/best-practices) - 实现最佳实践  
+- [FastMCP 框架](https://github.com/jlowin/fastmcp) - Python MCP 实现  
 
-### Development Tools
-- [Python in VS Code](https://code.visualstudio.com/docs/python/python-tutorial) - Python development setup
-- [Debugging in VS Code](https://code.visualstudio.com/docs/editor/debugging) - Advanced debugging techniques
-- [VS Code Tasks](https://code.visualstudio.com/docs/editor/tasks) - Task automation and configuration
+### 开发工具
+- [VS Code 中的 Python](https://code.visualstudio.com/docs/python/python-tutorial) - Python 开发设置  
+- [VS Code 调试](https://code.visualstudio.com/docs/editor/debugging) - 高级调试技术  
+- [VS Code 任务](https://code.visualstudio.com/docs/editor/tasks) - 任务自动化与配置  
 
 ---
 
-**Previous**: [Lab 08: Testing and Debugging](../08-Testing/README.md)  
-**Next**: [Lab 10: Deployment Strategies](../10-Deployment/README.md)
+**上一节**: [实验 08：测试与调试](../08-Testing/README.md)  
+**下一节**: [实验 10：部署策略](../10-Deployment/README.md)  
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

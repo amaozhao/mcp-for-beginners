@@ -1,38 +1,47 @@
-# MCP Security Best Practices - Advanced Implementation Guide
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "997c7119766a69552e23d7d681316902",
+  "translation_date": "2025-08-18T10:26:47+00:00",
+  "source_file": "05-AdvancedTopics/mcp-security/README.md",
+  "language_code": "zh"
+}
+-->
+# MCP安全最佳实践 - 高级实施指南
 
-> **Current Standard**: This guide reflects [MCP Specification 2025-06-18](https://spec.modelcontextprotocol.io/specification/2025-06-18/) security requirements and official [MCP Security Best Practices](https://modelcontextprotocol.io/specification/2025-06-18/basic/security_best_practices).
+> **当前标准**：本指南符合[MCP规范2025-06-18](https://spec.modelcontextprotocol.io/specification/2025-06-18/)的安全要求以及官方[MCP安全最佳实践](https://modelcontextprotocol.io/specification/2025-06-18/basic/security_best_practices)。
 
-Security is critical for MCP implementations, especially in enterprise environments. This advanced guide explores comprehensive security practices for production MCP deployments, addressing both traditional security concerns and AI-specific threats unique to the Model Context Protocol.
+安全性对于MCP的实施至关重要，尤其是在企业环境中。本高级指南探讨了生产环境中MCP部署的全面安全实践，涵盖传统安全问题以及MCP特有的AI相关威胁。
 
-## Introduction
+## 简介
 
-The Model Context Protocol (MCP) introduces unique security challenges that extend beyond traditional software security. As AI systems gain access to tools, data, and external services, new attack vectors emerge including prompt injection, tool poisoning, session hijacking, confused deputy problems, and token passthrough vulnerabilities.
+模型上下文协议（MCP）带来了超越传统软件安全的独特安全挑战。随着AI系统获得工具、数据和外部服务的访问权限，新的攻击向量随之出现，包括提示注入、工具污染、会话劫持、混淆代理问题以及令牌传递漏洞。
 
-This lesson explores advanced security implementations based on the latest MCP specification (2025-06-18), Microsoft security solutions, and established enterprise security patterns.
+本课程基于最新的MCP规范（2025-06-18）、微软安全解决方案以及成熟的企业安全模式，探讨高级安全实施方法。
 
-### **Core Security Principles**
+### **核心安全原则**
 
-**From MCP Specification (2025-06-18):**
+**摘自MCP规范（2025-06-18）：**
 
-- **Explicit Prohibitions**: MCP servers **MUST NOT** accept tokens not issued for them, and **MUST NOT** use sessions for authentication
-- **Mandatory Verification**: All inbound requests **MUST** be verified, and user consent **MUST** be obtained for proxy operations
-- **Secure Defaults**: Implement fail-safe security controls with defense-in-depth approaches
-- **User Control**: Users must provide explicit consent before any data access or tool execution
+- **明确禁止**：MCP服务器**不得**接受未为其签发的令牌，且**不得**使用会话进行身份验证  
+- **强制验证**：所有入站请求**必须**经过验证，代理操作**必须**获得用户同意  
+- **安全默认值**：实施防故障安全控制，采用深度防御方法  
+- **用户控制**：用户必须明确同意后才能访问数据或执行工具  
 
-## Learning Objectives
+## 学习目标
 
-By the end of this advanced lesson, you will be able to:
+完成本高级课程后，您将能够：
 
-- **Implement Advanced Authentication**: Deploy external identity provider integration with Microsoft Entra ID and OAuth 2.1 security patterns
-- **Prevent AI-Specific Attacks**: Protect against prompt injection, tool poisoning, and session hijacking using Microsoft Prompt Shields and Azure Content Safety
-- **Apply Enterprise Security**: Implement comprehensive logging, monitoring, and incident response for production MCP deployments  
-- **Secure Tool Execution**: Design sandboxed execution environments with proper isolation and resource controls
-- **Address MCP Vulnerabilities**: Identify and mitigate confused deputy problems, token passthrough vulnerabilities, and supply chain risks
-- **Integrate Microsoft Security**: Leverage Azure security services and GitHub Advanced Security for comprehensive protection
+- **实施高级身份验证**：部署与Microsoft Entra ID和OAuth 2.1安全模式集成的外部身份提供商  
+- **防范AI特定攻击**：使用Microsoft Prompt Shields和Azure Content Safety防止提示注入、工具污染和会话劫持  
+- **应用企业安全**：为生产环境中的MCP部署实施全面的日志记录、监控和事件响应  
+- **保护工具执行**：设计隔离的沙盒执行环境，确保资源控制  
+- **解决MCP漏洞**：识别并缓解混淆代理问题、令牌传递漏洞以及供应链风险  
+- **集成微软安全**：利用Azure安全服务和GitHub高级安全实现全面保护  
 
-## **MANDATORY Security Requirements**
+## **强制性安全要求**
 
-### **Critical Requirements from MCP Specification (2025-06-18):**
+### **MCP规范（2025-06-18）中的关键要求：**
 
 ```yaml
 Authentication & Authorization:
@@ -51,24 +60,24 @@ Session Management:
   transport_security: "MUST use HTTPS for all communications"
 ```
 
-## Advanced Authentication and Authorization
+## 高级身份验证与授权
 
-Modern MCP implementations benefit from the specification's evolution toward external identity provider delegation, significantly improving security posture over custom authentication implementations.
+现代MCP实施受益于规范向外部身份提供商委托的演进，相较于自定义身份验证实现显著提升了安全性。
 
-### **Microsoft Entra ID Integration**
+### **Microsoft Entra ID集成**
 
-The current MCP specification (2025-06-18) allows delegation to external identity providers like Microsoft Entra ID, providing enterprise-grade security features:
+最新的MCP规范（2025-06-18）允许委托给外部身份提供商，如Microsoft Entra ID，提供企业级安全功能：
 
-**Security Benefits:**
-- Enterprise-grade multi-factor authentication (MFA)
-- Conditional access policies based on risk assessment
-- Centralized identity lifecycle management
-- Advanced threat protection and anomaly detection
-- Compliance with enterprise security standards
+**安全优势：**
+- 企业级多因素认证（MFA）  
+- 基于风险评估的条件访问策略  
+- 集中的身份生命周期管理  
+- 高级威胁保护和异常检测  
+- 符合企业安全标准  
 
-### .NET Implementation with Entra ID
+### 使用Entra ID的.NET实现
 
-Enhanced implementation leveraging Microsoft security ecosystem:
+利用微软安全生态系统的增强实现：
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -258,9 +267,9 @@ public class AuditLoggingService
 }
 ``` 
 
-### Java Spring Security with OAuth 2.1 Integration
+### 使用OAuth 2.1集成的Java Spring Security
 
-Enhanced Spring Security implementation following OAuth 2.1 security patterns required by MCP specification:
+遵循MCP规范要求的OAuth 2.1安全模式的增强Spring Security实现：
 
 ```java
 @Configuration
@@ -509,11 +518,11 @@ public class AdvancedMcpSecurityInterceptor implements ToolExecutionInterceptor 
 }
 ```
 
-## AI-Specific Security Controls & Microsoft Solutions
+## AI特定安全控制与微软解决方案
 
-### **Prompt Injection Defense with Microsoft Prompt Shields**
+### **使用Microsoft Prompt Shields防御提示注入**
 
-Modern MCP implementations face sophisticated AI-specific attacks requiring specialized defenses:
+现代MCP实施面临复杂的AI特定攻击，需要专门的防御措施：
 
 ```python
 from mcp_server import McpServer
@@ -897,11 +906,11 @@ async def log_security_event(event_data: Dict):
     logging.info(f"MCP Security Event: {json.dumps(event_data, default=str)}")
 ```
 
-## Advanced MCP Security Threat Mitigation
+## 高级MCP安全威胁缓解
 
-### **1. Confused Deputy Attack Prevention**
+### **1. 防止混淆代理攻击**
 
-**Enhanced Implementation Following MCP Specification (2025-06-18):**
+**遵循MCP规范（2025-06-18）的增强实现：**
 
 ```python
 import asyncio
@@ -1136,9 +1145,9 @@ async def secure_oauth_proxy_flow():
         return await exchange_code_for_tokens(authorization_code, code_verifier)
 ```
 
-### **2. Token Passthrough Prevention**
+### **2. 防止令牌传递**
 
-**Comprehensive Implementation:**
+**全面实施：**
 
 ```python
 class TokenPassthroughPrevention:
@@ -1263,9 +1272,9 @@ class TokenPassthroughPrevention:
         return await self.sign_downstream_token(token_payload)
 ```
 
-### **3. Session Hijacking Prevention**
+### **3. 防止会话劫持**
 
-**Advanced Session Security:**
+**高级会话安全：**
 
 ```python
 import secrets
@@ -1431,9 +1440,9 @@ class AdvancedSessionSecurity:
         }
 ```
 
-## Enterprise Security Integration & Monitoring
+## 企业安全集成与监控
 
-### **Comprehensive Logging with Azure Application Insights**
+### **使用Azure Application Insights进行全面日志记录**
 
 ```python
 import json
@@ -1646,7 +1655,7 @@ class MCPThreatDetectionPipeline:
         return detection_results
 ```
 
-### **Supply Chain Security Integration**
+### **供应链安全集成**
 
 ```python
 class MCPSupplyChainSecurity:
@@ -1715,68 +1724,71 @@ class MCPSupplyChainSecurity:
         return validation_results
 ```
 
-## Best Practices Summary & Enterprise Guidelines
+## 最佳实践总结与企业指南
 
-### **Critical Implementation Checklist**
+### **关键实施检查表**
 
-Authentication & Authorization:
-  External identity provider integration (Microsoft Entra ID)
-  Token audience validation (MANDATORY)
-  No session-based authentication
-  Comprehensive request verification
-  
-AI Security Controls:
-  Microsoft Prompt Shields integration
-  Azure Content Safety screening  
-  Tool poisoning detection
-  Output content validation
-  
-Session Security:
-  Cryptographically secure session IDs
-  User-specific session binding
-  Session hijacking detection
-  HTTPS transport enforcement
-  
-OAuth & Proxy Security:
-  PKCE implementation (OAuth 2.1)
-  Explicit user consent for dynamic clients
-  Strict redirect URI validation
-  No token passthrough (MANDATORY)
+身份验证与授权：
+  外部身份提供商集成（Microsoft Entra ID）  
+  令牌受众验证（强制性）  
+  不使用基于会话的身份验证  
+  全面的请求验证  
 
-Enterprise Integration:
-  Azure Key Vault for secrets management
-  Application Insights for security monitoring
-  GitHub Advanced Security for supply chain
-  Microsoft Defender for DevOps integration
+AI安全控制：
+  集成Microsoft Prompt Shields  
+  Azure Content Safety筛选  
+  工具污染检测  
+  输出内容验证  
 
-Monitoring & Response:
-  Comprehensive security event logging
-  Real-time threat detection
-  Automated incident response
-  Risk-based alerting
+会话安全：
+  加密安全的会话ID  
+  用户特定的会话绑定  
+  会话劫持检测  
+  强制HTTPS传输  
 
-### **Microsoft Security Ecosystem Benefits**
+OAuth与代理安全：
+  PKCE实施（OAuth 2.1）  
+  动态客户端的明确用户同意  
+  严格的重定向URI验证  
+  不允许令牌传递（强制性）  
 
-- **Integrated Security Posture**: Unified security across identity, infrastructure, and applications
-- **Advanced AI Protection**: Purpose-built defenses against AI-specific threats  
-- **Enterprise Compliance**: Built-in support for regulatory requirements and industry standards
-- **Threat Intelligence**: Global threat intelligence integration for proactive protection
-- **Scalable Architecture**: Enterprise-grade scaling with maintained security controls
+企业集成：
+  使用Azure Key Vault进行密钥管理  
+  使用Application Insights进行安全监控  
+  使用GitHub高级安全保护供应链  
+  集成Microsoft Defender for DevOps  
 
-### **References & Resources**
+监控与响应：
+  全面的安全事件日志记录  
+  实时威胁检测  
+  自动化事件响应  
+  基于风险的警报  
 
-- **[MCP Specification (2025-06-18)](https://spec.modelcontextprotocol.io/specification/2025-06-18/)**
-- **[MCP Security Best Practices](https://modelcontextprotocol.io/specification/2025-06-18/basic/security_best_practices)**  
-- **[MCP Authorization Specification](https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization)**
-- **[Microsoft Prompt Shields](https://learn.microsoft.com/azure/ai-services/content-safety/concepts/jailbreak-detection)**
-- **[Azure Content Safety](https://learn.microsoft.com/azure/ai-services/content-safety/)**
-- **[OAuth 2.0 Security Best Practices (RFC 9700)](https://datatracker.ietf.org/doc/html/rfc9700)**
-- **[OWASP Top 10 for Large Language Models](https://genai.owasp.org/)**
+### **微软安全生态系统的优势**
+
+- **集成的安全态势**：统一的身份、基础设施和应用安全  
+- **高级AI保护**：针对AI特定威胁的专用防御  
+- **企业合规性**：内置支持法规要求和行业标准  
+- **威胁情报**：全球威胁情报集成，实现主动保护  
+- **可扩展架构**：企业级扩展，同时保持安全控制  
+
+### **参考与资源**
+
+- **[MCP规范（2025-06-18）](https://spec.modelcontextprotocol.io/specification/2025-06-18/)**  
+- **[MCP安全最佳实践](https://modelcontextprotocol.io/specification/2025-06-18/basic/security_best_practices)**  
+- **[MCP授权规范](https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization)**  
+- **[Microsoft Prompt Shields](https://learn.microsoft.com/azure/ai-services/content-safety/concepts/jailbreak-detection)**  
+- **[Azure Content Safety](https://learn.microsoft.com/azure/ai-services/content-safety/)**  
+- **[OAuth 2.0安全最佳实践（RFC 9700）](https://datatracker.ietf.org/doc/html/rfc9700)**  
+- **[OWASP大型语言模型十大安全问题](https://genai.owasp.org/)**  
 
 ---
 
-> **Security Notice**: This advanced implementation guide reflects current MCP specification (2025-06-18) requirements. Always verify against the latest official documentation and consider your specific security requirements and threat model when implementing these controls.
+> **安全提示**：本高级实施指南反映了当前MCP规范（2025-06-18）的要求。实施这些控制时，请始终核对最新的官方文档，并根据您的具体安全需求和威胁模型进行调整。
 
-## What's next
+## 下一步
 
-- [5.9 Web search](../web-search-mcp/README.md)
+- [5.9 网络搜索](../web-search-mcp/README.md)
+
+**免责声明**：  
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。

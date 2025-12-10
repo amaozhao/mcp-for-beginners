@@ -1,58 +1,66 @@
-## Testing and Debugging
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "4e34e34e84f013e73c7eaa6d09884756",
+  "translation_date": "2025-07-13T21:57:32+00:00",
+  "source_file": "03-GettingStarted/08-testing/README.md",
+  "language_code": "zh"
+}
+-->
+## 测试与调试
 
-Before you begin testing your MCP server, it's important to understand the available tools and best practices for debugging. Effective testing ensures your server behaves as expected and helps you quickly identify and resolve issues. The following section outlines recommended approaches for validating your MCP implementation.
+在开始测试你的 MCP 服务器之前，了解可用的工具和调试的最佳实践非常重要。有效的测试能确保服务器按预期运行，并帮助你快速发现和解决问题。以下部分将介绍验证 MCP 实现的推荐方法。
 
-## Overview
+## 概述
 
-This lesson covers how to select the right testing approach and the most effective testing tool.
+本课将介绍如何选择合适的测试方法以及最有效的测试工具。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lesson, you will be able to:
+完成本课后，你将能够：
 
-- Describe various approaches for testing.
-- Use different tools to effectively test your code.
+- 描述各种测试方法。
+- 使用不同工具有效地测试代码。
 
+## 测试 MCP 服务器
 
-## Testing MCP Servers
+MCP 提供了帮助你测试和调试服务器的工具：
 
-MCP provides tools to help you test and debug your servers:
+- **MCP Inspector**：一个命令行工具，可作为 CLI 工具或可视化工具运行。
+- **手动测试**：你可以使用 curl 这类工具发送网络请求，任何支持 HTTP 的工具都可以。
+- **单元测试**：可以使用你喜欢的测试框架来测试服务器和客户端的功能。
 
-- **MCP Inspector**: A command line tool that can be run both as a CLI tool and as a visual tool.
-- **Manual testing**: You can use a tool like curl to run web requests, but any tool capabable of running HTTP will do.
-- **Unit testing**: It's possible to use your preferred testing framework to test the features of both server and client.
+### 使用 MCP Inspector
 
-### Using MCP Inspector
+我们在之前的课程中介绍过该工具的使用，这里做个简要说明。它是基于 Node.js 构建的工具，你可以通过调用 `npx` 命令来使用，`npx` 会临时下载并安装该工具，运行完成后会自动清理。
 
-We've describes the usage of this tool in previous lessons but let's talk about it a bit at high level. It's a tool built in Node.js and you can use it by calling the `npx` executable which will download and install the tool itself temporarily and will clean itself up once it's done running your request.
+[MCP Inspector](https://github.com/modelcontextprotocol/inspector) 可以帮助你：
 
-The [MCP Inspector](https://github.com/modelcontextprotocol/inspector) helps you:
+- **发现服务器功能**：自动检测可用的资源、工具和提示
+- **测试工具执行**：尝试不同参数，实时查看响应
+- **查看服务器元数据**：检查服务器信息、模式和配置
 
-- **Discover Server Capabilities**: Automatically detect available resources, tools, and prompts
-- **Test Tool Execution**: Try different parameters and see responses in real-time
-- **View Server Metadata**: Examine server info, schemas, and configurations
-
-A typical run of the tool looks like so:
+工具的典型运行示例如下：
 
 ```bash
 npx @modelcontextprotocol/inspector node build/index.js
 ```
 
-The above command starts an MCP and its visual interface and launches a local web interface in your browser. You can expect to see a dashboard displaying your registered MCP servers, their available tools, resources, and prompts. The interface allows you to interactively test tool execution, inspect server metadata, and view real-time responses, making it easier to validate and debug your MCP server implementations.
+上述命令启动 MCP 及其可视化界面，并在浏览器中打开本地网页界面。你会看到一个仪表盘，显示已注册的 MCP 服务器、可用工具、资源和提示。该界面允许你交互式地测试工具执行、检查服务器元数据和查看实时响应，方便验证和调试 MCP 服务器实现。
 
-Here's what it can look like: ![Inspector](/03-GettingStarted/01-first-server/assets/connect.png)
+界面示例如下： ![Inspector](../../translated_images/connect.141db0b2bd05f096fb1dd91273771fd8b2469d6507656c3b0c9df4b3c5473929.zh.png)
 
-You can also run this tool in CLI mode in which case you add `--cli` attribute. Here's an example of running the tool in "CLI" mode which lists all the tools on the server:
+你也可以在 CLI 模式下运行该工具，只需添加 `--cli` 参数。下面是以“CLI”模式运行工具并列出服务器上所有工具的示例：
 
 ```sh
 npx @modelcontextprotocol/inspector --cli node build/index.js --method tools/list
 ```
 
-### Manual Testing
+### 手动测试
 
-Apart from running the inspector tool to test server capabilities, another similar approach is to run a client capable of using HTTP lik for example curl.
+除了使用 inspector 工具测试服务器功能外，另一种类似的方法是使用支持 HTTP 的客户端工具，比如 curl。
 
-With curl, you can test MCP servers directly using HTTP requests:
+使用 curl，你可以通过 HTTP 请求直接测试 MCP 服务器：
 
 ```bash
 # Example: Test server metadata
@@ -64,11 +72,11 @@ curl -X POST http://localhost:3000/v1/tools/execute \
   -d '{"name": "calculator", "parameters": {"expression": "2+2"}}'
 ```
 
-As you can see from above usage of curl, you use a POST request  to invoke a tool using a payload consisting of the tools name and its parameters. Use the approach that fits you best. CLI tools in general tends to be faster to use and lends themselves to be scripted which can be useful in a CI/CD environment.
+如上所示，使用 curl 发送 POST 请求，调用工具时需要传递工具名称和参数的负载。选择最适合你的方法。CLI 工具通常使用更快，也便于脚本化，这在 CI/CD 环境中非常有用。
 
-### Unit Testing
+### 单元测试
 
-Create unit tests for your tools and resources to ensure they work as expected. Here's some example testing code.
+为你的工具和资源编写单元测试，确保它们按预期工作。以下是示例测试代码。
 
 ```python
 import pytest
@@ -121,30 +129,33 @@ async def test_list_tools_cursor_parameter():
     
 ```
 
-The preceding code does the following:
+上述代码实现了：
 
-- Leverages pytest framework which lets you create tests as functions and use assert statements.
-- Creates an MCP Server with two different tools.
-- Uses `assert` statement to check that certain conditions are fulfilled.
+- 利用 pytest 框架，可以将测试写成函数并使用 assert 语句。
+- 创建了一个包含两个不同工具的 MCP 服务器。
+- 使用 `assert` 语句检查特定条件是否满足。
 
-Have a look at the [full file here](https://github.com/modelcontextprotocol/python-sdk/blob/main/tests/client/test_list_methods_cursor.py)
+完整文件请查看 [full file here](https://github.com/modelcontextprotocol/python-sdk/blob/main/tests/client/test_list_methods_cursor.py)
 
-Given the above file, you can test your own server to ensure capabilities are created as they should.
+基于上述文件，你可以测试自己的服务器，确保功能按预期创建。
 
-All major SDKs have similar testing sections so you can adjust to your chosen runtime.
+所有主流 SDK 都有类似的测试部分，你可以根据所选运行环境进行调整。
 
-## Samples 
+## 示例
 
-- [Java Calculator](../samples/java/calculator/README.md)
-- [.Net Calculator](../samples/csharp/)
-- [JavaScript Calculator](../samples/javascript/README.md)
-- [TypeScript Calculator](../samples/typescript/README.md)
-- [Python Calculator](../samples/python/) 
+- [Java 计算器](../samples/java/calculator/README.md)
+- [.Net 计算器](../../../../03-GettingStarted/samples/csharp)
+- [JavaScript 计算器](../samples/javascript/README.md)
+- [TypeScript 计算器](../samples/typescript/README.md)
+- [Python 计算器](../../../../03-GettingStarted/samples/python)
 
-## Additional Resources
+## 额外资源
 
 - [Python SDK](https://github.com/modelcontextprotocol/python-sdk)
 
-## What's Next
+## 后续内容
 
-- Next: [Deployment](../09-deployment/README.md)
+- 下一节：[部署](../09-deployment/README.md)
+
+**免责声明**：  
+本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。虽然我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。对于因使用本翻译而产生的任何误解或误释，我们不承担任何责任。

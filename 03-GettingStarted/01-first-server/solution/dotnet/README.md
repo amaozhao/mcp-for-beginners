@@ -1,42 +1,50 @@
-# Running this sample
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "92af35e8c34923031f3d228dffad9ebb",
+  "translation_date": "2025-09-03T15:58:49+00:00",
+  "source_file": "03-GettingStarted/01-first-server/solution/dotnet/README.md",
+  "language_code": "zh"
+}
+-->
+# 运行此示例
 
-## -1- Install the dependencies
+## -1- 安装依赖项
 
 ```bash
 dotnet restore
 ```
 
-## -3- Run the sample
-
+## -3- 运行示例
 
 ```bash
 dotnet run
 ```
 
-## -4- Test the sample
+## -4- 测试示例
 
-With the server running in one terminal, open another terminal and run the following command:
+在一个终端中运行服务器后，打开另一个终端并运行以下命令：
 
 ```bash
 npx @modelcontextprotocol/inspector dotnet run
 ```
 
-This should start a web server with a visual interface allowing you to test the sample.
+这将启动一个带有可视化界面的网络服务器，允许您测试该示例。
 
-Once the server is connected: 
+服务器连接后：
 
-- try listing tools and run `add`, with args 2 and 4, you should see 6 in the result.
-- go to resources and resource template and call "greeting", type in a name and you should see a greeting with the name you provided.
+- 尝试列出工具并运行 `add`，参数为 2 和 4，结果应该显示为 6。
+- 进入资源和资源模板，调用 "greeting"，输入一个名字，您应该会看到包含您提供名字的问候语。
 
-### Testing in CLI mode
+### 在 CLI 模式下测试
 
-You can launch it directly in CLI mode by running the following command:
+您可以通过运行以下命令直接以 CLI 模式启动：
 
 ```bash
 npx @modelcontextprotocol/inspector --cli dotnet run --method tools/list
 ```
 
-This will list all the tools available in the server. You should see the following output:
+这将列出服务器中所有可用的工具。您应该会看到以下输出：
 
 ```text
 {
@@ -66,13 +74,13 @@ This will list all the tools available in the server. You should see the followi
 }
 ```
 
-To invoke a tool type:
+要调用某个工具，请输入：
 
 ```bash
 npx @modelcontextprotocol/inspector --cli dotnet run --method tools/call --tool-name Add --tool-arg a=1 --tool-arg b=2
 ```
 
-You should see the following output:
+您应该会看到以下输出：
 
 ```text
 {
@@ -87,5 +95,10 @@ You should see the following output:
 ```
 
 > [!TIP]
-> It's usually a lot faster to run the inspector in CLI mode than in the browser.
-> Read more about the inspector [here](https://github.com/modelcontextprotocol/inspector).
+> 通常在 CLI 模式下运行检查器比在浏览器中快得多。
+> 在 [这里](https://github.com/modelcontextprotocol/inspector) 阅读更多关于检查器的信息。
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

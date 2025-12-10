@@ -1,29 +1,38 @@
-# MCP Server Implementation
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "240e365cc324d23a0033e5615b5feb5e",
+  "translation_date": "2025-09-30T12:37:48+00:00",
+  "source_file": "11-MCPServerHandsOnLabs/05-MCP-Server/README.md",
+  "language_code": "zh"
+}
+-->
+# MCP服务器实现
 
-## 🎯 What This Lab Covers
+## 🎯 本实验内容
 
-This hands-on lab guides you through implementing a production-ready MCP server using FastMCP framework. You'll build the core server structure, implement database integration, create tools for data access, and establish the foundation for AI-powered retail analytics.
+本动手实验将指导您使用FastMCP框架实现一个生产级的MCP服务器。您将构建核心服务器结构，实施数据库集成，创建数据访问工具，并为AI驱动的零售分析奠定基础。
 
-## Overview
+## 概述
 
-The MCP server is the heart of our retail analytics solution. It acts as a bridge between AI assistants and the PostgreSQL database, providing secure, intelligent access to business data through a standardized protocol.
+MCP服务器是我们零售分析解决方案的核心。它充当AI助手与PostgreSQL数据库之间的桥梁，通过标准化协议提供安全、智能的业务数据访问。
 
-This lab teaches you to build a robust, scalable MCP server following enterprise patterns and best practices.
+本实验将教您如何按照企业模式和最佳实践构建一个强大、可扩展的MCP服务器。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lab, you will be able to:
+完成本实验后，您将能够：
 
-- **Build** a FastMCP server with proper architecture and organization
-- **Implement** database integration with connection pooling and error handling
-- **Create** MCP tools for database schema introspection and query execution
-- **Configure** Row Level Security context management
-- **Add** health monitoring and observability features
-- **Test** your MCP server implementation locally and with VS Code
+- **构建**一个具有良好架构和组织的FastMCP服务器
+- **实施**数据库集成，包括连接池和错误处理
+- **创建**用于数据库模式自省和查询执行的MCP工具
+- **配置**行级安全（RLS）上下文管理
+- **添加**健康监控和可观察性功能
+- **测试**您的MCP服务器实现，包括本地测试和VS Code集成
 
-## 📁 Project Structure
+## 📁 项目结构
 
-Let's examine the MCP server organization:
+让我们来看看MCP服务器的组织结构：
 
 ```
 mcp_server/
@@ -35,11 +44,11 @@ mcp_server/
 └── sales_analysis_text_embeddings.py  # AI/semantic search integration
 ```
 
-## 🔧 Configuration Management
+## 🔧 配置管理
 
-### Environment Configuration (`config.py`)
+### 环境配置 (`config.py`)
 
-First, let's create a robust configuration system:
+首先，创建一个强大的配置系统：
 
 ```python
 # mcp_server/config.py
@@ -181,19 +190,19 @@ class MCPServerConfig:
 config = MCPServerConfig()
 ```
 
-### Key Configuration Features
+### 关键配置功能
 
-- **Environment Variable Loading**: Automatic .env file support
-- **Type Safety**: Dataclass validation and type hints
-- **Flexible Defaults**: Sensible defaults for development
-- **Validation**: Configuration validation with helpful error messages
-- **Security**: Sensitive values only from environment variables
+- **环境变量加载**：自动支持.env文件
+- **类型安全**：数据类验证和类型提示
+- **灵活默认值**：为开发提供合理的默认值
+- **验证**：配置验证并提供有用的错误信息
+- **安全性**：敏感值仅从环境变量中获取
 
-## 🗄️ Database Integration Layer
+## 🗄️ 数据库集成层
 
-### PostgreSQL Provider (`sales_analysis_postgres.py`)
+### PostgreSQL提供者 (`sales_analysis_postgres.py`)
 
-Let's implement the database integration layer:
+让我们实现数据库集成层：
 
 ```python
 # mcp_server/sales_analysis_postgres.py
@@ -530,20 +539,20 @@ class PostgreSQLSchemaProvider:
 db_provider = PostgreSQLSchemaProvider()
 ```
 
-### Key Database Layer Features
+### 关键数据库层功能
 
-- **Connection Pooling**: Efficient resource management with asyncpg
-- **RLS Integration**: Automatic Row Level Security context setting
-- **Schema Introspection**: Dynamic table schema discovery
-- **Error Handling**: Comprehensive error management and logging
-- **Query Formatting**: AI-friendly result formatting
-- **Health Monitoring**: Database connectivity and pool status checks
+- **连接池**：使用asyncpg高效管理资源
+- **RLS集成**：自动设置行级安全上下文
+- **模式自省**：动态表模式发现
+- **错误处理**：全面的错误管理和日志记录
+- **查询格式化**：AI友好的结果格式化
+- **健康监控**：数据库连接性和池状态检查
 
-## 🔧 Main MCP Server Implementation
+## 🔧 MCP服务器主要实现
 
-### FastMCP Server (`sales_analysis.py`)
+### FastMCP服务器 (`sales_analysis.py`)
 
-Now let's implement the main MCP server:
+现在让我们实现主要的MCP服务器：
 
 ```python
 # mcp_server/sales_analysis.py
@@ -764,18 +773,18 @@ if __name__ == "__main__":
     )
 ```
 
-### Key MCP Server Features
+### 关键MCP服务器功能
 
-- **Tool Registration**: Declarative tool definitions with type safety
-- **RLS Context Management**: Automatic user identity extraction and context setting
-- **Error Handling**: Comprehensive error management with user-friendly messages
-- **Lifecycle Management**: Proper startup/shutdown with resource cleanup
-- **Health Monitoring**: Built-in health check endpoints
-- **Development Support**: Hot reload and debugging capabilities
+- **工具注册**：声明式工具定义，支持类型安全
+- **RLS上下文管理**：自动提取用户身份并设置上下文
+- **错误处理**：全面的错误管理，提供用户友好的消息
+- **生命周期管理**：正确的启动/关闭和资源清理
+- **健康监控**：内置健康检查端点
+- **开发支持**：热重载和调试功能
 
-## 🏥 Health Monitoring
+## 🏥 健康监控
 
-### Health Check Implementation (`health_check.py`)
+### 健康检查实现 (`health_check.py`)
 
 ```python
 # mcp_server/health_check.py
@@ -871,11 +880,11 @@ def setup_health_endpoints(app: FastAPI, db_provider) -> None:
     logger.info("Health check endpoints configured")
 ```
 
-## 🧪 Testing Your MCP Server
+## 🧪 测试您的MCP服务器
 
-### Local Testing
+### 本地测试
 
-1. **Start the MCP Server**:
+1. **启动MCP服务器**：
    ```bash
    # Activate virtual environment
    source mcp-env/bin/activate  # macOS/Linux
@@ -886,7 +895,7 @@ def setup_health_endpoints(app: FastAPI, db_provider) -> None:
    python sales_analysis.py
    ```
 
-2. **Test Health Endpoints**:
+2. **测试健康端点**：
    ```bash
    # Basic health check
    curl http://localhost:8000/health
@@ -895,7 +904,7 @@ def setup_health_endpoints(app: FastAPI, db_provider) -> None:
    curl http://localhost:8000/health/detailed
    ```
 
-3. **Test MCP Tools**:
+3. **测试MCP工具**：
    ```bash
    # List available tools
    curl -X POST http://localhost:8000/mcp \
@@ -918,9 +927,9 @@ def setup_health_endpoints(app: FastAPI, db_provider) -> None:
      }'
    ```
 
-### VS Code Integration Testing
+### VS Code集成测试
 
-1. **Configure VS Code MCP**:
+1. **配置VS Code MCP**：
    ```json
    // .vscode/mcp.json
    {
@@ -934,15 +943,15 @@ def setup_health_endpoints(app: FastAPI, db_provider) -> None:
    }
    ```
 
-2. **Test in AI Chat**:
-   - Open VS Code AI Chat
-   - Type `#zava` and select your server
-   - Ask: "What tables are available?"
-   - Ask: "Show me the top 5 stores by number of orders"
+2. **在AI聊天中测试**：
+   - 打开VS Code AI聊天
+   - 输入 `#zava` 并选择您的服务器
+   - 提问：“有哪些可用的表？”
+   - 提问：“显示订单数量最多的前5家门店”
 
-### Unit Testing
+### 单元测试
 
-Create comprehensive unit tests:
+创建全面的单元测试：
 
 ```python
 # tests/test_mcp_server.py
@@ -996,44 +1005,49 @@ async def test_query_execution():
         await db.close_pool()
 ```
 
-## 🎯 Key Takeaways
+## 🎯 关键收获
 
-After completing this lab, you should have:
+完成本实验后，您应该拥有：
 
-✅ **Working MCP Server**: FastMCP server with database integration  
-✅ **Configuration Management**: Robust environment-based configuration  
-✅ **Database Layer**: PostgreSQL integration with connection pooling  
-✅ **MCP Tools**: Schema introspection and query execution tools  
-✅ **RLS Integration**: Row Level Security context management  
-✅ **Health Monitoring**: Comprehensive health check endpoints  
-✅ **Testing Strategy**: Local testing and VS Code integration  
+✅ **工作中的MCP服务器**：具有数据库集成的FastMCP服务器  
+✅ **配置管理**：基于环境的强大配置系统  
+✅ **数据库层**：支持连接池的PostgreSQL集成  
+✅ **MCP工具**：模式自省和查询执行工具  
+✅ **RLS集成**：行级安全上下文管理  
+✅ **健康监控**：全面的健康检查端点  
+✅ **测试策略**：本地测试和VS Code集成测试  
 
-## 🚀 What's Next
+## 🚀 下一步
 
-Continue with **[Lab 06: Tool Development](../06-Tools/README.md)** to:
+继续学习 **[实验06：工具开发](../06-Tools/README.md)**：
 
-- Expand your MCP tool collection
-- Implement advanced query patterns
-- Add data validation and transformation
-- Create specialized analytics tools
+- 扩展您的MCP工具集合
+- 实现高级查询模式
+- 添加数据验证和转换
+- 创建专门的分析工具
 
-## 📚 Additional Resources
+## 📚 额外资源
 
-### FastMCP Framework
-- [FastMCP Documentation](https://github.com/modelcontextprotocol/python-sdk) - Official FastMCP guide
-- [MCP Specification](https://modelcontextprotocol.io/docs/) - Protocol specification
-- [Tool Development Guide](https://modelcontextprotocol.io/docs/tools/) - Creating MCP tools
+### FastMCP框架
+- [FastMCP文档](https://github.com/modelcontextprotocol/python-sdk) - 官方FastMCP指南
+- [MCP规范](https://modelcontextprotocol.io/docs/) - 协议规范
+- [工具开发指南](https://modelcontextprotocol.io/docs/tools/) - 创建MCP工具
 
-### Database Integration
-- [asyncpg Documentation](https://magicstack.github.io/asyncpg/current/) - PostgreSQL async driver
-- [Connection Pooling Best Practices](https://www.postgresql.org/docs/current/runtime-config-connection.html) - PostgreSQL tuning
-- [Row Level Security Guide](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) - RLS implementation
+### 数据库集成
+- [asyncpg文档](https://magicstack.github.io/asyncpg/current/) - PostgreSQL异步驱动
+- [连接池最佳实践](https://www.postgresql.org/docs/current/runtime-config-connection.html) - PostgreSQL调优
+- [行级安全指南](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) - RLS实现
 
-### FastAPI Patterns
-- [FastAPI Documentation](https://fastapi.tiangolo.com/) - Web framework reference
-- [Dependency Injection](https://fastapi.tiangolo.com/tutorial/dependencies/) - FastAPI patterns
-- [Background Tasks](https://fastapi.tiangolo.com/tutorial/background-tasks/) - Async task management
+### FastAPI模式
+- [FastAPI文档](https://fastapi.tiangolo.com/) - Web框架参考
+- [依赖注入](https://fastapi.tiangolo.com/tutorial/dependencies/) - FastAPI模式
+- [后台任务](https://fastapi.tiangolo.com/tutorial/background-tasks/) - 异步任务管理
 
 ---
 
-**Next**: Ready to expand your tools? Continue with [Lab 06: Tool Development](../06-Tools/README.md)
+**下一步**：准备扩展您的工具？继续学习 [实验06：工具开发](../06-Tools/README.md)
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。

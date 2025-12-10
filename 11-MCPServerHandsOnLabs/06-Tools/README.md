@@ -1,29 +1,38 @@
-# Tool Development
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "5854af7b7c1cf4a5193eabdca60a4c19",
+  "translation_date": "2025-09-30T13:03:43+00:00",
+  "source_file": "11-MCPServerHandsOnLabs/06-Tools/README.md",
+  "language_code": "zh"
+}
+-->
+# 工具开发
 
-## 🎯 What This Lab Covers
+## 🎯 本实验涵盖内容
 
-This lab dives deep into creating sophisticated MCP tools that provide AI assistants with powerful database query capabilities, schema introspection, and analytics functions. You'll learn to build tools that are both powerful and safe, with comprehensive error handling and performance optimization.
+本实验深入探讨如何创建复杂的 MCP 工具，为 AI 助手提供强大的数据库查询能力、模式自省功能和分析功能。您将学习如何构建既强大又安全的工具，包括全面的错误处理和性能优化。
 
-## Overview
+## 概述
 
-MCP tools are the interface between AI assistants and your data systems. Well-designed tools provide structured, validated access to complex operations while maintaining security and performance. This lab covers the complete lifecycle of tool development from design to deployment.
+MCP 工具是 AI 助手与数据系统之间的接口。设计良好的工具可以在保持安全性和性能的同时，提供对复杂操作的结构化和验证访问。本实验涵盖了从设计到部署的工具开发完整生命周期。
 
-Our retail MCP server implements a comprehensive suite of tools that enable natural language querying of sales data, product catalogs, and business analytics while maintaining strict security boundaries and optimal performance.
+我们的零售 MCP 服务器实现了一套全面的工具，支持对销售数据、产品目录和业务分析的自然语言查询，同时保持严格的安全边界和最佳性能。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lab, you will be able to:
+完成本实验后，您将能够：
 
-- **Design** advanced MCP tools with complex parameter validation
-- **Implement** secure database query tools with SQL injection protection
-- **Create** schema introspection capabilities for dynamic queries
-- **Build** custom analytics tools for business intelligence
-- **Apply** comprehensive error handling and graceful degradation
-- **Optimize** tool performance for production workloads
+- **设计** 具有复杂参数验证的高级 MCP 工具  
+- **实现** 具有 SQL 注入保护的安全数据库查询工具  
+- **创建** 支持动态查询的模式自省功能  
+- **构建** 用于商业智能的自定义分析工具  
+- **应用** 全面的错误处理和优雅降级  
+- **优化** 工具性能以适应生产工作负载  
 
-## 🛠️ Core Tool Architecture
+## 🛠️ 核心工具架构
 
-### Tool Design Principles
+### 工具设计原则
 
 ```python
 # mcp_server/tools/base.py
@@ -242,7 +251,7 @@ class DatabaseTool(BaseTool):
                 )
 ```
 
-### Query Validation and Security
+### 查询验证与安全性
 
 ```python
 # mcp_server/tools/query_validator.py
@@ -422,9 +431,9 @@ class QueryValidator:
 query_validator = QueryValidator()
 ```
 
-## 🗃️ Database Query Tools
+## 🗃️ 数据库查询工具
 
-### Sales Analysis Tool
+### 销售分析工具
 
 ```python
 # mcp_server/tools/sales_analysis.py
@@ -705,7 +714,7 @@ class SalesAnalysisTool(DatabaseTool):
         }
 ```
 
-### Schema Introspection Tool
+### 模式自省工具
 
 ```python
 # mcp_server/tools/schema_introspection.py
@@ -1041,9 +1050,9 @@ class MultiTableSchemaTool(DatabaseTool):
         }
 ```
 
-## 📊 Analytics and Utility Tools
+## 📊 分析与实用工具
 
-### Business Intelligence Tool
+### 商业智能工具
 
 ```python
 # mcp_server/tools/business_intelligence.py
@@ -1284,44 +1293,49 @@ class UtilityTool(DatabaseTool):
         }
 ```
 
-## 🎯 Key Takeaways
+## 🎯 关键收获
 
-After completing this lab, you should have:
+完成本实验后，您将掌握：
 
-✅ **Advanced Tool Architecture**: Implemented sophisticated MCP tools with comprehensive error handling  
-✅ **Query Validation**: Built secure SQL validation to prevent injection attacks  
-✅ **Database Tools**: Created powerful sales analysis and schema introspection capabilities  
-✅ **Business Intelligence**: Developed analytics tools for comprehensive business insights  
-✅ **Performance Optimization**: Applied caching, connection pooling, and query optimization  
-✅ **Security Integration**: Implemented role-based access control and audit logging  
+✅ **高级工具架构**：实现了具有全面错误处理的复杂 MCP 工具  
+✅ **查询验证**：构建了防止注入攻击的安全 SQL 验证  
+✅ **数据库工具**：创建了强大的销售分析和模式自省功能  
+✅ **商业智能**：开发了用于全面业务洞察的分析工具  
+✅ **性能优化**：应用了缓存、连接池和查询优化技术  
+✅ **安全集成**：实现了基于角色的访问控制和审计日志  
 
-## 🚀 What's Next
+## 🚀 下一步
 
-Continue with **[Lab 07: Semantic Search Integration](../07-Semantic-Search/README.md)** to:
+继续学习 **[实验 07：语义搜索集成](../07-Semantic-Search/README.md)**，以：
 
-- Integrate vector search capabilities with MCP tools
-- Build semantic product search functionality
-- Implement AI-powered query understanding
-- Create hybrid search combining traditional and vector queries
+- 将向量搜索功能集成到 MCP 工具中  
+- 构建语义化的产品搜索功能  
+- 实现 AI 驱动的查询理解  
+- 创建结合传统查询和向量查询的混合搜索  
 
-## 📚 Additional Resources
+## 📚 其他资源
 
-### MCP Tool Development
-- [Model Context Protocol Documentation](https://modelcontextprotocol.io/docs) - Official MCP specification
-- [FastMCP Framework](https://github.com/jlowin/fastmcp) - Python MCP implementation
-- [MCP Tool Patterns](https://github.com/modelcontextprotocol/servers) - Example tool implementations
+### MCP 工具开发
+- [Model Context Protocol 文档](https://modelcontextprotocol.io/docs) - 官方 MCP 规范  
+- [FastMCP 框架](https://github.com/jlowin/fastmcp) - Python MCP 实现  
+- [MCP 工具模式](https://github.com/modelcontextprotocol/servers) - 示例工具实现  
 
-### Database Security
-- [SQL Injection Prevention](https://owasp.org/www-community/attacks/SQL_Injection) - OWASP security guide
-- [PostgreSQL Security](https://www.postgresql.org/docs/current/security.html) - Database security best practices
-- [Query Validation Techniques](https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html) - Secure query patterns
+### 数据库安全
+- [SQL 注入防护](https://owasp.org/www-community/attacks/SQL_Injection) - OWASP 安全指南  
+- [PostgreSQL 安全性](https://www.postgresql.org/docs/current/security.html) - 数据库安全最佳实践  
+- [查询验证技术](https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html) - 安全查询模式  
 
-### Performance Optimization
-- [Database Query Optimization](https://www.postgresql.org/docs/current/performance-tips.html) - PostgreSQL performance guide
-- [Connection Pooling Best Practices](https://www.postgresql.org/docs/current/runtime-config-connection.html) - Connection management
-- [Async Python Patterns](https://docs.python.org/3/library/asyncio.html) - Asynchronous programming guide
+### 性能优化
+- [数据库查询优化](https://www.postgresql.org/docs/current/performance-tips.html) - PostgreSQL 性能指南  
+- [连接池最佳实践](https://www.postgresql.org/docs/current/runtime-config-connection.html) - 连接管理  
+- [异步 Python 模式](https://docs.python.org/3/library/asyncio.html) - 异步编程指南  
 
 ---
 
-**Previous**: [Lab 05: MCP Server Implementation](../05-MCP-Server/README.md)  
-**Next**: [Lab 07: Semantic Search Integration](../07-Semantic-Search/README.md)
+**上一节**: [实验 05：MCP 服务器实现](../05-MCP-Server/README.md)  
+**下一节**: [实验 07：语义搜索集成](../07-Semantic-Search/README.md)
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

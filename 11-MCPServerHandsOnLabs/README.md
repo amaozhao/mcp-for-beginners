@@ -1,156 +1,169 @@
-# 🚀 MCP Server with PostgreSQL - Complete Learning Guide
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "83d32e5c5dd838d4b87a730cab88db77",
+  "translation_date": "2025-09-30T12:35:01+00:00",
+  "source_file": "11-MCPServerHandsOnLabs/README.md",
+  "language_code": "zh"
+}
+-->
+# 🚀 MCP服务器与PostgreSQL - 完整学习指南
 
-## 🧠 Overview of the MCP Database Integration Learning Path
+## 🧠 MCP数据库集成学习路径概述
 
-This comprehensive learning guide teaches you how to build production-ready **Model Context Protocol (MCP) servers** that integrate with databases through a practical retail analytics implementation. You'll learn enterprise-grade patterns including **Row Level Security (RLS)**, **semantic search**, **Azure AI integration**, and **multi-tenant data access**.
+这份全面的学习指南将教您如何通过一个实际的零售分析实现，构建生产级的**Model Context Protocol (MCP)服务器**并与数据库集成。您将学习企业级模式，包括**行级安全（RLS）**、**语义搜索**、**Azure AI集成**以及**多租户数据访问**。
 
-Whether you're a backend developer, AI engineer, or data architect, this guide provides structured learning with real-world examples and hands-on exercises which walks you through the following MCP server https://github.com/microsoft/MCP-Server-and-PostgreSQL-Sample-Retail.
+无论您是后端开发人员、AI工程师还是数据架构师，这份指南都提供了结构化的学习内容，结合真实案例和动手练习，带您逐步完成以下MCP服务器：https://github.com/microsoft/MCP-Server-and-PostgreSQL-Sample-Retail。
 
-## 🔗 Official MCP Resources
+## 🔗 官方MCP资源
 
-- 📘 [MCP Documentation](https://modelcontextprotocol.io/) – Detailed tutorials and user guides
-- 📜 [MCP Specification](https://modelcontextprotocol.io/docs/) – Protocol architecture and technical references
-- 🧑‍💻 [MCP GitHub Repository](https://github.com/modelcontextprotocol) – Open-source SDKs, tools, and code samples
-- 🌐 [MCP Community](https://github.com/orgs/modelcontextprotocol/discussions) – Join discussions and contribute to the community
+- 📘 [MCP文档](https://modelcontextprotocol.io/) – 详细教程和用户指南
+- 📜 [MCP规范](https://modelcontextprotocol.io/docs/) – 协议架构和技术参考
+- 🧑‍💻 [MCP GitHub仓库](https://github.com/modelcontextprotocol) – 开源SDK、工具和代码示例
+- 🌐 [MCP社区](https://github.com/orgs/modelcontextprotocol/discussions) – 加入讨论并为社区做贡献
 
+## 🧭 MCP数据库集成学习路径
 
-## 🧭 MCP Database Integration Learning Path
+### 📚 https://github.com/microsoft/MCP-Server-and-PostgreSQL-Sample-Retail 的完整学习结构
 
-### 📚 Complete Learning Structure for https://github.com/microsoft/MCP-Server-and-PostgreSQL-Sample-Retail
-
-| Lab | Topic | Description | Link |
+| 实验 | 主题 | 描述 | 链接 |
 |--------|-------|-------------|------|
-| **Lab 1-3: Foundations** | | | |
-| 00 | [Introduction to MCP Database Integration](./00-Introduction/README.md) | Overview of MCP with database integration and retail analytics use case | [Start Here](./00-Introduction/README.md) |
-| 01 | [Core Architecture Concepts](./01-Architecture/README.md) | Understanding MCP server architecture, database layers, and security patterns | [Learn](./01-Architecture/README.md) |
-| 02 | [Security and Multi-Tenancy](./02-Security/README.md) | Row Level Security, authentication, and multi-tenant data access | [Learn](./02-Security/README.md) |
-| 03 | [Environment Setup](./03-Setup/README.md) | Setting up development environment, Docker, Azure resources | [Setup](./03-Setup/README.md) |
-| **Lab 4-6: Building the MCP Server** | | | |
-| 04 | [Database Design and Schema](./04-Database/README.md) | PostgreSQL setup, retail schema design, and sample data | [Build](./04-Database/README.md) |
-| 05 | [MCP Server Implementation](./05-MCP-Server/README.md) | Building the FastMCP server with database integration | [Build](./05-MCP-Server/README.md) |
-| 06 | [Tool Development](./06-Tools/README.md) | Creating database query tools and schema introspection | [Build](./06-Tools/README.md) |
-| **Lab 7-9: Advanced Features** | | | |
-| 07 | [Semantic Search Integration](./07-Semantic-Search/README.md) | Implementing vector embeddings with Azure OpenAI and pgvector | [Advance](./07-Semantic-Search/README.md) |
-| 08 | [Testing and Debugging](./08-Testing/README.md) | Testing strategies, debugging tools, and validation approaches | [Test](./08-Testing/README.md) |
-| 09 | [VS Code Integration](./09-VS-Code/README.md) | Configuring VS Code MCP integration and AI Chat usage | [Integrate](./09-VS-Code/README.md) |
-| **Lab 10-12: Production and Best Practices** | | | |
-| 10 | [Deployment Strategies](./10-Deployment/README.md) | Docker deployment, Azure Container Apps, and scaling considerations | [Deploy](./10-Deployment/README.md) |
-| 11 | [Monitoring and Observability](./11-Monitoring/README.md) | Application Insights, logging, performance monitoring | [Monitor](./11-Monitoring/README.md) |
-| 12 | [Best Practices and Optimization](./12-Best-Practices/README.md) | Performance optimization, security hardening, and production tips | [Optimize](./12-Best-Practices/README.md) |
+| **实验1-3：基础知识** | | | |
+| 00 | [MCP数据库集成简介](./00-Introduction/README.md) | MCP与数据库集成及零售分析用例概述 | [从这里开始](./00-Introduction/README.md) |
+| 01 | [核心架构概念](./01-Architecture/README.md) | 了解MCP服务器架构、数据库层和安全模式 | [学习](./01-Architecture/README.md) |
+| 02 | [安全性与多租户](./02-Security/README.md) | 行级安全、认证和多租户数据访问 | [学习](./02-Security/README.md) |
+| 03 | [环境设置](./03-Setup/README.md) | 设置开发环境、Docker和Azure资源 | [设置](./03-Setup/README.md) |
+| **实验4-6：构建MCP服务器** | | | |
+| 04 | [数据库设计与架构](./04-Database/README.md) | PostgreSQL设置、零售架构设计和示例数据 | [构建](./04-Database/README.md) |
+| 05 | [MCP服务器实现](./05-MCP-Server/README.md) | 构建与数据库集成的FastMCP服务器 | [构建](./05-MCP-Server/README.md) |
+| 06 | [工具开发](./06-Tools/README.md) | 创建数据库查询工具和架构内省工具 | [构建](./06-Tools/README.md) |
+| **实验7-9：高级功能** | | | |
+| 07 | [语义搜索集成](./07-Semantic-Search/README.md) | 使用Azure OpenAI和pgvector实现向量嵌入 | [进阶](./07-Semantic-Search/README.md) |
+| 08 | [测试与调试](./08-Testing/README.md) | 测试策略、调试工具和验证方法 | [测试](./08-Testing/README.md) |
+| 09 | [VS Code集成](./09-VS-Code/README.md) | 配置VS Code MCP集成和AI聊天功能 | [集成](./09-VS-Code/README.md) |
+| **实验10-12：生产与最佳实践** | | | |
+| 10 | [部署策略](./10-Deployment/README.md) | Docker部署、Azure容器应用和扩展考虑 | [部署](./10-Deployment/README.md) |
+| 11 | [监控与可观测性](./11-Monitoring/README.md) | 应用洞察、日志记录和性能监控 | [监控](./11-Monitoring/README.md) |
+| 12 | [最佳实践与优化](./12-Best-Practices/README.md) | 性能优化、安全加固和生产技巧 | [优化](./12-Best-Practices/README.md) |
 
-### 💻 What You'll Build
+### 💻 您将构建的内容
 
-By the end of this learning path, you'll have built a complete **Zava Retail Analytics MCP Server** featuring:
+完成学习路径后，您将构建一个完整的**Zava零售分析MCP服务器**，包括：
 
-- **Multi-table retail database** with customer orders, products, and inventory
-- **Row Level Security** for store-based data isolation
-- **Semantic product search** using Azure OpenAI embeddings
-- **VS Code AI Chat integration** for natural language queries
-- **Production-ready deployment** with Docker and Azure
-- **Comprehensive monitoring** with Application Insights
+- **多表零售数据库**，涵盖客户订单、产品和库存
+- **行级安全**，实现基于门店的数据隔离
+- **语义产品搜索**，使用Azure OpenAI嵌入
+- **VS Code AI聊天集成**，支持自然语言查询
+- **生产级部署**，使用Docker和Azure
+- **全面监控**，通过应用洞察实现
 
-## 🎯 Prerequisites for Learning
+## 🎯 学习前提条件
 
-To get the most out of this learning path, you should have:
+为了充分利用这条学习路径，您需要具备以下知识：
 
-- **Programming Experience**: Familiarity with Python (preferred) or similar languages
-- **Database Knowledge**: Basic understanding of SQL and relational databases
-- **API Concepts**: Understanding of REST APIs and HTTP concepts
-- **Development Tools**: Experience with command line, Git, and code editors
-- **Cloud Basics**: (Optional) Basic knowledge of Azure or similar cloud platforms
-- **Docker Familiarity**: (Optional) Understanding of containerization concepts
+- **编程经验**：熟悉Python（优先）或类似语言
+- **数据库知识**：基本了解SQL和关系型数据库
+- **API概念**：理解REST API和HTTP相关概念
+- **开发工具**：熟悉命令行、Git和代码编辑器
+- **云基础知识**：（可选）了解Azure或类似云平台
+- **Docker基础知识**：（可选）理解容器化概念
 
-### Required Tools
+### 所需工具
 
-- **Docker Desktop** - For running PostgreSQL and the MCP server
-- **Azure CLI** - For cloud resource deployment
-- **VS Code** - For development and MCP integration
-- **Git** - For version control
-- **Python 3.8+** - For MCP server development
+- **Docker Desktop** - 用于运行PostgreSQL和MCP服务器
+- **Azure CLI** - 用于云资源部署
+- **VS Code** - 用于开发和MCP集成
+- **Git** - 用于版本控制
+- **Python 3.8+** - 用于MCP服务器开发
 
-## 📚 Study Guide & Resources
+## 📚 学习指南与资源
 
-This learning path includes comprehensive resources to help you navigate effectively:
+这条学习路径包含全面的资源，帮助您高效学习：
 
-### Study Guide
+### 学习指南
 
-Each lab includes:
-- **Clear learning objectives** - What you'll achieve
-- **Step-by-step instructions** - Detailed implementation guides
-- **Code examples** - Working samples with explanations
-- **Exercises** - Hands-on practice opportunities
-- **Troubleshooting guides** - Common issues and solutions
-- **Additional resources** - Further reading and exploration
+每个实验包括：
+- **清晰的学习目标** - 您将实现的内容
+- **分步指导** - 详细的实施指南
+- **代码示例** - 带有解释的工作样例
+- **练习** - 动手实践机会
+- **故障排除指南** - 常见问题及解决方案
+- **额外资源** - 深入阅读和探索
 
-### Prerequisites Check
+### 前提条件检查
 
-Before starting each lab, you'll find:
-- **Required knowledge** - What you should know beforehand
-- **Setup validation** - How to verify your environment
-- **Time estimates** - Expected completion time
-- **Learning outcomes** - What you'll know after completion
+在开始每个实验之前，您将看到：
+- **所需知识** - 您需要事先了解的内容
+- **设置验证** - 如何验证您的环境
+- **时间估算** - 预计完成时间
+- **学习成果** - 完成后您将掌握的内容
 
-### Recommended Learning Paths
+### 推荐学习路径
 
-Choose your path based on your experience level:
+根据您的经验水平选择学习路径：
 
-#### 🟢 **Beginner Path** (New to MCP)
-1. Ensure you have completed 0-10 of [MCP for Beginners](https://aka.ms/mcp-for-beginners) first
-2. Complete labs 00-03 to reforce your understand foundations
-3. Follow labs 04-06 for hands-on building
-4. Try labs 07-09 for practical usage
+#### 🟢 **初学者路径**（MCP新手）
+1. 确保您已完成 [MCP初学者指南](https://aka.ms/mcp-for-beginners) 的0-10部分
+2. 完成实验00-03以巩固基础知识
+3. 按顺序完成实验04-06进行动手实践
+4. 尝试实验07-09以了解实际应用
 
-#### 🟡 **Intermediate Path** (Some MCP Experience)
-1. Review labs 00-01 for database-specific concepts
-2. Focus on labs 02-06 for implementation
-3. Dive deep into labs 07-12 for advanced features
+#### 🟡 **中级路径**（有一定MCP经验）
+1. 回顾实验00-01以了解数据库相关概念
+2. 专注于实验02-06进行实现
+3. 深入研究实验07-12以掌握高级功能
 
-#### 🔴 **Advanced Path** (Experienced with MCP)
-1. Skim labs 00-03 for context
-2. Focus on labs 04-09 for database integration
-3. Concentrate on labs 10-12 for production deployment
+#### 🔴 **高级路径**（MCP经验丰富）
+1. 略读实验00-03以了解背景
+2. 专注于实验04-09进行数据库集成
+3. 重点研究实验10-12以实现生产部署
 
-## 🛠️ How to Use This Learning Path Effectively
+## 🛠️ 如何高效使用这条学习路径
 
-### Sequential Learning (Recommended)
+### 顺序学习（推荐）
 
-Work through labs in order for a comprehensive understanding:
+按顺序完成实验以全面理解：
 
-1. **Read the overview** - Understand what you'll learn
-2. **Check prerequisites** - Ensure you have required knowledge
-3. **Follow step-by-step guides** - Implement as you learn
-4. **Complete exercises** - Reinforce your understanding
-5. **Review key takeaways** - Solidify learning outcomes
+1. **阅读概述** - 了解您将学习的内容
+2. **检查前提条件** - 确保您具备所需知识
+3. **遵循分步指导** - 边学边实现
+4. **完成练习** - 巩固您的理解
+5. **回顾关键要点** - 加深学习成果
 
-### Targeted Learning
+### 目标导向学习
 
-If you need specific skills:
+如果您需要特定技能：
 
-- **Database Integration**: Focus on labs 04-06
-- **Security Implementation**: Concentrate on labs 02, 08, 12
-- **AI/Semantic Search**: Deep dive into lab 07
-- **Production Deployment**: Study labs 10-12
+- **数据库集成**：专注于实验04-06
+- **安全性实现**：集中于实验02、08、12
+- **AI/语义搜索**：深入研究实验07
+- **生产部署**：学习实验10-12
 
-### Hands-on Practice
+### 动手实践
 
-Each lab includes:
-- **Working code examples** - Copy, modify, and experiment
-- **Real-world scenarios** - Practical retail analytics use cases
-- **Progressive complexity** - Building from simple to advanced
-- **Validation steps** - Verify your implementation works
+每个实验包括：
+- **工作代码示例** - 复制、修改并实验
+- **真实场景** - 实际零售分析用例
+- **逐步复杂性** - 从简单到高级逐步构建
+- **验证步骤** - 确保您的实现有效
 
-## 🌟 Community and Support
+## 🌟 社区与支持
 
-### Get Help
+### 获取帮助
 
-- **Azure AI Discord**: [Join for expert support](https://discord.com/invite/ByRwuEEgH4)
-- **GitHub Repo and Implementation Sample**: [Deployment Sample and Resources](https://github.com/microsoft/MCP-Server-and-PostgreSQL-Sample-Retail/)
-- **MCP Community**: [Join broader MCP discussions](https://github.com/orgs/modelcontextprotocol/discussions)
+- **Azure AI Discord**: [加入以获得专家支持](https://discord.com/invite/ByRwuEEgH4)
+- **GitHub仓库与实现示例**: [部署示例与资源](https://github.com/microsoft/MCP-Server-and-PostgreSQL-Sample-Retail/)
+- **MCP社区**: [加入更广泛的MCP讨论](https://github.com/orgs/modelcontextprotocol/discussions)
 
-## 🚀 Ready to Start?
+## 🚀 准备开始了吗？
 
-Begin your journey with **[Lab 00: Introduction to MCP Database Integration](./00-Introduction/README.md)**
+从**[实验00：MCP数据库集成简介](./00-Introduction/README.md)**开始您的学习之旅
 
 ---
 
-*Master building production-ready MCP servers with database integration through this comprehensive, hands-on learning experience.*
+*通过这份全面的动手学习体验，掌握构建生产级MCP服务器与数据库集成的技能。*
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。

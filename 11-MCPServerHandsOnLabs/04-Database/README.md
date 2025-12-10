@@ -1,31 +1,40 @@
-# Database Design and Schema
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "9525f06ed164e10f29e0f6b055d4f3d3",
+  "translation_date": "2025-09-30T12:59:59+00:00",
+  "source_file": "11-MCPServerHandsOnLabs/04-Database/README.md",
+  "language_code": "zh"
+}
+-->
+# 数据库设计与架构
 
-## 🎯 What This Lab Covers
+## 🎯 本实验内容
 
-This lab dives deep into the PostgreSQL database design for the Zava Retail system. You'll learn to implement a comprehensive retail schema with vector search capabilities, multi-tenant data modeling, and Row Level Security (RLS) for data isolation.
+本实验深入探讨了 Zava 零售系统的 PostgreSQL 数据库设计。您将学习如何实现一个全面的零售数据库架构，包括向量搜索功能、多租户数据建模以及用于数据隔离的行级安全（RLS）。
 
-## Overview
+## 概述
 
-The database is the foundation of our MCP server, storing retail data across multiple stores while maintaining strict data isolation. We use PostgreSQL with the pgvector extension to enable semantic search capabilities, allowing customers to find products using natural language queries.
+数据库是我们 MCP 服务器的基础，用于存储多个商店的零售数据，同时保持严格的数据隔离。我们使用 PostgreSQL 和 pgvector 扩展来实现语义搜索功能，使客户能够通过自然语言查询找到产品。
 
-Our schema follows modern multi-tenant patterns with Row Level Security ensuring users can only access data from their authorized stores. This approach provides enterprise-grade security while maintaining optimal performance.
+我们的架构遵循现代多租户模式，通过行级安全（Row Level Security）确保用户只能访问其授权商店的数据。这种方法在提供企业级安全性的同时，保持了最佳性能。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lab, you will be able to:
+完成本实验后，您将能够：
 
-- **Design** scalable multi-tenant retail database schemas
-- **Implement** PostgreSQL with pgvector for vector search
-- **Configure** Row Level Security for data isolation
-- **Generate** realistic sample data for testing
-- **Optimize** database performance for retail workloads
-- **Implement** backup and recovery strategies
+- **设计** 可扩展的多租户零售数据库架构  
+- **实现** PostgreSQL 与 pgvector 的向量搜索功能  
+- **配置** 行级安全以实现数据隔离  
+- **生成** 用于测试的真实样本数据  
+- **优化** 零售工作负载的数据库性能  
+- **实施** 备份和恢复策略  
 
-## 🗃️ Database Architecture
+## 🗃️ 数据库架构
 
-### PostgreSQL with pgvector
+### PostgreSQL 与 pgvector
 
-Our database leverages PostgreSQL's enterprise features combined with the pgvector extension for AI-powered search:
+我们的数据库结合了 PostgreSQL 的企业级功能和 pgvector 扩展，实现了 AI 驱动的搜索功能：
 
 ```sql
 -- Enable required extensions
@@ -37,9 +46,10 @@ CREATE EXTENSION IF NOT EXISTS "vector";
 SELECT * FROM pg_extension WHERE extname = 'vector';
 ```
 
-### Multi-Tenant Architecture
 
-The database uses a **shared database, shared schema** multi-tenancy model with Row Level Security:
+### 多租户架构
+
+数据库采用了 **共享数据库、共享架构** 的多租户模型，并结合行级安全：
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -55,9 +65,10 @@ The database uses a **shared database, shared schema** multi-tenancy model with 
 └─────────────────────────────────────────────────┘
 ```
 
-## 📊 Core Schema Design
 
-### Stores Table (Tenant Master)
+## 📊 核心架构设计
+
+### Stores 表（租户主表）
 
 ```sql
 -- Stores table: Master tenant registry
@@ -84,7 +95,8 @@ CREATE INDEX idx_stores_region ON retail.stores(region);
 CREATE INDEX idx_stores_active ON retail.stores(is_active) WHERE is_active = TRUE;
 ```
 
-### Customers Table
+
+### Customers 表
 
 ```sql
 -- Customers table with RLS
@@ -120,7 +132,8 @@ CREATE INDEX idx_customers_loyalty_tier ON retail.customers(loyalty_tier);
 CREATE INDEX idx_customers_created_at ON retail.customers(created_at);
 ```
 
-### Products Table with Categories
+
+### Products 表及分类
 
 ```sql
 -- Product categories
@@ -202,7 +215,8 @@ CREATE INDEX idx_products_text_search ON retail.products USING GIN(
 );
 ```
 
-### Sales Transactions
+
+### 销售交易
 
 ```sql
 -- Sales transactions table
@@ -277,9 +291,10 @@ CREATE INDEX idx_sales_transaction_items_transaction_id ON retail.sales_transact
 CREATE INDEX idx_sales_transaction_items_product_id ON retail.sales_transaction_items(product_id);
 ```
 
-## 🔍 Vector Search Implementation
 
-### Product Embeddings Table
+## 🔍 向量搜索实现
+
+### 产品嵌入表
 
 ```sql
 -- Product embeddings for semantic search
@@ -316,7 +331,8 @@ CREATE INDEX idx_product_embeddings_store_id ON retail.product_embeddings(store_
 CREATE INDEX idx_product_embeddings_model ON retail.product_embeddings(embedding_model);
 ```
 
-### Vector Search Functions
+
+### 向量搜索函数
 
 ```sql
 -- Function to search products by similarity
@@ -360,9 +376,10 @@ $$;
 GRANT EXECUTE ON FUNCTION retail.search_products_by_similarity TO mcp_user;
 ```
 
-## 🔐 Row Level Security Setup
 
-### Database Roles and Permissions
+## 🔐 行级安全设置
+
+### 数据库角色与权限
 
 ```sql
 -- Create MCP application role
@@ -415,7 +432,8 @@ $$;
 GRANT EXECUTE ON FUNCTION retail.set_store_context TO mcp_user;
 ```
 
-### Audit Logging
+
+### 审计日志
 
 ```sql
 -- Audit log table for security and compliance
@@ -509,9 +527,10 @@ CREATE TRIGGER sales_transactions_audit_trigger
     FOR EACH ROW EXECUTE FUNCTION retail.audit_trigger();
 ```
 
-## 📊 Sample Data Generation
 
-### Realistic Test Data Script
+## 📊 样本数据生成
+
+### 真实测试数据脚本
 
 ```python
 # scripts/generate_sample_data.py
@@ -794,9 +813,10 @@ if __name__ == "__main__":
     asyncio.run(generator.generate_all_data())
 ```
 
-## 🚀 Performance Optimization
 
-### Database Configuration
+## 🚀 性能优化
+
+### 数据库配置
 
 ```sql
 -- Performance-oriented PostgreSQL settings
@@ -828,7 +848,8 @@ log_disconnections = on
 log_line_prefix = '%t [%p-%l] %q%u@%d '
 ```
 
-### Query Optimization Views
+
+### 查询优化视图
 
 ```sql
 -- Create monitoring views for query performance
@@ -876,7 +897,8 @@ WHERE schemaname = 'retail'
 ORDER BY idx_tup_read DESC;
 ```
 
-### Automated Maintenance
+
+### 自动化维护
 
 ```sql
 -- Create function for automated maintenance
@@ -920,9 +942,10 @@ $$;
 -- Example cron entry: 0 2 * * 0 psql -d retail_db -c "SELECT retail.perform_maintenance();"
 ```
 
-## 💾 Backup and Recovery
 
-### Backup Strategy
+## 💾 备份与恢复
+
+### 备份策略
 
 ```bash
 #!/bin/bash
@@ -993,7 +1016,8 @@ if [ -n "$AZURE_STORAGE_ACCOUNT" ] && [ -n "$AZURE_STORAGE_KEY" ]; then
 fi
 ```
 
-### Recovery Procedures
+
+### 恢复流程
 
 ```bash
 #!/bin/bash
@@ -1076,44 +1100,50 @@ TABLES_COUNT=$(psql \
 echo "Verified $TABLES_COUNT tables in retail schema"
 ```
 
-## 🎯 Key Takeaways
 
-After completing this lab, you should have:
+## 🎯 关键收获
 
-✅ **Multi-Tenant Database Design**: Implemented Row Level Security for secure data isolation  
-✅ **Vector Search Capabilities**: Configured pgvector for semantic product search  
-✅ **Comprehensive Schema**: Created production-ready retail database schema  
-✅ **Sample Data Generation**: Built realistic test data for development and testing  
-✅ **Performance Optimization**: Configured indexes and query optimization  
-✅ **Backup and Recovery**: Established robust data protection strategies  
+完成本实验后，您将掌握：
 
-## 🚀 What's Next
+✅ **多租户数据库设计**：实现了行级安全以确保数据隔离  
+✅ **向量搜索功能**：配置了 pgvector 以实现语义产品搜索  
+✅ **全面的架构设计**：创建了生产级零售数据库架构  
+✅ **样本数据生成**：构建了用于开发和测试的真实测试数据  
+✅ **性能优化**：配置了索引并优化了查询性能  
+✅ **备份与恢复**：建立了可靠的数据保护策略  
 
-Continue with **[Lab 05: MCP Server Implementation](../05-MCP-Server/README.md)** to:
+## 🚀 下一步
 
-- Build the FastMCP server that connects to this database
-- Implement database query tools for the MCP protocol
-- Add semantic search capabilities using the embeddings
-- Configure connection pooling and error handling
+继续学习 **[实验 05：MCP 服务器实现](../05-MCP-Server/README.md)**，以便：
 
-## 📚 Additional Resources
+- 构建连接到该数据库的 FastMCP 服务器  
+- 实现 MCP 协议的数据库查询工具  
+- 添加基于嵌入的语义搜索功能  
+- 配置连接池和错误处理  
 
-### PostgreSQL & pgvector
-- [PostgreSQL Documentation](https://www.postgresql.org/docs/) - Complete PostgreSQL reference
-- [pgvector Extension](https://github.com/pgvector/pgvector) - Vector similarity search for PostgreSQL
-- [PostgreSQL Performance Tuning](https://wiki.postgresql.org/wiki/Performance_Optimization) - Optimization best practices
+## 📚 补充资源
 
-### Multi-Tenant Architecture
-- [Row Level Security](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) - PostgreSQL RLS documentation
-- [Multi-Tenant Data Architecture](https://docs.microsoft.com/azure/architecture/patterns/multitenancy) - Azure architecture patterns
-- [Database Security Best Practices](https://www.postgresql.org/docs/current/security.html) - PostgreSQL security guide
+### PostgreSQL 与 pgvector
+- [PostgreSQL 文档](https://www.postgresql.org/docs/) - 完整的 PostgreSQL 参考文档  
+- [pgvector 扩展](https://github.com/pgvector/pgvector) - PostgreSQL 的向量相似性搜索  
+- [PostgreSQL 性能调优](https://wiki.postgresql.org/wiki/Performance_Optimization) - 优化最佳实践  
 
-### Vector Databases
-- [Vector Search Fundamentals](https://www.pinecone.io/learn/vector-database/) - Understanding vector databases
-- [Embedding Models](https://platform.openai.com/docs/guides/embeddings) - OpenAI embeddings documentation
-- [HNSW Algorithm](https://arxiv.org/abs/1603.09320) - Hierarchical Navigable Small World graphs
+### 多租户架构
+- [行级安全](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) - PostgreSQL RLS 文档  
+- [多租户数据架构](https://docs.microsoft.com/azure/architecture/patterns/multitenancy) - Azure 架构模式  
+- [数据库安全最佳实践](https://www.postgresql.org/docs/current/security.html) - PostgreSQL 安全指南  
+
+### 向量数据库
+- [向量搜索基础](https://www.pinecone.io/learn/vector-database/) - 理解向量数据库  
+- [嵌入模型](https://platform.openai.com/docs/guides/embeddings) - OpenAI 嵌入文档  
+- [HNSW 算法](https://arxiv.org/abs/1603.09320) - 分层可导航小世界图  
 
 ---
 
-**Previous**: [Lab 03: Environment Setup](../03-Setup/README.md)  
-**Next**: [Lab 05: MCP Server Implementation](../05-MCP-Server/README.md)
+**上一节**: [实验 03：环境设置](../03-Setup/README.md)  
+**下一节**: [实验 05：MCP 服务器实现](../05-MCP-Server/README.md)  
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。

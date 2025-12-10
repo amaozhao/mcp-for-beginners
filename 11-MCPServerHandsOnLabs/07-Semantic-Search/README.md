@@ -1,29 +1,38 @@
-# Semantic Search Integration
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "772b18b1ca4fb34af68e12eb2f2defda",
+  "translation_date": "2025-09-30T13:02:12+00:00",
+  "source_file": "11-MCPServerHandsOnLabs/07-Semantic-Search/README.md",
+  "language_code": "zh"
+}
+-->
+# 语义搜索集成
 
-## 🎯 What This Lab Covers
+## 🎯 本实验内容
 
-This lab provides comprehensive guidance on implementing semantic search capabilities using Azure OpenAI embeddings and PostgreSQL's pgvector extension. You'll learn to build AI-powered product search that understands natural language queries and delivers relevant results based on semantic similarity.
+本实验提供了全面的指导，帮助您使用 Azure OpenAI 嵌入和 PostgreSQL 的 pgvector 扩展实现语义搜索功能。您将学习如何构建基于 AI 的产品搜索，理解自然语言查询，并根据语义相似性提供相关结果。
 
-## Overview
+## 概述
 
-Traditional keyword-based search often fails to capture user intent and semantic meaning. Semantic search using vector embeddings enables natural language queries like "comfortable running shoes for rainy weather" to find relevant products even if those exact words don't appear in product descriptions.
+传统的基于关键词的搜索通常无法准确捕捉用户意图和语义含义。使用向量嵌入的语义搜索可以处理自然语言查询，例如“适合雨天穿的舒适跑鞋”，即使这些确切的词语没有出现在产品描述中，也能找到相关产品。
 
-Our implementation combines Azure OpenAI's powerful embedding models with PostgreSQL's pgvector extension to create a high-performance, scalable semantic search system that enhances the retail experience with intelligent product discovery.
+我们的实现结合了 Azure OpenAI 强大的嵌入模型和 PostgreSQL 的 pgvector 扩展，创建了一个高性能、可扩展的语义搜索系统，利用智能产品发现提升零售体验。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lab, you will be able to:
+完成本实验后，您将能够：
 
-- **Integrate** Azure OpenAI embedding models for text vectorization
-- **Implement** pgvector for efficient similarity search operations
-- **Build** semantic search tools for natural language product queries
-- **Create** hybrid search combining traditional and vector search
-- **Optimize** vector queries for production performance
-- **Design** recommendation systems using embedding similarity
+- **集成** Azure OpenAI 嵌入模型进行文本向量化
+- **实现** pgvector 以高效执行相似性搜索操作
+- **构建**支持自然语言产品查询的语义搜索工具
+- **创建**结合传统搜索和向量搜索的混合搜索
+- **优化**生产环境中的向量查询性能
+- **设计**基于嵌入相似性的推荐系统
 
-## 🧠 Semantic Search Architecture
+## 🧠 语义搜索架构
 
-### Vector Search Pipeline
+### 向量搜索流程
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -53,7 +62,7 @@ By the end of this lab, you will be able to:
 └─────────────────────────────────────────────────┘
 ```
 
-### Embedding Generation Strategy
+### 嵌入生成策略
 
 ```python
 # mcp_server/embeddings/embedding_manager.py
@@ -294,9 +303,9 @@ embedding_manager = EmbeddingManager(
 )
 ```
 
-## 🔍 Product Embedding Generation
+## 🔍 产品嵌入生成
 
-### Automated Embedding Pipeline
+### 自动化嵌入流程
 
 ```python
 # mcp_server/embeddings/product_embedder.py
@@ -556,9 +565,9 @@ class ProductEmbedder:
 product_embedder = ProductEmbedder(db_provider)
 ```
 
-## 🔎 Semantic Search Tools
+## 🔎 语义搜索工具
 
-### Semantic Product Search Tool
+### 语义产品搜索工具
 
 ```python
 # mcp_server/tools/semantic_search.py
@@ -960,9 +969,9 @@ class HybridSearchTool(DatabaseTool):
         }
 ```
 
-## 🎯 Recommendation Systems
+## 🎯 推荐系统
 
-### Product Recommendation Engine
+### 产品推荐引擎
 
 ```python
 # mcp_server/tools/recommendations.py
@@ -1209,9 +1218,9 @@ class ProductRecommendationTool(DatabaseTool):
         }
 ```
 
-## ⚡ Performance Optimization
+## ⚡ 性能优化
 
-### Vector Query Optimization
+### 向量查询优化
 
 ```sql
 -- Optimize pgvector performance
@@ -1271,7 +1280,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-### Embedding Cache Strategy
+### 嵌入缓存策略
 
 ```python
 # mcp_server/embeddings/cache_manager.py
@@ -1457,44 +1466,49 @@ class EmbeddingCacheManager:
 cache_manager = EmbeddingCacheManager()
 ```
 
-## 🎯 Key Takeaways
+## 🎯 关键收获
 
-After completing this lab, you should have:
+完成本实验后，您应该具备以下能力：
 
-✅ **Azure OpenAI Integration**: Complete embedding generation with caching and optimization  
-✅ **Vector Search Implementation**: Production-ready semantic search with pgvector  
-✅ **Hybrid Search Capabilities**: Combined keyword and semantic search for optimal results  
-✅ **Recommendation Systems**: AI-powered product recommendations using similarity  
-✅ **Performance Optimization**: Vector index optimization and intelligent caching  
-✅ **Scalable Architecture**: Enterprise-ready semantic search infrastructure  
+✅ **Azure OpenAI 集成**：完成嵌入生成并实现缓存和优化  
+✅ **向量搜索实现**：基于 pgvector 的生产级语义搜索  
+✅ **混合搜索功能**：结合关键词搜索和语义搜索以获得最佳结果  
+✅ **推荐系统**：基于 AI 的产品推荐，利用相似性  
+✅ **性能优化**：向量索引优化和智能缓存  
+✅ **可扩展架构**：企业级语义搜索基础设施  
 
-## 🚀 What's Next
+## 🚀 下一步
 
-Continue with **[Lab 08: Testing and Debugging](../08-Testing/README.md)** to:
+继续学习 **[实验 08：测试与调试](../08-Testing/README.md)**，以：
 
-- Implement comprehensive testing strategies for semantic search
-- Debug vector search performance issues
-- Validate embedding quality and relevance
-- Test recommendation system accuracy
+- 实现语义搜索的全面测试策略
+- 调试向量搜索性能问题
+- 验证嵌入质量和相关性
+- 测试推荐系统的准确性
 
-## 📚 Additional Resources
+## 📚 其他资源
 
 ### Azure OpenAI
-- [Azure OpenAI Service Documentation](https://docs.microsoft.com/azure/cognitive-services/openai/) - Complete service guide
-- [Embeddings API Reference](https://platform.openai.com/docs/api-reference/embeddings) - API documentation
-- [Best Practices for Embeddings](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings) - Implementation guidance
+- [Azure OpenAI 服务文档](https://docs.microsoft.com/azure/cognitive-services/openai/) - 完整服务指南
+- [嵌入 API 参考](https://platform.openai.com/docs/api-reference/embeddings) - API 文档
+- [嵌入的最佳实践](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings) - 实现指导
 
-### Vector Databases
-- [pgvector Documentation](https://github.com/pgvector/pgvector) - PostgreSQL vector extension
-- [Vector Search Optimization](https://www.pinecone.io/learn/vector-search-optimization/) - Performance tuning
-- [HNSW Algorithm](https://arxiv.org/abs/1603.09320) - Hierarchical navigable small world graphs
+### 向量数据库
+- [pgvector 文档](https://github.com/pgvector/pgvector) - PostgreSQL 向量扩展
+- [向量搜索优化](https://www.pinecone.io/learn/vector-search-optimization/) - 性能调优
+- [HNSW 算法](https://arxiv.org/abs/1603.09320) - 分层可导航小世界图
 
-### Semantic Search
-- [Information Retrieval Fundamentals](https://nlp.stanford.edu/IR-book/) - Stanford IR textbook
-- [Vector Search Best Practices](https://weaviate.io/blog/vector-search-best-practices) - Implementation patterns
-- [Hybrid Search Strategies](https://blog.vespa.ai/hybrid-search/) - Combining different search approaches
+### 语义搜索
+- [信息检索基础](https://nlp.stanford.edu/IR-book/) - 斯坦福信息检索教材
+- [向量搜索最佳实践](https://weaviate.io/blog/vector-search-best-practices) - 实现模式
+- [混合搜索策略](https://blog.vespa.ai/hybrid-search/) - 结合不同搜索方法
 
 ---
 
-**Previous**: [Lab 06: Tool Development](../06-Tools/README.md)  
-**Next**: [Lab 08: Testing and Debugging](../08-Testing/README.md)
+**上一节**: [实验 06：工具开发](../06-Tools/README.md)  
+**下一节**: [实验 08：测试与调试](../08-Testing/README.md)
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。因使用本翻译而导致的任何误解或误读，我们概不负责。

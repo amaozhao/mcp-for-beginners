@@ -1,38 +1,13 @@
-```mermaid
-sequenceDiagram
-    actor User
-    participant WebApp as Web App<br/>(ContentSafetyController)
-    participant SafetyService as Content Safety Service
-    participant AzureAPI as Azure Content Safety API
-    participant LangChain as LangChain4j
-    participant McpClient as MCP Client
-    participant McpServer as MCP Calculator Server<br/>(Port 8080)
-    participant CalcService as Calculator Service
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "0eaf9f1f29c86311674013505e9202f3",
+  "translation_date": "2025-07-13T23:22:32+00:00",
+  "source_file": "04-PracticalImplementation/samples/java/containerapp/src/main/resources/static/images/sequence-diagram.md",
+  "language_code": "zh"
+}
+-->
+请将以下文本翻译成中文（简体）(zh)。绝不添加任何额外内容或标签，且仅翻译所给内容。保持Markdown格式。请从左到右书写输出。
 
-    %% User Interaction
-    User->>WebApp: Enter calculation prompt
-    WebApp->>WebApp: Create PromptRequest
-
-    %% Content Safety Check
-    WebApp->>SafetyService: processPrompt(prompt)
-    SafetyService->>AzureAPI: analyzeText(prompt)
-    AzureAPI-->>SafetyService: AnalyzeTextResult
-    SafetyService->>SafetyService: Check if content is safe<br/>(severity < 2 for all categories)
-
-    %% Processing Flow - Safe Content
-    alt Content is safe
-        SafetyService->>LangChain: Pass prompt to Bot.chat()
-        LangChain->>McpClient: Process prompt
-        McpClient->>McpServer: Call appropriate calculator tool via SSE
-        McpServer->>CalcService: Execute calculation<br/>(add, subtract, multiply, etc.)
-        CalcService-->>McpServer: Calculation result
-        McpServer-->>McpClient: Tool execution result
-        McpClient-->>LangChain: Tool result
-        LangChain-->>SafetyService: Bot response
-        SafetyService-->>WebApp: Return result map<br/>{isSafe: "true", botResponse: result, safetyResult: details}
-        WebApp-->>User: Display calculation result and safety info
-    else Content is unsafe
-        SafetyService-->>WebApp: Return result map<br/>{isSafe: "false", safetyResult: details}
-        WebApp-->>User: Display safety warning<br/>(without calculation)
-    end
-```
+**免责声明**：  
+本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。虽然我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。对于因使用本翻译而产生的任何误解或误释，我们不承担任何责任。

@@ -1,29 +1,38 @@
-# Deployment Strategies
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "42c4bda55924cd1d6964c1a01fe65f28",
+  "translation_date": "2025-09-30T12:58:05+00:00",
+  "source_file": "11-MCPServerHandsOnLabs/10-Deployment/README.md",
+  "language_code": "zh"
+}
+-->
+# 部署策略
 
-## 🎯 What This Lab Covers
+## 🎯 本实验内容
 
-This lab provides comprehensive guidance on deploying your MCP retail server to production environments using modern containerization and cloud-native approaches. You'll learn to deploy scalable, secure, and monitored MCP servers that can handle enterprise workloads.
+本实验提供了全面的指导，帮助您使用现代容器化和云原生方法将 MCP 零售服务器部署到生产环境中。您将学习如何部署可扩展、安全且可监控的 MCP 服务器，以处理企业级工作负载。
 
-## Overview
+## 概述
 
-Production deployment of MCP servers requires careful consideration of containerization, orchestration, security, scalability, and monitoring. This lab covers deploying to Azure Container Apps with PostgreSQL Flexible Server, implementing CI/CD pipelines, and configuring auto-scaling for variable workloads.
+MCP 服务器的生产部署需要仔细考虑容器化、编排、安全性、可扩展性和监控。本实验涵盖了使用 Azure Container Apps 和 PostgreSQL Flexible Server 的部署，实施 CI/CD 流水线，以及为可变工作负载配置自动扩展。
 
-The deployment strategies range from simple single-container deployments for development to sophisticated multi-region, auto-scaling production environments with comprehensive monitoring and security features.
+部署策略从用于开发的简单单容器部署，到具有全面监控和安全功能的复杂多区域自动扩展生产环境。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lab, you will be able to:
+完成本实验后，您将能够：
 
-- **Containerize** MCP servers using Docker with multi-stage builds
-- **Deploy** to Azure Container Apps with secure networking
-- **Configure** production-grade PostgreSQL with high availability
-- **Implement** CI/CD pipelines for automated deployment
-- **Scale** applications automatically based on demand
-- **Monitor** production deployments with comprehensive observability
+- 使用 Docker 的多阶段构建对 MCP 服务器进行**容器化**
+- 使用安全网络将 MCP 服务器**部署**到 Azure Container Apps
+- 配置具有高可用性的生产级 PostgreSQL
+- 实现 CI/CD 流水线以实现自动化部署
+- 根据需求**自动扩展**应用程序
+- 使用全面的可观测性**监控**生产部署
 
-## 🐳 Docker Containerization
+## 🐳 Docker 容器化
 
-### Multi-Stage Dockerfile
+### 多阶段 Dockerfile
 
 ```dockerfile
 # Dockerfile - Production-ready multi-stage build
@@ -93,7 +102,7 @@ EXPOSE 8000
 CMD ["python", "-m", "mcp_server.main"]
 ```
 
-### Docker Compose for Development
+### 用于开发的 Docker Compose
 
 ```yaml
 # docker-compose.yml - Development environment
@@ -183,7 +192,7 @@ networks:
     driver: bridge
 ```
 
-### Production Docker Compose
+### 生产环境的 Docker Compose
 
 ```yaml
 # docker-compose.prod.yml - Production environment
@@ -239,9 +248,9 @@ networks:
     external: true
 ```
 
-## ☁️ Azure Container Apps Deployment
+## ☁️ Azure Container Apps 部署
 
-### Infrastructure as Code with Bicep
+### 使用 Bicep 的基础设施即代码
 
 ```bicep
 // infra/container-apps.bicep - Azure Container Apps deployment
@@ -495,9 +504,9 @@ output serverId string = postgresqlServer.id
 output databaseName string = retailDatabase.name
 ```
 
-## 🚀 CI/CD Pipeline Configuration
+## 🚀 CI/CD 流水线配置
 
-### GitHub Actions Workflow
+### GitHub Actions 工作流
 
 ```yaml
 # .github/workflows/deploy.yml - CI/CD pipeline
@@ -740,7 +749,7 @@ jobs:
               --revision-weight latest=100
 ```
 
-### Azure DevOps Pipeline
+### Azure DevOps 流水线
 
 ```yaml
 # azure-pipelines.yml - Azure DevOps pipeline
@@ -908,9 +917,9 @@ stages:
                         --parameters containerImageTag=$(imageTag)
 ```
 
-## 📊 Scaling and Performance
+## 📊 扩展与性能
 
-### Auto-scaling Configuration
+### 自动扩展配置
 
 ```yaml
 # k8s/hpa.yaml - Horizontal Pod Autoscaler for Kubernetes
@@ -965,7 +974,7 @@ spec:
       selectPolicy: Max
 ```
 
-### Performance Monitoring
+### 性能监控
 
 ```python
 # mcp_server/monitoring/performance.py
@@ -1203,9 +1212,9 @@ class PerformanceMonitor:
         }
 ```
 
-## 🔐 Production Security Configuration
+## 🔐 生产安全配置
 
-### Security Hardening
+### 安全加固
 
 ```yaml
 # k8s/security-policy.yaml - Kubernetes security policies
@@ -1265,7 +1274,7 @@ spec:
           port: 53   # DNS
 ```
 
-### Environment Configuration
+### 环境配置
 
 ```bash
 # scripts/setup-production-env.sh
@@ -1334,44 +1343,49 @@ az deployment group create \
 echo "✅ Production environment setup complete!"
 ```
 
-## 🎯 Key Takeaways
+## 🎯 关键收获
 
-After completing this lab, you should have:
+完成本实验后，您将掌握：
 
-✅ **Container Strategy**: Production-ready Docker containers with security hardening  
-✅ **Cloud Deployment**: Azure Container Apps with auto-scaling and monitoring  
-✅ **Database Deployment**: PostgreSQL Flexible Server with high availability  
-✅ **CI/CD Pipelines**: Automated testing, building, and deployment workflows  
-✅ **Performance Monitoring**: Comprehensive metrics collection and alerting  
-✅ **Security Configuration**: Production-grade security policies and network isolation  
+✅ **容器策略**：具备安全加固的生产级 Docker 容器  
+✅ **云部署**：Azure Container Apps，支持自动扩展和监控  
+✅ **数据库部署**：具有高可用性的 PostgreSQL Flexible Server  
+✅ **CI/CD 流水线**：自动化测试、构建和部署工作流  
+✅ **性能监控**：全面的指标收集和告警  
+✅ **安全配置**：生产级安全策略和网络隔离  
 
-## 🚀 What's Next
+## 🚀 下一步
 
-Continue with **[Lab 11: Monitoring and Observability](../11-Monitoring/README.md)** to:
+继续学习 **[实验 11：监控与可观测性](../11-Monitoring/README.md)**，以：
 
-- Set up comprehensive monitoring with Application Insights
-- Configure structured logging and distributed tracing
-- Implement alerting and automated response systems
-- Monitor business metrics and performance KPIs
+- 设置使用 Application Insights 的全面监控
+- 配置结构化日志记录和分布式追踪
+- 实现告警和自动响应系统
+- 监控业务指标和性能 KPI
 
-## 📚 Additional Resources
+## 📚 其他资源
 
-### Container Technologies
-- [Docker Best Practices](https://docs.docker.com/develop/dev-best-practices/) - Official Docker best practices
-- [Azure Container Apps](https://docs.microsoft.com/en-us/azure/container-apps/) - Azure Container Apps documentation
-- [Kubernetes Documentation](https://kubernetes.io/docs/) - Kubernetes official documentation
+### 容器技术
+- [Docker 最佳实践](https://docs.docker.com/develop/dev-best-practices/) - 官方 Docker 最佳实践
+- [Azure Container Apps](https://docs.microsoft.com/en-us/azure/container-apps/) - Azure Container Apps 文档
+- [Kubernetes 文档](https://kubernetes.io/docs/) - Kubernetes 官方文档
 
-### CI/CD and DevOps
-- [GitHub Actions](https://docs.github.com/en/actions) - GitHub Actions documentation
-- [Azure DevOps](https://docs.microsoft.com/en-us/azure/devops/) - Azure DevOps services
-- [Infrastructure as Code](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/) - Azure Bicep documentation
+### CI/CD 和 DevOps
+- [GitHub Actions](https://docs.github.com/en/actions) - GitHub Actions 文档
+- [Azure DevOps](https://docs.microsoft.com/en-us/azure/devops/) - Azure DevOps 服务
+- [基础设施即代码](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/) - Azure Bicep 文档
 
-### Security and Monitoring
-- [Azure Security Center](https://docs.microsoft.com/en-us/azure/security-center/) - Azure security recommendations
-- [Container Security](https://kubernetes.io/docs/concepts/security/) - Kubernetes security concepts
+### 安全与监控
+- [Azure 安全中心](https://docs.microsoft.com/en-us/azure/security-center/) - Azure 安全建议
+- [容器安全](https://kubernetes.io/docs/concepts/security/) - Kubernetes 安全概念
 - [Application Insights](https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) - Azure Application Insights
 
 ---
 
-**Previous**: [Lab 09: VS Code Integration](../09-VS-Code/README.md)  
-**Next**: [Lab 11: Monitoring and Observability](../11-Monitoring/README.md)
+**上一节**: [实验 09：VS Code 集成](../09-VS-Code/README.md)  
+**下一节**: [实验 11：监控与可观测性](../11-Monitoring/README.md)
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

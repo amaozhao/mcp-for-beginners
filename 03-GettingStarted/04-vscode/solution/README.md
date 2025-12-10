@@ -1,73 +1,31 @@
-# Running the sample
-
-Here we assume you already have a working server code. Please locate a server from one of the earlier chapters.
-
-## Set up mcp.json
-
-Here's a file you use for reference, [mcp.json](./mcp.json).
-
-Change the server entry as needed to point out the absolute path to your server including the needed full command to run.
-
-In the example file referred above the server entry looks like so:
-
-<details>
-<summary>node.js</summary>
-```json
-"hello-mcp": {
-    "command": "node",
-    "args": [
-        "build/index.js"
-    ]
-}
-```
-</details>
-
-<details>
-<summary>.NET</summary>
-
-You might have to enter the GitHub repository root, which can be fetched from the command, `git rev-parse --show-toplevel`.
-
-```jsonc
+<!--
+CO_OP_TRANSLATOR_METADATA:
 {
-  "inputs": [
-    {
-      "type": "promptString",
-      "id": "repository-root",
-      "description": "The absolute path to the repository root"
-    }
-  ],
-  "servers": {
-    "calculator-mcp-dotnet": {
-      "type": "stdio",
-      "command": "dotnet",
-      "args": [
-        "run",
-        "--project",
-        "${input:repository-root}/03-GettingStarted/02-client/solution/server/server.csproj"
-      ]
-    }
-  }
+  "original_hash": "5ef8f5821c1a04f7b1fc4f15098ecab8",
+  "translation_date": "2025-07-13T19:39:34+00:00",
+  "source_file": "03-GettingStarted/04-vscode/solution/README.md",
+  "language_code": "zh"
 }
-```
+-->
+这相当于运行如下命令：`node build/index.js`。
 
-</details>
+- 根据你的服务器文件位置或所选运行时和服务器位置，修改此服务器条目以适应启动服务器所需的完整命令。
 
-This corresponds to running a command like so: `node build/index.js`.
+## 在服务器中使用功能
 
-- Change this server entry to fit where your server file is located or to what's needed to startup your server depending on your chosen runtime and server location.
+- 将 *mcp.json* 添加到 *./vscode* 文件夹后，点击 `play` 图标，
 
-## Consume the features in the server
+    你会看到工具图标发生变化，可用工具数量增加。工具图标位于 GitHub Copilot 聊天框上方。
 
-- Click the `play` icon, once you've added *mcp.json* to *./vscode* folder,
+## 运行工具
 
-    Observe the tooling icon change to increase the number of available tools. Tooling icon is located right above the chat field in GitHub Copilot.
+- 在聊天窗口输入与工具描述匹配的提示。例如，要触发 `add` 工具，可以输入类似“add 3 to 20”的内容。
 
-## Run a tool
+    你会看到聊天文本框上方出现一个工具提示，提示你选择运行该工具，如下图所示：
 
-- Type a prompt in your chat window that matches the description of your tool. For example to trigger the tool `add` type something like "add 3 to 20".
+    ![VS Code indicating it wanting to run a tool](../../../translated_images/vscode-agent.d5a0e0b897331060518fe3f13907677ef52b879db98c64d68a38338608f3751e.zh.png)
 
-    You should see a tool being presented above the chat text box indicating for you to select to run the tool like in this visual:
+    选择该工具后，如果你的提示如前所述，应该会得到一个数字结果“23”。
 
-    ![VS Code indicating it wanting to run a tool](../assets/vscode-agent.png)
-
-    Selecting the tool should produce a numeric result saying "23" if your prompt was like we mentioned previously.
+**免责声明**：  
+本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。虽然我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始语言的原文应被视为权威来源。对于重要信息，建议采用专业人工翻译。对于因使用本翻译而产生的任何误解或误释，我们不承担任何责任。

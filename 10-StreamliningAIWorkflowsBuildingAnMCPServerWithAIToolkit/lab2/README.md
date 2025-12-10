@@ -1,52 +1,61 @@
-# 🌐 Module 2: MCP with AI Toolkit Fundamentals
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "a22b7dd11cd7690f99f9195877cafdc3",
+  "translation_date": "2025-07-14T07:42:43+00:00",
+  "source_file": "10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab2/README.md",
+  "language_code": "zh"
+}
+-->
+# 🌐 模块 2：MCP 与 AI Toolkit 基础
 
 [![Duration](https://img.shields.io/badge/Duration-20%20minutes-blue.svg)]()
 [![Difficulty](https://img.shields.io/badge/Difficulty-Intermediate-yellow.svg)]()
 [![Prerequisites](https://img.shields.io/badge/Prerequisites-Module%201%20Complete-orange.svg)]()
 
-## 📋 Learning Objectives
+## 📋 学习目标
 
-By the end of this module, you will be able to:
-- ✅ Understand Model Context Protocol (MCP) architecture and benefits
-- ✅ Explore Microsoft's MCP server ecosystem
-- ✅ Integrate MCP servers with AI Toolkit Agent Builder
-- ✅ Build a functional browser automation agent using Playwright MCP
-- ✅ Configure and test MCP tools within your agents
-- ✅ Export and deploy MCP-powered agents for production use
+完成本模块后，您将能够：
+- ✅ 理解 Model Context Protocol (MCP) 的架构及其优势
+- ✅ 探索微软的 MCP 服务器生态系统
+- ✅ 将 MCP 服务器与 AI Toolkit Agent Builder 集成
+- ✅ 使用 Playwright MCP 构建功能齐全的浏览器自动化代理
+- ✅ 配置并测试代理中的 MCP 工具
+- ✅ 导出并部署基于 MCP 的代理以供生产使用
 
-## 🎯 Building on Module 1
+## 🎯 基于模块 1 的进阶
 
-In Module 1, we mastered AI Toolkit basics and created our first Python Agent. Now we'll **supercharge** your agents by connecting them to external tools and services through the revolutionary **Model Context Protocol (MCP)**. 
+在模块 1 中，我们掌握了 AI Toolkit 的基础知识，并创建了第一个 Python 代理。现在，我们将通过革命性的 **Model Context Protocol (MCP)**，将您的代理连接到外部工具和服务，实现**能力升级**。
 
-Think of this as upgrading from a basic calculator to a full computer - your AI agents will gain the ability to:
-- 🌐 Browse and interact with websites
-- 📁 Access and manipulate files
-- 🔧 Integrate with enterprise systems
-- 📊 Process real-time data from APIs
+可以把这看作是从基础计算器升级到完整计算机——您的 AI 代理将具备以下能力：
+- 🌐 浏览并与网站交互
+- 📁 访问和操作文件
+- 🔧 集成企业系统
+- 📊 处理来自 API 的实时数据
 
-## 🧠 Understanding Model Context Protocol (MCP)
+## 🧠 理解 Model Context Protocol (MCP)
 
-### 🔍 What is MCP?
+### 🔍 什么是 MCP？
 
-Model Context Protocol (MCP) is the **"USB-C for AI applications"** - a revolutionary open standard that connects Large Language Models (LLMs) to external tools, data sources, and services. Just as USB-C eliminated cable chaos by providing one universal connector, MCP eliminates AI integration complexity with one standardized protocol.
+Model Context Protocol (MCP) 是 AI 应用的 **“USB-C”** —— 一个革命性的开放标准，连接大型语言模型（LLM）与外部工具、数据源和服务。正如 USB-C 通过统一接口解决了线缆混乱，MCP 通过统一协议简化了 AI 集成的复杂性。
 
-### 🎯 The Problem MCP Solves
+### 🎯 MCP 解决的问题
 
-**Before MCP:**
-- 🔧 Custom integrations for every tool
-- 🔄 Vendor lock-in with proprietary solutions  
-- 🔒 Security vulnerabilities from ad-hoc connections
-- ⏱️ Months of development for basic integrations
+**MCP 之前：**
+- 🔧 每个工具都需定制集成
+- 🔄 被供应商专有方案锁定
+- 🔒 临时连接带来安全隐患
+- ⏱️ 基础集成开发耗时数月
 
-**With MCP:**
-- ⚡ Plug-and-play tool integration
-- 🔄 Vendor-agnostic architecture
-- 🛡️ Built-in security best practices
-- 🚀 Minutes to add new capabilities
+**使用 MCP 后：**
+- ⚡ 即插即用的工具集成
+- 🔄 供应商无关的架构
+- 🛡️ 内置安全最佳实践
+- 🚀 几分钟即可添加新功能
 
-### 🏗️ MCP Architecture Deep Dive
+### 🏗️ MCP 架构深入解析
 
-MCP follows a **client-server architecture** that creates a secure, scalable ecosystem:
+MCP 采用**客户端-服务器架构**，构建安全且可扩展的生态系统：
 
 ```mermaid
 graph TB
@@ -62,203 +71,200 @@ graph TB
     F --> J[Enterprise Systems]
 ```
 
-**🔧 Core Components:**
+**🔧 核心组件：**
 
-| Component | Role | Examples |
+| 组件 | 角色 | 示例 |
 |-----------|------|----------|
-| **MCP Hosts** | Applications that consume MCP services | Claude Desktop, VS Code, AI Toolkit |
-| **MCP Clients** | Protocol handlers (1:1 with servers) | Built into host applications |
-| **MCP Servers** | Expose capabilities via standard protocol | Playwright, Files, Azure, GitHub |
-| **Transport Layer** | Communication methods | stdio, HTTP, WebSockets |
+| **MCP Hosts** | 使用 MCP 服务的应用程序 | Claude Desktop、VS Code、AI Toolkit |
+| **MCP Clients** | 协议处理器（与服务器一一对应） | 内置于主机应用 |
+| **MCP Servers** | 通过标准协议暴露功能 | Playwright、Files、Azure、GitHub |
+| **传输层** | 通信方式 | stdio、HTTP、WebSockets |
 
+## 🏢 微软的 MCP 服务器生态系统
 
-## 🏢 Microsoft's MCP Server Ecosystem
+微软引领 MCP 生态，提供一套企业级服务器，满足实际业务需求。
 
-Microsoft leads the MCP ecosystem with a comprehensive suite of enterprise-grade servers that address real-world business needs.
+### 🌟 微软 MCP 服务器精选
 
-### 🌟 Featured Microsoft MCP Servers
+#### 1. ☁️ Azure MCP 服务器
+**🔗 仓库**：[azure/azure-mcp](https://github.com/azure/azure-mcp)  
+**🎯 目标**：集成 AI 的全面 Azure 资源管理
 
-#### 1. ☁️ Azure MCP Server
-**🔗 Repository**: [azure/azure-mcp](https://github.com/azure/azure-mcp)
-**🎯 Purpose**: Comprehensive Azure resource management with AI integration
+**✨ 主要功能：**
+- 声明式基础设施配置
+- 实时资源监控
+- 成本优化建议
+- 安全合规检查
 
-**✨ Key Features:**
-- Declarative infrastructure provisioning
-- Real-time resource monitoring
-- Cost optimization recommendations
-- Security compliance checking
-
-**🚀 Use Cases:**
-- Infrastructure-as-Code with AI assistance
-- Automated resource scaling
-- Cloud cost optimization
-- DevOps workflow automation
+**🚀 应用场景：**
+- AI 辅助的基础设施即代码
+- 自动资源弹性伸缩
+- 云成本优化
+- DevOps 工作流自动化
 
 #### 2. 📊 Microsoft Dataverse MCP
-**📚 Documentation**: [Microsoft Dataverse Integration](https://go.microsoft.com/fwlink/?linkid=2320176)
-**🎯 Purpose**: Natural language interface for business data
+**📚 文档**：[Microsoft Dataverse Integration](https://go.microsoft.com/fwlink/?linkid=2320176)  
+**🎯 目标**：面向业务数据的自然语言接口
 
-**✨ Key Features:**
-- Natural language database queries
-- Business context understanding
-- Custom prompt templates
-- Enterprise data governance
+**✨ 主要功能：**
+- 自然语言数据库查询
+- 业务上下文理解
+- 自定义提示模板
+- 企业数据治理
 
-**🚀 Use Cases:**
-- Business intelligence reporting
-- Customer data analysis
-- Sales pipeline insights
-- Compliance data queries
+**🚀 应用场景：**
+- 商业智能报告
+- 客户数据分析
+- 销售管道洞察
+- 合规数据查询
 
-#### 3. 🌐 Playwright MCP Server
-**🔗 Repository**: [microsoft/playwright-mcp](https://github.com/microsoft/playwright-mcp)
-**🎯 Purpose**: Browser automation and web interaction capabilities
+#### 3. 🌐 Playwright MCP 服务器
+**🔗 仓库**：[microsoft/playwright-mcp](https://github.com/microsoft/playwright-mcp)  
+**🎯 目标**：浏览器自动化与网页交互能力
 
-**✨ Key Features:**
-- Cross-browser automation (Chrome, Firefox, Safari)
-- Intelligent element detection
-- Screenshot and PDF generation
-- Network traffic monitoring
+**✨ 主要功能：**
+- 跨浏览器自动化（Chrome、Firefox、Safari）
+- 智能元素识别
+- 截图与 PDF 生成
+- 网络流量监控
 
-**🚀 Use Cases:**
-- Automated testing workflows
-- Web scraping and data extraction
-- UI/UX monitoring
-- Competitive analysis automation
+**🚀 应用场景：**
+- 自动化测试流程
+- 网页爬取与数据提取
+- UI/UX 监控
+- 竞争分析自动化
 
-#### 4. 📁 Files MCP Server
-**🔗 Repository**: [microsoft/files-mcp-server](https://github.com/microsoft/files-mcp-server)
-**🎯 Purpose**: Intelligent file system operations
+#### 4. 📁 Files MCP 服务器
+**🔗 仓库**：[microsoft/files-mcp-server](https://github.com/microsoft/files-mcp-server)  
+**🎯 目标**：智能文件系统操作
 
-**✨ Key Features:**
-- Declarative file management
-- Content synchronization
-- Version control integration
-- Metadata extraction
+**✨ 主要功能：**
+- 声明式文件管理
+- 内容同步
+- 版本控制集成
+- 元数据提取
 
-**🚀 Use Cases:**
-- Documentation management
-- Code repository organization
-- Content publishing workflows
-- Data pipeline file handling
+**🚀 应用场景：**
+- 文档管理
+- 代码仓库整理
+- 内容发布工作流
+- 数据管道文件处理
 
-#### 5. 📝 MarkItDown MCP Server
-**🔗 Repository**: [microsoft/markitdown](https://github.com/microsoft/markitdown)
-**🎯 Purpose**: Advanced Markdown processing and manipulation
+#### 5. 📝 MarkItDown MCP 服务器
+**🔗 仓库**：[microsoft/markitdown](https://github.com/microsoft/markitdown)  
+**🎯 目标**：高级 Markdown 处理与操作
 
-**✨ Key Features:**
-- Rich Markdown parsing
-- Format conversion (MD ↔ HTML ↔ PDF)
-- Content structure analysis
-- Template processing
+**✨ 主要功能：**
+- 丰富的 Markdown 解析
+- 格式转换（MD ↔ HTML ↔ PDF）
+- 内容结构分析
+- 模板处理
 
-**🚀 Use Cases:**
-- Technical documentation workflows
-- Content management systems
-- Report generation
-- Knowledge base automation
+**🚀 应用场景：**
+- 技术文档工作流
+- 内容管理系统
+- 报告生成
+- 知识库自动化
 
-#### 6. 📈 Clarity MCP Server
-**📦 Package**: [@microsoft/clarity-mcp-server](https://www.npmjs.com/package/@microsoft/clarity-mcp-server)
-**🎯 Purpose**: Web analytics and user behavior insights
+#### 6. 📈 Clarity MCP 服务器
+**📦 包**：[@microsoft/clarity-mcp-server](https://www.npmjs.com/package/@microsoft/clarity-mcp-server)  
+**🎯 目标**：网页分析与用户行为洞察
 
-**✨ Key Features:**
-- Heatmap data analysis
-- User session recordings
-- Performance metrics
-- Conversion funnel analysis
+**✨ 主要功能：**
+- 热力图数据分析
+- 用户会话录制
+- 性能指标
+- 转化漏斗分析
 
-**🚀 Use Cases:**
-- Website optimization
-- User experience research
-- A/B testing analysis
-- Business intelligence dashboards
+**🚀 应用场景：**
+- 网站优化
+- 用户体验研究
+- A/B 测试分析
+- 商业智能仪表盘
 
-### 🌍 Community Ecosystem
+### 🌍 社区生态系统
 
-Beyond Microsoft's servers, the MCP ecosystem includes:
-- **🐙 GitHub MCP**: Repository management and code analysis
-- **🗄️ Database MCPs**: PostgreSQL, MySQL, MongoDB integrations
-- **☁️ Cloud Provider MCPs**: AWS, GCP, Digital Ocean tools
-- **📧 Communication MCPs**: Slack, Teams, Email integrations
+除了微软服务器，MCP 生态还包括：
+- **🐙 GitHub MCP**：仓库管理与代码分析
+- **🗄️ 数据库 MCP**：PostgreSQL、MySQL、MongoDB 集成
+- **☁️ 云服务 MCP**：AWS、GCP、Digital Ocean 工具
+- **📧 通信 MCP**：Slack、Teams、邮件集成
 
-## 🛠️ Hands-On Lab: Building a Browser Automation Agent
+## 🛠️ 实操实验：构建浏览器自动化代理
 
-**🎯 Project Goal**: Create an intelligent browser automation agent using Playwright MCP server that can navigate websites, extract information, and perform complex web interactions.
+**🎯 项目目标**：使用 Playwright MCP 服务器创建智能浏览器自动化代理，能够浏览网站、提取信息并执行复杂网页交互。
 
-### 🚀 Phase 1: Agent Foundation Setup
+### 🚀 阶段 1：代理基础设置
 
-#### Step 1: Initialize Your Agent
-1. **Open AI Toolkit Agent Builder**
-2. **Create New Agent** with the following configuration:
-   - **Name**: `BrowserAgent`
-   - **Model**: Choose GPT-4o 
+#### 步骤 1：初始化代理
+1. **打开 AI Toolkit Agent Builder**
+2. **创建新代理**，配置如下：
+   - **名称**：`BrowserAgent`
+   - **模型**：选择 GPT-4o
 
-![BrowserAgent](../../images/10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab2/BrowserAgent.png)
+![BrowserAgent](../../translated_images/BrowserAgent.09c1adde5e136573b64ab1baecd830049830e295eac66cb18bebb85fb386e00a.zh.png)
 
+### 🔧 阶段 2：MCP 集成流程
 
-### 🔧 Phase 2: MCP Integration Workflow
+#### 步骤 3：添加 MCP 服务器集成
+1. **进入 Agent Builder 的工具部分**
+2. **点击“添加工具”**打开集成菜单
+3. **选择“MCP 服务器”**选项
 
-#### Step 3: Add MCP Server Integration
-1. **Navigate to Tools Section** in Agent Builder
-2. **Click "Add Tool"** to open the integration menu
-3. **Select "MCP Server"** from available options
+![AddMCP](../../translated_images/AddMCP.afe3308ac20aa94469a5717b632d77b2197b9838a438b05d39aeb2db3ec47ef1.zh.png)
 
-![AddMCP](../../images/10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab2/AddMCP.png)
+**🔍 理解工具类型：**
+- **内置工具**：预配置的 AI Toolkit 功能
+- **MCP 服务器**：外部服务集成
+- **自定义 API**：您自己的服务端点
+- **函数调用**：直接访问模型函数
 
-**🔍 Understanding Tool Types:**
-- **Built-in Tools**: Pre-configured AI Toolkit functions
-- **MCP Servers**: External service integrations
-- **Custom APIs**: Your own service endpoints
-- **Function Calling**: Direct model function access
+#### 步骤 4：选择 MCP 服务器
+1. **选择“MCP 服务器”**继续
+![AddMCPServer](../../translated_images/AddMCPServer.69b911ccef872cbd0d0c0c2e6a00806916e1673e543b902a23dee23e6ff54b4c.zh.png)
 
-#### Step 4: MCP Server Selection
-1. **Choose "MCP Server"** option to proceed
-![AddMCPServer](../../images/10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab2/AddMCPServer.png)
+2. **浏览 MCP 目录**，探索可用集成
+![MCPCatalog](../../translated_images/MCPCatalog.a817d053145699006264f5a475f2b48fbd744e43633f656b6453c15a09ba5130.zh.png)
 
-2. **Browse MCP Catalog** to explore available integrations
-![MCPCatalog](../../images/10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab2/MCPCatalog.png)
+### 🎮 阶段 3：Playwright MCP 配置
 
+#### 步骤 5：选择并配置 Playwright
+1. **点击“使用精选 MCP 服务器”**访问微软认证服务器
+2. **从精选列表中选择“Playwright”**
+3. **接受默认 MCP ID**或根据环境自定义
 
-### 🎮 Phase 3: Playwright MCP Configuration
+![MCPID](../../translated_images/MCPID.67d446052979e819c945ff7b6430196ef587f5217daadd3ca52fa9659c1245c9.zh.png)
 
-#### Step 5: Select and Configure Playwright
-1. **Click "Use Featured MCP Servers"** to access Microsoft's verified servers
-2. **Select "Playwright"** from the featured list
-3. **Accept Default MCP ID** or customize for your environment
+#### 步骤 6：启用 Playwright 功能
+**🔑 关键步骤**：选择所有可用的 Playwright 方法以获得最大功能
 
-![MCPID](../../images/10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab2/MCPID.png)
+![Tools](../../translated_images/Tools.3ea23c447b4d9feccbd7101e6dcf9e27cb0e5273f351995fde62c5abf9a78b4c.zh.png)
 
-#### Step 6: Enable Playwright Capabilities
-**🔑 Critical Step**: Select **ALL** available Playwright methods for maximum functionality
+**🛠️ 重要的 Playwright 工具：**
+- **导航**：`goto`、`goBack`、`goForward`、`reload`
+- **交互**：`click`、`fill`、`press`、`hover`、`drag`
+- **提取**：`textContent`、`innerHTML`、`getAttribute`
+- **验证**：`isVisible`、`isEnabled`、`waitForSelector`
+- **捕获**：`screenshot`、`pdf`、`video`
+- **网络**：`setExtraHTTPHeaders`、`route`、`waitForResponse`
 
-![Tools](../../images/10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab2/Tools.png)
+#### 步骤 7：验证集成成功
+**✅ 成功标志：**
+- 所有工具均显示在 Agent Builder 界面
+- 集成面板无错误信息
+- Playwright 服务器状态显示“已连接”
 
-**🛠️ Essential Playwright Tools:**
-- **Navigation**: `goto`, `goBack`, `goForward`, `reload`
-- **Interaction**: `click`, `fill`, `press`, `hover`, `drag`
-- **Extraction**: `textContent`, `innerHTML`, `getAttribute`
-- **Validation**: `isVisible`, `isEnabled`, `waitForSelector`
-- **Capture**: `screenshot`, `pdf`, `video`
-- **Network**: `setExtraHTTPHeaders`, `route`, `waitForResponse`
+![AgentTools](../../translated_images/AgentTools.053cfb96a17e02199dcc6563010d2b324d4fc3ebdd24889657a6950647a52f63.zh.png)
 
-#### Step 7: Verify Integration Success
-**✅ Success Indicators:**
-- All tools appear in Agent Builder interface
-- No error messages in the integration panel
-- Playwright server status shows "Connected"
+**🔧 常见问题排查：**
+- **连接失败**：检查网络连接和防火墙设置
+- **工具缺失**：确认设置时已选择所有功能
+- **权限错误**：确认 VS Code 拥有必要的系统权限
 
-![AgentTools](../../images/10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab2/AgentTools.png)
+### 🎯 阶段 4：高级提示工程
 
-**🔧 Troubleshooting Common Issues:**
-- **Connection Failed**: Check internet connectivity and firewall settings
-- **Missing Tools**: Ensure all capabilities were selected during setup
-- **Permission Errors**: Verify VS Code has necessary system permissions
-
-### 🎯 Phase 4: Advanced Prompt Engineering
-
-#### Step 8: Design Intelligent System Prompts
-Create sophisticated prompts that leverage Playwright's full capabilities:
+#### 步骤 8：设计智能系统提示
+创建充分利用 Playwright 全功能的复杂提示：
 
 ```markdown
 # Web Automation Expert System Prompt
@@ -298,10 +304,10 @@ You are an advanced web automation specialist with deep expertise in browser aut
 - Follow website terms of service
 ```
 
-#### Step 9: Create Dynamic User Prompts
-Design prompts that demonstrate various capabilities:
+#### 步骤 9：创建动态用户提示
+设计展示多种功能的提示示例：
 
-**🌐 Web Analysis Example:**
+**🌐 网页分析示例：**
 ```markdown
 Navigate to github.com/kinfey and provide a comprehensive analysis including:
 1. Repository structure and organization
@@ -314,58 +320,60 @@ Navigate to github.com/kinfey and provide a comprehensive analysis including:
 Include screenshots at key steps and provide actionable insights.
 ```
 
-![Prompt](../../images/10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab2/Prompt.png)
+![Prompt](../../translated_images/Prompt.bfc846605db4999f4d9c1b09c710ef63cae7b3057444e68bf07240fb142d9f8f.zh.png)
 
-### 🚀 Phase 5: Execution and Testing
+### 🚀 阶段 5：执行与测试
 
-#### Step 10: Execute Your First Automation
-1. **Click "Run"** to launch the automation sequence
-2. **Monitor Real-time Execution**:
-   - Chrome browser launches automatically
-   - Agent navigates to target website
-   - Screenshots capture each major step
-   - Analysis results stream in real-time
+#### 步骤 10：执行首次自动化
+1. **点击“运行”**启动自动化流程
+2. **实时监控执行过程**：
+   - 自动启动 Chrome 浏览器
+   - 代理导航至目标网站
+   - 截图记录每个关键步骤
+   - 分析结果实时输出
 
-![Browser](../../images/10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab2/Browser.png)
+![Browser](../../translated_images/Browser.ec011d0bd64d0d112c8a29bd8cc44c76d0bbfd0b019cb2983ef679328435ce5d.zh.png)
 
-#### Step 11: Analyze Results and Insights
-Review comprehensive analysis in Agent Builder's interface:
+#### 步骤 11：分析结果与洞察
+在 Agent Builder 界面查看详细分析结果：
 
-![Result](../../images/10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab2/Result.png)
+![Result](../../translated_images/Result.8638f2b6703e9ea6d58d4e4475e39456b6a51d4c787f9bf481bae694d370a69a.zh.png)
 
-### 🌟 Phase 6: Advanced Capabilities and Deployment
+### 🌟 阶段 6：高级功能与部署
 
-#### Step 12: Export and Production Deployment
-Agent Builder supports multiple deployment options:
+#### 步骤 12：导出与生产部署
+Agent Builder 支持多种部署选项：
 
-![Code](../../images/10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab2/Code.png)
+![Code](../../translated_images/Code.d9eeeead0b96db0ca19c5b10ad64cfea8c1d0d1736584262970a4d43e1403d13.zh.png)
 
-## 🎓 Module 2 Summary & Next Steps
+## 🎓 模块 2 总结与后续步骤
 
-### 🏆 Achievement Unlocked: MCP Integration Master
+### 🏆 成就解锁：MCP 集成大师
 
-**✅ Skills Mastered:**
-- [ ] Understanding MCP architecture and benefits
-- [ ] Navigating Microsoft's MCP server ecosystem
-- [ ] Integrating Playwright MCP with AI Toolkit
-- [ ] Building sophisticated browser automation agents
-- [ ] Advanced prompt engineering for web automation
+**✅ 掌握技能：**
+- [ ] 理解 MCP 架构及优势
+- [ ] 熟悉微软 MCP 服务器生态
+- [ ] 将 Playwright MCP 与 AI Toolkit 集成
+- [ ] 构建复杂的浏览器自动化代理
+- [ ] 进行高级网页自动化提示工程
 
-### 📚 Additional Resources
+### 📚 额外资源
 
-- **🔗 MCP Specification**: [Official Protocol Documentation](https://modelcontextprotocol.io/)
-- **🛠️ Playwright API**: [Complete Method Reference](https://playwright.dev/docs/api/class-playwright)
-- **🏢 Microsoft MCP Servers**: [Enterprise Integration Guide](https://github.com/microsoft/mcp-servers)
-- **🌍 Community Examples**: [MCP Server Gallery](https://github.com/modelcontextprotocol/servers)
+- **🔗 MCP 规范**：[官方协议文档](https://modelcontextprotocol.io/)
+- **🛠️ Playwright API**：[完整方法参考](https://playwright.dev/docs/api/class-playwright)
+- **🏢 微软 MCP 服务器**：[企业集成指南](https://github.com/microsoft/mcp-servers)
+- **🌍 社区示例**：[MCP 服务器画廊](https://github.com/modelcontextprotocol/servers)
 
-**🎉 Congratulations!** You've successfully mastered MCP integration and can now build production-ready AI agents with external tool capabilities!
+**🎉 恭喜！** 您已成功掌握 MCP 集成，现可构建具备外部工具能力的生产级 AI 代理！
 
+### 🔜 继续下一个模块
 
-### 🔜 Continue to Next Module
+准备好提升您的 MCP 技能了吗？请前往 **[模块 3：使用 AI Toolkit 进行高级 MCP 开发](../lab3/README.md)**，您将学习如何：
+- 创建自定义 MCP 服务器
+- 配置并使用最新 MCP Python SDK
+- 设置 MCP Inspector 进行调试
+- 掌握高级 MCP 服务器开发流程
+- 从零开始构建一个 Weather MCP 服务器
 
-Ready to take your MCP skills to the next level? Proceed to **[Module 3: Advanced MCP Development with AI Toolkit](../lab3/README.md)** where you'll learn how to:
-- Create your own custom MCP servers
-- Configure and use the latest MCP Python SDK
-- Set up the MCP Inspector for debugging
-- Master advanced MCP server development workflows
-- Build a Weather MCP Server from scratch
+**免责声明**：  
+本文件由 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻译而成。尽管我们力求准确，但请注意，自动翻译可能存在错误或不准确之处。原始文件的母语版本应被视为权威来源。对于重要信息，建议采用专业人工翻译。我们不对因使用本翻译而产生的任何误解或误释承担责任。

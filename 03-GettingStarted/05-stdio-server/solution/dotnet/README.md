@@ -1,73 +1,82 @@
-# MCP stdio Server - .NET Solution
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "69372338676e01a2c97f42f70fdfbf42",
+  "translation_date": "2025-08-26T20:17:18+00:00",
+  "source_file": "03-GettingStarted/05-stdio-server/solution/dotnet/README.md",
+  "language_code": "zh"
+}
+-->
+# MCP stdio 服务器 - .NET 解决方案
 
-> **⚠️ Important**: This solution has been updated to use the **stdio transport** as recommended by MCP Specification 2025-06-18. The original SSE transport has been deprecated.
+> **⚠️ 重要**：此解决方案已更新为使用 **stdio 传输**，这是 MCP 规范 2025-06-18 推荐的方式。原有的 SSE 传输已被弃用。
 
-## Overview
+## 概述
 
-This .NET solution demonstrates how to build an MCP server using the current stdio transport. The stdio transport is simpler, more secure, and provides better performance than the deprecated SSE approach.
+此 .NET 解决方案展示了如何使用当前的 stdio 传输构建 MCP 服务器。相比已弃用的 SSE 方法，stdio 传输更简单、更安全，并且性能更优。
 
-## Prerequisites
+## 前置条件
 
-- .NET 9.0 SDK or later
-- Basic understanding of .NET dependency injection
+- .NET 9.0 SDK 或更高版本
+- 基本了解 .NET 的依赖注入
 
-## Setup Instructions
+## 设置说明
 
-### Step 1: Restore dependencies
+### 步骤 1：恢复依赖项
 
 ```bash
 dotnet restore
 ```
 
-### Step 2: Build the project
+### 步骤 2：构建项目
 
 ```bash
 dotnet build
 ```
 
-## Running the Server
+## 运行服务器
 
-The stdio server runs differently than the old HTTP-based server. Instead of starting a web server, it communicates through stdin/stdout:
+stdio 服务器的运行方式与旧的基于 HTTP 的服务器不同。它通过标准输入/输出（stdin/stdout）进行通信，而不是启动一个 Web 服务器：
 
 ```bash
 dotnet run
 ```
 
-**Important**: The server will appear to hang - this is normal! It's waiting for JSON-RPC messages from stdin.
+**重要**：服务器看起来会“挂起”——这是正常现象！它正在等待从标准输入接收 JSON-RPC 消息。
 
-## Testing the Server
+## 测试服务器
 
-### Method 1: Using the MCP Inspector (Recommended)
+### 方法 1：使用 MCP Inspector（推荐）
 
 ```bash
 npx @modelcontextprotocol/inspector dotnet run
 ```
 
-This will:
-1. Launch your server as a subprocess
-2. Open a web interface for testing
-3. Allow you to test all server tools interactively
+此操作将：
+1. 将服务器作为子进程启动
+2. 打开一个用于测试的 Web 界面
+3. 允许您交互式测试所有服务器工具
 
-### Method 2: Direct command line testing
+### 方法 2：直接使用命令行测试
 
-You can also test by launching the Inspector directly:
+您也可以通过直接启动 Inspector 进行测试：
 
 ```bash
 npx @modelcontextprotocol/inspector dotnet run --project .
 ```
 
-### Available Tools
+### 可用工具
 
-The server provides these tools:
+服务器提供以下工具：
 
-- **AddNumbers(a, b)**: Add two numbers together
-- **MultiplyNumbers(a, b)**: Multiply two numbers together  
-- **GetGreeting(name)**: Generate a personalized greeting
-- **GetServerInfo()**: Get information about the server
+- **AddNumbers(a, b)**：将两个数字相加
+- **MultiplyNumbers(a, b)**：将两个数字相乘  
+- **GetGreeting(name)**：生成个性化问候语
+- **GetServerInfo()**：获取服务器信息
 
-### Testing with Claude Desktop
+### 使用 Claude Desktop 测试
 
-To use this server with Claude Desktop, add this configuration to your `claude_desktop_config.json`:
+要在 Claude Desktop 中使用此服务器，请将以下配置添加到您的 `claude_desktop_config.json` 文件中：
 
 ```json
 {
@@ -80,7 +89,7 @@ To use this server with Claude Desktop, add this configuration to your `claude_d
 }
 ```
 
-## Project Structure
+## 项目结构
 
 ```
 dotnet/
@@ -92,37 +101,42 @@ dotnet/
 └── README.md          # This file
 ```
 
-## Key Differences from HTTP/SSE
+## 与 HTTP/SSE 的主要区别
 
-**stdio transport (Current):**
-- ✅ Simpler setup - no web server needed
-- ✅ Better security - no HTTP endpoints
-- ✅ Uses `Host.CreateApplicationBuilder()` instead of `WebApplication.CreateBuilder()`
-- ✅ `WithStdioTransport()` instead of `WithHttpTransport()`
-- ✅ Console application instead of web application
-- ✅ Better performance
+**stdio 传输（当前）：**
+- ✅ 设置更简单 - 无需 Web 服务器
+- ✅ 更高的安全性 - 无 HTTP 端点
+- ✅ 使用 `Host.CreateApplicationBuilder()` 替代 `WebApplication.CreateBuilder()`
+- ✅ 使用 `WithStdioTransport()` 替代 `WithHttpTransport()`
+- ✅ 控制台应用程序替代 Web 应用程序
+- ✅ 性能更优
 
-**HTTP/SSE transport (Deprecated):**
-- ❌ Required ASP.NET Core web server
-- ❌ Needed `app.MapMcp()` routing setup
-- ❌ More complex configuration and dependencies
-- ❌ Additional security considerations
-- ❌ Now deprecated in MCP 2025-06-18
+**HTTP/SSE 传输（已弃用）：**
+- ❌ 需要 ASP.NET Core Web 服务器
+- ❌ 需要设置 `app.MapMcp()` 路由
+- ❌ 配置和依赖项更复杂
+- ❌ 存在额外的安全性考量
+- ❌ 已在 MCP 2025-06-18 中被弃用
 
-## Development Features
+## 开发功能
 
-- **Dependency Injection**: Full DI support for services and logging
-- **Structured Logging**: Proper logging to stderr using `ILogger<T>`
-- **Tool Attributes**: Clean tool definition using `[McpServerTool]` attributes
-- **Async Support**: All tools support async operations
-- **Error Handling**: Graceful error handling and logging
+- **依赖注入**：全面支持服务和日志记录的 DI
+- **结构化日志**：通过 `ILogger<T>` 向标准错误输出正确记录日志
+- **工具属性**：使用 `[McpServerTool]` 属性清晰定义工具
+- **异步支持**：所有工具支持异步操作
+- **错误处理**：优雅的错误处理和日志记录
 
-## Development Tips
+## 开发提示
 
-- Use `ILogger` for logging (never write to stdout directly)
-- Build with `dotnet build` before testing
-- Test with the Inspector for visual debugging
-- All logging goes to stderr automatically
-- The server handles graceful shutdown signals
+- 使用 `ILogger` 进行日志记录（切勿直接写入标准输出）
+- 在测试前使用 `dotnet build` 构建项目
+- 使用 Inspector 进行可视化调试
+- 所有日志记录会自动输出到标准错误
+- 服务器会处理优雅的关闭信号
 
-This solution follows the current MCP specification and demonstrates best practices for stdio transport implementation using .NET.
+此解决方案遵循当前 MCP 规范，展示了使用 .NET 实现 stdio 传输的最佳实践。
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

@@ -1,87 +1,96 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "ac2459c0d5cc823922e3d9240a95028c",
+  "translation_date": "2025-07-13T19:06:42+00:00",
+  "source_file": "03-GettingStarted/03-llm-client/solution/java/README.md",
+  "language_code": "zh"
+}
+-->
 # Calculator LLM Client
 
-A Java application that demonstrates how to use LangChain4j to connect to an MCP (Model Context Protocol) calculator service with GitHub Models integration.
+一个 Java 应用程序，演示如何使用 LangChain4j 连接带有 GitHub Models 集成的 MCP（模型上下文协议）计算器服务。
 
-## Prerequisites
+## 前提条件
 
-- Java 21 or higher
-- Maven 3.6+ (or use the included Maven wrapper)
-- A GitHub account with access to GitHub Models
-- An MCP calculator service running on `http://localhost:8080`
+- Java 21 或更高版本
+- Maven 3.6+（或使用附带的 Maven 包装器）
+- 拥有访问 GitHub Models 权限的 GitHub 账号
+- 在 `http://localhost:8080` 运行的 MCP 计算器服务
 
-## Getting the GitHub Token
+## 获取 GitHub Token
 
-This application uses GitHub Models which requires a GitHub personal access token. Follow these steps to get your token:
+该应用使用 GitHub Models，需要 GitHub 个人访问令牌。请按照以下步骤获取令牌：
 
-### 1. Access GitHub Models
-1. Go to [GitHub Models](https://github.com/marketplace/models)
-2. Sign in with your GitHub account
-3. Request access to GitHub Models if you haven't already
+### 1. 访问 GitHub Models
+1. 访问 [GitHub Models](https://github.com/marketplace/models)
+2. 使用你的 GitHub 账号登录
+3. 如果尚未获得访问权限，请申请访问 GitHub Models
 
-### 2. Create a Personal Access Token
-1. Go to [GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)](https://github.com/settings/tokens)
-2. Click "Generate new token" → "Generate new token (classic)"
-3. Give your token a descriptive name (e.g., "MCP Calculator Client")
-4. Set expiration as needed
-5. Select the following scopes:
-   - `repo` (if accessing private repositories)
+### 2. 创建个人访问令牌
+1. 进入 [GitHub 设置 → 开发者设置 → 个人访问令牌 → 令牌（经典）](https://github.com/settings/tokens)
+2. 点击“生成新令牌” → “生成新令牌（经典）”
+3. 给令牌起一个描述性名称（例如，“MCP Calculator Client”）
+4. 根据需要设置过期时间
+5. 选择以下权限范围：
+   - `repo`（如果需要访问私有仓库）
    - `user:email`
-6. Click "Generate token"
-7. **Important**: Copy the token immediately - you won't be able to see it again!
+6. 点击“生成令牌”
+7. **重要**：请立即复制令牌，之后将无法再次查看！
 
-### 3. Set the Environment Variable
+### 3. 设置环境变量
 
-#### On Windows (Command Prompt):
+#### Windows（命令提示符）：
 ```cmd
 set GITHUB_TOKEN=your_github_token_here
 ```
 
-#### On Windows (PowerShell):
+#### Windows（PowerShell）：
 ```powershell
 $env:GITHUB_TOKEN="your_github_token_here"
 ```
 
-#### On macOS/Linux:
+#### macOS/Linux：
 ```bash
 export GITHUB_TOKEN=your_github_token_here
 ```
 
-## Setup and Installation
+## 设置与安装
 
-1. **Clone or navigate to the project directory**
+1. **克隆或进入项目目录**
 
-2. **Install dependencies**:
+2. **安装依赖**：
    ```cmd
    mvnw clean install
    ```
-   Or if you have Maven installed globally:
+   如果你已全局安装 Maven：
    ```cmd
    mvn clean install
    ```
 
-3. **Set up the environment variable** (see "Getting the GitHub Token" section above)
+3. **设置环境变量**（参见上文“获取 GitHub Token”部分）
 
-4. **Start the MCP Calculator Service**:
-   Make sure you have chapter 1's MCP calculator service running on `http://localhost:8080/sse`. This should be running before you start the client.
+4. **启动 MCP 计算器服务**：
+   确保第 1 章的 MCP 计算器服务已在 `http://localhost:8080/sse` 运行。启动客户端前需先启动该服务。
 
-## Running the Application
+## 运行应用程序
 
 ```cmd
 mvnw clean package
 java -jar target\calculator-llm-client-0.0.1-SNAPSHOT.jar
 ```
 
-## What the Application Does
+## 应用功能说明
 
-The application demonstrates three main interactions with the calculator service:
+该应用演示了与计算器服务的三种主要交互：
 
-1. **Addition**: Calculates the sum of 24.5 and 17.3
-2. **Square Root**: Calculates the square root of 144
-3. **Help**: Shows available calculator functions
+1. **加法**：计算 24.5 和 17.3 的和
+2. **平方根**：计算 144 的平方根
+3. **帮助**：显示可用的计算器功能
 
-## Expected Output
+## 预期输出
 
-When running successfully, you should see output similar to:
+成功运行时，你应看到类似如下输出：
 
 ```
 The sum of 24.5 and 17.3 is 41.8.
@@ -89,49 +98,52 @@ The square root of 144 is 12.
 The calculator service provides the following functions: add, subtract, multiply, divide, sqrt, power...
 ```
 
-## Troubleshooting
+## 故障排除
 
-### Common Issues
+### 常见问题
 
-1. **"GITHUB_TOKEN environment variable not set"**
-   - Make sure you've set the `GITHUB_TOKEN` environment variable
-   - Restart your terminal/command prompt after setting the variable
+1. **“GITHUB_TOKEN 环境变量未设置”**
+   - 确认已设置 `GITHUB_TOKEN` 环境变量
+   - 设置后重启终端或命令提示符
 
-2. **"Connection refused to localhost:8080"**
-   - Ensure the MCP calculator service is running on port 8080
-   - Check if another service is using port 8080
+2. **“连接被拒绝 localhost:8080”**
+   - 确认 MCP 计算器服务已在 8080 端口运行
+   - 检查是否有其他服务占用了 8080 端口
 
-3. **"Authentication failed"**
-   - Verify your GitHub token is valid and has the correct permissions
-   - Check if you have access to GitHub Models
+3. **“身份验证失败”**
+   - 验证 GitHub 令牌是否有效且权限正确
+   - 确认你有访问 GitHub Models 的权限
 
-4. **Maven build errors**
-   - Ensure you're using Java 21 or higher: `java -version`
-   - Try cleaning the build: `mvnw clean`
+4. **Maven 构建错误**
+   - 确认使用的是 Java 21 或更高版本：`java -version`
+   - 尝试清理构建：`mvnw clean`
 
-### Debugging
+### 调试
 
-To enable debug logging, add the following JVM argument when running:
+要启用调试日志，运行时添加以下 JVM 参数：
 ```cmd
 java -Dlogging.level.dev.langchain4j=DEBUG -jar target\calculator-llm-client-0.0.1-SNAPSHOT.jar
 ```
 
-## Configuration
+## 配置
 
-The application is configured to:
-- Use GitHub Models with the `gpt-4.1-nano` model
-- Connect to MCP service at `http://localhost:8080/sse`
-- Use a 60-second timeout for requests
-- Enable request/response logging for debugging
+应用配置如下：
+- 使用 GitHub Models，模型为 `gpt-4.1-nano`
+- 连接 MCP 服务地址为 `http://localhost:8080/sse`
+- 请求超时设置为 60 秒
+- 启用请求/响应日志以便调试
 
-## Dependencies
+## 依赖
 
-Key dependencies used in this project:
-- **LangChain4j**: For AI integration and tool management
-- **LangChain4j MCP**: For Model Context Protocol support
-- **LangChain4j GitHub Models**: For GitHub Models integration
-- **Spring Boot**: For application framework and dependency injection
+本项目主要依赖：
+- **LangChain4j**：用于 AI 集成和工具管理
+- **LangChain4j MCP**：支持模型上下文协议
+- **LangChain4j GitHub Models**：集成 GitHub Models
+- **Spring Boot**：应用框架和依赖注入
 
-## License
+## 许可证
 
-This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+本项目采用 Apache License 2.0 许可，详情请参见 [LICENSE](../../../../../../03-GettingStarted/03-llm-client/solution/java/LICENSE) 文件。
+
+**免责声明**：  
+本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。虽然我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始语言的原文应被视为权威来源。对于重要信息，建议采用专业人工翻译。对于因使用本翻译而产生的任何误解或误释，我们不承担任何责任。

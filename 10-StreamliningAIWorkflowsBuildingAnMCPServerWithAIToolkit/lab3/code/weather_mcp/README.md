@@ -1,66 +1,78 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "999c5e7623c1e2d5e5a07c2feb39eb67",
+  "translation_date": "2025-07-14T08:23:56+00:00",
+  "source_file": "10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab3/code/weather_mcp/README.md",
+  "language_code": "zh"
+}
+-->
 # Weather MCP Server
 
-This is a sample MCP Server in Python implementing weather tools with mock responses. It can be used as a scaffold for your own MCP Server. It includes the following features: 
+这是一个用 Python 实现的天气工具示例 MCP Server，返回模拟的响应。它可以作为你自己 MCP Server 的基础框架。包含以下功能：
 
-- **Weather Tool**: A tool that provides mocked weather information based on the given location.
-- **Connect to Agent Builder**: A feature that allows you to connect the MCP server to the Agent Builder for testing and debugging.
-- **Debug in [MCP Inspector](https://github.com/modelcontextprotocol/inspector)**: A feature that allows you to debug the MCP Server using the MCP Inspector.
+- **Weather Tool**：一个根据给定位置提供模拟天气信息的工具。
+- **连接到 Agent Builder**：允许你将 MCP Server 连接到 Agent Builder 以进行测试和调试。
+- **在 [MCP Inspector](https://github.com/modelcontextprotocol/inspector) 中调试**：支持使用 MCP Inspector 调试 MCP Server。
 
-## Get started with the Weather MCP Server template
+## 使用 Weather MCP Server 模板快速开始
 
-> **Prerequisites**
+> **前提条件**
 >
-> To run the MCP Server in your local dev machine, you will need:
+> 要在本地开发机器上运行 MCP Server，你需要：
 >
 > - [Python](https://www.python.org/)
-> - (*Optional - if you prefer uv*) [uv](https://github.com/astral-sh/uv)
-> - [Python Debugger Extension](https://marketplace.visualstudio.com/items?itemName=ms-python.debugpy)
+> - （可选 - 如果你喜欢使用 uv）[uv](https://github.com/astral-sh/uv)
+> - [Python 调试扩展](https://marketplace.visualstudio.com/items?itemName=ms-python.debugpy)
 
-## Prepare environment
+## 准备环境
 
-There are two approaches to set up the environment for this project. You can choose either one based on your preference.
+有两种方式可以为该项目设置环境，你可以根据喜好选择其中一种。
 
-> Note: Reload VSCode or terminal to ensure the virtual environment python is used after creating the virtual environment.
+> 注意：创建虚拟环境后，请重新加载 VSCode 或终端，确保使用虚拟环境中的 Python。
 
-| Approach | Steps |
+| 方式 | 步骤 |
 | -------- | ----- |
-| Using `uv` | 1. Create virtual environment: `uv venv` <br>2. Run VSCode Command "***Python: Select Interpreter***" and select the python from created virtual environment <br>3. Install dependencies (include dev dependencies): `uv pip install -r pyproject.toml --extra dev` |
-| Using `pip` | 1. Create virtual environment: `python -m venv .venv` <br>2. Run VSCode Command "***Python: Select Interpreter***" and select the python from created virtual environment<br>3. Install dependencies (include dev dependencies): `pip install -e .[dev]` | 
+| 使用 `uv` | 1. 创建虚拟环境：`uv venv` <br>2. 运行 VSCode 命令 "***Python: Select Interpreter***"，选择刚创建的虚拟环境中的 Python <br>3. 安装依赖（包括开发依赖）：`uv pip install -r pyproject.toml --extra dev` |
+| 使用 `pip` | 1. 创建虚拟环境：`python -m venv .venv` <br>2. 运行 VSCode 命令 "***Python: Select Interpreter***"，选择刚创建的虚拟环境中的 Python <br>3. 安装依赖（包括开发依赖）：`pip install -e .[dev]` |
 
-After setting up the environment, you can run the server in your local dev machine via Agent Builder as the MCP Client to get started:
-1. Open VS Code Debug panel. Select `Debug in Agent Builder` or press `F5` to start debugging the MCP server.
-2. Use AI Toolkit Agent Builder to test the server with [this prompt](vscode://ms-windows-ai-studio.windows-ai-studio/open_prompt_builder?model_id=github/gpt-4o-mini&system_prompt=You%20are%20a%20weather%20forecast%20professional%20that%20can%20tell%20weather%20information%20based%20on%20given%20location&user_prompt=What%20is%20the%20weather%20in%20Shanghai?&track_from=vsc_md&mcp=weather_mcp). Server will be auto-connected to the Agent Builder.
-3. Click `Run` to test the server with the prompt.
+环境配置完成后，你可以通过 Agent Builder 作为 MCP Client 在本地开发机器上运行服务器，开始使用：
+1. 打开 VS Code 调试面板。选择 `Debug in Agent Builder` 或按 `F5` 启动 MCP Server 调试。
+2. 使用 AI Toolkit Agent Builder 通过[此提示](../../../../../../../../../../open_prompt_builder)测试服务器。服务器会自动连接到 Agent Builder。
+3. 点击 `Run` 使用该提示测试服务器。
 
-**Congratulations**! You have successfully run the Weather MCP Server in your local dev machine via Agent Builder as the MCP Client.
+**恭喜**！你已成功通过 Agent Builder 作为 MCP Client 在本地开发机器上运行了 Weather MCP Server。  
 ![DebugMCP](https://raw.githubusercontent.com/microsoft/windows-ai-studio-templates/refs/heads/dev/mcpServers/mcp_debug.gif)
 
-## What's included in the template
+## 模板包含内容
 
-| Folder / File| Contents                                     |
+| 文件夹 / 文件 | 内容 |
 | ------------ | -------------------------------------------- |
-| `.vscode`    | VSCode files for debugging                   |
-| `.aitk`      | Configurations for AI Toolkit                |
-| `src`        | The source code for the weather mcp server   |
+| `.vscode`    | 用于调试的 VSCode 配置文件                   |
+| `.aitk`      | AI Toolkit 的配置文件                         |
+| `src`        | weather mcp server 的源代码                   |
 
-## How to debug the Weather MCP Server
+## 如何调试 Weather MCP Server
 
-> Notes:
-> - [MCP Inspector](https://github.com/modelcontextprotocol/inspector) is a visual developer tool for testing and debugging MCP servers.
-> - All debugging modes support breakpoints, so you can add breakpoints to the tool implementation code.
+> 说明：
+> - [MCP Inspector](https://github.com/modelcontextprotocol/inspector) 是一个用于测试和调试 MCP Server 的可视化开发工具。
+> - 所有调试模式均支持断点，你可以在工具实现代码中添加断点。
 
-| Debug Mode | Description | Steps to debug |
+| 调试模式 | 说明 | 调试步骤 |
 | ---------- | ----------- | --------------- |
-| Agent Builder | Debug the MCP server in the Agent Builder via AI Toolkit. | 1. Open VS Code Debug panel. Select `Debug in Agent Builder` and press `F5` to start debugging the MCP server.<br>2. Use AI Toolkit Agent Builder to test the server with [this prompt](vscode://ms-windows-ai-studio.windows-ai-studio/open_prompt_builder?model_id=github/gpt-4o-mini&system_prompt=You%20are%20a%20weather%20forecast%20professional%20that%20can%20tell%20weather%20information%20based%20on%20given%20location&user_prompt=What%20is%20the%20weather%20in%20Shanghai?&track_from=vsc_md&mcp=weather_mcp). Server will be auto-connected to the Agent Builder.<br>3. Click `Run` to test the server with the prompt. |
-| MCP Inspector | Debug the MCP server using the MCP Inspector. | 1. Install [Node.js](https://nodejs.org/)<br> 2. Set up Inspector: `cd inspector` && `npm install` <br> 3. Open VS Code Debug panel. Select `Debug SSE in Inspector (Edge)` or `Debug SSE in Inspector (Chrome)`. Press F5 to start debugging.<br> 4. When MCP Inspector launches in the browser, click the `Connect` button to connect this MCP server.<br> 5. Then you can `List Tools`, select a tool, input parameters, and `Run Tool` to debug your server code.<br> |
+| Agent Builder | 通过 AI Toolkit 在 Agent Builder 中调试 MCP Server。 | 1. 打开 VS Code 调试面板。选择 `Debug in Agent Builder` 并按 `F5` 启动 MCP Server 调试。<br>2. 使用 AI Toolkit Agent Builder 通过[此提示](../../../../../../../../../../open_prompt_builder)测试服务器。服务器会自动连接到 Agent Builder。<br>3. 点击 `Run` 使用该提示测试服务器。 |
+| MCP Inspector | 使用 MCP Inspector 调试 MCP Server。 | 1. 安装 [Node.js](https://nodejs.org/)<br>2. 设置 Inspector：`cd inspector` && `npm install` <br>3. 打开 VS Code 调试面板。选择 `Debug SSE in Inspector (Edge)` 或 `Debug SSE in Inspector (Chrome)`，按 F5 启动调试。<br>4. 当 MCP Inspector 在浏览器中启动时，点击 `Connect` 按钮连接该 MCP Server。<br>5. 然后你可以 `List Tools`，选择工具，输入参数，点击 `Run Tool` 来调试服务器代码。<br> |
 
-## Default Ports and customizations
+## 默认端口及自定义
 
-| Debug Mode | Ports | Definitions | Customizations | Note |
+| 调试模式 | 端口 | 定义文件 | 自定义方式 | 备注 |
 | ---------- | ----- | ------------ | -------------- |-------------- |
-| Agent Builder | 3001 | [tasks.json](.vscode/tasks.json) | Edit [launch.json](.vscode/launch.json), [tasks.json](.vscode/tasks.json), [\_\_init\_\_.py](src/__init__.py), [mcp.json](.aitk/mcp.json) to change above ports. | N/A |
-| MCP Inspector | 3001 (Server); 5173 and 3000 (Inspector) | [tasks.json](.vscode/tasks.json) | Edit [launch.json](.vscode/launch.json), [tasks.json](.vscode/tasks.json), [\_\_init\_\_.py](src/__init__.py), [mcp.json](.aitk/mcp.json) to change above ports.| N/A |
+| Agent Builder | 3001 | [tasks.json](../../../../../../10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab3/code/weather_mcp/.vscode/tasks.json) | 编辑 [launch.json](../../../../../../10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab3/code/weather_mcp/.vscode/launch.json)、[tasks.json](../../../../../../10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab3/code/weather_mcp/.vscode/tasks.json)、[__init__.py](../../../../../../10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab3/code/weather_mcp/src/__init__.py)、[mcp.json](../../../../../../10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab3/code/weather_mcp/.aitk/mcp.json) 来修改端口。 | 无 |
+| MCP Inspector | 3001（服务器）；5173 和 3000（Inspector） | [tasks.json](../../../../../../10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab3/code/weather_mcp/.vscode/tasks.json) | 编辑 [launch.json](../../../../../../10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab3/code/weather_mcp/.vscode/launch.json)、[tasks.json](../../../../../../10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab3/code/weather_mcp/.vscode/tasks.json)、[__init__.py](../../../../../../10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab3/code/weather_mcp/src/__init__.py)、[mcp.json](../../../../../../10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/lab3/code/weather_mcp/.aitk/mcp.json) 来修改端口。 | 无 |
 
-## Feedback
+## 反馈
 
-If you have any feedback or suggestions for this template, please open an issue on the [AI Toolkit GitHub repository](https://github.com/microsoft/vscode-ai-toolkit/issues)
+如果你对该模板有任何反馈或建议，请在 [AI Toolkit GitHub 仓库](https://github.com/microsoft/vscode-ai-toolkit/issues) 提交 issue。
+
+**免责声明**：  
+本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。虽然我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始文件的母语版本应被视为权威来源。对于重要信息，建议采用专业人工翻译。我们不对因使用本翻译而产生的任何误解或误释承担责任。

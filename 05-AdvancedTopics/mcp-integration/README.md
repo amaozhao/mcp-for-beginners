@@ -1,27 +1,36 @@
-# Enterprise Integration
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "f84eaea79c8fa9ab318a494f40891814",
+  "translation_date": "2025-07-22T06:57:48+00:00",
+  "source_file": "05-AdvancedTopics/mcp-integration/README.md",
+  "language_code": "zh"
+}
+-->
+# 企业集成
 
-When building MCP Servers in an enterprise context, you often need to integrate with existing AI platforms and services. This section covers how to integrate MCP with enterprise systems like Azure OpenAI and Microsoft AI Foundry, enabling advanced AI capabilities and tool orchestration.
+在企业环境中构建 MCP 服务器时，通常需要与现有的 AI 平台和服务进行集成。本节将介绍如何将 MCP 与企业系统（如 Azure OpenAI 和 Microsoft AI Foundry）集成，以实现高级 AI 功能和工具编排。
 
-## Introduction
+## 简介
 
-In this lesson, you'll learn how to integrate Model Context Protocol (MCP) with enterprise AI systems, focusing on Azure OpenAI and Microsoft AI Foundry. These integrations allow you to leverage powerful AI models and tools while maintaining the flexibility and extensibility of MCP.
+在本课程中，您将学习如何将模型上下文协议（MCP）与企业 AI 系统集成，重点关注 Azure OpenAI 和 Microsoft AI Foundry。这些集成使您能够利用强大的 AI 模型和工具，同时保持 MCP 的灵活性和可扩展性。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lesson, you will be able to:
+完成本课程后，您将能够：
 
-- Integrate MCP with Azure OpenAI to utilize its AI capabilities.
-- Implement MCP tool orchestration with Azure OpenAI.
-- Combine MCP with Microsoft AI Foundry for advanced AI agent capabilities.
-- Leverage Azure Machine Learning (ML) for executing ML pipelines and registering models as MCP tools.
+- 将 MCP 与 Azure OpenAI 集成，以利用其 AI 功能。
+- 使用 Azure OpenAI 实现 MCP 工具编排。
+- 将 MCP 与 Microsoft AI Foundry 结合，提供高级 AI 代理功能。
+- 利用 Azure 机器学习（ML）执行 ML 管道并将模型注册为 MCP 工具。
 
-## Azure OpenAI Integration
+## Azure OpenAI 集成
 
-Azure OpenAI provides access to powerful AI models like GPT-4 and others. Integrating MCP with Azure OpenAI allows you to utilize these models while maintaining the flexibility of MCP's tool orchestration.
+Azure OpenAI 提供了对强大 AI 模型（如 GPT-4 等）的访问权限。将 MCP 与 Azure OpenAI 集成可以在保持 MCP 工具编排灵活性的同时利用这些模型。
 
-### C# Implementation
+### C# 实现
 
-In this code snippet, we demonstrate how to integrate MCP with Azure OpenAI using the Azure OpenAI SDK.
+以下代码片段展示了如何使用 Azure OpenAI SDK 将 MCP 与 Azure OpenAI 集成。
 
 ```csharp
 // .NET Azure OpenAI Integration
@@ -85,21 +94,21 @@ namespace EnterpriseIntegration
 }
 ```
 
-In the preceding code we've:
+在上述代码中，我们：
 
-- Configured the Azure OpenAI client with the endpoint, deployment name and API key.
-- Created a method `GetCompletionWithToolsAsync` to get completions with tool support.
-- Handled tool calls in the response.
+- 配置了 Azure OpenAI 客户端，包括端点、部署名称和 API 密钥。
+- 创建了一个方法 `GetCompletionWithToolsAsync`，用于获取支持工具的补全结果。
+- 处理了响应中的工具调用。
 
-You're encouraged to implement the actual tool handling logic based on your specific MCP server setup.
+建议您根据具体的 MCP 服务器设置实现实际的工具处理逻辑。
 
-## Microsoft AI Foundry Integration
+## Microsoft AI Foundry 集成
 
-Azure AI Foundry provides a platform for building and deploying AI agents. Integrating MCP with AI Foundry allows you to leverage its capabilities while maintaining the flexibility of MCP.
+Azure AI Foundry 提供了一个构建和部署 AI 代理的平台。将 MCP 与 AI Foundry 集成可以在保持 MCP 灵活性的同时利用其功能。
 
-In the below code, we develop an Agent integration that processes requests and handles tool calls using MCP.
+以下代码展示了一个代理集成，它处理请求并使用 MCP 处理工具调用。
 
-### Java Implementation
+### Java 实现
 
 ```java
 // Java AI Foundry Agent Integration
@@ -157,17 +166,17 @@ public class AIFoundryMcpBridge {
 }
 ```
 
-In the preceding code, we've:
+在上述代码中，我们：
 
-- Created an `AIFoundryMcpBridge` class that integrates with both AI Foundry and MCP.
-- Implemented a method `processAgentRequest` that processes an AI Foundry agent request.
-- Handled tool calls by executing them through the MCP client and submitting the results back to the AI Foundry agent.
+- 创建了一个 `AIFoundryMcpBridge` 类，该类与 AI Foundry 和 MCP 都进行了集成。
+- 实现了一个方法 `processAgentRequest`，用于处理 AI Foundry 代理请求。
+- 通过 MCP 客户端执行工具调用，并将结果提交回 AI Foundry 代理。
 
-## Integrating MCP with Azure ML
+## MCP 与 Azure ML 的集成
 
-Integrating MCP with Azure Machine Learning (ML) allows you to leverage Azure's powerful ML capabilities while maintaining the flexibility of MCP. This integration can be used to execute ML pipelines, register models as tools, and manage compute resources.
+将 MCP 与 Azure 机器学习（ML）集成可以在保持 MCP 灵活性的同时利用 Azure 强大的 ML 功能。此集成可用于执行 ML 管道、将模型注册为工具以及管理计算资源。
 
-### Python Implementation
+### Python 实现
 
 ```python
 # Python Azure AI Integration
@@ -291,14 +300,17 @@ class EnterpriseAiIntegration:
         return mapping.get(ml_type, "string")
 ```
 
-In the preceding code, we've:
+在上述代码中，我们：
 
-- Created an `EnterpriseAiIntegration` class that integrates MCP with Azure ML.
-- Implemented an `execute_ml_pipeline` method that processes input data using MCP tools and submits an ML pipeline to Azure ML.
-- Implemented a `register_ml_model_as_tool` method that registers an Azure ML model as an MCP tool, including creating the necessary deployment environment and compute resources.
-- Mapped Azure ML data types to JSON schema types for tool registration.
-- Used asynchronous programming to handle potentially long-running operations like ML pipeline execution and model registration.
+- 创建了一个 `EnterpriseAiIntegration` 类，将 MCP 与 Azure ML 集成。
+- 实现了一个 `execute_ml_pipeline` 方法，使用 MCP 工具处理输入数据并将 ML 管道提交到 Azure ML。
+- 实现了一个 `register_ml_model_as_tool` 方法，将 Azure ML 模型注册为 MCP 工具，包括创建必要的部署环境和计算资源。
+- 将 Azure ML 数据类型映射到 JSON schema 类型以进行工具注册。
+- 使用异步编程处理可能耗时较长的操作，例如 ML 管道执行和模型注册。
 
-## What's next
+## 下一步
 
-- [5.2 Multi modality](../mcp-multi-modality/README.md)
+- [5.2 多模态](../mcp-multi-modality/README.md)
+
+**免责声明**：  
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。虽然我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

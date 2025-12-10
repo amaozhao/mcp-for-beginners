@@ -1,43 +1,52 @@
-# MCP Java Client - Calculator Demo
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "7074b9f4c8cd147c1c10f569d8508c82",
+  "translation_date": "2025-07-13T18:31:17+00:00",
+  "source_file": "03-GettingStarted/02-client/solution/java/README.md",
+  "language_code": "zh"
+}
+-->
+# MCP Java 客户端 - 计算器演示
 
-This project demonstrates how to create a Java client that connects to and interacts with an MCP (Model Context Protocol) server. In this example, we'll connect to the calculator server from Chapter 01 and perform various mathematical operations.
+本项目演示如何创建一个 Java 客户端，连接并与 MCP（模型上下文协议）服务器交互。在本例中，我们将连接到第01章的计算器服务器，并执行各种数学运算。
 
-## Prerequisites
+## 前提条件
 
-Before running this client, you need to:
+在运行此客户端之前，您需要：
 
-1. **Start the Calculator Server** from Chapter 01:
-   - Navigate to the calculator server directory: `03-GettingStarted/01-first-server/solution/java/`
-   - Build and run the calculator server:
+1. **启动第01章的计算器服务器**：
+   - 进入计算器服务器目录：`03-GettingStarted/01-first-server/solution/java/`
+   - 构建并运行计算器服务器：
      ```cmd
      cd ..\01-first-server\solution\java
      .\mvnw clean install -DskipTests
      java -jar target\calculator-server-0.0.1-SNAPSHOT.jar
      ```
-   - The server should be running on `http://localhost:8080`
+   - 服务器应运行在 `http://localhost:8080`
 
-2. **Java 21 or higher** installed on your system
-3. **Maven** (included via Maven Wrapper)
+2. 在系统中安装 **Java 21 或更高版本**
+3. 安装 **Maven**（通过 Maven Wrapper 包含）
 
-## What is the SDKClient?
+## 什么是 SDKClient？
 
-The `SDKClient` is a Java application that demonstrates how to:
-- Connect to an MCP server using Server-Sent Events (SSE) transport
-- List available tools from the server
-- Call various calculator functions remotely
-- Handle responses and display results
+`SDKClient` 是一个 Java 应用程序，演示如何：
+- 使用 Server-Sent Events (SSE) 传输连接到 MCP 服务器
+- 列出服务器上可用的工具
+- 远程调用各种计算器函数
+- 处理响应并显示结果
 
-## How It Works
+## 工作原理
 
-The client uses the Spring AI MCP framework to:
+客户端使用 Spring AI MCP 框架来：
 
-1. **Establish Connection**: Creates a WebFlux SSE client transport to connect to the calculator server
-2. **Initialize Client**: Sets up the MCP client and establishes the connection
-3. **Discover Tools**: Lists all available calculator operations
-4. **Execute Operations**: Calls various mathematical functions with sample data
-5. **Display Results**: Shows the results of each calculation
+1. **建立连接**：创建一个 WebFlux SSE 客户端传输，连接到计算器服务器
+2. **初始化客户端**：设置 MCP 客户端并建立连接
+3. **发现工具**：列出所有可用的计算器操作
+4. **执行操作**：使用示例数据调用各种数学函数
+5. **显示结果**：展示每个计算结果
 
-## Project Structure
+## 项目结构
 
 ```
 src/
@@ -51,9 +60,9 @@ src/
                             └── SDKClient.java    # Main client implementation
 ```
 
-## Key Dependencies
+## 主要依赖
 
-The project uses the following key dependencies:
+项目使用以下主要依赖：
 
 ```xml
 <dependency>
@@ -62,44 +71,44 @@ The project uses the following key dependencies:
 </dependency>
 ```
 
-This dependency provides:
-- `McpClient` - The main client interface
-- `WebFluxSseClientTransport` - SSE transport for web-based communication
-- MCP protocol schemas and request/response types
+该依赖提供：
+- `McpClient` - 主要客户端接口
+- `WebFluxSseClientTransport` - 用于基于 Web 的 SSE 传输
+- MCP 协议的模式和请求/响应类型
 
-## Building the Project
+## 构建项目
 
-Build the project using the Maven wrapper:
+使用 Maven Wrapper 构建项目：
 
 ```cmd
 .\mvnw clean install
 ```
 
-## Running the Client
+## 运行客户端
 
 ```cmd
 java -jar .\target\calculator-client-0.0.1-SNAPSHOT.jar
 ```
 
-**Note**: Make sure the calculator server is running on `http://localhost:8080` before executing any of these commands.
+**注意**：执行这些命令前，请确保计算器服务器正在 `http://localhost:8080` 运行。
 
-## What the Client Does
+## 客户端功能
 
-When you run the client, it will:
+运行客户端时，它将：
 
-1. **Connect** to the calculator server at `http://localhost:8080`
-2. **List Tools** - Shows all available calculator operations
-3. **Perform Calculations**:
-   - Addition: 5 + 3 = 8
-   - Subtraction: 10 - 4 = 6
-   - Multiplication: 6 × 7 = 42
-   - Division: 20 ÷ 4 = 5
-   - Power: 2^8 = 256
-   - Square Root: √16 = 4
-   - Absolute Value: |-5.5| = 5.5
-   - Help: Shows available operations
+1. **连接** 到 `http://localhost:8080` 的计算器服务器
+2. **列出工具** - 显示所有可用的计算器操作
+3. **执行计算**：
+   - 加法：5 + 3 = 8
+   - 减法：10 - 4 = 6
+   - 乘法：6 × 7 = 42
+   - 除法：20 ÷ 4 = 5
+   - 幂运算：2^8 = 256
+   - 平方根：√16 = 4
+   - 绝对值：|-5.5| = 5.5
+   - 帮助：显示可用操作
 
-## Expected Output
+## 预期输出
 
 ```
 Available Tools = ListToolsResult[tools=[Tool[name=add, description=Add two numbers together, ...], ...]]
@@ -113,53 +122,56 @@ Absolute Result = CallToolResult[content=[TextContent[text="|-5,50| = 5,50"]], i
 Help = CallToolResult[content=[TextContent[text="Basic Calculator MCP Service\n\nAvailable operations:\n1. add(a, b) - Adds two numbers\n2. subtract(a, b) - Subtracts the second number from the first\n..."]], isError=false]
 ```
 
-**Note**: You may see Maven warnings about lingering threads at the end - this is normal for reactive applications and doesn't indicate an error.
+**注意**：你可能会看到 Maven 关于残留线程的警告——这是响应式应用的正常现象，不代表错误。
 
-## Understanding the Code
+## 代码解析
 
-### 1. Transport Setup
+### 1. 传输设置
 ```java
 var transport = new WebFluxSseClientTransport(WebClient.builder().baseUrl("http://localhost:8080"));
 ```
-This creates an SSE (Server-Sent Events) transport that connects to the calculator server.
+这段代码创建了一个 SSE（服务器发送事件）传输，连接到计算器服务器。
 
-### 2. Client Creation
+### 2. 客户端创建
 ```java
 var client = McpClient.sync(this.transport).build();
 client.initialize();
 ```
-Creates a synchronous MCP client and initializes the connection.
+创建一个同步的 MCP 客户端并初始化连接。
 
-### 3. Calling Tools
+### 3. 调用工具
 ```java
 CallToolResult resultAdd = client.callTool(new CallToolRequest("add", Map.of("a", 5.0, "b", 3.0)));
 ```
-Calls the "add" tool with parameters a=5.0 and b=3.0.
+调用名为 "add" 的工具，参数为 a=5.0 和 b=3.0。
 
-## Troubleshooting
+## 故障排除
 
-### Server Not Running
-If you get connection errors, make sure the calculator server from Chapter 01 is running:
+### 服务器未运行
+如果出现连接错误，请确保第01章的计算器服务器正在运行：
 ```
 Error: Connection refused
 ```
-**Solution**: Start the calculator server first.
+**解决方案**：先启动计算器服务器。
 
-### Port Already in Use
-If port 8080 is busy:
+### 端口已被占用
+如果端口 8080 被占用：
 ```
 Error: Address already in use
 ```
-**Solution**: Stop other applications using port 8080 or modify the server to use a different port.
+**解决方案**：停止占用端口 8080 的其他应用，或修改服务器使用其他端口。
 
-### Build Errors
-If you encounter build errors:
+### 构建错误
+如果遇到构建错误：
 ```cmd
 .\mvnw clean install -DskipTests
 ```
 
-## Learn More
+## 了解更多
 
-- [Spring AI MCP Documentation](https://docs.spring.io/spring-ai/reference/api/mcp/)
-- [Model Context Protocol Specification](https://modelcontextprotocol.io/)
-- [Spring WebFlux Documentation](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html)
+- [Spring AI MCP 文档](https://docs.spring.io/spring-ai/reference/api/mcp/)
+- [模型上下文协议规范](https://modelcontextprotocol.io/)
+- [Spring WebFlux 文档](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html)
+
+**免责声明**：  
+本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。虽然我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始文件的母语版本应被视为权威来源。对于重要信息，建议采用专业人工翻译。因使用本翻译而产生的任何误解或误释，我们概不负责。

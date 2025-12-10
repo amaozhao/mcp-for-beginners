@@ -1,33 +1,42 @@
-# Creating a client
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "94c80ae71fb9971e9b57b51ab0912121",
+  "translation_date": "2025-08-12T19:07:01+00:00",
+  "source_file": "03-GettingStarted/02-client/README.md",
+  "language_code": "zh"
+}
+-->
+# 创建客户端
 
-Clients are custom applications or scripts that communicate directly with an MCP Server to request resources, tools, and prompts. Unlike using the inspector tool, which provides a graphical interface for interacting with the server, writing your own client allows for programmatic and automated interactions. This enables developers to integrate MCP capabilities into their own workflows, automate tasks, and build custom solutions tailored to specific needs.
+客户端是与 MCP 服务器直接通信以请求资源、工具和提示的自定义应用程序或脚本。与使用提供图形界面的检查工具不同，编写自己的客户端可以实现编程和自动化交互。这使开发人员能够将 MCP 功能集成到自己的工作流程中，自动化任务，并构建针对特定需求量身定制的解决方案。
 
-## Overview
+## 概述
 
-This lesson introduces the concept of clients within the Model Context Protocol (MCP) ecosystem. You'll learn how to write your own client and have it connect to an MCP Server.
+本课程介绍了 Model Context Protocol (MCP) 生态系统中的客户端概念。您将学习如何编写自己的客户端并将其连接到 MCP 服务器。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lesson, you will be able to:
+完成本课程后，您将能够：
 
-- Understand what a client can do.
-- Write your own client.
-- Connect and test the client with an MCP server to ensure the latter works as expected.
+- 了解客户端的功能。
+- 编写自己的客户端。
+- 连接并测试客户端与 MCP 服务器，以确保服务器正常工作。
 
-## What goes into writing a client?
+## 编写客户端需要做什么？
 
-To write a client, you'll need to do the following:
+要编写客户端，您需要完成以下步骤：
 
-- **Import the correct libraries**. You'll be using the same library as before, just different constructs.
-- **Instantiate a client**. This will involve creating a client instance and connect it to the chosen transport method.
-- **Decide on what resources to list**. Your MCP server comes with resources, tools and prompts, you need to decide which one to list.
-- **Integrate the client to a host application**. Once you know the capabilities of the server you need to integrate this your host application so that if a user types a prompt or other command the corresponding server feature is invoked.
+- **导入正确的库**。您将使用之前相同的库，但需要不同的构造。
+- **实例化客户端**。这包括创建客户端实例并将其连接到选定的传输方法。
+- **决定要列出的资源**。您的 MCP 服务器提供资源、工具和提示，您需要决定列出哪些内容。
+- **将客户端集成到主机应用程序中**。一旦了解了服务器的功能，您需要将其集成到主机应用程序中，以便用户输入提示或其他命令时，调用相应的服务器功能。
 
-Now that we understand at high level what we're about to do, let's look at an example next.
+现在我们已经了解了即将进行的操作的总体概况，接下来让我们看一个示例。
 
-### An example client
+### 示例客户端
 
-Let's have a look at this example client:
+让我们看一个示例客户端：
 
 ### TypeScript
 
@@ -77,23 +86,23 @@ const result = await client.callTool({
 });
 ```
 
-In the preceding code we:
+在上述代码中，我们：
 
-- Import the libraries
-- Create an instance of a client and connect it using stdio for transport.
-- List prompts, resources and tools and invoke them all.
+- 导入了库。
+- 创建了一个客户端实例，并使用 stdio 作为传输方式进行连接。
+- 列出了提示、资源和工具，并调用了它们。
 
-There you have it, a client that can talk to an MCP Server.
+就是这样，一个可以与 MCP 服务器通信的客户端。
 
-Let's take our time in the next exercise section and break down each code snippet and explain what's going on.
+接下来，我们将在练习部分逐步分解每段代码并解释其作用。
 
-## Exercise: Writing a client
+## 练习：编写客户端
 
-As said above, let's take our time explaining the code, and by all means code along if you want.
+如上所述，我们将逐步解释代码，当然，如果您愿意，可以跟着一起编写代码。
 
-### -1- Import the libraries
+### -1- 导入库
 
-Let's import the libraries we need, we will need references to a client and to our chosen transport protocol, stdio. stdio is a protocol for things meant to run on your local machine. SSE is another transport protocol we will show in future chapters but that's your other option. For now though, let's continue with stdio.
+让我们导入所需的库，我们需要引用客户端和选定的传输协议 stdio。stdio 是一种用于本地运行的协议。SSE 是另一种传输协议，我们将在后续章节中展示，但这是您的另一个选择。现在，让我们继续使用 stdio。
 
 #### TypeScript
 
@@ -121,7 +130,7 @@ using ModelContextProtocol.Protocol.Transport;
 
 #### Java
 
-For Java, you'll create a client that connects to the MCP server from the previous exercise. Using the same Java Spring Boot project structure from [Getting Started with MCP Server](../01-first-server/solution/java), create a new Java class called `SDKClient` in the `src/main/java/com/microsoft/mcp/sample/client/` folder and add the following imports:
+对于 Java，您将创建一个客户端，该客户端连接到之前练习中的 MCP 服务器。使用 [MCP 服务器入门](../../../../03-GettingStarted/01-first-server/solution/java) 中的 Java Spring Boot 项目结构，在 `src/main/java/com/microsoft/mcp/sample/client/` 文件夹中创建一个名为 `SDKClient` 的新 Java 类，并添加以下导入：
 
 ```java
 import java.util.Map;
@@ -136,7 +145,7 @@ import io.modelcontextprotocol.spec.McpSchema.ListToolsResult;
 
 #### Rust
 
-You will need to add the following dependencies to your `Cargo.toml` file.
+您需要在 `Cargo.toml` 文件中添加以下依赖项。
 
 ```toml
 [package]
@@ -150,7 +159,7 @@ serde_json = "1.0.141"
 tokio = { version = "1.46.1", features = ["rt-multi-thread"] }
 ```
 
-From there, you can import the necessary libraries in your client code.
+然后，您可以在客户端代码中导入必要的库。
 
 ```rust
 use rmcp::{
@@ -162,11 +171,11 @@ use rmcp::{
 use tokio::process::Command;
 ```
 
-Let's move on to instantiation.
+接下来是实例化。
 
-### -2- Instantiating client and transport
+### -2- 实例化客户端和传输
 
-We will need to create an instance of the transport and that of our client:
+我们需要创建传输实例以及客户端实例：
 
 #### TypeScript
 
@@ -186,9 +195,9 @@ const client = new Client(
 await client.connect(transport);
 ```
 
-In the preceding code we've:
+在上述代码中，我们：
 
-- Created an stdio transport instance. Note how it specifies command and args for how to find and start up the server as that's something we will need to do as we create the client.
+- 创建了一个 stdio 传输实例。注意它如何指定命令和参数以找到并启动服务器，这是我们在创建客户端时需要做的。
 
     ```typescript
     const transport = new StdioClientTransport({
@@ -197,7 +206,7 @@ In the preceding code we've:
     });
     ```
 
-- Instantiated a client by giving it a name and version.
+- 实例化了一个客户端，并为其指定了名称和版本。
 
     ```typescript
     const client = new Client(
@@ -207,7 +216,7 @@ In the preceding code we've:
     });
     ```
 
-- Connected the client to the chosen transport.
+- 将客户端连接到选定的传输方式。
 
     ```typescript
     await client.connect(transport);
@@ -242,12 +251,12 @@ if __name__ == "__main__":
     asyncio.run(run())
 ```
 
-In the preceding code we've:
+在上述代码中，我们：
 
-- Imported the needed libraries
-- Instantiated a server parameters object as we will use this to run the server so we can connect to it with our client.
-- Defined a method `run` that in turn calls `stdio_client` which starts a client session.
-- Created an entry point where we provide the `run` method to `asyncio.run`.
+- 导入了所需的库。
+- 实例化了一个服务器参数对象，因为我们将使用它运行服务器，以便可以通过客户端连接到它。
+- 定义了一个 `run` 方法，该方法调用 `stdio_client` 启动客户端会话。
+- 创建了一个入口点，在其中我们将 `run` 方法提供给 `asyncio.run`。
 
 #### .NET
 
@@ -276,12 +285,12 @@ var clientTransport = new StdioClientTransport(new()
 await using var mcpClient = await McpClientFactory.CreateAsync(clientTransport);
 ```
 
-In the preceding code we've:
+在上述代码中，我们：
 
-- Imported the needed libraries.
-- Create an stdio transport and created a client `mcpClient`. The latter is something we will use to list and invoke features on the MCP Server.
+- 导入了所需的库。
+- 创建了一个 stdio 传输，并创建了一个客户端 `mcpClient`。后者是我们用来列出和调用 MCP 服务器功能的工具。
 
-Note, in "Arguments", you can either point to the *.csproj* or to the executable.
+注意，在 "Arguments" 中，您可以指向 *.csproj* 或可执行文件。
 
 #### Java
 
@@ -308,16 +317,16 @@ public class SDKClient {
 }
 ```
 
-In the preceding code we've:
+在上述代码中，我们：
 
-- Created a main method that sets up an SSE transport pointing to `http://localhost:8080` where our MCP server will be running.
-- Created a client class that takes the transport as a constructor parameter.
-- In the `run` method, we create a synchronous MCP client using the transport and initialize the connection.
-- Used SSE (Server-Sent Events) transport which is suitable for HTTP-based communication with Java Spring Boot MCP servers.
+- 创建了一个主方法，该方法设置了指向 `http://localhost:8080` 的 SSE 传输，我们的 MCP 服务器将在此运行。
+- 创建了一个客户端类，该类将传输作为构造函数参数。
+- 在 `run` 方法中，我们使用传输创建了一个同步 MCP 客户端并初始化了连接。
+- 使用了 SSE（服务器发送事件）传输，这适用于基于 HTTP 的 Java Spring Boot MCP 服务器通信。
 
 #### Rust
 
-Note this Rust client assumes the server is a sibling project named "calculator-server" in the same directory. The code below will start the server and connect to it.
+此 Rust 客户端假设服务器是同一目录中的一个名为 "calculator-server" 的兄弟项目。以下代码将启动服务器并连接到它。
 
 ```rust
 async fn main() -> Result<(), RmcpError> {
@@ -347,9 +356,9 @@ async fn main() -> Result<(), RmcpError> {
 }
 ```
 
-### -3- Listing the server features
+### -3- 列出服务器功能
 
-Now, we have a client that can connect to should the program be run. However, it doesn't actually list its features so let's do that next:
+现在，我们有一个可以连接的客户端，但程序运行时它实际上并没有列出其功能，因此接下来让我们完成这一部分：
 
 #### TypeScript
 
@@ -380,7 +389,7 @@ for tool in tools.tools:
     print("Tool: ", tool.name)
 ```
 
-Here we list the available resources, `list_resources()` and tools, `list_tools` and print them out.
+在这里，我们列出了可用的资源 `list_resources()` 和工具 `list_tools` 并打印出来。
 
 #### .NET
 
@@ -391,7 +400,7 @@ foreach (var tool in await client.ListToolsAsync())
 }
 ```
 
-Above is an example how we can list the tools on the server. For each tool, we then print out its name.
+以上是一个列出服务器工具的示例。对于每个工具，我们打印出其名称。
 
 #### Java
 
@@ -404,17 +413,17 @@ System.out.println("Available Tools = " + toolsList);
 client.ping();
 ```
 
-In the preceding code we've:
+在上述代码中，我们：
 
-- Called `listTools()` to get all available tools from the MCP server.
-- Used `ping()` to verify that the connection to the server is working.
-- The `ListToolsResult` contains information about all tools including their names, descriptions, and input schemas.
+- 调用了 `listTools()` 获取 MCP 服务器的所有可用工具。
+- 使用 `ping()` 验证与服务器的连接是否正常。
+- `ListToolsResult` 包含所有工具的信息，包括它们的名称、描述和输入模式。
 
-Great, now we've captures all the features. Now the question is when do we use them? Well, this client is pretty simple, simple in the sense that we will need to explicitly call the features when we want them. In the next chapter, we will create a more advanced client that has access to it's own large language model, LLM. For now though, let's see how we can invoke the features on the server:
+很好，现在我们已经捕获了所有功能。那么问题是我们什么时候使用它们？这个客户端相对简单，简单的意思是我们需要显式调用功能才能使用它们。在下一章中，我们将创建一个更高级的客户端，它可以访问自己的大型语言模型（LLM）。不过现在，让我们看看如何调用服务器上的功能：
 
 #### Rust
 
-In the main function, after initializing the client, we can initialize the server and list some of its features.
+在主函数中，在初始化客户端之后，我们可以初始化服务器并列出其一些功能。
 
 ```rust
 // Initialize
@@ -426,9 +435,9 @@ let tools = client.list_tools(Default::default()).await?;
 println!("Available tools: {:?}", tools);
 ```
 
-### -4- Invoke features
+### -4- 调用功能
 
-To invoke the features we need to ensure we specify the correct arguments and in some cases the name of what we're trying to invoke.
+要调用功能，我们需要确保指定正确的参数，有时还需要指定我们尝试调用的名称。
 
 #### TypeScript
 
@@ -456,9 +465,9 @@ const promptResult = await client.getPrompt({
 })
 ```
 
-In the preceding code we:
+在上述代码中，我们：
 
-- Read a resource, we call the resource by calling `readResource()` specifying `uri`. Here's what it most likely look like on the server side:
+- 读取了一个资源，通过调用 `readResource()` 并指定 `uri` 来完成。以下是服务器端的代码示例：
 
     ```typescript
     server.resource(
@@ -473,9 +482,9 @@ In the preceding code we:
     );
     ```
 
-    Our `uri` value `file://example.txt` matches `file://{name}` on the server. `example.txt` will be mapped to `name`.
+    我们的 `uri` 值 `file://example.txt` 与服务器上的 `file://{name}` 匹配。`example.txt` 将映射到 `name`。
 
-- Call a tool, we call it by specifying its `name` and its `arguments` like so:
+- 调用了一个工具，通过指定其 `name` 和 `arguments` 来完成：
 
     ```typescript
     const result = await client.callTool({
@@ -486,7 +495,7 @@ In the preceding code we:
     });
     ```
 
-- Get prompt, to get a prompt, you call `getPrompt()` with `name` and `arguments`. The server code looks like so:
+- 获取提示，通过调用 `getPrompt()` 并提供 `name` 和 `arguments` 来完成。服务器代码如下所示：
 
     ```typescript
     server.prompt(
@@ -504,7 +513,7 @@ In the preceding code we:
     );
     ```
 
-    and your resulting client code therefore looks like so to match what's declared on the server:
+    因此，为了匹配服务器上声明的内容，您的客户端代码如下所示：
 
     ```typescript
     const promptResult = await client.getPrompt({
@@ -528,14 +537,14 @@ result = await session.call_tool("add", arguments={"a": 1, "b": 7})
 print(result.content)
 ```
 
-In the preceding code, we've:
+在上述代码中，我们：
 
-- Called a resource called `greeting` using `read_resource`.
-- Invoked a tool called `add` using `call_tool`.
+- 调用了一个名为 `greeting` 的资源，使用 `read_resource`。
+- 调用了一个名为 `add` 的工具，使用 `call_tool`。
 
 #### .NET
 
-1. Let's add some code to call a tool:
+1. 添加一些代码以调用工具：
 
   ```csharp
   var result = await mcpClient.CallToolAsync(
@@ -544,7 +553,7 @@ In the preceding code, we've:
       cancellationToken:CancellationToken.None);
   ```
 
-1. To print out the result, here's some code to handle that:
+1. 打印结果，以下是处理结果的代码：
 
   ```csharp
   Console.WriteLine(result.Content.First(c => c.Type == "text").Text);
@@ -571,12 +580,12 @@ CallToolResult resultHelp = client.callTool(new CallToolRequest("help", Map.of()
 System.out.println("Help = " + resultHelp);
 ```
 
-In the preceding code we've:
+在上述代码中，我们：
 
-- Called multiple calculator tools using `callTool()` method with `CallToolRequest` objects.
-- Each tool call specifies the tool name and a `Map` of arguments required by that tool.
-- The server tools expect specific parameter names (like "a", "b" for mathematical operations).
-- Results are returned as `CallToolResult` objects containing the response from the server.
+- 使用 `callTool()` 方法和 `CallToolRequest` 对象调用了多个计算器工具。
+- 每个工具调用都指定了工具名称和工具所需的参数 `Map`。
+- 服务器工具期望特定的参数名称（例如数学运算中的 "a" 和 "b"）。
+- 结果以 `CallToolResult` 对象的形式返回，包含服务器的响应。
 
 #### Rust
 
@@ -593,13 +602,13 @@ let tool_result = client
 println!("Result of {:?} + {:?}: {:?}", a, b, tool_result);
 ```
 
-### -5- Run the client
+### -5- 运行客户端
 
-To run the client, type the following command in the terminal:
+要运行客户端，请在终端中输入以下命令：
 
 #### TypeScript
 
-Add the following entry to your "scripts" section in *package.json*:
+在 *package.json* 的 "scripts" 部分添加以下条目：
 
 ```json
 "client": "tsc && node build/client.js"
@@ -611,7 +620,7 @@ npm run client
 
 #### Python
 
-Call the client with the following command:
+使用以下命令调用客户端：
 
 ```sh
 python client.py
@@ -625,7 +634,7 @@ dotnet run
 
 #### Java
 
-First, ensure your MCP server is running on `http://localhost:8080`. Then run the client:
+首先，确保您的 MCP 服务器正在 `http://localhost:8080` 上运行。然后运行客户端：
 
 ```bash
 # Build you project
@@ -635,7 +644,7 @@ First, ensure your MCP server is running on `http://localhost:8080`. Then run th
 ./mvnw exec:java -Dexec.mainClass="com.microsoft.mcp.sample.client.SDKClient"
 ```
 
-Alternatively, you can run the complete client project provided in the solution folder `03-GettingStarted\02-client\solution\java`:
+或者，您可以运行解决方案文件夹 `03-GettingStarted\02-client\solution\java` 中提供的完整客户端项目：
 
 ```bash
 # Navigate to the solution directory
@@ -653,11 +662,11 @@ cargo fmt
 cargo run
 ```
 
-## Assignment
+## 作业
 
-In this assignment, you'll use what you've learned in creating a client but create a client of your own.
+在本次作业中，您将使用所学内容创建自己的客户端。
 
-Here's a server you can use that you need to call via your client code, see if you can add more features to the server to make it more interesting.
+以下是您可以使用的服务器，您需要通过客户端代码调用它，看看是否可以为服务器添加更多功能，使其更有趣。
 
 ### TypeScript
 
@@ -761,21 +770,21 @@ public static class CalculatorTool
 }
 ```
 
-See this project to see how you can [add prompts and resources](https://github.com/modelcontextprotocol/csharp-sdk/blob/main/samples/EverythingServer/Program.cs).
+查看此项目以了解如何 [添加提示和资源](https://github.com/modelcontextprotocol/csharp-sdk/blob/main/samples/EverythingServer/Program.cs)。
 
-Also, check this link for how to invoke [prompts and resources](https://github.com/modelcontextprotocol/csharp-sdk/blob/main/src/ModelContextProtocol/Client/).
+同时，查看此链接以了解如何调用 [提示和资源](https://github.com/modelcontextprotocol/csharp-sdk/blob/main/src/ModelContextProtocol/Client/)。
 
 ### Rust
 
-In the [previous section](../01-first-server), you learned how to create a simple MCP server with Rust. You can continue to build on that or check this link for more Rust-based MCP server examples: [MCP Server Examples](https://github.com/modelcontextprotocol/rust-sdk/tree/main/examples/servers)
+在 [上一节](../../../../03-GettingStarted/01-first-server) 中，您学习了如何使用 Rust 创建一个简单的 MCP 服务器。您可以继续基于此构建，或者查看此链接以获取更多基于 Rust 的 MCP 服务器示例：[MCP 服务器示例](https://github.com/modelcontextprotocol/rust-sdk/tree/main/examples/servers)。
 
-## Solution
+## 解决方案
 
-The **solution folder** contains complete, ready-to-run client implementations that demonstrate all the concepts covered in this tutorial. Each solution includes both client and server code organized in separate, self-contained projects.
+**解决方案文件夹**包含完整的、可运行的客户端实现，展示了本教程中涵盖的所有概念。每个解决方案包括客户端和服务器代码，组织为独立的项目。
 
-### 📁 Solution Structure
+### 📁 解决方案结构
 
-The solution directory is organized by programming language:
+解决方案目录按编程语言组织：
 
 ```text
 solution/
@@ -805,19 +814,19 @@ solution/
     └── server.csproj    # Server project file
 ```
 
-### 🚀 What Each Solution Includes
+### 🚀 每个解决方案包含的内容
 
-Each language-specific solution provides:
+每个语言特定的解决方案提供：
 
-- **Complete client implementation** with all features from the tutorial
-- **Working project structure** with proper dependencies and configuration
-- **Build and run scripts** for easy setup and execution
-- **Detailed README** with language-specific instructions
-- **Error handling** and result processing examples
+- **完整的客户端实现**，包含本教程中的所有功能。
+- **工作项目结构**，具有适当的依赖项和配置。
+- **构建和运行脚本**，便于设置和执行。
+- **详细的 README**，提供语言特定的说明。
+- **错误处理**和结果处理示例。
 
-### 📖 Using the Solutions
+### 📖 使用解决方案
 
-1. **Navigate to your preferred language folder**:
+1. **导航到您选择的语言文件夹**：
 
    ```bash
    cd solution/typescript/    # For TypeScript
@@ -826,12 +835,12 @@ Each language-specific solution provides:
    cd solution/dotnet/        # For .NET
    ```
 
-2. **Follow the README instructions** in each folder for:
-   - Installing dependencies
-   - Building the project
-   - Running the client
+2. **按照每个文件夹中的 README 说明**：
+   - 安装依赖项
+   - 构建项目
+   - 运行客户端
 
-3. **Example output** you should see:
+3. **您应该看到的示例输出**：
 
    ```text
    Prompt: Please review this code: console.log("hello");
@@ -839,72 +848,74 @@ Each language-specific solution provides:
    Tool result: { content: [ { type: 'text', text: '9' } ] }
    ```
 
-For complete documentation and step-by-step instructions, see: **[📖 Solution Documentation](./solution/README.md)**
+有关完整文档和逐步说明，请参阅：**[📖 解决方案文档](./solution/README.md)**
 
-## 🎯 Complete Examples
+## 🎯 完整示例
 
-We've provided complete, working client implementations for all programming languages covered in this tutorial. These examples demonstrate the full functionality described above and can be used as reference implementations or starting points for your own projects.
+我们提供了所有编程语言的完整、可运行的客户端实现。这些示例展示了上述功能的全部内容，可用作参考实现或您自己项目的起点。
 
-### Available Complete Examples
+### 可用的完整示例
 
-| Language | File | Description |
-|----------|------|-------------|
-| **Java** | [`client_example_java.java`](./client_example_java.java) | Complete Java client using SSE transport with comprehensive error handling |
-| **C#** | [`client_example_csharp.cs`](./client_example_csharp.cs) | Complete C# client using stdio transport with automatic server startup |
-| **TypeScript** | [`client_example_typescript.ts`](./client_example_typescript.ts) | Complete TypeScript client with full MCP protocol support |
-| **Python** | [`client_example_python.py`](./client_example_python.py) | Complete Python client using async/await patterns |
-| **Rust** | [`client_example_rust.rs`](./client_example_rust.rs) | Complete Rust client using Tokio for async operations |
+| 语言       | 文件                          | 描述                                     |
+|------------|-------------------------------|------------------------------------------|
+| **Java**   | [`client_example_java.java`](../../../../03-GettingStarted/02-client/client_example_java.java) | 使用 SSE 传输的完整 Java 客户端，包含全面的错误处理 |
+| **C#**     | [`client_example_csharp.cs`](../../../../03-GettingStarted/02-client/client_example_csharp.cs) | 使用 stdio 传输的完整 C# 客户端，支持自动服务器启动 |
+| **TypeScript** | [`client_example_typescript.ts`](../../../../03-GettingStarted/02-client/client_example_typescript.ts) | 完整的 TypeScript 客户端，支持所有 MCP 协议功能 |
+| **Python** | [`client_example_python.py`](../../../../03-GettingStarted/02-client/client_example_python.py) | 使用 async/await 模式的完整 Python 客户端 |
+| **Rust**   | [`client_example_rust.rs`](../../../../03-GettingStarted/02-client/client_example_rust.rs) | 使用 Tokio 进行异步操作的完整 Rust 客户端 |
+每个完整示例包括：
 
-Each complete example includes:
+- ✅ **连接建立**和错误处理  
+- ✅ **服务器发现**（工具、资源、提示等，视情况而定）  
+- ✅ **计算器操作**（加、减、乘、除、帮助）  
+- ✅ **结果处理**和格式化输出  
+- ✅ **全面的错误处理**  
+- ✅ **清晰、带注释的代码**，包含逐步说明  
 
-- ✅ **Connection establishment** and error handling
-- ✅ **Server discovery** (tools, resources, prompts where applicable)
-- ✅ **Calculator operations** (add, subtract, multiply, divide, help)
-- ✅ **Result processing** and formatted output
-- ✅ **Comprehensive error handling**
-- ✅ **Clean, documented code** with step-by-step comments
+### 开始使用完整示例
 
-### Getting Started with Complete Examples
+1. **从上表中选择您偏好的语言**  
+2. **查看完整示例文件**，以了解完整实现  
+3. **按照[`complete_examples.md`](./complete_examples.md)中的说明运行示例**  
+4. **根据您的具体用例修改和扩展**示例  
 
-1. **Choose your preferred language** from the table above
-2. **Review the complete example file** to understand the full implementation
-3. **Run the example** following the instructions in [`complete_examples.md`](./complete_examples.md)
-4. **Modify and extend** the example for your specific use case
+有关运行和自定义这些示例的详细文档，请参阅：**[📖 完整示例文档](./complete_examples.md)**
 
-For detailed documentation about running and customizing these examples, see: **[📖 Complete Examples Documentation](./complete_examples.md)**
+### 💡 解决方案与完整示例的对比
 
-### 💡 Solution vs. Complete Examples
-
-| **Solution Folder** | **Complete Examples** |
+| **解决方案文件夹** | **完整示例** |
 |--------------------|--------------------- |
-| Full project structure with build files | Single-file implementations |
-| Ready-to-run with dependencies | Focused code examples |
-| Production-like setup | Educational reference |
-| Language-specific tooling | Cross-language comparison |
+| 包含构建文件的完整项目结构 | 单文件实现 |
+| 带依赖项的即用型项目 | 专注于代码示例 |
+| 类生产环境的设置 | 教学参考 |
+| 语言特定的工具链 | 跨语言对比 |
 
-Both approaches are valuable - use the **solution folder** for complete projects and the **complete examples** for learning and reference.
+这两种方法各有价值——对于完整项目，请使用**解决方案文件夹**；对于学习和参考，请使用**完整示例**。
 
-## Key Takeaways
+## 关键要点
 
-The key takeaways for this chapter is the following about clients:
+本章的关键要点如下，关于客户端的内容：
 
-- Can be used to both discover and invoke features on the server.
-- Can start a server while it starts itself (like in this chapter) but clients can connect to running servers as well.
-- Is a great way to test out server capabilities next to alternatives like the Inspector as was described in the previous chapter.
+- 客户端既可以用于发现服务器功能，也可以调用服务器功能。  
+- 客户端可以在自身启动时启动服务器（如本章所述），但也可以连接到已运行的服务器。  
+- 客户端是测试服务器功能的绝佳方式，与上一章提到的Inspector等替代方案相比，具有独特优势。  
 
-## Additional Resources
+## 其他资源
 
-- [Building clients in MCP](https://modelcontextprotocol.io/quickstart/client)
+- [在MCP中构建客户端](https://modelcontextprotocol.io/quickstart/client)
 
-## Samples
+## 示例
 
-- [Java Calculator](../samples/java/calculator/README.md)
-- [.Net Calculator](../samples/csharp/)
-- [JavaScript Calculator](../samples/javascript/README.md)
-- [TypeScript Calculator](../samples/typescript/README.md)
-- [Python Calculator](../samples/python/)
-- [Rust Calculator](../samples/rust/)
+- [Java计算器](../samples/java/calculator/README.md)  
+- [.Net计算器](../../../../03-GettingStarted/samples/csharp)  
+- [JavaScript计算器](../samples/javascript/README.md)  
+- [TypeScript计算器](../samples/typescript/README.md)  
+- [Python计算器](../../../../03-GettingStarted/samples/python)  
+- [Rust计算器](../../../../03-GettingStarted/samples/rust)  
 
-## What's Next
+## 接下来
 
-- Next: [Creating a client with an LLM](../03-llm-client/README.md)
+- 下一步：[使用LLM创建客户端](../03-llm-client/README.md)  
+
+**免责声明**：  
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。虽然我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。

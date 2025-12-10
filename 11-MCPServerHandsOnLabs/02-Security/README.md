@@ -1,29 +1,38 @@
-# Security and Multi-Tenancy
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "3b3c9c3f033e59a30c92b5895e0dc9fd",
+  "translation_date": "2025-09-30T12:46:53+00:00",
+  "source_file": "11-MCPServerHandsOnLabs/02-Security/README.md",
+  "language_code": "zh"
+}
+-->
+# 安全性与多租户
 
-## 🎯 What This Lab Covers
+## 🎯 本实验内容
 
-This lab provides comprehensive guidance on implementing enterprise-grade security and multi-tenancy for MCP servers. You'll learn to design secure, compliant systems that protect sensitive retail data while enabling flexible access patterns across multiple tenants.
+本实验提供了关于为 MCP 服务器实施企业级安全性和多租户的全面指导。您将学习如何设计安全、合规的系统，以保护敏感的零售数据，同时支持跨多个租户的灵活访问模式。
 
-## Overview
+## 概述
 
-Security is paramount in retail applications that handle customer data, payment information, and business intelligence. This lab covers the complete security architecture from authentication and authorization to data isolation and compliance monitoring.
+安全性在处理客户数据、支付信息和商业智能的零售应用中至关重要。本实验涵盖了完整的安全架构，从身份验证和授权到数据隔离和合规监控。
 
-We implement a defense-in-depth strategy combining Azure identity services, PostgreSQL Row Level Security, application-level controls, and comprehensive audit logging to create a robust, compliant platform.
+我们采用纵深防御策略，结合 Azure 身份服务、PostgreSQL 行级安全（RLS）、应用级控制以及全面的审计日志记录，创建一个强大且合规的平台。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lab, you will be able to:
+完成本实验后，您将能够：
 
-- **Implement** enterprise-grade Row Level Security for multi-tenant data isolation
-- **Design** secure authentication and authorization patterns with Azure
-- **Configure** comprehensive audit logging for compliance requirements
-- **Apply** defense-in-depth security strategies across all application layers
-- **Validate** security implementations through systematic testing
-- **Monitor** security events and respond to potential threats
+- **实施** 企业级行级安全以实现多租户数据隔离  
+- **设计** 使用 Azure 的安全身份验证和授权模式  
+- **配置** 满足合规要求的全面审计日志记录  
+- **应用** 跨所有应用层的纵深防御安全策略  
+- **验证** 通过系统化测试验证安全性实施  
+- **监控** 安全事件并响应潜在威胁  
 
-## 🔐 Multi-Tenant Security Architecture
+## 🔐 多租户安全架构
 
-### Security Layers Overview
+### 安全层概述
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -44,24 +53,25 @@ By the end of this lab, you will be able to:
 └─────────────────────────────────────────────────┘
 ```
 
-### Multi-Tenancy Models
 
-Our implementation uses the **Shared Database, Shared Schema** model with Row Level Security:
+### 多租户模型
 
-**Benefits:**
-- Cost-effective resource utilization
-- Simplified maintenance and updates
-- Strong data isolation through RLS
-- Compliance-friendly audit trails
+我们的实现采用 **共享数据库，共享模式** 模型，并结合行级安全（RLS）：
 
-**Trade-offs:**
-- Requires careful RLS policy design
-- Schema changes affect all tenants
-- Need robust backup/restore procedures
+**优点：**
+- 成本效益高的资源利用  
+- 简化维护和更新  
+- 通过 RLS 实现强大的数据隔离  
+- 符合合规要求的审计记录  
 
-## 🛡️ Row Level Security Implementation
+**权衡：**
+- 需要精心设计 RLS 策略  
+- 模式更改会影响所有租户  
+- 需要强大的备份/恢复程序  
 
-### RLS Foundation
+## 🛡️ 行级安全实施
+
+### RLS 基础
 
 ```sql
 -- Enable RLS on all multi-tenant tables
@@ -77,7 +87,8 @@ GRANT USAGE ON SCHEMA retail TO mcp_user;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA retail TO mcp_user;
 ```
 
-### Store Context Management
+
+### 商店上下文管理
 
 ```sql
 -- Function to securely set store context
@@ -142,7 +153,8 @@ $$;
 GRANT EXECUTE ON FUNCTION retail.set_store_context TO mcp_user;
 ```
 
-### RLS Policies
+
+### RLS 策略
 
 ```sql
 -- Customers RLS Policy
@@ -226,7 +238,8 @@ CREATE POLICY product_embeddings_store_isolation ON retail.product_embeddings
     );
 ```
 
-### RLS Testing and Validation
+
+### RLS 测试与验证
 
 ```sql
 -- Test RLS policies with different store contexts
@@ -262,9 +275,10 @@ END;
 $$;
 ```
 
-## 🔑 Authentication and Authorization
 
-### Azure Entra ID Integration
+## 🔑 身份验证与授权
+
+### Azure Entra ID 集成
 
 ```python
 # mcp_server/security/authentication.py
@@ -441,7 +455,8 @@ class AzureAuthenticator:
 azure_authenticator = AzureAuthenticator()
 ```
 
-### Authorization Middleware
+
+### 授权中间件
 
 ```python
 # mcp_server/security/authorization.py
@@ -651,9 +666,10 @@ def require_store_context(store_param: str = 'store_id'):
     return decorator
 ```
 
-## 🔍 Security Audit and Compliance
 
-### Comprehensive Audit Logging
+## 🔍 安全审计与合规
+
+### 全面审计日志记录
 
 ```sql
 -- Security audit log table
@@ -741,7 +757,8 @@ $$;
 GRANT EXECUTE ON FUNCTION retail.log_security_event TO mcp_user;
 ```
 
-### Security Monitoring Views
+
+### 安全监控视图
 
 ```sql
 -- Failed authentication attempts
@@ -797,7 +814,8 @@ GROUP BY DATE_TRUNC('hour', created_at), store_id, resource_type, action
 ORDER BY access_hour DESC, access_count DESC;
 ```
 
-### Security Event Monitoring
+
+### 安全事件监控
 
 ```python
 # mcp_server/security/monitoring.py
@@ -995,9 +1013,10 @@ class SecurityMonitor:
         self.alert_handlers.append(handler)
 ```
 
-## 🧪 Security Testing and Validation
 
-### Automated Security Tests
+## 🧪 安全测试与验证
+
+### 自动化安全测试
 
 ```python
 # tests/security/test_security.py
@@ -1148,7 +1167,8 @@ if __name__ == "__main__":
     pytest.main([__file__, "-v"])
 ```
 
-### Penetration Testing Checklist
+
+### 渗透测试清单
 
 ```yaml
 # security-test-checklist.yml
@@ -1196,44 +1216,50 @@ penetration_testing:
         - "Connection pool exhaustion"
 ```
 
-## 🎯 Key Takeaways
 
-After completing this lab, you should have:
+## 🎯 关键收获
 
-✅ **Multi-Tenant Security**: Implemented Row Level Security for complete data isolation  
-✅ **Azure Authentication**: Integrated Azure Entra ID with JWT validation  
-✅ **Role-Based Authorization**: Configured hierarchical role and permission system  
-✅ **Comprehensive Audit Logging**: Established security event tracking and monitoring  
-✅ **Security Testing**: Implemented automated security validation tests  
-✅ **Threat Monitoring**: Created real-time security event detection and alerting  
+完成本实验后，您应该能够：
 
-## 🚀 What's Next
+✅ **多租户安全**：实施行级安全以实现完整的数据隔离  
+✅ **Azure 身份验证**：集成 Azure Entra ID 并验证 JWT  
+✅ **基于角色的授权**：配置分层角色和权限系统  
+✅ **全面审计日志记录**：建立安全事件跟踪和监控  
+✅ **安全测试**：实施自动化安全验证测试  
+✅ **威胁监控**：创建实时安全事件检测和警报  
 
-Continue with **[Lab 03: Environment Setup](../03-Setup/README.md)** to:
+## 🚀 下一步
 
-- Configure development environments with security best practices
-- Set up Azure services for authentication and monitoring
-- Implement secure database connections and secrets management
-- Validate security configurations in development environments
+继续学习 **[实验 03：环境设置](../03-Setup/README.md)**，以：
 
-## 📚 Additional Resources
+- 配置符合安全最佳实践的开发环境  
+- 设置 Azure 服务以进行身份验证和监控  
+- 实现安全的数据库连接和密钥管理  
+- 验证开发环境中的安全配置  
 
-### Azure Security
-- [Azure Entra ID Documentation](https://docs.microsoft.com/azure/active-directory/) - Complete identity platform guide
-- [Azure Key Vault](https://docs.microsoft.com/azure/key-vault/) - Secrets management service
-- [Azure Security Best Practices](https://docs.microsoft.com/azure/security/fundamentals/best-practices-and-patterns) - Security guidance
+## 📚 其他资源
 
-### Database Security
-- [PostgreSQL Row Level Security](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) - Official RLS documentation
-- [Database Security Checklist](https://www.postgresql.org/docs/current/security.html) - PostgreSQL security guide
-- [Multi-Tenant Database Patterns](https://docs.microsoft.com/azure/architecture/patterns/multitenancy) - Architecture patterns
+### Azure 安全
+- [Azure Entra ID 文档](https://docs.microsoft.com/azure/active-directory/) - 完整的身份平台指南  
+- [Azure Key Vault](https://docs.microsoft.com/azure/key-vault/) - 密钥管理服务  
+- [Azure 安全最佳实践](https://docs.microsoft.com/azure/security/fundamentals/best-practices-and-patterns) - 安全指导  
 
-### Security Testing
-- [OWASP Testing Guide](https://owasp.org/www-project-web-security-testing-guide/) - Comprehensive security testing
-- [JWT Security Best Practices](https://tools.ietf.org/html/rfc8725) - JWT security considerations
-- [API Security Testing](https://owasp.org/www-project-api-security/) - API-specific security testing
+### 数据库安全
+- [PostgreSQL 行级安全](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) - 官方 RLS 文档  
+- [数据库安全清单](https://www.postgresql.org/docs/current/security.html) - PostgreSQL 安全指南  
+- [多租户数据库模式](https://docs.microsoft.com/azure/architecture/patterns/multitenancy) - 架构模式  
+
+### 安全测试
+- [OWASP 测试指南](https://owasp.org/www-project-web-security-testing-guide/) - 全面的安全测试  
+- [JWT 安全最佳实践](https://tools.ietf.org/html/rfc8725) - JWT 安全注意事项  
+- [API 安全测试](https://owasp.org/www-project-api-security/) - 针对 API 的安全测试  
 
 ---
 
-**Previous**: [Lab 01: Core Architecture Concepts](../01-Architecture/README.md)  
-**Next**: [Lab 03: Environment Setup](../03-Setup/README.md)
+**上一节**：[实验 01：核心架构概念](../01-Architecture/README.md)  
+**下一节**：[实验 03：环境设置](../03-Setup/README.md)  
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

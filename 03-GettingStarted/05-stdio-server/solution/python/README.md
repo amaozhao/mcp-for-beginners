@@ -1,25 +1,34 @@
-# MCP stdio Server - Python Solution
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "68cd055621b3370948a5a1dff7bedc9a",
+  "translation_date": "2025-08-26T20:29:18+00:00",
+  "source_file": "03-GettingStarted/05-stdio-server/solution/python/README.md",
+  "language_code": "zh"
+}
+-->
+# MCP stdio 服务器 - Python 解决方案
 
-> **⚠️ Important**: This solution has been updated to use the **stdio transport** as recommended by MCP Specification 2025-06-18. The original SSE transport has been deprecated.
+> **⚠️ 重要**: 此解决方案已更新为使用 **stdio 传输**，根据 MCP 规范 2025-06-18 的推荐。原来的 SSE 传输已被弃用。
 
-## Overview
+## 概述
 
-This Python solution demonstrates how to build an MCP server using the current stdio transport. The stdio transport is simpler, more secure, and provides better performance than the deprecated SSE approach.
+此 Python 解决方案展示了如何使用当前的 stdio 传输构建 MCP 服务器。相比已弃用的 SSE 方法，stdio 传输更简单、更安全，并且性能更优。
 
-## Prerequisites
+## 前置条件
 
-- Python 3.8 or later
-- You're recommended to install `uv` for package management, see [instructions](https://docs.astral.sh/uv/#highlights)
+- Python 3.8 或更高版本
+- 推荐安装 `uv` 进行包管理，参见 [说明](https://docs.astral.sh/uv/#highlights)
 
-## Setup Instructions
+## 设置说明
 
-### Step 1: Create a virtual environment
+### 步骤 1: 创建虚拟环境
 
 ```bash
 python -m venv venv
 ```
 
-### Step 2: Activate the virtual environment
+### 步骤 2: 激活虚拟环境
 
 **Windows:**
 ```bash
@@ -31,60 +40,60 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-### Step 3: Install the dependencies
+### 步骤 3: 安装依赖项
 
 ```bash
 pip install mcp
 ```
 
-## Running the Server
+## 运行服务器
 
-The stdio server runs differently than the old SSE server. Instead of starting a web server, it communicates through stdin/stdout:
+stdio 服务器的运行方式与旧的 SSE 服务器不同。它通过标准输入/输出进行通信，而不是启动一个 Web 服务器：
 
 ```bash
 python server.py
 ```
 
-**Important**: The server will appear to hang - this is normal! It's waiting for JSON-RPC messages from stdin.
+**重要**: 服务器看起来会挂起——这是正常现象！它正在等待来自标准输入的 JSON-RPC 消息。
 
-## Testing the Server
+## 测试服务器
 
-### Method 1: Using the MCP Inspector (Recommended)
+### 方法 1: 使用 MCP Inspector（推荐）
 
 ```bash
 npx @modelcontextprotocol/inspector python server.py
 ```
 
-This will:
-1. Launch your server as a subprocess
-2. Open a web interface for testing
-3. Allow you to test all server tools interactively
+这将会：
+1. 将您的服务器作为子进程启动
+2. 打开一个用于测试的 Web 界面
+3. 允许您交互式测试所有服务器工具
 
-### Method 2: Direct JSON-RPC testing
+### 方法 2: 直接进行 JSON-RPC 测试
 
-You can also test by sending JSON-RPC messages directly:
+您也可以通过直接发送 JSON-RPC 消息进行测试：
 
-1. Start the server: `python server.py`
-2. Send a JSON-RPC message (example):
+1. 启动服务器: `python server.py`
+2. 发送一个 JSON-RPC 消息（示例）：
 
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/list"}
 ```
 
-3. The server will respond with available tools
+3. 服务器将返回可用工具
 
-### Available Tools
+### 可用工具
 
-The server provides these tools:
+服务器提供以下工具：
 
-- **add(a, b)**: Add two numbers together
-- **multiply(a, b)**: Multiply two numbers together  
-- **get_greeting(name)**: Generate a personalized greeting
-- **get_server_info()**: Get information about the server
+- **add(a, b)**: 将两个数字相加
+- **multiply(a, b)**: 将两个数字相乘  
+- **get_greeting(name)**: 生成个性化问候语
+- **get_server_info()**: 获取服务器信息
 
-### Testing with Claude Desktop
+### 使用 Claude Desktop 进行测试
 
-To use this server with Claude Desktop, add this configuration to your `claude_desktop_config.json`:
+要在 Claude Desktop 中使用此服务器，请将以下配置添加到您的 `claude_desktop_config.json` 文件中：
 
 ```json
 {
@@ -97,27 +106,32 @@ To use this server with Claude Desktop, add this configuration to your `claude_d
 }
 ```
 
-## Key Differences from SSE
+## 与 SSE 的主要区别
 
-**stdio transport (Current):**
-- ✅ Simpler setup - no web server needed
-- ✅ Better security - no HTTP endpoints
-- ✅ Subprocess-based communication
-- ✅ JSON-RPC over stdin/stdout
-- ✅ Better performance
+**stdio 传输（当前）:**
+- ✅ 设置更简单 - 无需 Web 服务器
+- ✅ 更高的安全性 - 无 HTTP 端点
+- ✅ 基于子进程的通信
+- ✅ 标准输入/输出上的 JSON-RPC
+- ✅ 性能更优
 
-**SSE transport (Deprecated):**
-- ❌ Required HTTP server setup
-- ❌ Needed web framework (Starlette/FastAPI)
-- ❌ More complex routing and session management
-- ❌ Additional security considerations
-- ❌ Now deprecated in MCP 2025-06-18
+**SSE 传输（已弃用）:**
+- ❌ 需要设置 HTTP 服务器
+- ❌ 需要 Web 框架（Starlette/FastAPI）
+- ❌ 路由和会话管理更复杂
+- ❌ 额外的安全性考虑
+- ❌ 在 MCP 2025-06-18 中已弃用
 
-## Debugging Tips
+## 调试提示
 
-- Use `stderr` for logging (never `stdout`)
-- Test with the Inspector for visual debugging
-- Ensure all JSON messages are newline-delimited
-- Check that the server starts without errors
+- 使用 `stderr` 进行日志记录（不要使用 `stdout`）
+- 使用 Inspector 进行可视化调试
+- 确保所有 JSON 消息以换行符分隔
+- 检查服务器是否正常启动且无错误
 
-This solution follows the current MCP specification and demonstrates best practices for stdio transport implementation.
+此解决方案遵循当前 MCP 规范，并展示了 stdio 传输实现的最佳实践。
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。

@@ -1,41 +1,49 @@
-<!-- BEGIN MICROSOFT SECURITY.MD V0.0.9 BLOCK -->
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "57f14126c1c6add76b3aef3844dfe4e3",
+  "translation_date": "2025-07-13T15:03:17+00:00",
+  "source_file": "SECURITY.md",
+  "language_code": "zh"
+}
+-->
+## 安全
 
-## Security
+微软非常重视我们软件产品和服务的安全性，这包括通过我们的 GitHub 组织管理的所有源代码仓库，这些组织包括 [Microsoft](https://github.com/Microsoft)、[Azure](https://github.com/Azure)、[DotNet](https://github.com/dotnet)、[AspNet](https://github.com/aspnet) 和 [Xamarin](https://github.com/xamarin)。
 
-Microsoft takes the security of our software products and services seriously, which includes all source code repositories managed through our GitHub organizations, which include [Microsoft](https://github.com/Microsoft), [Azure](https://github.com/Azure), [DotNet](https://github.com/dotnet), [AspNet](https://github.com/aspnet) and [Xamarin](https://github.com/xamarin).
+如果您认为在任何微软拥有的仓库中发现了符合 [微软安全漏洞定义](https://aka.ms/security.md/definition) 的安全漏洞，请按照以下说明向我们报告。
 
-If you believe you have found a security vulnerability in any Microsoft-owned repository that meets [Microsoft's definition of a security vulnerability](https://aka.ms/security.md/definition), please report it to us as described below.
+## 报告安全问题
 
-## Reporting Security Issues
+**请不要通过公开的 GitHub issue 报告安全漏洞。**
 
-**Please do not report security vulnerabilities through public GitHub issues.**
+请改为通过微软安全响应中心 (MSRC) 在 [https://msrc.microsoft.com/create-report](https://aka.ms/security.md/msrc/create-report) 报告。
 
-Instead, please report them to the Microsoft Security Response Center (MSRC) at [https://msrc.microsoft.com/create-report](https://aka.ms/security.md/msrc/create-report).
+如果您希望无需登录即可提交，请发送邮件至 [secure@microsoft.com](mailto:secure@microsoft.com)。如果可能，请使用我们的 PGP 密钥加密您的邮件；您可以从 [微软安全响应中心 PGP 密钥页面](https://aka.ms/security.md/msrc/pgp) 下载该密钥。
 
-If you prefer to submit without logging in, send email to [secure@microsoft.com](mailto:secure@microsoft.com).  If possible, encrypt your message with our PGP key; please download it from the [Microsoft Security Response Center PGP Key page](https://aka.ms/security.md/msrc/pgp).
+您应在 24 小时内收到回复。如果因某种原因未收到回复，请通过邮件跟进，以确保我们已收到您的原始信息。更多信息请访问 [microsoft.com/msrc](https://www.microsoft.com/msrc)。
 
-You should receive a response within 24 hours. If for some reason you do not, please follow up via email to ensure we received your original message. Additional information can be found at [microsoft.com/msrc](https://www.microsoft.com/msrc). 
+请尽可能提供以下信息，以帮助我们更好地了解问题的性质和范围：
 
-Please include the requested information listed below (as much as you can provide) to help us better understand the nature and scope of the possible issue:
+  * 问题类型（例如缓冲区溢出、SQL 注入、跨站脚本等）
+  * 与问题表现相关的源文件完整路径
+  * 受影响源代码的位置（标签/分支/提交或直接 URL）
+  * 复现问题所需的任何特殊配置
+  * 复现问题的详细步骤
+  * 概念验证或利用代码（如果可能）
+  * 问题的影响，包括攻击者可能如何利用该问题
 
-  * Type of issue (e.g. buffer overflow, SQL injection, cross-site scripting, etc.)
-  * Full paths of source file(s) related to the manifestation of the issue
-  * The location of the affected source code (tag/branch/commit or direct URL)
-  * Any special configuration required to reproduce the issue
-  * Step-by-step instructions to reproduce the issue
-  * Proof-of-concept or exploit code (if possible)
-  * Impact of the issue, including how an attacker might exploit the issue
+这些信息将帮助我们更快地处理您的报告。
 
-This information will help us triage your report more quickly.
+如果您是为漏洞赏金计划报告，提供更完整的报告有助于获得更高的赏金奖励。有关我们活跃计划的更多详情，请访问我们的 [微软漏洞赏金计划](https://aka.ms/security.md/msrc/bounty) 页面。
 
-If you are reporting for a bug bounty, more complete reports can contribute to a higher bounty award. Please visit our [Microsoft Bug Bounty Program](https://aka.ms/security.md/msrc/bounty) page for more details about our active programs.
+## 首选语言
 
-## Preferred Languages
+我们希望所有沟通均使用英语。
 
-We prefer all communications to be in English.
+## 政策
 
-## Policy
+微软遵循 [协调漏洞披露](https://aka.ms/security.md/cvd) 原则。
 
-Microsoft follows the principle of [Coordinated Vulnerability Disclosure](https://aka.ms/security.md/cvd).
-
-<!-- END MICROSOFT SECURITY.MD BLOCK -->
+**免责声明**：  
+本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。虽然我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。对于因使用本翻译而产生的任何误解或误释，我们不承担任何责任。

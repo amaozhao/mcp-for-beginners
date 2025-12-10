@@ -1,49 +1,58 @@
-# Run sample
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "b4662e0a75e645f3eeb4e69e5ba905f4",
+  "translation_date": "2025-10-06T16:07:47+00:00",
+  "source_file": "03-GettingStarted/10-advanced/code/typescript/README.md",
+  "language_code": "zh"
+}
+-->
+# 运行示例
 
-## Install dependencies
+## 安装依赖
 
 ```sh
 npm install
 ```
 
-## Build it
+## 构建项目
 
 ```sh
 npm run build
 ```
 
-## Run it
+## 运行项目
 
 ```sh
 npm start
 ```
 
-You should see the text:
+你应该会看到以下文本：
 
 ```text
 Registering tools...
 Starting server...
 ```
 
-Great, that means it' starting up correctly.
+很好，这表示它已正确启动。
 
-## Test the server
+## 测试服务器
 
-Test out the capabilities with the following command:
+使用以下命令测试功能：
 
 ```sh
 npx @modelcontextprotocol/inspector node build/app.js
 ```
 
-This should start up the web interface of the inspector tool.
+这应该会启动检查工具的网页界面。
 
-### Test in CLI mode
+### 在命令行模式下测试
 
 ```sh
 npx @modelcontextprotocol/inspector --cli node ./build/app.js --method tools/list
 ```
 
-You should see the following output:
+你应该会看到以下输出：
 
 ```json
 {
@@ -132,13 +141,13 @@ You should see the following output:
 }
 ```
 
-Run a tool:
+运行一个工具：
 
 ```sh
 npx @modelcontextprotocol/inspector --cli node ./build/app.js --method tools/call --tool-name add --tool-arg a=1 --tool-arg b=2
 ```
 
-You should see a response similar to:
+你应该会看到类似以下的响应：
 
 ```text
 {
@@ -150,13 +159,13 @@ You should see a response similar to:
   ]
 ```
 
-Try testing a tool that doesn't exist like "add2" with this command:
+尝试测试一个不存在的工具，比如 "add2"，使用以下命令：
 
 ```sh
 npx @modelcontextprotocol/inspector --cli node ./build/app.js --method tools/call --tool-name add2 --tool-arg a=1 --tool-arg b=2
 ```
 
-You should now see this message showing that your validatiob works:
+你现在应该会看到这条消息，表明你的验证功能正常：
 
 ```text
 {
@@ -167,13 +176,13 @@ You should now see this message showing that your validatiob works:
   }
 ```
 
-Also try sending in a parameter `c` that should be rejected by the schema like so:
+还可以尝试发送一个参数 `c`，该参数应该会被架构拒绝，例如：
 
 ```sh
 npx @modelcontextprotocol/inspector --cli node ./build/app.js --method tools/call --tool-name add --tool-arg a=1 --tool-arg c=2
 ```
 
-You should now see "invalid arguments" error:
+你现在应该会看到 "invalid arguments" 错误：
 
 ```text
 {
@@ -184,3 +193,8 @@ You should now see "invalid arguments" error:
   }
 }
 ```
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

@@ -1,27 +1,36 @@
-# Running this sample
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "67ecbca6a060477ded3e13ddbeba64f7",
+  "translation_date": "2025-08-18T12:55:14+00:00",
+  "source_file": "03-GettingStarted/06-http-streaming/solution/python/README.md",
+  "language_code": "zh"
+}
+-->
+# 运行此示例
 
-Here's how to run the classic HTTP streaming server and client, as well as the MCP streaming server and client using Python.
+以下是如何使用 Python 运行经典 HTTP 流式服务器和客户端，以及 MCP 流式服务器和客户端的指南。
 
-### Overview
+### 概述
 
-- You will set up an MCP server that streams progress notifications to the client as it processes items.
-- The client will display each notification in real time.
-- This guide covers prerequisites, setup, running, and troubleshooting.
+- 您将设置一个 MCP 服务器，该服务器在处理项目时向客户端流式发送进度通知。
+- 客户端将实时显示每条通知。
+- 本指南涵盖了前提条件、设置、运行和故障排除。
 
-### Prerequisites
+### 前提条件
 
-- Python 3.9 or newer
-- The `mcp` Python package (install with `pip install mcp`)
+- Python 3.9 或更高版本
+- `mcp` Python 包（通过 `pip install mcp` 安装）
 
-### Installation & Setup
+### 安装与设置
 
-1. Clone the repository or download the solution files.
+1. 克隆仓库或下载解决方案文件。
 
    ```pwsh
    git clone https://github.com/microsoft/mcp-for-beginners
    ```
 
-1. **Create and activate a virtual environment (recommended):**
+1. **创建并激活虚拟环境（推荐）：**
 
    ```pwsh
    python -m venv venv
@@ -30,48 +39,48 @@ Here's how to run the classic HTTP streaming server and client, as well as the M
    source venv/bin/activate      # On Linux/macOS
    ```
 
-1. **Install required dependencies:**
+1. **安装所需依赖项：**
 
    ```pwsh
    pip install "mcp[cli]" fastapi requests
    ```
 
-### Files
+### 文件
 
-- **Server:** [server.py](./server.py)
-- **Client:** [client.py](./client.py)
+- **服务器文件:** [server.py](../../../../../../03-GettingStarted/06-http-streaming/solution/python/server.py)
+- **客户端文件:** [client.py](../../../../../../03-GettingStarted/06-http-streaming/solution/python/client.py)
 
-### Running the Classic HTTP Streaming Server
+### 运行经典 HTTP 流式服务器
 
-1. Navigate to the solution directory:
+1. 进入解决方案目录：
 
    ```pwsh
    cd 03-GettingStarted/06-http-streaming/solution
    ```
 
-2. Start the classic HTTP streaming server:
+2. 启动经典 HTTP 流式服务器：
 
    ```pwsh
    python server.py
    ```
 
-3. The server will start and display:
+3. 服务器将启动并显示：
 
    ```
    Starting FastAPI server for classic HTTP streaming...
    INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
    ```
 
-### Running the Classic HTTP Streaming Client
+### 运行经典 HTTP 流式客户端
 
-1. Open a new terminal (activate the same virtual environment and directory):
+1. 打开一个新的终端（激活相同的虚拟环境并进入目录）：
 
    ```pwsh
    cd 03-GettingStarted/06-http-streaming/solution
    python client.py
    ```
 
-2. You should see streamed messages printed sequentially:
+2. 您应该会看到流式消息按顺序打印：
 
    ```text
    Running classic HTTP streaming client...
@@ -84,30 +93,30 @@ Here's how to run the classic HTTP streaming server and client, as well as the M
    --- Stream Ended ---
    ```
 
-### Running the MCP Streaming Server
+### 运行 MCP 流式服务器
 
-1. Navigate to the solution directory:
+1. 进入解决方案目录：
    ```pwsh
    cd 03-GettingStarted/06-http-streaming/solution
    ```
-2. Start the MCP server with the streamable-http transport:
+2. 使用 streamable-http 传输启动 MCP 服务器：
    ```pwsh
    python server.py mcp
    ```
-3. The server will start and display:
+3. 服务器将启动并显示：
    ```
    Starting MCP server with streamable-http transport...
    INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
    ```
 
-### Running the MCP Streaming Client
+### 运行 MCP 流式客户端
 
-1. Open a new terminal (activate the same virtual environment and directory):
+1. 打开一个新的终端（激活相同的虚拟环境并进入目录）：
    ```pwsh
    cd 03-GettingStarted/06-http-streaming/solution
    python client.py mcp
    ```
-2. You should see notifications printed in real time as the server processes each item:
+2. 您应该会看到通知随着服务器处理每个项目实时打印：
    ```
    Running MCP client...
    Starting client...
@@ -120,21 +129,23 @@ Here's how to run the classic HTTP streaming server and client, as well as the M
    Tool result: meta=None content=[TextContent(type='text', text='Processed files: file_1.txt, file_2.txt, file_3.txt | Message: hello from client')]
    ```
 
-### Key Implementation Steps
+### 关键实现步骤
 
-1. **Create the MCP server using FastMCP.**
-2. **Define a tool that processes a list and sends notifications using `ctx.info()` or `ctx.log()`.**
-3. **Run the server with `transport="streamable-http"`.**
-4. **Implement a client with a message handler to display notifications as they arrive.**
+1. **使用 FastMCP 创建 MCP 服务器。**
+2. **定义一个工具来处理列表，并使用 `ctx.info()` 或 `ctx.log()` 发送通知。**
+3. **通过 `transport="streamable-http"` 运行服务器。**
+4. **实现一个客户端，使用消息处理器显示到达的通知。**
 
-### Code Walkthrough
-- The server uses async functions and the MCP context to send progress updates.
-- The client implements an async message handler to print notifications and the final result.
+### 代码讲解
+- 服务器使用异步函数和 MCP 上下文发送进度更新。
+- 客户端实现了一个异步消息处理器，用于打印通知和最终结果。
 
-### Tips & Troubleshooting
+### 提示与故障排除
 
-- Use `async/await` for non-blocking operations.
-- Always handle exceptions in both server and client for robustness.
-- Test with multiple clients to observe real-time updates.
-- If you encounter errors, check your Python version and ensure all dependencies are installed.
+- 使用 `async/await` 进行非阻塞操作。
+- 在服务器和客户端中始终处理异常以提高健壮性。
+- 使用多个客户端进行测试以观察实时更新。
+- 如果遇到错误，请检查您的 Python 版本并确保所有依赖项已安装。
 
+**免责声明**：  
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保准确性，但请注意，自动翻译可能包含错误或不准确之处。应以原始语言的文档作为权威来源。对于关键信息，建议使用专业人工翻译。对于因使用本翻译而引起的任何误解或误读，我们概不负责。

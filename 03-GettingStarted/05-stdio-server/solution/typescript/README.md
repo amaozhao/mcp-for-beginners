@@ -1,73 +1,82 @@
-# MCP stdio Server - TypeScript Solution
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "9d799c4a30a8383e0a74af9153262972",
+  "translation_date": "2025-08-26T20:06:15+00:00",
+  "source_file": "03-GettingStarted/05-stdio-server/solution/typescript/README.md",
+  "language_code": "zh"
+}
+-->
+# MCP stdio 服务器 - TypeScript 解决方案
 
-> **⚠️ Important**: This solution has been updated to use the **stdio transport** as recommended by MCP Specification 2025-06-18. The original SSE transport has been deprecated.
+> **⚠️ 重要**: 此解决方案已更新为使用 **stdio 传输**，根据 MCP 规范 2025-06-18 的推荐。原来的 SSE 传输已被弃用。
 
-## Overview
+## 概述
 
-This TypeScript solution demonstrates how to build an MCP server using the current stdio transport. The stdio transport is simpler, more secure, and provides better performance than the deprecated SSE approach.
+此 TypeScript 解决方案展示了如何使用当前的 stdio 传输构建 MCP 服务器。相比已弃用的 SSE 方法，stdio 传输更简单、更安全，并且性能更优。
 
-## Prerequisites
+## 前置条件
 
-- Node.js 18+ or later
-- npm or yarn package manager
+- Node.js 18 或更高版本
+- npm 或 yarn 包管理工具
 
-## Setup Instructions
+## 设置说明
 
-### Step 1: Install the dependencies
+### 步骤 1: 安装依赖
 
 ```bash
 npm install
 ```
 
-### Step 2: Build the project
+### 步骤 2: 构建项目
 
 ```bash
 npm run build
 ```
 
-## Running the Server
+## 运行服务器
 
-The stdio server runs differently than the old SSE server. Instead of starting a web server, it communicates through stdin/stdout:
+stdio 服务器的运行方式与旧的 SSE 服务器不同。它不启动一个 Web 服务器，而是通过 stdin/stdout 进行通信：
 
 ```bash
 npm start
 ```
 
-**Important**: The server will appear to hang - this is normal! It's waiting for JSON-RPC messages from stdin.
+**重要**: 服务器看起来会像是挂起了——这是正常现象！它正在等待来自 stdin 的 JSON-RPC 消息。
 
-## Testing the Server
+## 测试服务器
 
-### Method 1: Using the MCP Inspector (Recommended)
+### 方法 1: 使用 MCP Inspector（推荐）
 
 ```bash
 npm run inspector
 ```
 
-This will:
-1. Launch your server as a subprocess
-2. Open a web interface for testing
-3. Allow you to test all server tools interactively
+这将会：
+1. 将您的服务器作为子进程启动
+2. 打开一个用于测试的 Web 界面
+3. 允许您交互式测试所有服务器工具
 
-### Method 2: Direct command line testing
+### 方法 2: 直接使用命令行测试
 
-You can also test by launching the Inspector directly:
+您也可以通过直接启动 Inspector 进行测试：
 
 ```bash
 npx @modelcontextprotocol/inspector node build/index.js
 ```
 
-### Available Tools
+### 可用工具
 
-The server provides these tools:
+服务器提供以下工具：
 
-- **add(a, b)**: Add two numbers together
-- **multiply(a, b)**: Multiply two numbers together  
-- **get_greeting(name)**: Generate a personalized greeting
-- **get_server_info()**: Get information about the server
+- **add(a, b)**: 将两个数字相加
+- **multiply(a, b)**: 将两个数字相乘  
+- **get_greeting(name)**: 生成个性化问候语
+- **get_server_info()**: 获取服务器信息
 
-### Testing with Claude Desktop
+### 使用 Claude Desktop 进行测试
 
-To use this server with Claude Desktop, add this configuration to your `claude_desktop_config.json`:
+要在 Claude Desktop 中使用此服务器，请将以下配置添加到您的 `claude_desktop_config.json` 文件中：
 
 ```json
 {
@@ -80,7 +89,7 @@ To use this server with Claude Desktop, add this configuration to your `claude_d
 }
 ```
 
-## Project Structure
+## 项目结构
 
 ```
 typescript/
@@ -92,28 +101,33 @@ typescript/
 └── README.md            # This file
 ```
 
-## Key Differences from SSE
+## 与 SSE 的关键区别
 
-**stdio transport (Current):**
-- ✅ Simpler setup - no HTTP server needed
-- ✅ Better security - no HTTP endpoints
-- ✅ Subprocess-based communication
-- ✅ JSON-RPC over stdin/stdout
-- ✅ Better performance
+**stdio 传输（当前）：**
+- ✅ 设置更简单 - 不需要 HTTP 服务器
+- ✅ 更高的安全性 - 无需 HTTP 端点
+- ✅ 基于子进程的通信
+- ✅ 通过 stdin/stdout 使用 JSON-RPC
+- ✅ 性能更优
 
-**SSE transport (Deprecated):**
-- ❌ Required Express server setup
-- ❌ Needed complex routing and session management
-- ❌ More dependencies (Express, HTTP handling)
-- ❌ Additional security considerations
-- ❌ Now deprecated in MCP 2025-06-18
+**SSE 传输（已弃用）：**
+- ❌ 需要设置 Express 服务器
+- ❌ 需要复杂的路由和会话管理
+- ❌ 更多依赖项（Express、HTTP 处理）
+- ❌ 额外的安全性考虑
+- ❌ 在 MCP 2025-06-18 中已被弃用
 
-## Development Tips
+## 开发提示
 
-- Use `console.error()` for logging (never `console.log()` as it writes to stdout)
-- Build with `npm run build` before testing
-- Test with the Inspector for visual debugging
-- Ensure all JSON messages are properly formatted
-- The server automatically handles graceful shutdown on SIGINT/SIGTERM
+- 使用 `console.error()` 进行日志记录（不要使用 `console.log()`，因为它会写入 stdout）
+- 在测试之前使用 `npm run build` 进行构建
+- 使用 Inspector 进行可视化调试
+- 确保所有 JSON 消息格式正确
+- 服务器会在接收到 SIGINT/SIGTERM 时自动处理优雅关闭
 
-This solution follows the current MCP specification and demonstrates best practices for stdio transport implementation using TypeScript.
+此解决方案遵循当前 MCP 规范，并展示了使用 TypeScript 实现 stdio 传输的最佳实践。
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。应以原始语言的文档作为权威来源。对于关键信息，建议使用专业人工翻译。我们对因使用此翻译而引起的任何误解或误读不承担责任。

@@ -1,163 +1,175 @@
-# MCP in Action: Real-World Case Studies
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "1611dc5f6a2a35a789fc4c95fc5bfbe8",
+  "translation_date": "2025-09-26T17:48:17+00:00",
+  "source_file": "09-CaseStudy/README.md",
+  "language_code": "zh"
+}
+-->
+# MCP 实践：真实案例研究
 
-[![MCP in Action: Real-World Case Studies](../images/video-thumbnails/10.png)](https://youtu.be/IxshWb2Az5w)
+[![MCP 实践：真实案例研究](../translated_images/10.3262cc80b4de5071fde8ba74c5c5d6738a0a9f398dcc0423f0210f632e2238b8.zh.png)](https://youtu.be/IxshWb2Az5w)
 
-_(Click the image above to view video of this lesson)_
+_（点击上方图片观看本课视频）_
 
-The Model Context Protocol (MCP) is transforming how AI applications interact with data, tools, and services. This section presents real-world case studies that demonstrate practical applications of MCP in various enterprise scenarios.
+模型上下文协议（MCP）正在改变 AI 应用与数据、工具和服务的交互方式。本节展示了多个真实案例，说明 MCP 在各种企业场景中的实际应用。
 
-## Overview
+## 概述
 
-This section showcases concrete examples of MCP implementations, highlighting how organizations are leveraging this protocol to solve complex business challenges. By examining these case studies, you'll gain insights into the versatility, scalability, and practical benefits of MCP in real-world scenarios.
+本节展示了 MCP 实现的具体示例，重点介绍组织如何利用该协议解决复杂的业务挑战。通过研究这些案例，您将深入了解 MCP 在实际场景中的灵活性、可扩展性和实际优势。
 
-## Key Learning Objectives
+## 关键学习目标
 
-By exploring these case studies, you will:
+通过探索这些案例，您将能够：
 
-- Understand how MCP can be applied to solve specific business problems
-- Learn about different integration patterns and architectural approaches
-- Recognize best practices for implementing MCP in enterprise environments
-- Gain insights into the challenges and solutions encountered in real-world implementations
-- Identify opportunities to apply similar patterns in your own projects
+- 理解 MCP 如何应用于解决特定业务问题
+- 学习不同的集成模式和架构方法
+- 了解在企业环境中实施 MCP 的最佳实践
+- 获得关于真实实施中遇到的挑战和解决方案的洞察
+- 发现将类似模式应用于您自己项目的机会
 
-## Featured Case Studies
+## 精选案例研究
 
-### 1. [Azure AI Travel Agents – Reference Implementation](./travelagentsample.md)
+### 1. [Azure AI 旅行代理——参考实现](./travelagentsample.md)
 
-This case study examines Microsoft's comprehensive reference solution that demonstrates how to build a multi-agent, AI-powered travel planning application using MCP, Azure OpenAI, and Azure AI Search. The project showcases:
+此案例研究探讨了微软的综合参考解决方案，展示如何使用 MCP、Azure OpenAI 和 Azure AI Search 构建一个多代理、AI 驱动的旅行规划应用。项目亮点包括：
 
-- Multi-agent orchestration through MCP
-- Enterprise data integration with Azure AI Search
-- Secure, scalable architecture using Azure services
-- Extensible tooling with reusable MCP components
-- Conversational user experience powered by Azure OpenAI
+- 通过 MCP 实现多代理协调
+- 使用 Azure AI Search 进行企业数据集成
+- 利用 Azure 服务构建安全、可扩展的架构
+- 使用可重用的 MCP 组件扩展工具
+- 通过 Azure OpenAI 提供对话式用户体验
 
-The architecture and implementation details provide valuable insights into building complex, multi-agent systems with MCP as the coordination layer.
+架构和实施细节为构建复杂的多代理系统提供了宝贵的见解，MCP 作为协调层发挥了重要作用。
 
-### 2. [Updating Azure DevOps Items from YouTube Data](./UpdateADOItemsFromYT.md)
+### 2. [从 YouTube 数据更新 Azure DevOps 项目](./UpdateADOItemsFromYT.md)
 
-This case study demonstrates a practical application of MCP for automating workflow processes. It shows how MCP tools can be used to:
+此案例研究展示了 MCP 在自动化工作流程中的实际应用。它说明了如何使用 MCP 工具来：
 
-- Extract data from online platforms (YouTube)
-- Update work items in Azure DevOps systems
-- Create repeatable automation workflows
-- Integrate data across disparate systems
+- 从在线平台（如 YouTube）提取数据
+- 更新 Azure DevOps 系统中的工作项
+- 创建可重复的自动化工作流程
+- 跨不同系统集成数据
 
-This example illustrates how even relatively simple MCP implementations can provide significant efficiency gains by automating routine tasks and improving data consistency across systems.
+此示例说明了即使是相对简单的 MCP 实现也能通过自动化日常任务和提高数据一致性显著提升效率。
 
-### 3. [Real-Time Documentation Retrieval with MCP](./docs-mcp/README.md)
+### 3. [使用 MCP 实现实时文档检索](./docs-mcp/README.md)
 
-This case study guides you through connecting a Python console client to a Model Context Protocol (MCP) server to retrieve and log real-time, context-aware Microsoft documentation. You'll learn how to:
+此案例研究指导您如何连接 Python 控制台客户端到 MCP 服务器，以检索和记录实时、上下文相关的微软文档。您将学习：
 
-- Connect to an MCP server using a Python client and the official MCP SDK
-- Use streaming HTTP clients for efficient, real-time data retrieval
-- Call documentation tools on the server and log responses directly to the console
-- Integrate up-to-date Microsoft documentation into your workflow without leaving the terminal
+- 使用 Python 客户端和官方 MCP SDK 连接到 MCP 服务器
+- 使用流式 HTTP 客户端高效地实时检索数据
+- 调用服务器上的文档工具并将响应直接记录到控制台
+- 将最新的微软文档集成到您的工作流程中，无需离开终端
 
-The chapter includes a hands-on assignment, a minimal working code sample, and links to additional resources for deeper learning. See the full walkthrough and code in the linked chapter to understand how MCP can transform documentation access and developer productivity in console-based environments.
+章节包括动手任务、最小工作代码示例，以及深入学习的额外资源链接。查看链接章节中的完整演练和代码，了解 MCP 如何改变文档访问和开发者生产力。
 
-### 4. [Interactive Study Plan Generator Web App with MCP](./docs-mcp/README.md)
+### 4. [使用 MCP 构建交互式学习计划生成器 Web 应用](./docs-mcp/README.md)
 
-This case study demonstrates how to build an interactive web application using Chainlit and the Model Context Protocol (MCP) to generate personalized study plans for any topic. Users can specify a subject (such as "AI-900 certification") and a study duration (e.g., 8 weeks), and the app will provide a week-by-week breakdown of recommended content. Chainlit enables a conversational chat interface, making the experience engaging and adaptive.
+此案例研究展示了如何使用 Chainlit 和 MCP 构建一个交互式 Web 应用，为任何主题生成个性化学习计划。用户可以指定主题（如“AI-900认证”）和学习时长（例如8周），应用将提供逐周推荐内容。Chainlit 提供了对话式聊天界面，使体验更具互动性和适应性。
 
-- Conversational web app powered by Chainlit
-- User-driven prompts for topic and duration
-- Week-by-week content recommendations using MCP
-- Real-time, adaptive responses in a chat interface
+- 由 Chainlit 驱动的对话式 Web 应用
+- 用户输入主题和时长的提示
+- 使用 MCP 提供逐周内容推荐
+- 聊天界面中的实时、适应性响应
 
-The project illustrates how conversational AI and MCP can be combined to create dynamic, user-driven educational tools in a modern web environment.
+该项目展示了如何将对话式 AI 和 MCP 结合起来，在现代 Web 环境中创建动态、用户驱动的教育工具。
 
-### 5. [In-Editor Docs with MCP Server in VS Code](./docs-mcp/README.md)
+### 5. [在 VS Code 中使用 MCP 服务器实现编辑器内文档访问](./docs-mcp/README.md)
 
-This case study demonstrates how you can bring Microsoft Learn Docs directly into your VS Code environment using the MCP server—no more switching browser tabs! You'll see how to:
+此案例研究展示了如何将微软 Learn 文档直接带入 VS Code 环境，无需切换浏览器标签页！您将看到如何：
 
-- Instantly search and read docs inside VS Code using the MCP panel or command palette
-- Reference documentation and insert links directly into your README or course markdown files
-- Use GitHub Copilot and MCP together for seamless, AI-powered documentation and code workflows
-- Validate and enhance your documentation with real-time feedback and Microsoft-sourced accuracy
-- Integrate MCP with GitHub workflows for continuous documentation validation
+- 使用 MCP 面板或命令面板在 VS Code 中即时搜索和阅读文档
+- 引用文档并将链接直接插入到您的 README 或课程 Markdown 文件中
+- 将 GitHub Copilot 和 MCP 结合使用，实现无缝的 AI 驱动文档和代码工作流
+- 使用实时反馈和微软提供的准确性验证和增强您的文档
+- 将 MCP 集成到 GitHub 工作流中，实现持续的文档验证
 
-The implementation includes:
+实施内容包括：
 
-- Example `.vscode/mcp.json` configuration for easy setup
-- Screenshot-based walkthroughs of the in-editor experience
-- Tips for combining Copilot and MCP for maximum productivity
+- 示例 `.vscode/mcp.json` 配置，便于设置
+- 编辑器体验的截图演练
+- 结合 Copilot 和 MCP 的生产力提升技巧
 
-This scenario is ideal for course authors, documentation writers, and developers who want to stay focused in their editor while working with docs, Copilot, and validation tools—all powered by MCP.
+此场景非常适合课程作者、文档撰写者和开发者，他们希望在编辑器中专注于文档、Copilot 和验证工具的工作——所有这些都由 MCP 提供支持。
 
-### 6. [APIM MCP Server Creation](./apimsample.md)
+### 6. [使用 Azure API 管理创建 MCP 服务器](./apimsample.md)
 
-This case study provides a step-by-step guide on how to create an MCP server using Azure API Management (APIM). It covers:
+此案例研究提供了如何使用 Azure API 管理创建 MCP 服务器的分步指南，内容包括：
 
-- Setting up an MCP server in Azure API Management
-- Exposing API operations as MCP tools
-- Configuring policies for rate limiting and security
-- Testing the MCP server using Visual Studio Code and GitHub Copilot
+- 在 Azure API 管理中设置 MCP 服务器
+- 将 API 操作公开为 MCP 工具
+- 配置速率限制和安全策略
+- 使用 Visual Studio Code 和 GitHub Copilot 测试 MCP 服务器
 
-This example illustrates how to leverage Azure's capabilities to create a robust MCP server that can be used in various applications, enhancing the integration of AI systems with enterprise APIs.
+此示例说明了如何利用 Azure 的功能创建一个强大的 MCP 服务器，可用于各种应用，增强 AI 系统与企业 API 的集成。
 
-### 7. [GitHub MCP Registry — Accelerating Agentic Integration](https://github.com/mcp)
+### 7. [GitHub MCP 注册表——加速代理集成](https://github.com/mcp)
 
-This case study examines how GitHub's MCP Registry, launched in September 2025, addresses a critical challenge in the AI ecosystem: the fragmented discovery and deployment of Model Context Protocol (MCP) servers.
+此案例研究探讨了 GitHub 的 MCP 注册表（于 2025 年 9 月推出）如何解决 AI 生态系统中的一个关键问题：分散的 MCP 服务器发现和部署。
 
-#### Overview
-The **MCP Registry** solves the growing pain of scattered MCP servers across repositories and registries, which previously made integration slow and error-prone. These servers enable AI agents to interact with external systems like APIs, databases, and documentation sources.
+#### 概述
+**MCP 注册表**解决了分散的 MCP 服务器在不同存储库和注册表中难以发现的问题，这曾导致集成缓慢且容易出错。这些服务器使 AI 代理能够与外部系统（如 API、数据库和文档源）交互。
 
-#### Problem Statement
-Developers building agentic workflows faced several challenges:
-- **Poor discoverability** of MCP servers across different platforms
-- **Redundant setup questions** scattered across forums and documentation
-- **Security risks** from unverified and untrusted sources
-- **Lack of standardization** in server quality and compatibility
+#### 问题陈述
+构建代理工作流的开发者面临以下挑战：
+- **发现性差**：MCP 服务器分布在不同平台上
+- **重复的设置问题**：分散在论坛和文档中
+- **安全风险**：来自未经验证和不可信来源
+- **缺乏标准化**：服务器质量和兼容性不一致
 
-#### Solution Architecture
-GitHub's MCP Registry centralizes trusted MCP servers with key features:
-- **One-click install** integration via VS Code for streamlined setup
-- **Signal-over-noise sorting** by stars, activity, and community validation
-- **Direct integration** with GitHub Copilot and other MCP-compatible tools
-- **Open contribution model** enabling both community and enterprise partners to contribute
+#### 解决方案架构
+GitHub 的 MCP 注册表集中托管可信的 MCP 服务器，具有以下关键功能：
+- **一键安装**：通过 VS Code 实现简化设置
+- **信号优先排序**：按星级、活动度和社区验证排序
+- **直接集成**：与 GitHub Copilot 和其他 MCP 兼容工具无缝连接
+- **开放贡献模式**：允许社区和企业合作伙伴共同贡献
 
-#### Business Impact
-The registry has delivered measurable improvements:
-- **Faster onboarding** for developers using tools like the Microsoft Learn MCP Server, which streams official documentation directly into agents
-- **Improved productivity** via specialized servers like `github-mcp-server`, enabling natural language GitHub automation (PR creation, CI reruns, code scanning)
-- **Stronger ecosystem trust** through curated listings and transparent configuration standards
+#### 商业影响
+注册表带来了显著的改进：
+- **更快的入门**：开发者使用工具（如微软 Learn MCP 服务器）更快上手，将官方文档直接流式传输到代理中
+- **提高生产力**：通过专用服务器（如 `github-mcp-server`），实现自然语言的 GitHub 自动化（PR 创建、CI 重运行、代码扫描）
+- **增强生态系统信任**：通过策划列表和透明的配置标准
 
-#### Strategic Value
-For practitioners specializing in agent lifecycle management and reproducible workflows, the MCP Registry provides:
-- **Modular agent deployment** capabilities with standardized components
-- **Registry-backed evaluation pipelines** for consistent testing and validation
-- **Cross-tool interoperability** enabling seamless integration across different AI platforms
+#### 战略价值
+对于专注于代理生命周期管理和可重复工作流的实践者，MCP 注册表提供：
+- **模块化代理部署**：具有标准化组件
+- **注册表支持的评估管道**：实现一致的测试和验证
+- **跨工具互操作性**：在不同 AI 平台之间实现无缝集成
 
-This case study demonstrates that the MCP Registry is more than just a directory—it's a foundational platform for scalable, real-world model integration and agentic system deployment.
+此案例研究表明，MCP 注册表不仅仅是一个目录——它是一个可扩展的、真实世界模型集成和代理系统部署的基础平台。
 
-## Conclusion
+## 结论
 
-These seven comprehensive case studies demonstrate the remarkable versatility and practical applications of the Model Context Protocol across diverse real-world scenarios. From complex multi-agent travel planning systems and enterprise API management to streamlined documentation workflows and the revolutionary GitHub MCP Registry, these examples showcase how MCP provides a standardized, scalable way to connect AI systems with the tools, data, and services they need to deliver exceptional value.
+这七个全面的案例研究展示了模型上下文协议在各种真实场景中的显著灵活性和实际应用。从复杂的多代理旅行规划系统和企业 API 管理到简化的文档工作流和革命性的 GitHub MCP 注册表，这些示例展示了 MCP 如何提供标准化、可扩展的方式，将 AI 系统与所需的工具、数据和服务连接起来，以提供卓越的价值。
 
-The case studies span multiple dimensions of MCP implementation:
-- **Enterprise Integration**: Azure API Management and Azure DevOps automation
-- **Multi-Agent Orchestration**: Travel planning with coordinated AI agents
-- **Developer Productivity**: VS Code integration and real-time documentation access
-- **Ecosystem Development**: GitHub's MCP Registry as a foundational platform
-- **Educational Applications**: Interactive study plan generators and conversational interfaces
+案例研究涵盖了 MCP 实现的多个维度：
+- **企业集成**：Azure API 管理和 Azure DevOps 自动化
+- **多代理协调**：通过协调的 AI 代理进行旅行规划
+- **开发者生产力**：VS Code 集成和实时文档访问
+- **生态系统发展**：GitHub 的 MCP 注册表作为基础平台
+- **教育应用**：交互式学习计划生成器和对话界面
 
-By studying these implementations, you gain critical insights into:
-- **Architectural patterns** for different scales and use cases
-- **Implementation strategies** that balance functionality with maintainability
-- **Security and scalability** considerations for production deployments
-- **Best practices** for MCP server development and client integration
-- **Ecosystem thinking** for building interconnected AI-powered solutions
+通过研究这些实现，您将获得关键洞察：
+- **架构模式**：适用于不同规模和用例
+- **实施策略**：在功能与可维护性之间取得平衡
+- **安全性和可扩展性**：生产部署的考虑因素
+- **最佳实践**：MCP 服务器开发和客户端集成
+- **生态系统思维**：构建互联的 AI 驱动解决方案
 
-These examples collectively demonstrate that MCP is not merely a theoretical framework but a mature, production-ready protocol enabling practical solutions to complex business challenges. Whether you're building simple automation tools or sophisticated multi-agent systems, the patterns and approaches illustrated here provide a solid foundation for your own MCP projects.
+这些示例共同证明，MCP 不仅仅是一个理论框架，而是一个成熟的、可投入生产的协议，能够为复杂的业务挑战提供实际解决方案。无论您是在构建简单的自动化工具还是复杂的多代理系统，这里展示的模式和方法都为您的 MCP 项目提供了坚实的基础。
 
-## Additional Resources
+## 额外资源
 
-- [Azure AI Travel Agents GitHub Repository](https://github.com/Azure-Samples/azure-ai-travel-agents)
-- [Azure DevOps MCP Tool](https://github.com/microsoft/azure-devops-mcp)
-- [Playwright MCP Tool](https://github.com/microsoft/playwright-mcp)
-- [Microsoft Docs MCP Server](https://github.com/MicrosoftDocs/mcp)
-- [GitHub MCP Registry — Accelerating Agentic Integration](https://github.com/mcp)
-- [MCP Community Examples](https://github.com/microsoft/mcp)
+- [Azure AI 旅行代理 GitHub 仓库](https://github.com/Azure-Samples/azure-ai-travel-agents)
+- [Azure DevOps MCP 工具](https://github.com/microsoft/azure-devops-mcp)
+- [Playwright MCP 工具](https://github.com/microsoft/playwright-mcp)
+- [微软文档 MCP 服务器](https://github.com/MicrosoftDocs/mcp)
+- [GitHub MCP 注册表——加速代理集成](https://github.com/mcp)
+- [MCP 社区示例](https://github.com/microsoft/mcp)
 
-Next: Hands on Lab [Streamlining AI Workflows: Building an MCP Server with AI Toolkit](../10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/README.md)
+下一步：动手实验 [简化 AI 工作流：使用 AI 工具包构建 MCP 服务器](../10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/README.md)
+
+---
+

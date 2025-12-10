@@ -1,58 +1,67 @@
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "193889b580c86bbb1e4f577114a5ce4e",
+  "translation_date": "2025-07-16T20:54:28+00:00",
+  "source_file": "05-AdvancedTopics/mcp-sampling/README.md",
+  "language_code": "zh"
+}
+-->
 # Sampling in Model Context Protocol
 
-Sampling is a powerful MCP feature that allows servers to request LLM completions through the client, enabling sophisticated agentic behaviors while maintaining security and privacy. The right sampling configuration can dramatically improve response quality and performance. MCP provides a standardized way to control how models generate text with specific parameters that influence randomness, creativity, and coherence.
+Sampling 是 MCP 的一个强大功能，允许服务器通过客户端请求 LLM 完成，从而实现复杂的代理行为，同时保持安全性和隐私。合适的采样配置可以显著提升响应质量和性能。MCP 提供了一种标准化方式，通过特定参数控制模型生成文本的随机性、创造力和连贯性。
 
-## Introduction
+## 介绍
 
-In this lesson, we will explore how to configure sampling parameters in MCP requests and understand the underlying protocol mechanics of sampling.
+本课将探讨如何在 MCP 请求中配置采样参数，并理解采样的底层协议机制。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lesson, you will be able to:
+完成本课后，您将能够：
 
-- Understand the key sampling parameters available in MCP.
-- Configure sampling parameters for different use cases.
-- Implement deterministic sampling for reproducible results.
-- Dynamically adjust sampling parameters based on context and user preferences.
-- Apply sampling strategies to enhance model performance in various scenarios.
-- Understand how sampling works in the client-server flow of MCP.
+- 理解 MCP 中可用的关键采样参数。
+- 针对不同用例配置采样参数。
+- 实现确定性采样以获得可复现的结果。
+- 根据上下文和用户偏好动态调整采样参数。
+- 应用采样策略提升模型在各种场景下的表现。
+- 理解采样在 MCP 客户端-服务器流程中的工作原理。
 
-## How Sampling Works in MCP
+## MCP 中采样的工作原理
 
-The sampling flow in MCP follows these steps:
+MCP 中的采样流程如下：
 
-1. Server sends a `sampling/createMessage` request to the client
-2. Client reviews the request and can modify it
-3. Client samples from an LLM
-4. Client reviews the completion
-5. Client returns the result to the server
+1. 服务器向客户端发送 `sampling/createMessage` 请求
+2. 客户端审核请求并可进行修改
+3. 客户端从 LLM 中采样
+4. 客户端审核完成结果
+5. 客户端将结果返回给服务器
 
-This human-in-the-loop design ensures users maintain control over what the LLM sees and generates.
+这种人机交互设计确保用户对 LLM 所见和生成内容保持控制。
 
-## Sampling Parameters Overview
+## 采样参数概览
 
-MCP defines the following sampling parameters that can be configured in client requests:
+MCP 定义了以下可在客户端请求中配置的采样参数：
 
-| Parameter | Description | Typical Range |
+| 参数 | 描述 | 典型范围 |
 |-----------|-------------|---------------|
-| `temperature` | Controls randomness in token selection | 0.0 - 1.0 |
-| `maxTokens` | Maximum number of tokens to generate | Integer value |
-| `stopSequences` | Custom sequences that stop generation when encountered | Array of strings |
-| `metadata` | Additional provider-specific parameters | JSON object |
+| `temperature` | 控制选词的随机性 | 0.0 - 1.0 |
+| `maxTokens` | 最大生成 token 数量 | 整数值 |
+| `stopSequences` | 遇到自定义序列时停止生成 | 字符串数组 |
+| `metadata` | 额外的提供商特定参数 | JSON 对象 |
 
-Many LLM providers support additional parameters through the `metadata` field, which may include:
+许多 LLM 提供商通过 `metadata` 字段支持额外参数，可能包括：
 
-| Common Extension Parameter | Description | Typical Range |
+| 常见扩展参数 | 描述 | 典型范围 |
 |-----------|-------------|---------------|
-| `top_p` | Nucleus sampling - limits tokens to top cumulative probability | 0.0 - 1.0 |
-| `top_k` | Limits token selection to top K options | 1 - 100 |
-| `presence_penalty` | Penalizes tokens based on their presence in the text so far | -2.0 - 2.0 |
-| `frequency_penalty` | Penalizes tokens based on their frequency in the text so far | -2.0 - 2.0 |
-| `seed` | Specific random seed for reproducible results | Integer value |
+| `top_p` | 核采样 - 限制 token 到累计概率最高部分 | 0.0 - 1.0 |
+| `top_k` | 限制选词范围到前 K 个选项 | 1 - 100 |
+| `presence_penalty` | 根据文本中 token 出现情况进行惩罚 | -2.0 - 2.0 |
+| `frequency_penalty` | 根据文本中 token 频率进行惩罚 | -2.0 - 2.0 |
+| `seed` | 固定随机种子以实现可复现结果 | 整数值 |
 
-## Example Request Format
+## 请求示例格式
 
-Here's an example of requesting sampling from a client in MCP:
+以下是 MCP 中向客户端请求采样的示例：
 
 ```json
 {
@@ -75,9 +84,9 @@ Here's an example of requesting sampling from a client in MCP:
 }
 ```
 
-## Response Format
+## 响应格式
 
-The client returns a completion result:
+客户端返回完成结果：
 
 ```json
 {
@@ -91,44 +100,44 @@ The client returns a completion result:
 }
 ```
 
-## Human in the Loop Controls
+## 人机交互控制
 
-MCP sampling is designed with human oversight in mind:
+MCP 采样设计时考虑了人工监督：
 
-- **For prompts**:
-  - Clients should show users the proposed prompt
-  - Users should be able to modify or reject prompts
-  - System prompts can be filtered or modified
-  - Context inclusion is controlled by the client
+- **针对提示**：
+  - 客户端应向用户展示拟定的提示
+  - 用户应能修改或拒绝提示
+  - 系统提示可被过滤或修改
+  - 上下文包含由客户端控制
 
-- **For completions**:
-  - Clients should show users the completion
-  - Users should be able to modify or reject completions
-  - Clients can filter or modify completions
-  - Users control which model is used
+- **针对完成结果**：
+  - 客户端应向用户展示完成内容
+  - 用户应能修改或拒绝完成结果
+  - 客户端可过滤或修改完成内容
+  - 用户控制所用模型
 
-With these principles in mind, let's look at how to implement sampling in different programming languages, focusing on the parameters that are commonly supported across LLM providers.
+基于这些原则，下面将展示如何在不同编程语言中实现采样，重点关注各 LLM 提供商普遍支持的参数。
 
-## Security Considerations
+## 安全注意事项
 
-When implementing sampling in MCP, consider these security best practices:
+在 MCP 中实现采样时，请考虑以下安全最佳实践：
 
-- **Validate all message content** before sending it to the client
-- **Sanitize sensitive information** from prompts and completions
-- **Implement rate limits** to prevent abuse
-- **Monitor sampling usage** for unusual patterns
-- **Encrypt data in transit** using secure protocols
-- **Handle user data privacy** according to relevant regulations
-- **Audit sampling requests** for compliance and security
-- **Control cost exposure** with appropriate limits
-- **Implement timeouts** for sampling requests
-- **Handle model errors gracefully** with appropriate fallbacks
+- **验证所有消息内容**，确保发送给客户端前无误
+- **清理提示和完成内容中的敏感信息**
+- **实施速率限制**，防止滥用
+- **监控采样使用情况**，发现异常模式
+- **使用安全协议加密传输数据**
+- **根据相关法规处理用户数据隐私**
+- **审计采样请求**，确保合规和安全
+- **控制成本暴露**，设置适当限制
+- **为采样请求设置超时**
+- **优雅处理模型错误**，提供合适的降级方案
 
-Sampling parameters allow fine-tuning the behavior of language models to achieve the desired balance between deterministic and creative outputs.
+采样参数允许微调语言模型的行为，实现确定性与创造性输出之间的理想平衡。
 
-Let's look at how to configure these parameters in different programming languages.
+接下来看看如何在不同编程语言中配置这些参数。
 
-# [.NET](#tab-dotnet)
+# [.NET](../../../../05-AdvancedTopics/mcp-sampling)
 
 ```csharp
 // .NET Example: Configuring sampling parameters in MCP
@@ -164,20 +173,20 @@ public class SamplingExample
 }
 ```
 
-In the preceding code we've:
+在上述代码中我们：
 
-- Created an MCP client with a specific server URL.
-- Configured a request with sampling parameters like `temperature`, `top_p`, and `top_k`.
-- Sent the request and printed the generated text.
-- Used:
-    - `allowedTools` to specify which tools the model can use during generation. In this case, we allowed the `ideaGenerator` and `marketAnalyzer` tools to assist in generating creative app ideas.
-    - `frequencyPenalty` and `presencePenalty` to control repetition and diversity in the output.
-    - `temperature` to control the randomness of the output, where higher values lead to more creative responses.
-    - `top_p` to limit the selection of tokens to those that contribute to the top cumulative probability mass, enhancing the quality of generated text.
-    - `top_k` to restrict the model to the top K most probable tokens, which can help in generating more coherent responses.
-    - `frequencyPenalty` and `presencePenalty` to reduce repetition and encourage diversity in the generated text.
+- 创建了一个带有特定服务器 URL 的 MCP 客户端。
+- 配置了包含 `temperature`、`top_p` 和 `top_k` 等采样参数的请求。
+- 发送请求并打印生成的文本。
+- 使用了：
+    - `allowedTools` 指定模型生成时可使用的工具。本例中允许 `ideaGenerator` 和 `marketAnalyzer` 工具协助生成创意应用点子。
+    - `frequencyPenalty` 和 `presencePenalty` 控制输出的重复性和多样性。
+    - `temperature` 控制输出的随机性，数值越高，响应越具创造性。
+    - `top_p` 限制选词范围为累计概率最高的部分，提升生成文本质量。
+    - `top_k` 限制模型仅从概率最高的 K 个 token 中选择，有助于生成更连贯的响应。
+    - `frequencyPenalty` 和 `presencePenalty` 用于减少重复并鼓励多样性。
 
-# [JavaScript](#tab/javascript)
+# [JavaScript](../../../../05-AdvancedTopics/mcp-sampling)
 
 ```javascript
 // JavaScript Example: Temperature and Top-P sampling configuration
@@ -237,27 +246,27 @@ async function demonstrateSampling() {
 demonstrateSampling();
 ```
 
-In the preceding code we've:
+在上述代码中我们：
 
-- Initialized an MCP client with a server URL and API key.
-- Configured two sets of sampling parameters: one for creative tasks and another for factual tasks.
-- Sent requests with these configurations, allowing the model to use specific tools for each task.
-- Printed the generated responses to demonstrate the effects of different sampling parameters.
-- Used `allowedTools` to specify which tools the model can use during generation. In this case, we allowed the `ideaGenerator` and `environmentalImpactTool` for creative tasks, and `factChecker` and `dataAnalysisTool` for factual tasks.
-- Used `temperature` to control the randomness of the output, where higher values lead to more creative responses.
-- Used `top_p` to limit the selection of tokens to those that contribute to the top cumulative probability mass, enhancing the quality of generated text.
-- Used `frequencyPenalty` and `presencePenalty` to reduce repetition and encourage diversity in the output.
-- Used `top_k` to restrict the model to the top K most probable tokens, which can help in generating more coherent responses.
+- 使用服务器 URL 和 API 密钥初始化了 MCP 客户端。
+- 配置了两组采样参数：一组用于创意任务，另一组用于事实任务。
+- 发送了带有这些配置的请求，允许模型针对不同任务使用特定工具。
+- 打印生成的响应，展示不同采样参数的效果。
+- 使用 `allowedTools` 指定模型生成时可用的工具。本例中创意任务允许 `ideaGenerator` 和 `environmentalImpactTool`，事实任务允许 `factChecker` 和 `dataAnalysisTool`。
+- 使用 `temperature` 控制输出随机性，数值越高响应越具创造性。
+- 使用 `top_p` 限制选词范围为累计概率最高部分，提升生成文本质量。
+- 使用 `frequencyPenalty` 和 `presencePenalty` 减少重复并鼓励多样性。
+- 使用 `top_k` 限制模型仅从概率最高的 K 个 token 中选择，有助于生成更连贯的响应。
 
 ---
 
-## Deterministic Sampling
+## 确定性采样
 
-For applications requiring consistent outputs, deterministic sampling ensures reproducible results. How it does that is by using a fixed random seed and setting the temperature to zero.
+对于需要一致输出的应用，确定性采样确保结果可复现。其方法是使用固定随机种子并将温度设为零。
 
-Let's look at below sample implementation to demonstrate deterministic sampling in different programming languages.
+下面示例展示了如何在不同编程语言中实现确定性采样。
 
-# [Java](#tab/java)
+# [Java](../../../../05-AdvancedTopics/mcp-sampling)
 
 ```java
 // Java Example: Deterministic responses with fixed seed
@@ -296,16 +305,16 @@ public class DeterministicSamplingExample {
 }
 ```
 
-In the preceding code we've:
+在上述代码中我们：
 
-- Created an MCP client with a specified server URL.
-- Configured two requests with the same prompt, fixed seed, and zero temperature.
-- Sent both requests and printed the generated text.
-- Demonstrated that the responses are identical due to the deterministic nature of the sampling configuration (same seed and temperature).
-- Used `setSeed` to specify a fixed random seed, ensuring that the model generates the same output for the same input every time.
-- Set `temperature` to zero to ensure maximum determinism, meaning the model will always select the most probable next token without randomness.
+- 创建了一个指定服务器 URL 的 MCP 客户端。
+- 配置了两个请求，使用相同提示、固定种子和零温度。
+- 发送两个请求并打印生成文本。
+- 演示了由于采样配置的确定性（相同种子和温度），响应内容完全一致。
+- 使用 `setSeed` 指定固定随机种子，确保相同输入每次生成相同输出。
+- 将 `temperature` 设为零，确保最大确定性，模型总是选择最可能的下一个 token，无随机性。
 
-# [JavaScript](#tab/javascript-deterministic)
+# [JavaScript](../../../../05-AdvancedTopics/mcp-sampling)
 
 ```javascript
 // JavaScript Example: Deterministic responses with seed control
@@ -352,25 +361,25 @@ async function deterministicSampling() {
 deterministicSampling();
 ```
 
-In the preceding code we've:
+在上述代码中我们：
 
-- Initialized an MCP client with a server URL.
-- Configured two requests with the same prompt, fixed seed, and zero temperature.
-- Sent both requests and printed the generated text.
-- Demonstrated that the responses are identical due to the deterministic nature of the sampling configuration (same seed and temperature).
-- Used `seed` to specify a fixed random seed, ensuring that the model generates the same output for the same input every time.
-- Set `temperature` to zero to ensure maximum determinism, meaning the model will always select the most probable next token without randomness.
-- Used a different seed for the third request to show that changing the seed results in different outputs, even with the same prompt and temperature.
+- 使用服务器 URL 初始化 MCP 客户端。
+- 配置了两个请求，使用相同提示、固定种子和零温度。
+- 发送两个请求并打印生成文本。
+- 演示了由于采样配置的确定性（相同种子和温度），响应内容完全一致。
+- 使用 `seed` 指定固定随机种子，确保相同输入每次生成相同输出。
+- 将 `temperature` 设为零，确保最大确定性，模型总是选择最可能的下一个 token，无随机性。
+- 对第三个请求使用不同种子，展示即使提示和温度相同，改变种子也会产生不同输出。
 
 ---
 
-## Dynamic Sampling Configuration
+## 动态采样配置
 
-Intelligent sampling adapts parameters based on the context and requirements of each request. That means dynamically adjusting parameters like temperature, top_p, and penalties based on the task type, user preferences, or historical performance.
+智能采样根据每个请求的上下文和需求调整参数。这意味着根据任务类型、用户偏好或历史表现动态调整 temperature、top_p 和惩罚参数。
 
-Let's look at how to implement dynamic sampling in different programming languages.
+下面展示如何在不同编程语言中实现动态采样。
 
-# [Python](#tab/python)
+# [Python](../../../../05-AdvancedTopics/mcp-sampling)
 
 ```python
 # Python Example: Dynamic sampling based on request context
@@ -420,24 +429,24 @@ class DynamicSamplingService:
         }
 ```
 
-In the preceding code we've:
+在上述代码中我们：
 
-- Created a `DynamicSamplingService` class that manages adaptive sampling.
-- Defined sampling presets for different task types (creative, factual, code, analytical).
-- Selected a base sampling preset based on the task type.
-- Adjusted the sampling parameters based on user preferences, such as creativity level and diversity.
-- Sent the request with the dynamically configured sampling parameters.
-- Returned the generated text along with the applied sampling parameters and task type for transparency.
-- Used `temperature` to control the randomness of the output, where higher values lead to more creative responses.
-- Used `top_p` to limit the selection of tokens to those that contribute to the top cumulative probability mass, enhancing the quality of generated text.
-- Used `frequency_penalty` to reduce repetition and encourage diversity in the output.
-- Used `user_preferences` to allow customization of the sampling parameters based on user-defined creativity and diversity levels.
-- Used `task_type` to determine the appropriate sampling strategy for the request, allowing for more tailored responses based on the nature of the task.
-- Used `send_request` method to send the prompt with the configured sampling parameters, ensuring that the model generates text according to the specified requirements.
-- Used `generated_text` to retrieve the model's response, which is then returned along with the sampling parameters and task type for further analysis or display.
-- Used `min` and `max` functions to ensure that user preferences are clamped within valid ranges, preventing invalid sampling configurations.
+- 创建了一个管理自适应采样的 `DynamicSamplingService` 类。
+- 定义了针对不同任务类型（创意、事实、代码、分析）的采样预设。
+- 根据任务类型选择基础采样预设。
+- 根据用户偏好（如创造力和多样性）调整采样参数。
+- 发送带有动态配置采样参数的请求。
+- 返回生成文本及所用采样参数和任务类型，确保透明度。
+- 使用 `temperature` 控制输出随机性，数值越高响应越具创造性。
+- 使用 `top_p` 限制选词范围为累计概率最高部分，提升生成文本质量。
+- 使用 `frequency_penalty` 减少重复并鼓励多样性。
+- 使用 `user_preferences` 允许基于用户定义的创造力和多样性水平自定义采样参数。
+- 使用 `task_type` 确定请求的合适采样策略，实现更针对性的响应。
+- 使用 `send_request` 方法发送带有配置采样参数的提示，确保模型按要求生成文本。
+- 使用 `generated_text` 获取模型响应，并连同采样参数和任务类型一并返回，便于后续分析或展示。
+- 使用 `min` 和 `max` 函数确保用户偏好值在有效范围内，防止无效采样配置。
 
-# [JavaScript Dynamic](#tab/javascript-dynamic)
+# [JavaScript Dynamic](../../../../05-AdvancedTopics/mcp-sampling)
 
 ```javascript
 // JavaScript Example: Dynamic sampling configuration based on user context
@@ -628,30 +637,33 @@ async function demonstrateAdaptiveSampling() {
 demonstrateAdaptiveSampling();
 ```
 
-In the preceding code we've:
+在上述代码中我们：
 
-- Created an `AdaptiveSamplingManager` class that manages dynamic sampling based on task type and user preferences.
-- Defined sampling profiles for different task types (creative, factual, code, conversational).
-- Implemented a method to detect the task type from the prompt using simple heuristics.
-- Calculated sampling parameters based on the detected task type and user preferences.
-- Applied learned adjustments based on historical performance to optimize sampling parameters.
-- Recorded performance for future adjustments, allowing the system to learn from past interactions.
-- Sent requests with dynamically configured sampling parameters and returned the generated text along with applied parameters and detected task type.
-- Used:
-    - `userPreferences` to allow customization of the sampling parameters based on user-defined creativity, precision, and consistency levels.
-    - `detectTaskType` to determine the nature of the task based on the prompt, allowing for more tailored responses.
-    - `recordPerformance` to log the performance of generated responses, enabling the system to adapt and improve over time.
-    - `applyLearnedAdjustments` to modify sampling parameters based on historical performance, enhancing the model's ability to generate high-quality responses.
-    - `generateResponse` to encapsulate the entire process of generating a response with adaptive sampling, making it easy to call with different prompts and contexts.
-    - `allowedTools` to specify which tools the model can use during generation, allowing for more context-aware responses.
-    - `feedbackScore` to allow users to provide feedback on the quality of the generated response, which can be used to further refine the model's performance over time.
-    - `performanceHistory` to maintain a record of past interactions, enabling the system to learn from previous successes and failures.
-    - `getSamplingParameters` to dynamically adjust sampling parameters based on the context of the request, allowing for more flexible and responsive model behavior.
-    - `detectTaskType` to classify the task based on the prompt, enabling the system to apply appropriate sampling strategies for different types of requests.
-    - `samplingProfiles` to define base sampling configurations for different task types, allowing for quick adjustments based on the nature of the request.
+- 创建了一个基于任务类型和用户偏好的动态采样管理类 `AdaptiveSamplingManager`。
+- 定义了针对不同任务类型（创意、事实、代码、对话）的采样配置档案。
+- 实现了一个简单启发式方法从提示中检测任务类型。
+- 根据检测到的任务类型和用户偏好计算采样参数。
+- 应用基于历史表现的学习调整，优化采样参数。
+- 记录性能以便未来调整，使系统能从过去交互中学习。
+- 发送带有动态配置采样参数的请求，返回生成文本及应用的参数和检测到的任务类型。
+- 使用了：
+    - `userPreferences` 允许基于用户定义的创造力、精确度和一致性水平自定义采样参数。
+    - `detectTaskType` 根据提示确定任务性质，实现更针对性的响应。
+    - `recordPerformance` 记录生成响应的表现，使系统能适应和改进。
+    - `applyLearnedAdjustments` 基于历史表现调整采样参数，提升模型生成高质量响应的能力。
+    - `generateResponse` 封装整个自适应采样生成过程，方便不同提示和上下文调用。
+    - `allowedTools` 指定模型生成时可用的工具，实现更具上下文感知的响应。
+    - `feedbackScore` 允许用户对生成响应质量提供反馈，用于进一步优化模型表现。
+    - `performanceHistory` 维护过去交互记录，使系统能从成功和失败中学习。
+    - `getSamplingParameters` 根据请求上下文动态调整采样参数，实现更灵活响应。
+    - `detectTaskType` 对提示进行分类，应用适合不同请求类型的采样策略。
+    - `samplingProfiles` 定义不同任务类型的基础采样配置，便于根据请求性质快速调整。
 
 ---
 
-## What's next
+## 后续内容
 
 - [5.7 Scaling](../mcp-scaling/README.md)
+
+**免责声明**：  
+本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。虽然我们力求准确，但请注意自动翻译可能包含错误或不准确之处。原始文件的母语版本应被视为权威来源。对于重要信息，建议使用专业人工翻译。对于因使用本翻译而产生的任何误解或误释，我们不承担任何责任。

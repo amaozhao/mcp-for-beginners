@@ -1,64 +1,73 @@
-# HTTPS Streaming with Model Context Protocol (MCP)
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "5f1383103523fa822e1fec7ef81904d5",
+  "translation_date": "2025-08-11T09:41:26+00:00",
+  "source_file": "03-GettingStarted/06-http-streaming/README.md",
+  "language_code": "zh"
+}
+-->
+# 使用模型上下文协议 (MCP) 的 HTTPS 流式传输
 
-This chapter provides a comprehensive guide to implementing secure, scalable, and real-time streaming with the Model Context Protocol (MCP) using HTTPS. It covers the motivation for streaming, the available transport mechanisms, how to implement streamable HTTP in MCP, security best practices, migration from SSE, and practical guidance for building your own streaming MCP applications. 
+本章提供了使用 HTTPS 实现安全、可扩展和实时流式传输的全面指南，基于模型上下文协议 (MCP)。内容涵盖了流式传输的动机、可用的传输机制、如何在 MCP 中实现可流式的 HTTP、安全最佳实践、从 SSE 的迁移，以及构建您自己的 MCP 流式应用程序的实用指导。
 
-## Transport Mechanisms and Streaming in MCP
+## MCP 中的传输机制与流式传输
 
-This section explores the different transport mechanisms available in MCP and their role in enabling streaming capabilities for real-time communication between clients and servers.
+本节探讨了 MCP 中可用的不同传输机制及其在实现客户端与服务器之间实时通信中的作用。
 
-### What is a Transport Mechanism?
+### 什么是传输机制？
 
-A transport mechanism defines how data is exchanged between the client and server. MCP supports multiple transport types to suit different environments and requirements:
+传输机制定义了客户端与服务器之间数据交换的方式。MCP 支持多种传输类型，以满足不同环境和需求：
 
-- **stdio**: Standard input/output, suitable for local and CLI-based tools. Simple but not suitable for web or cloud.
-- **SSE (Server-Sent Events)**: Allows servers to push real-time updates to clients over HTTP. Good for web UIs, but limited in scalability and flexibility.
-- **Streamable HTTP**: Modern HTTP-based streaming transport, supporting notifications and better scalability. Recommended for most production and cloud scenarios.
+- **stdio**：标准输入/输出，适用于本地和基于命令行工具的场景。简单但不适合 Web 或云环境。
+- **SSE (服务器发送事件)**：允许服务器通过 HTTP 向客户端推送实时更新。适合 Web 界面，但在可扩展性和灵活性方面有限。
+- **可流式 HTTP**：基于现代 HTTP 的流式传输机制，支持通知并具有更好的可扩展性。推荐用于大多数生产环境和云场景。
 
-### Comparison Table
+### 对比表
 
-Have a look at the comparison table below to understand the differences between these transport mechanisms:
+以下是这些传输机制的对比表：
 
-| Transport         | Real-time Updates | Streaming | Scalability | Use Case                |
-|-------------------|------------------|-----------|-------------|-------------------------|
-| stdio             | No               | No        | Low         | Local CLI tools         |
-| SSE               | Yes              | Yes       | Medium      | Web, real-time updates  |
-| Streamable HTTP   | Yes              | Yes       | High        | Cloud, multi-client     |
+| 传输方式           | 实时更新       | 流式传输 | 可扩展性 | 使用场景                 |
+|-------------------|--------------|---------|---------|-------------------------|
+| stdio             | 否           | 否      | 低       | 本地 CLI 工具            |
+| SSE               | 是           | 是      | 中       | Web，实时更新            |
+| 可流式 HTTP        | 是           | 是      | 高       | 云，多客户端             |
 
-> **Tip:** Choosing the right transport impacts performance, scalability, and user experience. **Streamable HTTP** is recommended for modern, scalable, and cloud-ready applications.
+> **提示：** 选择合适的传输方式会影响性能、可扩展性和用户体验。**可流式 HTTP** 是现代、可扩展和云就绪应用程序的推荐选择。
 
-Note the transports stdio and SSE that you were shown in the previous chapters and how streamable HTTP is the transport covered in this chapter.
+注意，在前面的章节中介绍了 stdio 和 SSE，而本章将重点介绍可流式 HTTP。
 
-## Streaming: Concepts and Motivation
+## 流式传输：概念与动机
 
-Understanding the fundamental concepts and motivations behind streaming is essential for implementing effective real-time communication systems.
+理解流式传输的基本概念和动机是实现有效实时通信系统的关键。
 
-**Streaming** is a technique in network programming that allows data to be sent and received in small, manageable chunks or as a sequence of events, rather than waiting for an entire response to be ready. This is especially useful for:
+**流式传输** 是一种网络编程技术，允许数据以小块或事件序列的形式发送和接收，而不是等待整个响应准备好后再发送。这种技术特别适用于以下场景：
 
-- Large files or datasets.
-- Real-time updates (e.g., chat, progress bars).
-- Long-running computations where you want to keep the user informed.
+- 大型文件或数据集。
+- 实时更新（例如聊天、进度条）。
+- 长时间运行的计算任务，用户需要实时了解进展。
 
-Here's what you need to know about streaming at high level:
+以下是流式传输的一些核心特点：
 
-- Data is delivered progressively, not all at once.
-- The client can process data as it arrives.
-- Reduces perceived latency and improves user experience.
+- 数据是逐步传递的，而不是一次性全部发送。
+- 客户端可以在数据到达时立即处理。
+- 减少感知延迟，提升用户体验。
 
-### Why use streaming?
+### 为什么使用流式传输？
 
-The reasons for using streaming are the following:
+使用流式传输的原因包括：
 
-- Users get feedback immediately, not just at the end
-- Enables real-time applications and responsive UIs
-- More efficient use of network and compute resources
+- 用户可以立即获得反馈，而不是等到操作结束。
+- 支持实时应用程序和响应式用户界面。
+- 更高效地利用网络和计算资源。
 
-### Simple Example: HTTP Streaming Server & Client
+### 简单示例：HTTP 流式服务器与客户端
 
-Here's a simple example of how streaming can be implemented:
+以下是一个流式传输实现的简单示例：
 
 #### Python
 
-**Server (Python, using FastAPI and StreamingResponse):**
+**服务器端（使用 FastAPI 和 StreamingResponse）：**
 
 ```python
 from fastapi import FastAPI
@@ -77,7 +86,7 @@ def stream():
     return StreamingResponse(event_stream(), media_type="text/event-stream")
 ```
 
-**Client (Python, using requests):**
+**客户端（使用 requests）：**
 
 ```python
 import requests
@@ -88,22 +97,22 @@ with requests.get("http://localhost:8000/stream", stream=True) as r:
             print(line.decode())
 ```
 
-This example demonstrates a server sending a series of messages to the client as they become available, rather than waiting for all messages to be ready.
+此示例展示了服务器如何在消息准备好时逐条发送给客户端，而不是等待所有消息准备好后再发送。
 
-**How it works:**
+**工作原理：**
 
-- The server yields each message as it is ready.
-- The client receives and prints each chunk as it arrives.
+- 服务器在每条消息准备好时生成并发送。
+- 客户端在每个数据块到达时接收并打印。
 
-**Requirements:**
+**要求：**
 
-- The server must use a streaming response (e.g., `StreamingResponse` in FastAPI).
-- The client must process the response as a stream (`stream=True` in requests).
-- Content-Type is usually `text/event-stream` or `application/octet-stream`.
+- 服务器必须使用流式响应（例如 FastAPI 中的 `StreamingResponse`）。
+- 客户端必须将响应作为流处理（`stream=True`）。
+- Content-Type 通常为 `text/event-stream` 或 `application/octet-stream`。
 
 #### Java
 
-**Server (Java, using Spring Boot and Server-Sent Events):**
+**服务器端（使用 Spring Boot 和服务器发送事件）：**
 
 ```java
 @RestController
@@ -138,7 +147,7 @@ public class CalculatorController {
 }
 ```
 
-**Client (Java, using Spring WebFlux WebClient):**
+**客户端（使用 Spring WebFlux WebClient）：**
 
 ```java
 @SpringBootApplication
@@ -166,76 +175,72 @@ public class CalculatorClientApplication implements CommandLineRunner {
 }
 ```
 
-**Java Implementation Notes:**
+**Java 实现注意事项：**
 
-- Uses Spring Boot's reactive stack with `Flux` for streaming
-- `ServerSentEvent` provides structured event streaming with event types
-- `WebClient` with `bodyToFlux()` enables reactive streaming consumption
-- `delayElements()` simulates processing time between events
-- Events can have types (`info`, `result`) for better client handling
+- 使用 Spring Boot 的响应式栈，通过 `Flux` 实现流式传输。
+- `ServerSentEvent` 提供了带有事件类型的结构化事件流。
+- `WebClient` 的 `bodyToFlux()` 支持响应式流式消费。
+- `delayElements()` 模拟事件之间的处理时间。
+- 事件可以包含类型（如 `info`、`result`），以便客户端更好地处理。
 
-### Comparison: Classic Streaming vs MCP Streaming
+### 对比：经典流式传输与 MCP 流式传输
 
-The differences between how streaming works in a "classical" manner versus how it works in MCP can be depicted like so:
+经典 HTTP 流式传输与 MCP 流式传输的区别如下：
 
-| Feature                | Classic HTTP Streaming         | MCP Streaming (Notifications)      |
-|------------------------|-------------------------------|-------------------------------------|
-| Main response          | Chunked                       | Single, at end                      |
-| Progress updates       | Sent as data chunks           | Sent as notifications               |
-| Client requirements    | Must process stream           | Must implement message handler      |
-| Use case               | Large files, AI token streams | Progress, logs, real-time feedback  |
+| 特性                  | 经典 HTTP 流式传输            | MCP 流式传输（通知）          |
+|----------------------|-----------------------------|-----------------------------|
+| 主响应               | 分块传输                     | 最终单一响应                 |
+| 进度更新             | 作为数据块发送               | 作为通知发送                 |
+| 客户端要求           | 必须处理流式响应             | 必须实现消息处理器           |
+| 使用场景             | 大型文件、AI 令牌流          | 进度、日志、实时反馈         |
 
-### Key Differences Observed
+### 观察到的主要差异
 
-Additionally, here are some key differences:
+此外，还有以下关键差异：
 
-- **Communication Pattern:**
-  - Classic HTTP streaming: Uses simple chunked transfer encoding to send data in chunks
-  - MCP streaming: Uses a structured notification system with JSON-RPC protocol
+- **通信模式：**
+  - 经典 HTTP 流式传输：使用简单的分块传输编码发送数据块。
+  - MCP 流式传输：使用 JSON-RPC 协议的结构化通知系统。
 
-- **Message Format:**
-  - Classic HTTP: Plain text chunks with newlines
-  - MCP: Structured LoggingMessageNotification objects with metadata
+- **消息格式：**
+  - 经典 HTTP：纯文本块，使用换行符分隔。
+  - MCP：带有元数据的结构化 `LoggingMessageNotification` 对象。
 
-- **Client Implementation:**
-  - Classic HTTP: Simple client that processes streaming responses
-  - MCP: More sophisticated client with a message handler to process different types of messages
+- **客户端实现：**
+  - 经典 HTTP：简单的客户端处理流式响应。
+  - MCP：更复杂的客户端，需要消息处理器来处理不同类型的消息。
 
-- **Progress Updates:**
-  - Classic HTTP: The progress is part of the main response stream
-  - MCP: Progress is sent via separate notification messages while the main response comes at the end
+- **进度更新：**
+  - 经典 HTTP：进度是主响应流的一部分。
+  - MCP：进度通过单独的通知消息发送，而主响应在最后返回。
 
-### Recommendations
+### 推荐建议
 
-There are some things we recommend when it comes to choosing between implementing classical streaming (as an endpoint we showed you above using `/stream`) versus choosing streaming via MCP.
+在选择实现经典流式传输（如前面展示的 `/stream` 端点）还是 MCP 流式传输时，我们有以下建议：
 
-- **For simple streaming needs:** Classic HTTP streaming is simpler to implement and sufficient for basic streaming needs.
+- **对于简单的流式需求：** 经典 HTTP 流式传输更易于实现，适合基本的流式需求。
+- **对于复杂的交互式应用程序：** MCP 流式传输提供了更结构化的方法，具有更丰富的元数据，并将通知与最终结果分离。
+- **对于 AI 应用程序：** MCP 的通知系统特别适合长时间运行的 AI 任务，能够实时向用户提供进度更新。
 
-- **For complex, interactive applications:** MCP streaming provides a more structured approach with richer metadata and separation between notifications and final results.
+## MCP 中的流式传输
 
-- **For AI applications:** MCP's notification system is particularly useful for long-running AI tasks where you want to keep users informed of progress.
+好了，您已经看到了经典流式传输与 MCP 流式传输的对比和建议。接下来，我们将详细介绍如何在 MCP 中利用流式传输。
 
-## Streaming in MCP
+在 MCP 框架中，流式传输的重点不是将主响应分块发送，而是在工具处理请求时向客户端发送**通知**。这些通知可以包括进度更新、日志或其他事件。
 
-Ok, so you've seen some recommendations and comparisons so far on the difference between classical streaming and streaming in MCP. Let's get into detail exactly how you can leverage streaming in MCP.
+### 工作原理
 
-Understanding how streaming works within the MCP framework is essential for building responsive applications that provide real-time feedback to users during long-running operations.
+主结果仍然作为单一响应发送。然而，在处理过程中，通知可以作为单独的消息发送，从而实时更新客户端。客户端必须能够处理并显示这些通知。
 
-In MCP, streaming is not about sending the main response in chunks, but about sending **notifications** to the client while a tool is processing a request. These notifications can include progress updates, logs, or other events.
+## 什么是通知？
 
-### How it works
+我们提到“通知”，那么在 MCP 中它具体指什么？
 
-The main result is still sent as a single response. However, notifications can be sent as separate messages during processing and thereby update the client in real time. The client must be able to handle and display these notifications.
+通知是服务器在长时间运行的操作期间发送给客户端的消息，用于告知进度、状态或其他事件。通知提高了透明度和用户体验。
 
-## What is a Notification?
+例如，在客户端与服务器完成初始握手后，服务器应发送一条通知。
 
-We said "Notification", what does that mean in the context of MCP?
-
-A notification is a message sent from the server to the client to inform about progress, status, or other events during a long-running operation. Notifications improve transparency and user experience.
-
-For example, a client is supposed to send a notification once the initial handshake with the server has been made.
-
-A notification looks like so as a JSON message:
+通知的 JSON 消息格式如下：
 
 ```json
 {
@@ -247,9 +252,9 @@ A notification looks like so as a JSON message:
 }
 ```
 
-Notifications belongs to a topic in MCP referred to as ["Logging"](https://modelcontextprotocol.io/specification/draft/server/utilities/logging).
+通知属于 MCP 中称为 ["Logging"](https://modelcontextprotocol.io/specification/draft/server/utilities/logging) 的主题。
 
-To get logging to work, the server needs to enable it as feature/capability like so:
+要启用日志记录，服务器需要像这样将其作为功能/能力启用：
 
 ```json
 {
@@ -260,28 +265,28 @@ To get logging to work, the server needs to enable it as feature/capability like
 ```
 
 > [!NOTE]
-> Depending on the SDK used, logging might be enabled by default, or you might need to explicitly enable it in your server configuration.
+> 根据所使用的 SDK，日志记录可能默认启用，也可能需要在服务器配置中显式启用。
 
-There different types of notifications:
+通知有不同的类型：
 
-| Level     | Description                    | Example Use Case                |
-|-----------|-------------------------------|---------------------------------|
-| debug     | Detailed debugging information | Function entry/exit points      |
-| info      | General informational messages | Operation progress updates      |
-| notice    | Normal but significant events  | Configuration changes           |
-| warning   | Warning conditions             | Deprecated feature usage        |
-| error     | Error conditions               | Operation failures              |
-| critical  | Critical conditions            | System component failures       |
-| alert     | Action must be taken immediately | Data corruption detected      |
-| emergency | System is unusable             | Complete system failure         |
+| 级别       | 描述                         | 示例使用场景                   |
+|-----------|-----------------------------|-------------------------------|
+| debug     | 详细的调试信息               | 函数入口/退出点               |
+| info      | 一般信息性消息               | 操作进度更新                  |
+| notice    | 正常但重要的事件             | 配置更改                     |
+| warning   | 警告条件                     | 使用已弃用的功能              |
+| error     | 错误条件                     | 操作失败                     |
+| critical  | 严重条件                     | 系统组件故障                  |
+| alert     | 必须立即采取行动             | 检测到数据损坏                |
+| emergency | 系统不可用                   | 完全系统故障                  |
 
-## Implementing Notifications in MCP
+## 在 MCP 中实现通知
 
-To implement notifications in MCP, you need to set up both the server and client sides to handle real-time updates. This allows your application to provide immediate feedback to users during long-running operations.
+要在 MCP 中实现通知，您需要在服务器端和客户端设置处理实时更新的功能。这使您的应用程序能够在长时间运行的操作期间向用户提供即时反馈。
 
-### Server-side: Sending Notifications
+### 服务器端：发送通知
 
-Let's start with the server side. In MCP, you define tools that can send notifications while processing requests. The server uses the context object (usually `ctx`) to send messages to the client.
+从服务器端开始。在 MCP 中，您可以定义工具，在处理请求时发送通知。服务器使用上下文对象（通常是 `ctx`）向客户端发送消息。
 
 #### Python
 
@@ -294,9 +299,9 @@ async def process_files(message: str, ctx: Context) -> TextContent:
     return TextContent(type="text", text=f"Done: {message}")
 ```
 
-In the preceding example, the `process_files` tool sends three notifications to the client as it processes each file. The `ctx.info()` method is used to send informational messages.
+在上述示例中，`process_files` 工具在处理每个文件时向客户端发送三条通知。`ctx.info()` 方法用于发送信息性消息。
 
-Additionally, to enable notifications, ensure your server uses a streaming transport (like `streamable-http`) and your client implements a message handler to process notifications. Here's how you can set up the server to use the `streamable-http` transport:
+此外，为了启用通知，请确保您的服务器使用流式传输（如 `streamable-http`），并且客户端实现了消息处理器来处理通知。以下是设置服务器使用 `streamable-http` 传输的方法：
 
 ```python
 mcp.run(transport="streamable-http")
@@ -319,9 +324,9 @@ public async Task<TextContent> ProcessFiles(string message, ToolContext ctx)
 }
 ```
 
-In this .NET example, the `ProcessFiles` tool is decorated with the `Tool` attribute and sends three notifications to the client as it processes each file. The `ctx.Info()` method is used to send informational messages.
+在此 .NET 示例中，`ProcessFiles` 工具通过 `Tool` 属性定义，并在处理每个文件时向客户端发送三条通知。`ctx.Info()` 方法用于发送信息性消息。
 
-To enable notifications in your .NET MCP server, ensure you're using a streaming transport:
+要在 .NET MCP 服务器中启用通知，请确保您使用流式传输：
 
 ```csharp
 var builder = McpBuilder.Create();
@@ -331,9 +336,9 @@ await builder
     .RunAsync();
 ```
 
-### Client-side: Receiving Notifications
+### 客户端：接收通知
 
-The client must implement a message handler to process and display notifications as they arrive.
+客户端必须实现消息处理器，以便在通知到达时处理并显示。
 
 #### Python
 
@@ -352,7 +357,7 @@ async with ClientSession(
 ) as session:
 ```
 
-In the preceding code, the `message_handler` function checks if the incoming message is a notification. If it is, it prints the notification; otherwise, it processes it as a regular server message. Also note how the `ClientSession` is initialized with the `message_handler` to handle incoming notifications.
+在上述代码中，`message_handler` 函数检查传入消息是否为通知。如果是，则打印通知；否则将其作为常规服务器消息处理。此外，注意如何使用 `message_handler` 初始化 `ClientSession` 来处理传入通知。
 
 #### .NET
 
@@ -383,17 +388,17 @@ await client.InitializeAsync();
 // Now the client will process notifications through the MessageHandler
 ```
 
-In this .NET example, the `MessageHandler` function checks if the incoming message is a notification. If it is, it prints the notification; otherwise, it processes it as a regular server message. The `ClientSession` is initialized with the message handler via the `ClientSessionOptions`.
+在此 .NET 示例中，`MessageHandler` 函数检查传入消息是否为通知。如果是，则打印通知；否则将其作为常规服务器消息处理。通过 `ClientSessionOptions` 将消息处理器与 `ClientSession` 一起初始化。
 
-To enable notifications, ensure your server uses a streaming transport (like `streamable-http`) and your client implements a message handler to process notifications.
+为了启用通知，请确保您的服务器使用流式传输（如 `streamable-http`），并且客户端实现了消息处理器来处理通知。
 
-## Progress Notifications & Scenarios
+## 进度通知与场景
 
-This section explains the concept of progress notifications in MCP, why they matter, and how to implement them using Streamable HTTP. You'll also find a practical assignment to reinforce your understanding.
+本节解释了 MCP 中进度通知的概念、重要性，以及如何使用可流式 HTTP 实现它们。您还将找到一个实践任务来巩固您的理解。
 
-Progress notifications are real-time messages sent from the server to the client during long-running operations. Instead of waiting for the entire process to finish, the server keeps the client updated about the current status. This improves transparency, user experience, and makes debugging easier.
+进度通知是服务器在长时间运行的操作期间发送给客户端的实时消息。服务器在整个过程完成之前向客户端更新当前状态。这提高了透明度、用户体验，并使调试更容易。
 
-**Example:**
+**示例：**
 
 ```text
 
@@ -404,22 +409,22 @@ Progress notifications are real-time messages sent from the server to the client
 
 ```
 
-### Why Use Progress Notifications?
+### 为什么使用进度通知？
 
-Progress notifications are essential for several reasons:
+进度通知的重要性体现在以下几个方面：
 
-- **Better user experience:** Users see updates as work progresses, not just at the end.
-- **Real-time feedback:** Clients can display progress bars or logs, making the app feel responsive.
-- **Easier debugging and monitoring:** Developers and users can see where a process might be slow or stuck.
+- **更好的用户体验：** 用户可以在操作进行时看到更新，而不是等到结束。
+- **实时反馈：** 客户端可以显示进度条或日志，使应用程序更具响应性。
+- **更容易调试和监控：** 开发者和用户可以看到流程可能变慢或卡住的地方。
 
-### How to Implement Progress Notifications
+### 如何实现进度通知
 
-Here's how you can implement progress notifications in MCP:
+以下是如何在 MCP 中实现进度通知：
 
-- **On the server:** Use `ctx.info()` or `ctx.log()` to send notifications as each item is processed. This sends a message to the client before the main result is ready.
-- **On the client:** Implement a message handler that listens for and displays notifications as they arrive. This handler distinguishes between notifications and the final result.
+- **在服务器端：** 使用 `ctx.info()` 或 `ctx.log()` 在每个项目处理时发送通知。这会在主结果准备好之前向客户端发送消息。
+- **在客户端：** 实现一个消息处理器，监听并显示到达的通知。该处理器需要区分通知和最终结果。
 
-**Server Example:**
+**服务器示例：**
 
 #### Python
 
@@ -432,7 +437,7 @@ async def process_files(message: str, ctx: Context) -> TextContent:
     return TextContent(type="text", text=f"Done: {message}")
 ```
 
-**Client Example:**
+**客户端示例：**
 
 #### Python
 
@@ -444,126 +449,128 @@ async def message_handler(message):
         print("SERVER MESSAGE:", message)
 ```
 
-## Security Considerations
+## 安全注意事项
 
-When implementing MCP servers with HTTP-based transports, security becomes a paramount concern that requires careful attention to multiple attack vectors and protection mechanisms.
+在使用基于 HTTP 的传输实现 MCP 服务器时，安全性是一个需要仔细关注的关键问题，涉及多个攻击向量和保护机制。
 
-### Overview
+### 概述
 
-Security is critical when exposing MCP servers over HTTP. Streamable HTTP introduces new attack surfaces and requires careful configuration.
+当通过 HTTP 暴露 MCP 服务器时，安全性至关重要。可流式 HTTP 引入了新的攻击面，需要仔细配置。
 
-### Key Points
+### 关键点
 
-- **Origin Header Validation**: Always validate the `Origin` header to prevent DNS rebinding attacks.
-- **Localhost Binding**: For local development, bind servers to `localhost` to avoid exposing them to the public internet.
-- **Authentication**: Implement authentication (e.g., API keys, OAuth) for production deployments.
-- **CORS**: Configure Cross-Origin Resource Sharing (CORS) policies to restrict access.
-- **HTTPS**: Use HTTPS in production to encrypt traffic.
+- **Origin 头验证**：始终验证 `Origin` 头以防止 DNS 重绑定攻击。
+- **绑定到 localhost**：在本地开发中，将服务器绑定到 `localhost`，以避免暴露到公共互联网。
+- **认证**：在生产环境中实现认证（例如 API 密钥、OAuth）。
+- **CORS**：配置跨域资源共享 (CORS) 策略以限制访问。
+- **HTTPS**：在生产环境中使用 HTTPS 加密流量。
 
-### Best Practices
+### 最佳实践
 
-- Never trust incoming requests without validation.
-- Log and monitor all access and errors.
-- Regularly update dependencies to patch security vulnerabilities.
+- 不要信任未经验证的传入请求。
+- 记录并监控所有访问和错误。
+- 定期更新依赖项以修补安全漏洞。
 
-### Challenges
+### 挑战
 
-- Balancing security with ease of development
-- Ensuring compatibility with various client environments
+- 在开发便利性与安全性之间取得平衡。
+- 确保与各种客户端环境的兼容性。
 
-## Upgrading from SSE to Streamable HTTP
+## 从 SSE 升级到可流式 HTTP
 
-For applications currently using Server-Sent Events (SSE), migrating to Streamable HTTP provides enhanced capabilities and better long-term sustainability for your MCP implementations.
+对于当前使用服务器发送事件 (SSE) 的应用程序，迁移到可流式 HTTP 可以增强功能并为 MCP 实现提供更好的长期可持续性。
 
-### Why Upgrade?
+### 为什么要升级？
+从 SSE 升级到 Streamable HTTP 有两个重要原因：
 
-There are two compelling reasons to upgrade from SSE to Streamable HTTP:
+- Streamable HTTP 比 SSE 提供更好的可扩展性、兼容性以及更丰富的通知支持。
+- 它是新 MCP 应用程序推荐的传输方式。
 
-- Streamable HTTP offers better scalability, compatibility, and richer notification support than SSE.
-- It is the recommended transport for new MCP applications.
+### 迁移步骤
 
-### Migration Steps
+以下是如何在 MCP 应用程序中从 SSE 迁移到 Streamable HTTP 的方法：
 
-Here's how you can migrate from SSE to Streamable HTTP in your MCP applications:
+- **更新服务器代码**，在 `mcp.run()` 中使用 `transport="streamable-http"`。
+- **更新客户端代码**，使用 `streamablehttp_client` 替代 SSE 客户端。
+- **在客户端实现消息处理器**，以处理通知。
+- **测试与现有工具和工作流的兼容性**。
 
-- **Update server code** to use `transport="streamable-http"` in `mcp.run()`.
-- **Update client code** to use `streamablehttp_client` instead of SSE client.
-- **Implement a message handler** in the client to process notifications.
-- **Test for compatibility** with existing tools and workflows.
+### 保持兼容性
 
-### Maintaining Compatibility
+建议在迁移过程中保持与现有 SSE 客户端的兼容性。以下是一些策略：
 
-It's recommended to maintain compatibility with existing SSE clients during the migration process. Here are some strategies:
+- 可以通过在不同的端点上运行两种传输方式来同时支持 SSE 和 Streamable HTTP。
+- 逐步将客户端迁移到新的传输方式。
 
-- You can support both SSE and Streamable HTTP by running both transports on different endpoints.
-- Gradually migrate clients to the new transport.
+### 挑战
 
-### Challenges
+在迁移过程中需要解决以下挑战：
 
-Ensure you address the following challenges during migration:
+- 确保所有客户端都已更新
+- 处理通知传递方式的差异
 
-- Ensuring all clients are updated
-- Handling differences in notification delivery
+## 安全性考虑
 
-## Security Considerations
+在实现任何服务器时，安全性应是首要任务，尤其是在 MCP 中使用基于 HTTP 的传输方式（如 Streamable HTTP）时。
 
-Security should be a top priority when implementing any server, especially when using HTTP-based transports like Streamable HTTP in MCP. 
+在使用基于 HTTP 的传输方式实现 MCP 服务器时，安全性成为一个至关重要的问题，需要仔细关注多个攻击向量和保护机制。
 
-When implementing MCP servers with HTTP-based transports, security becomes a paramount concern that requires careful attention to multiple attack vectors and protection mechanisms.
+### 概述
 
-### Overview
+当通过 HTTP 暴露 MCP 服务器时，安全性至关重要。Streamable HTTP 引入了新的攻击面，需要谨慎配置。
 
-Security is critical when exposing MCP servers over HTTP. Streamable HTTP introduces new attack surfaces and requires careful configuration.
+以下是一些关键的安全性考虑：
 
-Here are some key security considerations:
+- **Origin Header 验证**：始终验证 `Origin` 头以防止 DNS 重绑定攻击。
+- **绑定到 Localhost**：在本地开发时，将服务器绑定到 `localhost`，以避免暴露到公共互联网。
+- **认证**：在生产环境中实现认证（例如 API 密钥、OAuth）。
+- **CORS**：配置跨域资源共享（CORS）策略以限制访问。
+- **HTTPS**：在生产环境中使用 HTTPS 加密流量。
 
-- **Origin Header Validation**: Always validate the `Origin` header to prevent DNS rebinding attacks.
-- **Localhost Binding**: For local development, bind servers to `localhost` to avoid exposing them to the public internet.
-- **Authentication**: Implement authentication (e.g., API keys, OAuth) for production deployments.
-- **CORS**: Configure Cross-Origin Resource Sharing (CORS) policies to restrict access.
-- **HTTPS**: Use HTTPS in production to encrypt traffic.
+### 最佳实践
 
-### Best Practices
+此外，以下是实现 MCP 流服务器安全性时应遵循的一些最佳实践：
 
-Additionally, here are some best practices to follow when implementing security in your MCP streaming server:
+- 不要信任未经验证的传入请求。
+- 记录并监控所有访问和错误。
+- 定期更新依赖项以修复安全漏洞。
 
-- Never trust incoming requests without validation.
-- Log and monitor all access and errors.
-- Regularly update dependencies to patch security vulnerabilities.
+### 挑战
 
-### Challenges
+在实现 MCP 流服务器的安全性时，可能会面临以下挑战：
 
-You will face some challenges when implementing security in MCP streaming servers:
+- 在安全性与开发便利性之间找到平衡
+- 确保与各种客户端环境的兼容性
 
-- Balancing security with ease of development
-- Ensuring compatibility with various client environments
+### 任务：构建自己的流式 MCP 应用程序
 
-### Assignment: Build Your Own Streaming MCP App
+**场景：**
+构建一个 MCP 服务器和客户端，服务器处理一个项目列表（例如文件或文档），并为每个处理的项目发送通知。客户端应实时显示每个到达的通知。
 
-**Scenario:**
-Build an MCP server and client where the server processes a list of items (e.g., files or documents) and sends a notification for each item processed. The client should display each notification as it arrives.
+**步骤：**
 
-**Steps:**
+1. 实现一个服务器工具，处理项目列表并为每个项目发送通知。
+2. 实现一个客户端，使用消息处理器实时显示通知。
+3. 通过运行服务器和客户端测试你的实现，并观察通知。
 
-1. Implement a server tool that processes a list and sends notifications for each item.
-2. Implement a client with a message handler to display notifications in real time.
-3. Test your implementation by running both server and client, and observe the notifications.
+[解决方案](./solution/README.md)
 
-[Solution](./solution/README.md)
+## 进一步阅读与下一步
 
-## Further Reading & What Next?
+为了继续学习 MCP 流技术并扩展知识，本节提供了额外资源和建议的下一步，以构建更高级的应用程序。
 
-To continue your journey with MCP streaming and expand your knowledge, this section provides additional resources and suggested next steps for building more advanced applications.
+### 进一步阅读
 
-### Further Reading
-
-- [Microsoft: Introduction to HTTP Streaming](https://learn.microsoft.com/aspnet/core/fundamentals/http-requests?view=aspnetcore-8.0&WT.mc_id=%3Fwt.mc_id%3DMVP_452430#streaming)
+- [Microsoft: HTTP 流简介](https://learn.microsoft.com/aspnet/core/fundamentals/http-requests?view=aspnetcore-8.0&WT.mc_id=%3Fwt.mc_id%3DMVP_452430#streaming)
 - [Microsoft: Server-Sent Events (SSE)](https://learn.microsoft.com/azure/application-gateway/for-containers/server-sent-events?tabs=server-sent-events-gateway-api&WT.mc_id=%3Fwt.mc_id%3DMVP_452430)
-- [Microsoft: CORS in ASP.NET Core](https://learn.microsoft.com/aspnet/core/security/cors?view=aspnetcore-8.0&WT.mc_id=%3Fwt.mc_id%3DMVP_452430)
-- [Python requests: Streaming Requests](https://requests.readthedocs.io/en/latest/user/advanced/#streaming-requests)
+- [Microsoft: ASP.NET Core 中的 CORS](https://learn.microsoft.com/aspnet/core/security/cors?view=aspnetcore-8.0&WT.mc_id=%3Fwt.mc_id%3DMVP_452430)
+- [Python requests: 流式请求](https://requests.readthedocs.io/en/latest/user/advanced/#streaming-requests)
 
-### What Next?
+### 下一步
 
-- Try building more advanced MCP tools that use streaming for real-time analytics, chat, or collaborative editing.
-- Explore integrating MCP streaming with frontend frameworks (React, Vue, etc.) for live UI updates.
-- Next: [Utilising AI Toolkit for VSCode](../07-aitk/README.md)
+- 尝试构建更高级的 MCP 工具，使用流技术实现实时分析、聊天或协作编辑。
+- 探索将 MCP 流与前端框架（React、Vue 等）集成，以实现实时 UI 更新。
+- 下一步：[利用 VSCode 的 AI 工具包](../07-aitk/README.md)
+
+**免责声明**：  
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

@@ -1,52 +1,61 @@
-# Case Study: Connecting to the Microsoft Learn Docs MCP Server from a Client
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "4319d291c9d124ecafea52b3d04bfa0e",
+  "translation_date": "2025-07-14T06:19:04+00:00",
+  "source_file": "09-CaseStudy/docs-mcp/README.md",
+  "language_code": "zh"
+}
+-->
+# 案例研究：从客户端连接到 Microsoft Learn Docs MCP 服务器
 
-Have you ever found yourself juggling between documentation sites, Stack Overflow, and endless search engine tabs, all while trying to solve a problem in your code? Maybe you keep a second monitor just for docs, or you’re constantly alt-tabbing between your IDE and a browser. Wouldn’t it be better if you could bring the documentation right into your workflow—integrated into your apps, your IDE, or even your own custom tools? In this case study, we’ll explore how to do exactly that by connecting directly to the Microsoft Learn Docs MCP server from your own client application.
+你是否曾经在文档网站、Stack Overflow 和无数搜索引擎标签页之间切换，同时试图解决代码中的问题？也许你专门留了第二个显示器用来看文档，或者不断在 IDE 和浏览器之间切换。有没有想过，如果能把文档直接集成到你的工作流程中——无论是在应用程序、IDE，还是你自己的定制工具里——会不会更好？在本案例研究中，我们将探讨如何通过客户端应用程序直接连接到 Microsoft Learn Docs MCP 服务器，实现这一目标。
 
-## Overview
+## 概述
 
-Modern development is more than just writing code—it’s about finding the right information at the right time. Documentation is everywhere, but it’s rarely where you need it most: inside your tools and workflows. By integrating documentation retrieval directly into your applications, you can save time, reduce context switching, and boost productivity. In this section, we’ll show you how to connect a client to the Microsoft Learn Docs MCP server, so you can access real-time, context-aware documentation without ever leaving your app.
+现代开发不仅仅是写代码，更是要在正确的时间找到正确的信息。文档无处不在，但很少出现在你最需要的地方：你的工具和工作流程中。通过将文档检索直接集成到应用程序中，你可以节省时间，减少上下文切换，提高工作效率。本节将向你展示如何连接客户端到 Microsoft Learn Docs MCP 服务器，从而无需离开应用即可访问实时、上下文相关的文档。
 
-We’ll walk through the process of establishing a connection, sending a request, and handling streaming responses efficiently. This approach not only streamlines your workflow but also opens the door to building smarter, more helpful developer tools.
+我们将演示如何建立连接、发送请求以及高效处理流式响应。这种方法不仅简化了工作流程，还为构建更智能、更有帮助的开发者工具打开了大门。
 
-## Learning Objectives
+## 学习目标
 
-Why are we doing this? Because the best developer experiences are those that remove friction. Imagine a world where your code editor, chatbot, or web app can answer your documentation questions instantly, using the latest content from Microsoft Learn. By the end of this chapter, you’ll know how to:
+为什么要这样做？因为最好的开发者体验是消除摩擦。想象一个世界，你的代码编辑器、聊天机器人或网页应用能即时回答你的文档问题，且使用的是 Microsoft Learn 的最新内容。完成本章后，你将学会：
 
-- Understand the basics of MCP server-client communication for documentation
-- Implement a console or web application to connect to the Microsoft Learn Docs MCP server
-- Use streaming HTTP clients for real-time documentation retrieval
-- Log and interpret documentation responses in your application
+- 理解 MCP 服务器与客户端之间文档通信的基础
+- 实现控制台或网页应用，连接到 Microsoft Learn Docs MCP 服务器
+- 使用流式 HTTP 客户端实现实时文档检索
+- 在应用中记录并解析文档响应
 
-You’ll see how these skills can help you build tools that are not just reactive, but truly interactive and context-aware.
+你将看到这些技能如何帮助你构建不仅是被动响应，而是真正交互且具备上下文感知的工具。
 
-## Scenario 1 - Real-Time Documentation Retrieval with MCP
+## 场景 1 - 使用 MCP 实时文档检索
 
-In this scenario, we’ll show you how to connect a client to the Microsoft Learn Docs MCP server, so you can access real-time, context-aware documentation without ever leaving your app. 
+在此场景中，我们将演示如何连接客户端到 Microsoft Learn Docs MCP 服务器，从而无需离开应用即可访问实时、上下文相关的文档。
 
-Let’s put this into practice. Your task is to write an app that connects to the Microsoft Learn Docs MCP server, invokes the `microsoft_docs_search` tool, and logs the streaming response to the console.
+让我们动手实践。你的任务是编写一个应用，连接到 Microsoft Learn Docs MCP 服务器，调用 `microsoft_docs_search` 工具，并将流式响应记录到控制台。
 
-### Why this approach?
-Because it’s the foundation for building more advanced integrations—whether you want to power a chatbot, an IDE extension, or a web dashboard.
+### 为什么采用这种方法？
+因为这是构建更高级集成的基础——无论你是想驱动聊天机器人、IDE 扩展还是网页仪表盘。
 
-You'll find the code and instructions for this scenario in the [`solution`](./solution/README.md) folder within this case study. The steps will guide you through setting up the connection:
-- Use the official MCP SDK and streamable HTTP client for connection
-- Call the `microsoft_docs_search` tool with a query parameter to retrieve documentation
-- Implement proper logging and error handling
-- Create an interactive console interface to allow users to enter multiple search queries
+你可以在本案例研究的 [`solution`](./solution/README.md) 文件夹中找到此场景的代码和说明。步骤将指导你完成连接设置：
+- 使用官方 MCP SDK 和支持流式的 HTTP 客户端进行连接
+- 使用查询参数调用 `microsoft_docs_search` 工具以检索文档
+- 实现适当的日志记录和错误处理
+- 创建交互式控制台界面，允许用户输入多个搜索查询
 
-This scenario demonstrates how to:
-- Connect to the Docs MCP server
-- Send a query
-- Parse and print the results
+此场景演示如何：
+- 连接到 Docs MCP 服务器
+- 发送查询
+- 解析并打印结果
 
-Here’s what running the solution might look like:
+运行示例可能如下所示：
 
 ```
 Prompt> What is Azure Key Vault?
 Answer> Azure Key Vault is a cloud service for securely storing and accessing secrets. ...
 ```
 
-Below is a minimal sample solution. The full code and details are available in the solution folder.
+以下是一个最简示例。完整代码和详细信息请参见 solution 文件夹。
 
 <details>
 <summary>Python</summary>
@@ -67,21 +76,20 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-- For the complete implementation and logging, see [`scenario1.py`](./solution/python/scenario1.py).
-- For installation and usage instructions, see the [`README.md`](./solution/python/README.md) file in the same folder.
+- 完整实现和日志记录请参见 [`scenario1.py`](../../../../09-CaseStudy/docs-mcp/solution/python/scenario1.py)。
+- 安装和使用说明请参见同一文件夹下的 [`README.md`](./solution/python/README.md)。
 </details>
 
+## 场景 2 - 使用 MCP 的交互式学习计划生成网页应用
 
-## Scenario 2 - Interactive Study Plan Generator Web App with MCP
+在此场景中，你将学习如何将 Docs MCP 集成到网页开发项目中。目标是让用户能够直接从网页界面搜索 Microsoft Learn 文档，使文档在你的应用或网站中即时可用。
 
-In this scenario, you’ll learn how to integrate Docs MCP into a web development project. The goal is to enable users to search Microsoft Learn documentation directly from a web interface, making documentation instantly accessible within your app or site.
+你将学习如何：
+- 搭建网页应用
+- 连接到 Docs MCP 服务器
+- 处理用户输入并显示结果
 
-You’ll see how to:
-- Set up a web app
-- Connect to the Docs MCP server
-- Handle user input and display results
-
-Here’s what running the solution might look like:
+运行示例可能如下所示：
 
 ```
 User> I want to learn about AI102 - so suggest the roadmap to get it started from learn for 6 weeks
@@ -100,14 +108,14 @@ Assistant> Here’s a detailed 6-week roadmap to start your preparation for the 
 Let me know if you want module-specific recommendations or need more customized weekly tasks!
 ```
 
-Below is a minimal sample solution. The full code and details are available in the solution folder.
+以下是一个最简示例。完整代码和详细信息请参见 solution 文件夹。
 
-![Scenario 2 Overview](./assets/scenario2.png)
+![场景 2 概览](../../translated_images/scenario2.0c92726d5cd81f68238e5ba65f839a0b300d5b74b8ca7db28bc8f900c3e7d037.zh.png)
 
 <details>
 <summary>Python (Chainlit)</summary>
 
-Chainlit is a framework for building conversational AI web apps. It makes it easy to create interactive chatbots and assistants that can call MCP tools and display results in real time. It’s ideal for rapid prototyping and user-friendly interfaces.
+Chainlit 是一个用于构建对话式 AI 网页应用的框架。它使创建能够调用 MCP 工具并实时显示结果的交互式聊天机器人和助手变得简单。非常适合快速原型开发和用户友好界面。
 
 ```python
 import chainlit as cl
@@ -126,25 +134,24 @@ def handle_message(message):
         cl.Message(content="Error: " + response.text).send()
 ```
 
-- For the complete implementation, see [`scenario2.py`](./solution/python/scenario2.py).
-- For setup and running instructions, see the [`README.md`](./solution/python/README.md).
+- 完整实现请参见 [`scenario2.py`](../../../../09-CaseStudy/docs-mcp/solution/python/scenario2.py)。
+- 安装和运行说明请参见 [`README.md`](./solution/python/README.md)。
 </details>
 
+## 场景 3：在 VS Code 中使用 MCP 服务器实现编辑器内文档
 
-## Scenario 3: In-Editor Docs with MCP Server in VS Code
+如果你想直接在 VS Code 中获取 Microsoft Learn Docs（而不是切换浏览器标签页），可以在编辑器中使用 MCP 服务器。这样你可以：
+- 在 VS Code 中搜索和阅读文档，无需离开编码环境
+- 直接在 README 或课程文件中引用文档并插入链接
+- 将 GitHub Copilot 与 MCP 结合，打造无缝的 AI 驱动文档工作流
 
-If you want to get Microsoft Learn Docs directly inside your VS Code (instead of switching browser tabs), you can use the MCP server in your editor. This allows you to:
-- Search and read docs in VS Code without leaving your coding environment.
-- Reference documentation and insert links directly into your README or course files.
-- Leverage GitHub Copilot and MCP together for a seamless, AI-powered documentation workflow.
+**你将学会：**
+- 在工作区根目录添加有效的 `.vscode/mcp.json` 文件（见下方示例）
+- 打开 MCP 面板或使用 VS Code 命令面板搜索并插入文档
+- 在编辑 Markdown 文件时直接引用文档
+- 将此工作流与 GitHub Copilot 结合，进一步提升效率
 
-**You'll see how to:**
-- Add a valid `.vscode/mcp.json` file to your workspace root (see example below).
-- Open the MCP panel or use the command palette in VS Code to search and insert docs.
-- Reference documentation directly in your markdown files as you work.
-- Combine this workflow with GitHub Copilot for even greater productivity.
-
-Here’s a example of how to set up the MCP server in VS Code:
+以下是在 VS Code 中设置 MCP 服务器的示例：
 
 ```json
 {
@@ -158,28 +165,31 @@ Here’s a example of how to set up the MCP server in VS Code:
 
 </details>
 
-> For a detailed walkthrough with screenshots and step-by-step guide, see [`README.md`](./solution/scenario3/README.md).
+> 有关详细的图文步骤指南，请参见 [`README.md`](./solution/scenario3/README.md)。
 
-![Scenario 3 Overview](./assets//step4-prompt-chat.png)
+![场景 3 概览](../../translated_images/step4-prompt-chat.12187bb001605efc5077992b621f0fcd1df12023c5dce0464f8eb8f3d595218f.zh.png)
 
-This approach is ideal for anyone building technical courses, writing documentation, or developing code with frequent reference needs.
+这种方法非常适合构建技术课程、编写文档或需要频繁参考的代码开发者。
 
-## Key Takeaways
+## 关键要点
 
-Integrating documentation directly into your tools isn’t just a convenience—it’s a game changer for productivity. By connecting to the Microsoft Learn Docs MCP server from your client, you can:
+将文档直接集成到你的工具中不仅仅是方便——它是提升生产力的关键。通过从客户端连接到 Microsoft Learn Docs MCP 服务器，你可以：
 
-- Eliminate context switching between your code and documentation
-- Retrieve up-to-date, context-aware docs in real time
-- Build smarter, more interactive developer tools
+- 消除代码与文档之间的上下文切换
+- 实时获取最新的、上下文相关的文档
+- 构建更智能、更具交互性的开发者工具
 
-These skills will help you create solutions that are not only efficient, but also delightful to use.
+这些技能将帮助你打造既高效又令人愉悦的解决方案。
 
-## Additional Resources
+## 额外资源
 
-To deepen your understanding, explore these official resources:
+为了加深理解，请参考以下官方资源：
 
 - [Microsoft Learn Docs MCP Server (GitHub)](https://github.com/MicrosoftDocs/mcp)
 - [Get started with Azure MCP Server (mcp-python)](https://learn.microsoft.com/en-us/azure/developer/azure-mcp-server/get-started#create-the-python-app)
 - [What is the Azure MCP Server?](https://learn.microsoft.com/en-us/azure/developer/azure-mcp-server/)
 - [Model Context Protocol (MCP) Introduction](https://modelcontextprotocol.io/introduction)
 - [Add plugins from a MCP Server (Python)](https://learn.microsoft.com/en-us/semantic-kernel/concepts/plugins/adding-mcp-plugins)
+
+**免责声明**：  
+本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。虽然我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始文件的母语版本应被视为权威来源。对于重要信息，建议使用专业人工翻译。对于因使用本翻译而产生的任何误解或误释，我们不承担任何责任。

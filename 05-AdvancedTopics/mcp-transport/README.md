@@ -1,36 +1,45 @@
-# MCP Custom Transports - Advanced Implementation Guide
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "c71c60af76120a517809a6cfba47e9a3",
+  "translation_date": "2025-09-15T21:29:06+00:00",
+  "source_file": "05-AdvancedTopics/mcp-transport/README.md",
+  "language_code": "zh"
+}
+-->
+# MCP自定义传输 - 高级实现指南
 
-The Model Context Protocol (MCP) provides flexibility in transport mechanisms, allowing custom implementations for specialized enterprise environments. This advanced guide explores custom transport implementations using Azure Event Grid and Azure Event Hubs as practical examples for building scalable, cloud-native MCP solutions.
+模型上下文协议（MCP）在传输机制上具有灵活性，允许针对特定企业环境进行自定义实现。本高级指南通过使用Azure Event Grid和Azure Event Hubs的实际示例，探讨如何构建可扩展的云原生MCP解决方案。
 
-## Introduction
+## 简介
 
-While MCP's standard transports (stdio and HTTP streaming) serve most use cases, enterprise environments often require specialized transport mechanisms for improved scalability, reliability, and integration with existing cloud infrastructure. Custom transports enable MCP to leverage cloud-native messaging services for asynchronous communication, event-driven architectures, and distributed processing.
+虽然MCP的标准传输方式（stdio和HTTP流）适用于大多数使用场景，但企业环境通常需要专门的传输机制，以提高可扩展性、可靠性以及与现有云基础设施的集成能力。自定义传输使MCP能够利用云原生消息服务，实现异步通信、事件驱动架构和分布式处理。
 
-This lesson explores advanced transport implementations based on the latest MCP specification (2025-06-18), Azure messaging services, and established enterprise integration patterns.
+本课程基于最新的MCP规范（2025-06-18），探讨了基于Azure消息服务和成熟企业集成模式的高级传输实现。
 
-### **MCP Transport Architecture**
+### **MCP传输架构**
 
-**From MCP Specification (2025-06-18):**
+**摘自MCP规范（2025-06-18）：**
 
-- **Standard Transports**: stdio (recommended), HTTP streaming (for remote scenarios)
-- **Custom Transports**: Any transport that implements the MCP message exchange protocol
-- **Message Format**: JSON-RPC 2.0 with MCP-specific extensions
-- **Bidirectional Communication**: Full duplex communication required for notifications and responses
+- **标准传输**：stdio（推荐），HTTP流（适用于远程场景）
+- **自定义传输**：任何实现MCP消息交换协议的传输方式
+- **消息格式**：JSON-RPC 2.0，带有MCP特定扩展
+- **双向通信**：需要全双工通信以支持通知和响应
 
-## Learning Objectives
+## 学习目标
 
-By the end of this advanced lesson, you will be able to:
+完成本高级课程后，您将能够：
 
-- **Understand Custom Transport Requirements**: Implement MCP protocol over any transport layer while maintaining compliance
-- **Build Azure Event Grid Transport**: Create event-driven MCP servers using Azure Event Grid for serverless scalability
-- **Implement Azure Event Hubs Transport**: Design high-throughput MCP solutions using Azure Event Hubs for real-time streaming
-- **Apply Enterprise Patterns**: Integrate custom transports with existing Azure infrastructure and security models
-- **Handle Transport Reliability**: Implement message durability, ordering, and error handling for enterprise scenarios
-- **Optimize Performance**: Design transport solutions for scale, latency, and throughput requirements
+- **理解自定义传输要求**：在任何传输层上实现MCP协议，同时保持规范一致性
+- **构建Azure Event Grid传输**：使用Azure Event Grid创建事件驱动的MCP服务器，实现无服务器扩展性
+- **实现Azure Event Hubs传输**：设计基于Azure Event Hubs的高吞吐量MCP解决方案，用于实时流处理
+- **应用企业模式**：将自定义传输与现有Azure基础设施和安全模型集成
+- **处理传输可靠性**：实现消息持久性、顺序性以及企业场景中的错误处理
+- **优化性能**：设计满足扩展性、延迟和吞吐量要求的传输解决方案
 
-## **Transport Requirements**
+## **传输要求**
 
-### **Core Requirements from MCP Specification (2025-06-18):**
+### **MCP规范（2025-06-18）中的核心要求：**
 
 ```yaml
 Message Protocol:
@@ -49,11 +58,11 @@ Custom Transport:
   interoperability: "MUST maintain protocol compatibility"
 ```
 
-## **Azure Event Grid Transport Implementation**
+## **Azure Event Grid传输实现**
 
-Azure Event Grid provides a serverless event routing service ideal for event-driven MCP architectures. This implementation demonstrates how to build scalable, loosely-coupled MCP systems.
+Azure Event Grid提供了一个无服务器事件路由服务，非常适合事件驱动的MCP架构。本实现展示了如何构建可扩展、松耦合的MCP系统。
 
-### **Architecture Overview**
+### **架构概览**
 
 ```mermaid
 graph TB
@@ -70,7 +79,7 @@ graph TB
     end
 ```
 
-### **C# Implementation - Event Grid Transport**
+### **C#实现 - Event Grid传输**
 
 ```csharp
 using Azure.Messaging.EventGrid;
@@ -142,7 +151,7 @@ public async Task<IActionResult> HandleEventGridMessage(
 }
 ```
 
-### **TypeScript Implementation - Event Grid Transport**
+### **TypeScript实现 - Event Grid传输**
 
 ```typescript
 import { EventGridPublisherClient, AzureKeyCredential } from "@azure/eventgrid";
@@ -205,7 +214,7 @@ app.eventGrid("mcpEventGridHandler", {
 });
 ```
 
-### **Python Implementation - Event Grid Transport**
+### **Python实现 - Event Grid传输**
 
 ```python
 from azure.eventgrid import EventGridPublisherClient, EventGridEvent
@@ -261,11 +270,11 @@ def main(event: func.EventGridEvent) -> None:
         raise
 ```
 
-## **Azure Event Hubs Transport Implementation**
+## **Azure Event Hubs传输实现**
 
-Azure Event Hubs provides high-throughput, real-time streaming capabilities for MCP scenarios requiring low latency and high message volume.
+Azure Event Hubs提供了高吞吐量、实时流处理能力，适用于需要低延迟和高消息量的MCP场景。
 
-### **Architecture Overview**
+### **架构概览**
 
 ```mermaid
 graph TB
@@ -285,7 +294,7 @@ graph TB
     EH --> Scaling
 ```
 
-### **C# Implementation - Event Hubs Transport**
+### **C#实现 - Event Hubs传输**
 
 ```csharp
 using Azure.Messaging.EventHubs;
@@ -359,7 +368,7 @@ public class EventHubsMcpTransport : IMcpTransport, IDisposable
 }
 ```
 
-### **TypeScript Implementation - Event Hubs Transport**
+### **TypeScript实现 - Event Hubs传输**
 
 ```typescript
 import { 
@@ -439,7 +448,7 @@ export class EventHubsMcpTransport implements McpTransport {
 }
 ```
 
-### **Python Implementation - Event Hubs Transport**
+### **Python实现 - Event Hubs传输**
 
 ```python
 from azure.eventhub import EventHubProducerClient, EventHubConsumerClient
@@ -525,9 +534,9 @@ class EventHubsMcpTransport:
         await self.consumer.close()
 ```
 
-## **Advanced Transport Patterns**
+## **高级传输模式**
 
-### **Message Durability and Reliability**
+### **消息持久性和可靠性**
 
 ```csharp
 // Implementing message durability with retry logic
@@ -554,7 +563,7 @@ public class ReliableTransportWrapper : IMcpTransport
 }
 ```
 
-### **Transport Security Integration**
+### **传输安全集成**
 
 ```csharp
 // Integrating Azure Key Vault for transport security
@@ -576,7 +585,7 @@ public class SecureTransportFactory
 }
 ```
 
-### **Transport Monitoring and Observability**
+### **传输监控和可观察性**
 
 ```csharp
 // Adding telemetry to custom transports
@@ -615,11 +624,11 @@ public class ObservableTransport : IMcpTransport
 }
 ```
 
-## **Enterprise Integration Scenarios**
+## **企业集成场景**
 
-### **Scenario 1: Distributed MCP Processing**
+### **场景1：分布式MCP处理**
 
-Using Azure Event Grid for distributing MCP requests across multiple processing nodes:
+使用Azure Event Grid将MCP请求分发到多个处理节点：
 
 ```yaml
 Architecture:
@@ -633,9 +642,9 @@ Benefits:
   - Cost optimization with serverless compute
 ```
 
-### **Scenario 2: Real-time MCP Streaming**
+### **场景2：实时MCP流处理**
 
-Using Azure Event Hubs for high-frequency MCP interactions:
+使用Azure Event Hubs进行高频MCP交互：
 
 ```yaml
 Architecture:
@@ -649,9 +658,9 @@ Benefits:
   - Built-in partitioning for parallel processing
 ```
 
-### **Scenario 3: Hybrid Transport Architecture**
+### **场景3：混合传输架构**
 
-Combining multiple transports for different use cases:
+结合多种传输方式以满足不同使用场景：
 
 ```csharp
 public class HybridMcpTransport : IMcpTransport
@@ -675,9 +684,9 @@ public class HybridMcpTransport : IMcpTransport
 }
 ```
 
-## **Performance Optimization**
+## **性能优化**
 
-### **Message Batching for Event Grid**
+### **Event Grid的消息批处理**
 
 ```csharp
 public class BatchingEventGridTransport : IMcpTransport
@@ -717,7 +726,7 @@ public class BatchingEventGridTransport : IMcpTransport
 }
 ```
 
-### **Partitioning Strategy for Event Hubs**
+### **Event Hubs的分区策略**
 
 ```csharp
 public class PartitionedEventHubsTransport : IMcpTransport
@@ -737,9 +746,9 @@ public class PartitionedEventHubsTransport : IMcpTransport
 }
 ```
 
-## **Testing Custom Transports**
+## **测试自定义传输**
 
-### **Unit Testing with Test Doubles**
+### **使用测试替身进行单元测试**
 
 ```csharp
 [Test]
@@ -766,7 +775,7 @@ public async Task EventGridTransport_SendMessage_PublishesCorrectEvent()
 }
 ```
 
-### **Integration Testing with Azure Test Containers**
+### **使用Azure测试容器进行集成测试**
 
 ```csharp
 [Test]
@@ -799,45 +808,49 @@ public async Task EventHubsTransport_IntegrationTest()
 }
 ```
 
-## **Best Practices and Guidelines**
+## **最佳实践和指南**
 
-### **Transport Design Principles**
+### **传输设计原则**
 
-1. **Idempotency**: Ensure message processing is idempotent to handle duplicates
-2. **Error Handling**: Implement comprehensive error handling and dead letter queues
-3. **Monitoring**: Add detailed telemetry and health checks
-4. **Security**: Use managed identities and least privilege access
-5. **Performance**: Design for your specific latency and throughput requirements
+1. **幂等性**：确保消息处理具有幂等性，以应对重复消息
+2. **错误处理**：实现全面的错误处理和死信队列
+3. **监控**：添加详细的遥测和健康检查
+4. **安全性**：使用托管身份和最小权限访问
+5. **性能**：根据具体的延迟和吞吐量要求进行设计
 
-### **Azure-Specific Recommendations**
+### **Azure特定建议**
 
-1. **Use Managed Identity**: Avoid connection strings in production
-2. **Implement Circuit Breakers**: Protect against Azure service outages
-3. **Monitor Costs**: Track message volume and processing costs
-4. **Plan for Scale**: Design partitioning and scaling strategies early
-5. **Test Thoroughly**: Use Azure DevTest Labs for comprehensive testing
+1. **使用托管身份**：避免在生产环境中使用连接字符串
+2. **实现断路器**：防止Azure服务中断的影响
+3. **监控成本**：跟踪消息量和处理成本
+4. **规划扩展**：提前设计分区和扩展策略
+5. **全面测试**：使用Azure DevTest Labs进行全面测试
 
-## **Conclusion**
+## **总结**
 
-Custom MCP transports enable powerful enterprise scenarios using Azure's messaging services. By implementing Event Grid or Event Hubs transports, you can build scalable, reliable MCP solutions that integrate seamlessly with existing Azure infrastructure.
+自定义MCP传输使得使用Azure消息服务的强大企业场景成为可能。通过实现Event Grid或Event Hubs传输，您可以构建可扩展、可靠的MCP解决方案，并与现有Azure基础设施无缝集成。
 
-The examples provided demonstrate production-ready patterns for implementing custom transports while maintaining MCP protocol compliance and Azure best practices.
+提供的示例展示了生产级模式，用于实现自定义传输，同时保持MCP协议一致性和Azure最佳实践。
 
-## **Additional Resources**
+## **附加资源**
 
-- [MCP Specification 2025-06-18](https://spec.modelcontextprotocol.io/specification/2025-06-18/)
-- [Azure Event Grid Documentation](https://docs.microsoft.com/azure/event-grid/)
-- [Azure Event Hubs Documentation](https://docs.microsoft.com/azure/event-hubs/)
-- [Azure Functions Event Grid Trigger](https://docs.microsoft.com/azure/azure-functions/functions-bindings-event-grid)
+- [MCP规范 2025-06-18](https://spec.modelcontextprotocol.io/specification/2025-06-18/)
+- [Azure Event Grid文档](https://docs.microsoft.com/azure/event-grid/)
+- [Azure Event Hubs文档](https://docs.microsoft.com/azure/event-hubs/)
+- [Azure Functions Event Grid触发器](https://docs.microsoft.com/azure/azure-functions/functions-bindings-event-grid)
 - [Azure SDK for .NET](https://github.com/Azure/azure-sdk-for-net)
 - [Azure SDK for TypeScript](https://github.com/Azure/azure-sdk-for-js)
 - [Azure SDK for Python](https://github.com/Azure/azure-sdk-for-python)
 
 ---
 
-> *This guide focuses on practical implementation patterns for production MCP systems. Always validate transport implementations against your specific requirements and Azure service limits.*
-> **Current Standard**: This guide reflects [MCP Specification 2025-06-18](https://spec.modelcontextprotocol.io/specification/2025-06-18/) transport requirements and advanced transport patterns for enterprise environments.
+> *本指南专注于生产MCP系统的实际实现模式。始终根据您的具体需求和Azure服务限制验证传输实现。*
+> **当前标准**：本指南反映了[MCP规范 2025-06-18](https://spec.modelcontextprotocol.io/specification/2025-06-18/)的传输要求和企业环境的高级传输模式。
 
+## 下一步
+- [6. 社区贡献](../../06-CommunityContributions/README.md)
 
-## What's Next
-- [6. Community Contributions](../../06-CommunityContributions/README.md)
+---
+
+**免责声明**：  
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

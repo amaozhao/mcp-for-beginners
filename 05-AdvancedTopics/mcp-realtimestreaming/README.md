@@ -1,92 +1,100 @@
-# Model Context Protocol for Real-Time Data Streaming
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "195f7287638b77a549acadd96c8f981c",
+  "translation_date": "2025-07-14T01:28:30+00:00",
+  "source_file": "05-AdvancedTopics/mcp-realtimestreaming/README.md",
+  "language_code": "zh"
+}
+-->
+# Model Context Protocol 实时数据流传输协议
 
-## Overview
+## 概述
 
-Real-time data streaming has become essential in today's data-driven world, where businesses and applications require immediate access to information to make timely decisions. The Model Context Protocol (MCP) represents a significant advancement in optimizing these real-time streaming processes, enhancing data processing efficiency, maintaining contextual integrity, and improving overall system performance.
+在当今数据驱动的世界中，实时数据流传输已成为必不可少的技术，企业和应用程序需要即时获取信息以做出及时决策。Model Context Protocol（MCP）代表了优化实时流传输流程的重要进展，提升了数据处理效率，保持了上下文的完整性，并改善了整体系统性能。
 
-This module explores how MCP transforms real-time data streaming by providing a standardized approach to context management across AI models, streaming platforms, and applications.
+本模块探讨了 MCP 如何通过为 AI 模型、流平台和应用程序提供标准化的上下文管理方法，改变实时数据流传输的方式。
 
-## Introduction to Real-Time Data Streaming
+## 实时数据流传输简介
 
-Real-time data streaming is a technological paradigm that enables the continuous transfer, processing, and analysis of data as it's generated, allowing systems to react immediately to new information. Unlike traditional batch processing that operates on static datasets, streaming processes data in motion, delivering insights and actions with minimal latency.
+实时数据流传输是一种技术范式，支持数据在生成时持续传输、处理和分析，使系统能够立即响应新信息。与传统的批处理操作静态数据集不同，流处理对动态数据进行处理，能够以极低的延迟提供洞察和响应。
 
-### Core Concepts of Real-Time Data Streaming:
+### 实时数据流传输的核心概念：
 
-- **Continuous Data Flow**: Data is processed as a continuous, never-ending stream of events or records.
-- **Low Latency Processing**: Systems are designed to minimize the time between data generation and processing.
-- **Scalability**: Streaming architectures must handle variable data volumes and velocity.
-- **Fault Tolerance**: Systems need to be resilient against failures to ensure uninterrupted data flow.
-- **Stateful Processing**: Maintaining context across events is crucial for meaningful analysis.
+- **持续数据流**：数据作为连续不断的事件或记录流进行处理。
+- **低延迟处理**：系统设计旨在最大限度减少数据生成与处理之间的时间。
+- **可扩展性**：流架构必须能够应对变化的数据量和速度。
+- **容错性**：系统需要具备抗故障能力，确保数据流不中断。
+- **有状态处理**：跨事件维护上下文对于有意义的分析至关重要。
 
-### The Model Context Protocol and Real-Time Streaming
+### Model Context Protocol 与实时流传输
 
-The Model Context Protocol (MCP) addresses several critical challenges in real-time streaming environments:
+Model Context Protocol（MCP）解决了实时流环境中的若干关键挑战：
 
-1. **Contextual Continuity**: MCP standardizes how context is maintained across distributed streaming components, ensuring that AI models and processing nodes have access to relevant historical and environmental context.
+1. **上下文连续性**：MCP 标准化了分布式流组件间的上下文维护，确保 AI 模型和处理节点能够访问相关的历史和环境上下文。
 
-2. **Efficient State Management**: By providing structured mechanisms for context transmission, MCP reduces the overhead of state management in streaming pipelines.
+2. **高效状态管理**：通过提供结构化的上下文传输机制，MCP 降低了流管道中状态管理的开销。
 
-3. **Interoperability**: MCP creates a common language for context sharing between diverse streaming technologies and AI models, enabling more flexible and extensible architectures.
+3. **互操作性**：MCP 为不同流技术和 AI 模型之间的上下文共享创建了通用语言，实现更灵活和可扩展的架构。
 
-4. **Streaming-Optimized Context**: MCP implementations can prioritize which context elements are most relevant for real-time decision making, optimizing for both performance and accuracy.
+4. **流优化上下文**：MCP 实现可以优先考虑对实时决策最相关的上下文元素，兼顾性能和准确性。
 
-5. **Adaptive Processing**: With proper context management through MCP, streaming systems can dynamically adjust processing based on evolving conditions and patterns in the data.
+5. **自适应处理**：通过 MCP 的上下文管理，流系统能够根据数据中不断变化的条件和模式动态调整处理。
 
-In modern applications ranging from IoT sensor networks to financial trading platforms, the integration of MCP with streaming technologies enables more intelligent, context-aware processing that can respond appropriately to complex, evolving situations in real time.
+在从物联网传感器网络到金融交易平台的现代应用中，MCP 与流技术的结合实现了更智能、具备上下文感知的处理，能够实时应对复杂且不断演变的场景。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lesson, you will be able to:
+完成本课后，您将能够：
 
-- Understand the fundamentals of real-time data streaming and its challenges
-- Explain how the Model Context Protocol (MCP) enhances real-time data streaming
-- Implement MCP-based streaming solutions using popular frameworks like Kafka and Pulsar
-- Design and deploy fault-tolerant, high-performance streaming architectures with MCP
-- Apply MCP concepts to IoT, financial trading, and AI-driven analytics use cases
-- Evaluate emerging trends and future innovations in MCP-based streaming technologies
+- 理解实时数据流传输的基本原理及其挑战
+- 说明 Model Context Protocol（MCP）如何增强实时数据流传输
+- 使用 Kafka 和 Pulsar 等流行框架实现基于 MCP 的流解决方案
+- 设计并部署具备容错性和高性能的 MCP 流架构
+- 将 MCP 概念应用于物联网、金融交易和 AI 驱动的分析场景
+- 评估基于 MCP 流技术的新兴趋势和未来创新
 
+### 定义与意义
 
-### Definition and Significance
+实时数据流传输涉及数据的持续生成、处理和传递，延迟极低。与批处理将数据收集后分批处理不同，流数据在到达时逐步处理，实现即时洞察和响应。
 
-Real-time data streaming involves the continuous generation, processing, and delivery of data with minimal latency. Unlike batch processing, where data is collected and processed in groups, streaming data is processed incrementally as it arrives, enabling immediate insights and actions.
+实时数据流传输的关键特征包括：
 
-Key characteristics of real-time data streaming include:
+- **低延迟**：在毫秒到秒级别内处理和分析数据
+- **持续流动**：来自多源的不断数据流
+- **即时处理**：数据到达即被分析，而非批量处理
+- **事件驱动架构**：对事件发生即时响应
 
-- **Low Latency**: Processing and analyzing data within milliseconds to seconds
-- **Continuous Flow**: Uninterrupted streams of data from various sources
-- **Immediate Processing**: Analyzing data as it arrives rather than in batches
-- **Event-Driven Architecture**: Responding to events as they occur
+### 传统数据流传输的挑战
 
-### Challenges in Traditional Data Streaming
+传统流传输方法存在若干限制：
 
-Traditional data streaming approaches face several limitations:
+1. **上下文丢失**：难以在分布式系统间保持上下文
+2. **可扩展性问题**：难以扩展以处理高量、高速数据
+3. **集成复杂性**：不同系统间互操作性差
+4. **延迟管理**：在吞吐量和处理时间间权衡
+5. **数据一致性**：确保流中数据的准确性和完整性
 
-1. **Context Loss**: Difficulty maintaining context across distributed systems
-2. **Scalability Issues**: Challenges in scaling to handle high-volume, high-velocity data
-3. **Integration Complexity**: Problems with interoperability between different systems
-4. **Latency Management**: Balancing throughput with processing time
-5. **Data Consistency**: Ensuring data accuracy and completeness across the stream
+## 理解 Model Context Protocol（MCP）
 
-## Understanding Model Context Protocol (MCP)
+### 什么是 MCP？
 
-### What is MCP?
+Model Context Protocol（MCP）是一种标准化通信协议，旨在促进 AI 模型与应用之间的高效交互。在实时数据流传输中，MCP 提供了：
 
-The Model Context Protocol (MCP) is a standardized communication protocol designed to facilitate efficient interaction between AI models and applications. In the context of real-time data streaming, MCP provides a framework for:
+- 在数据管道中保持上下文
+- 标准化数据交换格式
+- 优化大规模数据传输
+- 增强模型间及模型与应用间的通信
 
-- Preserving context throughout the data pipeline
-- Standardizing data exchange formats
-- Optimizing the transmission of large datasets
-- Enhancing model-to-model and model-to-application communication
+### 核心组件与架构
 
-### Core Components and Architecture
+MCP 实时流架构包含以下关键组件：
 
-MCP architecture for real-time streaming consists of several key components:
-
-1. **Context Handlers**: Manage and maintain contextual information across the streaming pipeline
-2. **Stream Processors**: Process incoming data streams using context-aware techniques
-3. **Protocol Adapters**: Convert between different streaming protocols while preserving context
-4. **Context Store**: Efficiently store and retrieve contextual information
-5. **Streaming Connectors**: Connect to various streaming platforms (Kafka, Pulsar, Kinesis, etc.)
+1. **上下文处理器**：管理并维护流管道中的上下文信息
+2. **流处理器**：利用上下文感知技术处理输入数据流
+3. **协议适配器**：在不同流协议间转换，同时保持上下文
+4. **上下文存储**：高效存储和检索上下文信息
+5. **流连接器**：连接各种流平台（Kafka、Pulsar、Kinesis 等）
 
 ```mermaid
 graph TD
@@ -156,47 +164,47 @@ graph TD
     class DA,Alerts,DL,API apps
 ```
 
-### How MCP Improves Real-Time Data Handling
+### MCP 如何提升实时数据处理
 
-MCP addresses traditional streaming challenges through:
+MCP 通过以下方式解决传统流处理难题：
 
-- **Contextual Integrity**: Maintaining relationships between data points across the entire pipeline
-- **Optimized Transmission**: Reducing redundancy in data exchange through intelligent context management
-- **Standardized Interfaces**: Providing consistent APIs for streaming components
-- **Reduced Latency**: Minimizing processing overhead through efficient context handling
-- **Enhanced Scalability**: Supporting horizontal scaling while preserving context
+- **上下文完整性**：维护整个管道中数据点间的关系
+- **传输优化**：通过智能上下文管理减少数据交换冗余
+- **标准化接口**：为流组件提供一致的 API
+- **降低延迟**：通过高效上下文处理减少处理开销
+- **增强可扩展性**：支持横向扩展同时保持上下文
 
-## Integration and Implementation
+## 集成与实现
 
-Real-time data streaming systems require careful architectural design and implementation to maintain both performance and contextual integrity. The Model Context Protocol offers a standardized approach to integrating AI models and streaming technologies, allowing for more sophisticated, context-aware processing pipelines.
+实时数据流系统需要精心设计架构和实现，以兼顾性能和上下文完整性。Model Context Protocol 提供了标准化方法，将 AI 模型与流技术集成，构建更复杂、具备上下文感知的处理管道。
 
-### Overview of MCP Integration in Streaming Architectures
+### MCP 在流架构中的集成概述
 
-Implementing MCP in real-time streaming environments involves several key considerations:
+在实时流环境中实现 MCP 需考虑以下关键点：
 
-1. **Context Serialization and Transport**: MCP provides efficient mechanisms for encoding contextual information within streaming data packets, ensuring that essential context follows the data throughout the processing pipeline. This includes standardized serialization formats optimized for streaming transport.
+1. **上下文序列化与传输**：MCP 提供高效机制，将上下文信息编码进流数据包，确保关键上下文随数据贯穿处理管道。包括针对流传输优化的标准序列化格式。
 
-2. **Stateful Stream Processing**: MCP enables more intelligent stateful processing by maintaining consistent context representation across processing nodes. This is particularly valuable in distributed streaming architectures where state management is traditionally challenging.
+2. **有状态流处理**：MCP 通过在处理节点间保持一致的上下文表示，实现更智能的有状态处理。这在分布式流架构中尤为重要，因状态管理传统上较为复杂。
 
-3. **Event-Time vs. Processing-Time**: MCP implementations in streaming systems must address the common challenge of differentiating between when events occurred and when they're processed. The protocol can incorporate temporal context that preserves event time semantics.
+3. **事件时间与处理时间**：MCP 实现需解决事件发生时间与处理时间的区分问题，协议可包含保留事件时间语义的时间上下文。
 
-4. **Backpressure Management**: By standardizing context handling, MCP helps manage backpressure in streaming systems, allowing components to communicate their processing capabilities and adjust flow accordingly.
+4. **背压管理**：通过标准化上下文处理，MCP 有助于管理流系统中的背压，使组件能传达处理能力并相应调整数据流。
 
-5. **Context Windowing and Aggregation**: MCP facilitates more sophisticated windowing operations by providing structured representations of temporal and relational contexts, enabling more meaningful aggregations across event streams.
+5. **上下文窗口与聚合**：MCP 支持更复杂的窗口操作，提供时间和关系上下文的结构化表示，实现跨事件流的更有意义聚合。
 
-6. **Exactly-Once Processing**: In streaming systems requiring exactly-once semantics, MCP can incorporate processing metadata to help track and verify processing status across distributed components.
+6. **精确一次处理**：在需要精确一次语义的流系统中，MCP 可包含处理元数据，帮助跟踪和验证分布式组件的处理状态。
 
-The implementation of MCP across various streaming technologies creates a unified approach to context management, reducing the need for custom integration code while enhancing the system's ability to maintain meaningful context as data flows through the pipeline.
+MCP 在多种流技术中的实现，形成了统一的上下文管理方法，减少了定制集成代码的需求，同时增强了系统在数据流动过程中保持有意义上下文的能力。
 
-### MCP in Various Data Streaming Frameworks
+### MCP 在各类数据流框架中的应用
 
-These examples follow the current MCP specification which focuses on a JSON-RPC based protocol with distinct transport mechanisms. The code demonstrates how you can implement custom transports that integrate streaming platforms like Kafka and Pulsar while maintaining full compatibility with the MCP protocol.
+以下示例基于当前 MCP 规范，采用基于 JSON-RPC 的协议及不同传输机制。代码展示了如何实现自定义传输，集成 Kafka 和 Pulsar 等流平台，同时保持与 MCP 协议的完全兼容。
 
-The examples are designed to show how streaming platforms can be integrated with MCP to provide real-time data processing while preserving the contextual awareness that is central to MCP. This approach ensures that the code samples accurately reflect the current state of the MCP specification as of June 2025.
+示例旨在展示如何将流平台与 MCP 集成，实现实时数据处理并保持 MCP 核心的上下文感知能力。此方法确保代码示例准确反映截至 2025 年 6 月的 MCP 规范状态。
 
-MCP can be integrated with popular streaming frameworks including:
+MCP 可集成于以下流行框架：
 
-#### Apache Kafka Integration
+#### Apache Kafka 集成
 
 ```python
 import asyncio
@@ -343,7 +351,7 @@ if __name__ == "__main__":
     asyncio.run(kafka_mcp_example())
 ```
 
-#### Apache Pulsar Implementation
+#### Apache Pulsar 实现
 
 ```python
 import asyncio
@@ -506,130 +514,134 @@ if __name__ == "__main__":
     asyncio.run(run_mcp_server_with_pulsar())
 ```
 
-### Best Practices for Deployment
+### 部署最佳实践
 
-When implementing MCP for real-time streaming:
+实施 MCP 实时流时应注意：
 
-1. **Design for Fault Tolerance**:
-   - Implement proper error handling
-   - Use dead-letter queues for failed messages
-   - Design idempotent processors
+1. **设计容错性**：
+   - 实现完善的错误处理
+   - 使用死信队列处理失败消息
+   - 设计幂等处理器
 
-2. **Optimize for Performance**:
-   - Configure appropriate buffer sizes
-   - Use batching where appropriate
-   - Implement backpressure mechanisms
+2. **性能优化**：
+   - 配置合适的缓冲区大小
+   - 适当使用批处理
+   - 实施背压机制
 
-3. **Monitor and Observe**:
-   - Track stream processing metrics
-   - Monitor context propagation
-   - Set up alerts for anomalies
+3. **监控与观察**：
+   - 跟踪流处理指标
+   - 监控上下文传播
+   - 设置异常告警
 
-4. **Secure Your Streams**:
-   - Implement encryption for sensitive data
-   - Use authentication and authorization
-   - Apply proper access controls
+4. **保障流安全**：
+   - 对敏感数据加密
+   - 使用身份验证和授权
+   - 应用适当的访问控制
 
+### MCP 在物联网和边缘计算中的应用
 
-### MCP in IoT and Edge Computing
+MCP 通过以下方式增强物联网流处理：
 
-MCP enhances IoT streaming by:
+- 在处理管道中保持设备上下文
+- 实现高效的边缘到云数据流传输
+- 支持物联网数据流的实时分析
+- 促进设备间基于上下文的通信
 
-- Preserving device context across the processing pipeline
-- Enabling efficient edge-to-cloud data streaming
-- Supporting real-time analytics on IoT data streams
-- Facilitating device-to-device communication with context
-
-Example: Smart City Sensor Networks
+示例：智慧城市传感器网络  
 ```
 Sensors → Edge Gateways → MCP Stream Processors → Real-time Analytics → Automated Responses
 ```
 
-### Role in Financial Transactions and High-Frequency Trading
+### 在金融交易和高频交易中的作用
 
-MCP provides significant advantages for financial data streaming:
+MCP 为金融数据流传输带来显著优势：
 
-- Ultra-low latency processing for trading decisions
-- Maintaining transaction context throughout processing
-- Supporting complex event processing with contextual awareness
-- Ensuring data consistency across distributed trading systems
+- 超低延迟处理支持交易决策
+- 维护交易上下文贯穿处理流程
+- 支持具备上下文感知的复杂事件处理
+- 确保分布式交易系统中的数据一致性
 
-### Enhancing AI-Driven Data Analytics
+### 增强 AI 驱动的数据分析
 
-MCP creates new possibilities for streaming analytics:
+MCP 为流分析开辟新可能：
 
-- Real-time model training and inference
-- Continuous learning from streaming data
-- Context-aware feature extraction
-- Multi-model inference pipelines with preserved context
+- 实时模型训练与推理
+- 持续从流数据中学习
+- 上下文感知的特征提取
+- 多模型推理管道中保持上下文
 
-## Future Trends and Innovations
+## 未来趋势与创新
 
-### Evolution of MCP in Real-Time Environments
+### MCP 在实时环境中的演进
 
-Looking ahead, we anticipate MCP evolving to address:
+展望未来，MCP 预计将应对：
 
-- **Quantum Computing Integration**: Preparing for quantum-based streaming systems
-- **Edge-Native Processing**: Moving more context-aware processing to edge devices
-- **Autonomous Stream Management**: Self-optimizing streaming pipelines
-- **Federated Streaming**: Distributed processing while preserving privacy
+- **量子计算集成**：为量子流系统做准备
+- **边缘原生处理**：将更多上下文感知处理迁移至边缘设备
+- **自主流管理**：实现自我优化的流管道
+- **联邦流处理**：在保护隐私的前提下实现分布式处理
 
-### Potential Advancements in Technology
+### 技术潜在进展
 
-Emerging technologies that will shape the future of MCP streaming:
+将塑造 MCP 流未来的新兴技术：
 
-1. **AI-Optimized Streaming Protocols**: Custom protocols designed specifically for AI workloads
-2. **Neuromorphic Computing Integration**: Brain-inspired computing for stream processing
-3. **Serverless Streaming**: Event-driven, scalable streaming without infrastructure management
-4. **Distributed Context Stores**: Globally distributed yet highly consistent context management
+1. **AI 优化流协议**：专为 AI 工作负载设计的定制协议
+2. **类脑计算集成**：基于脑启发的流处理计算
+3. **无服务器流处理**：事件驱动、可扩展且无需基础设施管理的流
+4. **分布式上下文存储**：全球分布且高度一致的上下文管理
 
-## Hands-On Exercises
+## 实践练习
 
-### Exercise 1: Setting Up a Basic MCP Streaming Pipeline
+### 练习 1：搭建基础 MCP 流管道
 
-In this exercise, you'll learn how to:
-- Configure a basic MCP streaming environment
-- Implement context handlers for stream processing
-- Test and validate context preservation
+本练习将指导您：
 
-### Exercise 2: Building a Real-Time Analytics Dashboard
+- 配置基础 MCP 流环境
+- 实现流处理的上下文处理器
+- 测试并验证上下文保持
 
-Create a complete application that:
-- Ingests streaming data using MCP
-- Processes the stream while maintaining context
-- Visualizes results in real-time
+### 练习 2：构建实时分析仪表盘
 
-### Exercise 3: Implementing Complex Event Processing with MCP
+创建完整应用，实现：
 
-Advanced exercise covering:
-- Pattern detection in streams
-- Contextual correlation across multiple streams
-- Generating complex events with preserved context
+- 使用 MCP 采集流数据
+- 在保持上下文的同时处理流
+- 实时可视化结果
 
-## Additional Resources
+### 练习 3：基于 MCP 实现复杂事件处理
 
-- [Model Context Protocol Specification](https://github.com/modelcontextprotocol) - Official MCP specification and documentation
-- [Apache Kafka Documentation](https://kafka.apache.org/documentation/) - Learn about Kafka for stream processing
-- [Apache Pulsar](https://pulsar.apache.org/) - Unified messaging and streaming platform
-- [Streaming Systems: The What, Where, When, and How of Large-Scale Data Processing](https://www.oreilly.com/library/view/streaming-systems/9781491983867/) - Comprehensive book on streaming architectures
-- [Microsoft Azure Event Hubs](https://learn.microsoft.com/azure/event-hubs/event-hubs-about) - Managed event streaming service
-- [MLflow Documentation](https://mlflow.org/docs/latest/index.html) - For ML model tracking and deployment
-- [Real-Time Analytics with Apache Storm](https://storm.apache.org/releases/current/index.html) - Processing framework for real-time computation
-- [Flink ML](https://nightlies.apache.org/flink/flink-ml-docs-master/) - Machine learning library for Apache Flink
-- [LangChain Documentation](https://python.langchain.com/docs/get_started/introduction) - Building applications with LLMs
+高级练习涵盖：
 
+- 流中的模式检测
+- 多流间的上下文关联
+- 生成带有上下文的复杂事件
 
-## Learning Outcomes
+## 额外资源
 
-By completing this module, you will be able to:
+- [Model Context Protocol Specification](https://github.com/modelcontextprotocol) - MCP 官方规范与文档
+- [Apache Kafka Documentation](https://kafka.apache.org/documentation/) - Kafka 流处理学习资料
+- [Apache Pulsar](https://pulsar.apache.org/) - 统一消息与流平台
+- [Streaming Systems: The What, Where, When, and How of Large-Scale Data Processing](https://www.oreilly.com/library/view/streaming-systems/9781491983867/) - 流架构综合书籍
+- [Microsoft Azure Event Hubs](https://learn.microsoft.com/azure/event-hubs/event-hubs-about) - 托管事件流服务
+- [MLflow Documentation](https://mlflow.org/docs/latest/index.html) - 机器学习模型跟踪与部署
+- [Real-Time Analytics with Apache Storm](https://storm.apache.org/releases/current/index.html) - 实时计算处理框架
+- [Flink ML](https://nightlies.apache.org/flink/flink-ml-docs-master/) - Apache Flink 机器学习库
+- [LangChain Documentation](https://python.langchain.com/docs/get_started/introduction) - 使用大型语言模型构建应用
 
-- Understand the fundamentals of real-time data streaming and its challenges
-- Explain how the Model Context Protocol (MCP) enhances real-time data streaming
-- Implement MCP-based streaming solutions using popular frameworks like Kafka and Pulsar
-- Design and deploy fault-tolerant, high-performance streaming architectures with MCP
-- Apply MCP concepts to IoT, financial trading, and AI-driven analytics use cases
-- Evaluate emerging trends and future innovations in MCP-based streaming technologies
+## 学习成果
 
-## What's next 
+完成本模块后，您将能够：
+
+- 理解实时数据流传输的基本原理及其挑战
+- 说明 Model Context Protocol（MCP）如何增强实时数据流传输
+- 使用 Kafka 和 Pulsar 等流行框架实现基于 MCP 的流解决方案
+- 设计并部署具备容错性和高性能的 MCP 流架构
+- 将 MCP 概念应用于物联网、金融交易和 AI 驱动的分析场景
+- 评估基于 MCP 流技术的新兴趋势和未来创新
+
+## 后续内容
 
 - [5.11 Realtime Search](../mcp-realtimesearch/README.md)
+
+**免责声明**：  
+本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。虽然我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始文件的母语版本应被视为权威来源。对于重要信息，建议采用专业人工翻译。因使用本翻译而产生的任何误解或误释，我们概不负责。

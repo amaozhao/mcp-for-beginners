@@ -1,40 +1,49 @@
-# Run sample
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "3880d89fa60abc699e1a17a82ae514ef",
+  "translation_date": "2025-10-07T01:20:47+00:00",
+  "source_file": "03-GettingStarted/11-simple-auth/solution/typescript/README.md",
+  "language_code": "zh"
+}
+-->
+# 运行示例
 
-## Install dependencies
+## 安装依赖
 
 ```sh
 npm install
 ```
 
-## Build
+## 构建
 
 ```sh
 npm run build
 ```
 
-## Generate tokens
+## 生成令牌
 
 ```sh
 npm run generate
 ```
 
-This creates a token in a file *.env*. The client will read from this file.
+这会在文件 *.env* 中创建一个令牌。客户端将从该文件中读取。
 
-## Run code
+## 运行代码
 
-Start the server with:
+启动服务器：
 
 ```sh
 npm start
 ```
 
-Run the client, in a separate terminal with:
+在另一个终端中运行客户端：
 
 ```sh
 npm run client
 ```
 
-In the server's terminal, you should see an output similar to:
+在服务器的终端中，你应该看到类似以下的输出：
 
 ```text
 User exists
@@ -42,7 +51,7 @@ User has required scopes
 Middleware executed
 ```
 
-and from the client terminal, you should see output similar to:
+而在客户端终端中，你应该看到类似以下的输出：
 
 ```text
 Connected to MCP server with session ID: c1e50d7b-acff-4f11-8f96-5ae490ca1eaa
@@ -51,9 +60,9 @@ Client disconnected.
 Exiting...
 ```
 
-### Changing things
+### 修改内容
 
-Let's ensure we understand the scopes. Locate the file *server.ts* and this code:
+让我们确保理解权限范围。找到文件 *server.ts* 和以下代码：
 
 ```typescript
  if(!hasScopes(token, ["User.Read"])){
@@ -61,20 +70,25 @@ Let's ensure we understand the scopes. Locate the file *server.ts* and this code
     }
 ```
 
-This says the passed token needs to have "User.Read", let's change that to "User.Write". Now run `npm run build` and restart the server `npm start`. You should now see auth fail as we don't have this scope (we have User.Read and Admin.Write):
+这表示传递的令牌需要具有 "User.Read" 权限，我们将其更改为 "User.Write"。然后运行 `npm run build` 并重新启动服务器 `npm start`。你现在应该看到认证失败，因为我们没有这个权限范围（我们有 User.Read 和 Admin.Write）：
 
-The client now says
+客户端现在显示
 
 ```text
 Error initializing client: Error: Error POSTing to endpoint (HTTP 403): Forbidden - insufficient scopes
 ```
 
-and you can see in the server terminal that it says:
+你可以在服务器终端中看到它显示：
 
 ```text
 User exists
 ```
 
-and that it doesn't go beyond this point. 
+并且它不会继续执行。
 
-Either add this scope "User.Write" and run `npm run generate` and rerun the client OR change the server code back.
+可以选择添加权限范围 "User.Write"，然后运行 `npm run generate` 并重新运行客户端，或者将服务器代码改回原样。
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。

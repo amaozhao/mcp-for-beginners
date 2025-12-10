@@ -1,70 +1,75 @@
-# MCP Security Controls - August 2025 Update
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "0c243c6189393ed7468e470ef2090049",
+  "translation_date": "2025-08-18T10:30:18+00:00",
+  "source_file": "02-Security/mcp-security-controls-2025.md",
+  "language_code": "zh"
+}
+-->
+# MCP安全控制 - 2025年8月更新
 
-> **Current Standard**: This document reflects [MCP Specification 2025-06-18](https://spec.modelcontextprotocol.io/specification/2025-06-18/) security requirements and official [MCP Security Best Practices](https://modelcontextprotocol.io/specification/2025-06-18/basic/security_best_practices).
+> **当前标准**：本文档反映了[MCP规范2025-06-18](https://spec.modelcontextprotocol.io/specification/2025-06-18/)的安全要求以及官方[MCP安全最佳实践](https://modelcontextprotocol.io/specification/2025-06-18/basic/security_best_practices)。
 
-The Model Context Protocol (MCP) has matured significantly with enhanced security controls addressing both traditional software security and AI-specific threats. This document provides comprehensive security controls for secure MCP implementations as of August 2025.
+模型上下文协议（MCP）在安全控制方面取得了显著进展，涵盖了传统软件安全和针对AI的特定威胁。本文档提供了截至2025年8月的安全MCP实施的全面安全控制。
 
-## **MANDATORY Security Requirements**
+## **强制性安全要求**
 
-### **Critical Prohibitions from MCP Specification:**
+### **MCP规范中的关键禁止事项：**
 
-> **FORBIDDEN**: MCP servers **MUST NOT** accept any tokens that were not explicitly issued for the MCP server
+> **禁止**：MCP服务器**不得**接受任何未明确为MCP服务器签发的令牌  
 >
-> **PROHIBITED**: MCP servers **MUST NOT** use sessions for authentication  
+> **禁止**：MCP服务器**不得**使用会话进行身份验证  
 >
-> **REQUIRED**: MCP servers implementing authorization **MUST** verify ALL inbound requests
+> **要求**：实施授权的MCP服务器**必须**验证所有入站请求  
 >
-> **MANDATORY**: MCP proxy servers using static client IDs **MUST** obtain user consent for each dynamically registered client
+> **强制性**：使用静态客户端ID的MCP代理服务器**必须**为每个动态注册的客户端获取用户同意  
 
 ---
 
-## 1. **Authentication & Authorization Controls**
+## 1. **身份验证与授权控制**
 
-### **External Identity Provider Integration**
+### **外部身份提供商集成**
 
-**Current MCP Standard (2025-06-18)** allows MCP servers to delegate authentication to external identity providers, representing a significant security improvement:
+**当前MCP标准（2025-06-18）**允许MCP服务器将身份验证委托给外部身份提供商，这代表了显著的安全改进：
 
-### **External Identity Provider Integration**
+**安全优势：**
+1. **消除自定义身份验证风险**：通过避免自定义身份验证实现，减少漏洞面
+2. **企业级安全**：利用诸如Microsoft Entra ID等成熟的身份提供商，提供高级安全功能
+3. **集中化身份管理**：简化用户生命周期管理、访问控制和合规审计
+4. **多因素身份验证**：继承企业身份提供商的MFA功能
+5. **条件访问策略**：受益于基于风险的访问控制和自适应身份验证
 
-**Current MCP Standard (2025-06-18)** allows MCP servers to delegate authentication to external identity providers, representing a significant security improvement:
+**实施要求：**
+- **令牌受众验证**：验证所有令牌是否明确为MCP服务器签发
+- **发行者验证**：验证令牌发行者是否与预期的身份提供商匹配
+- **签名验证**：对令牌完整性进行加密验证
+- **过期时间强制**：严格执行令牌的生命周期限制
+- **范围验证**：确保令牌包含适当的权限以执行请求的操作
 
-**Security Benefits:**
-1. **Eliminates Custom Authentication Risks**: Reduces vulnerability surface by avoiding custom authentication implementations
-2. **Enterprise-Grade Security**: Leverages established identity providers like Microsoft Entra ID with advanced security features
-3. **Centralized Identity Management**: Simplifies user lifecycle management, access control, and compliance auditing
-4. **Multi-Factor Authentication**: Inherits MFA capabilities from enterprise identity providers
-5. **Conditional Access Policies**: Benefits from risk-based access controls and adaptive authentication
+### **授权逻辑安全**
 
-**Implementation Requirements:**
-- **Token Audience Validation**: Verify all tokens are explicitly issued for the MCP server
-- **Issuer Verification**: Validate token issuer matches expected identity provider
-- **Signature Verification**: Cryptographic validation of token integrity
-- **Expiration Enforcement**: Strict enforcement of token lifetime limits
-- **Scope Validation**: Ensure tokens contain appropriate permissions for requested operations
+**关键控制：**
+- **全面授权审计**：定期对所有授权决策点进行安全审查
+- **安全默认设置**：当授权逻辑无法做出明确决策时拒绝访问
+- **权限边界**：明确区分不同权限级别和资源访问
+- **审计日志记录**：完整记录所有授权决策以进行安全监控
+- **定期访问审查**：定期验证用户权限和权限分配
 
-### **Authorization Logic Security**
+## 2. **令牌安全与防止传递控制**
 
-**Critical Controls:**
-- **Comprehensive Authorization Audits**: Regular security reviews of all authorization decision points
-- **Fail-Safe Defaults**: Deny access when authorization logic cannot make a definitive decision
-- **Permission Boundaries**: Clear separation between different privilege levels and resource access
-- **Audit Logging**: Complete logging of all authorization decisions for security monitoring
-- **Regular Access Reviews**: Periodic validation of user permissions and privilege assignments
+### **防止令牌传递**
 
-## 2. **Token Security & Anti-Passthrough Controls**
+**令牌传递在MCP授权规范中被明确禁止**，因为其存在重大安全风险：
 
-### **Token Passthrough Prevention**
+**解决的安全风险：**
+- **控制规避**：绕过速率限制、请求验证和流量监控等关键安全控制
+- **责任链断裂**：无法识别客户端身份，破坏审计记录和事件调查
+- **基于代理的数据泄露**：允许恶意行为者利用服务器作为代理进行未经授权的数据访问
+- **信任边界违规**：破坏下游服务对令牌来源的信任假设
+- **横向移动**：跨多个服务的令牌泄露可能导致更广泛的攻击扩展
 
-**Token passthrough is explicitly prohibited** in the MCP Authorization Specification due to critical security risks:
-
-**Security Risks Addressed:**
-- **Control Circumvention**: Bypasses essential security controls like rate limiting, request validation, and traffic monitoring
-- **Accountability Breakdown**: Makes client identification impossible, corrupting audit trails and incident investigation
-- **Proxy-Based Exfiltration**: Enables malicious actors to use servers as proxies for unauthorized data access
-- **Trust Boundary Violations**: Breaks downstream service trust assumptions about token origins
-- **Lateral Movement**: Compromised tokens across multiple services enable broader attack expansion
-
-**Implementation Controls:**
+**实施控制：**
 ```yaml
 Token Validation Requirements:
   audience_validation: MANDATORY
@@ -80,25 +85,25 @@ Token Lifecycle Management:
   replay_protection: "Implemented via nonce/timestamp"
 ```
 
-### **Secure Token Management Patterns**
+### **安全令牌管理模式**
 
-**Best Practices:**
-- **Short-Lived Tokens**: Minimize exposure window with frequent token rotation
-- **Just-in-Time Issuance**: Issue tokens only when needed for specific operations
-- **Secure Storage**: Use hardware security modules (HSMs) or secure key vaults
-- **Token Binding**: Bind tokens to specific clients, sessions, or operations where possible
-- **Monitoring & Alerting**: Real-time detection of token misuse or unauthorized access patterns
+**最佳实践：**
+- **短生命周期令牌**：通过频繁令牌轮换减少暴露窗口
+- **按需签发**：仅在特定操作需要时签发令牌
+- **安全存储**：使用硬件安全模块（HSM）或安全密钥库
+- **令牌绑定**：尽可能将令牌绑定到特定客户端、会话或操作
+- **监控与警报**：实时检测令牌滥用或未经授权的访问模式
 
-## 3. **Session Security Controls**
+## 3. **会话安全控制**
 
-### **Session Hijacking Prevention**
+### **防止会话劫持**
 
-**Attack Vectors Addressed:**
-- **Session Hijack Prompt Injection**: Malicious events injected into shared session state
-- **Session Impersonation**: Unauthorized use of stolen session IDs to bypass authentication
-- **Resumable Stream Attacks**: Exploitation of server-sent event resumption for malicious content injection
+**解决的攻击向量：**
+- **会话劫持提示注入**：恶意事件注入共享会话状态
+- **会话冒充**：未经授权使用被盗会话ID绕过身份验证
+- **可恢复流攻击**：利用服务器发送事件恢复进行恶意内容注入
 
-**Mandatory Session Controls:**
+**强制性会话控制：**
 ```yaml
 Session ID Generation:
   randomness_source: "Cryptographically secure RNG"
@@ -118,28 +123,28 @@ Session Lifecycle:
   cleanup: "Automated expired session removal"
 ```
 
-**Transport Security:**
-- **HTTPS Enforcement**: All session communication over TLS 1.3
-- **Secure Cookie Attributes**: HttpOnly, Secure, SameSite=Strict
-- **Certificate Pinning**: For critical connections to prevent MITM attacks
+**传输安全：**
+- **强制HTTPS**：所有会话通信均通过TLS 1.3
+- **安全Cookie属性**：HttpOnly、Secure、SameSite=Strict
+- **证书绑定**：关键连接的证书绑定以防止中间人攻击
 
-### **Stateful vs Stateless Considerations**
+### **有状态与无状态的考虑**
 
-**For Stateful Implementations:**
-- Shared session state requires additional protection against injection attacks
-- Queue-based session management needs integrity verification
-- Multiple server instances require secure session state synchronization
+**对于有状态实现：**
+- 共享会话状态需要额外保护以防止注入攻击
+- 基于队列的会话管理需要完整性验证
+- 多个服务器实例需要安全的会话状态同步
 
-**For Stateless Implementations:**
-- JWT or similar token-based session management
-- Cryptographic verification of session state integrity
-- Reduced attack surface but requires robust token validation
+**对于无状态实现：**
+- 基于JWT或类似令牌的会话管理
+- 会话状态完整性的加密验证
+- 攻击面减少，但需要强大的令牌验证
 
-## 4. **AI-Specific Security Controls**
+## 4. **AI特定安全控制**
 
-### **Prompt Injection Defense**
+### **防止提示注入**
 
-**Microsoft Prompt Shields Integration:**
+**Microsoft Prompt Shields集成：**
 ```yaml
 Detection Mechanisms:
   - "Advanced ML-based instruction detection"
@@ -157,15 +162,15 @@ Integration Points:
   - "Threat intelligence updates"
 ```
 
-**Implementation Controls:**
-- **Input Sanitization**: Comprehensive validation and filtering of all user inputs
-- **Content Boundary Definition**: Clear separation between system instructions and user content
-- **Instruction Hierarchy**: Proper precedence rules for conflicting instructions
-- **Output Monitoring**: Detection of potentially harmful or manipulated outputs
+**实施控制：**
+- **输入清理**：全面验证和过滤所有用户输入
+- **内容边界定义**：明确区分系统指令与用户内容
+- **指令层级**：为冲突指令设置适当的优先级规则
+- **输出监控**：检测潜在有害或被操纵的输出
 
-### **Tool Poisoning Prevention**
+### **防止工具投毒**
 
-**Tool Security Framework:**
+**工具安全框架：**
 ```yaml
 Tool Definition Protection:
   validation:
@@ -187,17 +192,17 @@ Tool Definition Protection:
     - "Automated alerting for suspicious modifications"
 ```
 
-**Dynamic Tool Management:**
-- **Approval Workflows**: Explicit user consent for tool modifications
-- **Rollback Capabilities**: Ability to revert to previous tool versions
-- **Change Auditing**: Complete history of tool definition modifications
-- **Risk Assessment**: Automated evaluation of tool security posture
+**动态工具管理：**
+- **审批工作流**：工具修改需明确用户同意
+- **回滚功能**：能够恢复到之前的工具版本
+- **变更审计**：完整记录工具定义的修改历史
+- **风险评估**：自动评估工具的安全状况
 
-## 5. **Confused Deputy Attack Prevention**
+## 5. **防止混淆代理攻击**
 
-### **OAuth Proxy Security**
+### **OAuth代理安全**
 
-**Attack Prevention Controls:**
+**攻击预防控制：**
 ```yaml
 Client Registration:
   static_client_protection:
@@ -213,17 +218,17 @@ Client Registration:
     - "Nonce verification for ID tokens"
 ```
 
-**Implementation Requirements:**
-- **User Consent Verification**: Never skip consent screens for dynamic client registration
-- **Redirect URI Validation**: Strict whitelist-based validation of redirect destinations
-- **Authorization Code Protection**: Short-lived codes with single-use enforcement
-- **Client Identity Verification**: Robust validation of client credentials and metadata
+**实施要求：**
+- **用户同意验证**：动态客户端注册时不得跳过同意屏幕
+- **重定向URI验证**：严格基于白名单验证重定向目标
+- **授权码保护**：短生命周期代码并强制单次使用
+- **客户端身份验证**：强大的客户端凭据和元数据验证
 
-## 6. **Tool Execution Security**
+## 6. **工具执行安全**
 
-### **Sandboxing & Isolation**
+### **沙箱与隔离**
 
-**Container-Based Isolation:**
+**基于容器的隔离：**
 ```yaml
 Execution Environment:
   containerization: "Docker/Podman with security profiles"
@@ -240,15 +245,15 @@ Execution Environment:
     filesystem: "Read-only root with minimal writable areas"
 ```
 
-**Process Isolation:**
-- **Separate Process Contexts**: Each tool execution in isolated process space
-- **Inter-Process Communication**: Secure IPC mechanisms with validation
-- **Process Monitoring**: Runtime behavior analysis and anomaly detection
-- **Resource Enforcement**: Hard limits on CPU, memory, and I/O operations
+**进程隔离：**
+- **独立进程上下文**：每个工具执行在隔离的进程空间中
+- **进程间通信**：使用验证的安全IPC机制
+- **进程监控**：运行时行为分析和异常检测
+- **资源限制**：对CPU、内存和I/O操作设置硬性限制
 
-### **Least Privilege Implementation**
+### **最小权限实施**
 
-**Permission Management:**
+**权限管理：**
 ```yaml
 Access Control:
   file_system:
@@ -269,11 +274,11 @@ Access Control:
     - "Restricted environment variable access"
 ```
 
-## 7. **Supply Chain Security Controls**
+## 7. **供应链安全控制**
 
-### **Dependency Verification**
+### **依赖验证**
 
-**Comprehensive Component Security:**
+**全面组件安全：**
 ```yaml
 Software Dependencies:
   scanning: 
@@ -302,19 +307,19 @@ AI Components:
     - "Incident response capability evaluation"
 ```
 
-### **Continuous Monitoring**
+### **持续监控**
 
-**Supply Chain Threat Detection:**
-- **Dependency Health Monitoring**: Continuous assessment of all dependencies for security issues
-- **Threat Intelligence Integration**: Real-time updates on emerging supply chain threats
-- **Behavioral Analysis**: Detection of unusual behavior in external components
-- **Automated Response**: Immediate containment of compromised components
+**供应链威胁检测：**
+- **依赖健康监控**：持续评估所有依赖项的安全问题
+- **威胁情报集成**：实时更新新兴供应链威胁
+- **行为分析**：检测外部组件的异常行为
+- **自动响应**：立即隔离受损组件
 
-## 8. **Monitoring & Detection Controls**
+## 8. **监控与检测控制**
 
-### **Security Information and Event Management (SIEM)**
+### **安全信息与事件管理（SIEM）**
 
-**Comprehensive Logging Strategy:**
+**全面日志策略：**
 ```yaml
 Authentication Events:
   - "All authentication attempts (success/failure)"
@@ -335,19 +340,19 @@ Security Events:
   - "Unusual access patterns and anomalies"
 ```
 
-### **Real-Time Threat Detection**
+### **实时威胁检测**
 
-**Behavioral Analytics:**
-- **User Behavior Analytics (UBA)**: Detection of unusual user access patterns
-- **Entity Behavior Analytics (EBA)**: Monitoring of MCP server and tool behavior
-- **Machine Learning Anomaly Detection**: AI-powered identification of security threats
-- **Threat Intelligence Correlation**: Matching observed activities against known attack patterns
+**行为分析：**
+- **用户行为分析（UBA）**：检测异常用户访问模式
+- **实体行为分析（EBA）**：监控MCP服务器和工具行为
+- **机器学习异常检测**：AI驱动的安全威胁识别
+- **威胁情报关联**：将观察到的活动与已知攻击模式匹配
 
-## 9. **Incident Response & Recovery**
+## 9. **事件响应与恢复**
 
-### **Automated Response Capabilities**
+### **自动响应能力**
 
-**Immediate Response Actions:**
+**即时响应行动：**
 ```yaml
 Threat Containment:
   session_management:
@@ -372,51 +377,54 @@ Recovery Procedures:
     - "Service restart procedures"
 ```
 
-### **Forensic Capabilities**
+### **取证能力**
 
-**Investigation Support:**
-- **Audit Trail Preservation**: Immutable logging with cryptographic integrity
-- **Evidence Collection**: Automated gathering of relevant security artifacts
-- **Timeline Reconstruction**: Detailed sequence of events leading to security incidents
-- **Impact Assessment**: Evaluation of compromise scope and data exposure
+**调查支持：**
+- **审计记录保存**：不可变日志记录并具有加密完整性
+- **证据收集**：自动收集相关安全工件
+- **时间线重建**：详细记录导致安全事件的事件序列
+- **影响评估**：评估妥协范围和数据暴露情况
 
-## **Key Security Architecture Principles**
+## **关键安全架构原则**
 
-### **Defense in Depth**
-- **Multiple Security Layers**: No single point of failure in security architecture
-- **Redundant Controls**: Overlapping security measures for critical functions
-- **Fail-Safe Mechanisms**: Secure defaults when systems encounter errors or attacks
+### **深度防御**
+- **多层安全**：安全架构中无单点故障
+- **冗余控制**：关键功能的重叠安全措施
+- **安全故障机制**：系统遇到错误或攻击时的安全默认设置
 
-### **Zero Trust Implementation**
-- **Never Trust, Always Verify**: Continuous validation of all entities and requests
-- **Principle of Least Privilege**: Minimal access rights for all components
-- **Micro-Segmentation**: Granular network and access controls
+### **零信任实施**
+- **永不信任，总是验证**：持续验证所有实体和请求
+- **最小权限原则**：所有组件的访问权限最小化
+- **微分段**：细粒度的网络和访问控制
 
-### **Continuous Security Evolution**
-- **Threat Landscape Adaptation**: Regular updates to address emerging threats
-- **Security Control Effectiveness**: Ongoing evaluation and improvement of controls
-- **Specification Compliance**: Alignment with evolving MCP security standards
+### **持续安全演进**
+- **威胁环境适应**：定期更新以应对新兴威胁
+- **安全控制有效性**：持续评估和改进控制措施
+- **规范合规性**：与不断发展的MCP安全标准保持一致
 
 ---
 
-## **Implementation Resources**
+## **实施资源**
 
-### **Official MCP Documentation**
-- [MCP Specification (2025-06-18)](https://spec.modelcontextprotocol.io/specification/2025-06-18/)
-- [MCP Security Best Practices](https://modelcontextprotocol.io/specification/2025-06-18/basic/security_best_practices)
-- [MCP Authorization Specification](https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization)
+### **官方MCP文档**
+- [MCP规范（2025-06-18）](https://spec.modelcontextprotocol.io/specification/2025-06-18/)
+- [MCP安全最佳实践](https://modelcontextprotocol.io/specification/2025-06-18/basic/security_best_practices)
+- [MCP授权规范](https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization)
 
-### **Microsoft Security Solutions**
+### **Microsoft安全解决方案**
 - [Microsoft Prompt Shields](https://learn.microsoft.com/azure/ai-services/content-safety/concepts/jailbreak-detection)
-- [Azure Content Safety](https://learn.microsoft.com/azure/ai-services/content-safety/)
-- [GitHub Advanced Security](https://github.com/security/advanced-security)
-- [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/)
+- [Azure内容安全](https://learn.microsoft.com/azure/ai-services/content-safety/)
+- [GitHub高级安全](https://github.com/security/advanced-security)
+- [Azure密钥库](https://learn.microsoft.com/azure/key-vault/)
 
-### **Security Standards**
-- [OAuth 2.0 Security Best Practices (RFC 9700)](https://datatracker.ietf.org/doc/html/rfc9700)
-- [OWASP Top 10 for Large Language Models](https://genai.owasp.org/)
-- [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)
+### **安全标准**
+- [OAuth 2.0安全最佳实践（RFC 9700）](https://datatracker.ietf.org/doc/html/rfc9700)
+- [OWASP大型语言模型十大安全问题](https://genai.owasp.org/)
+- [NIST网络安全框架](https://www.nist.gov/cyberframework)
 
 ---
 
-> **Important**: These security controls reflect the current MCP specification (2025-06-18). Always verify against the latest [official documentation](https://spec.modelcontextprotocol.io/) as standards continue to evolve rapidly.
+> **重要**：这些安全控制反映了当前MCP规范（2025-06-18）。由于标准快速演变，请始终根据最新的[官方文档](https://spec.modelcontextprotocol.io/)进行验证。
+
+**免责声明**：  
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保准确性，但请注意，自动翻译可能包含错误或不准确之处。应以原始语言的文档作为权威来源。对于关键信息，建议使用专业人工翻译。对于因使用本翻译而引起的任何误解或误读，我们概不负责。

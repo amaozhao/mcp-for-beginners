@@ -1,37 +1,46 @@
-# Scalability and High-Performance MCP
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "7b4d8d17fc1f501468cce40c3651aed1",
+  "translation_date": "2025-07-16T20:56:54+00:00",
+  "source_file": "05-AdvancedTopics/mcp-scaling/README.md",
+  "language_code": "zh"
+}
+-->
+# 可扩展性与高性能 MCP
 
-For enterprise deployments, MCP implementations often need to handle high volumes of requests with minimal latency.
+对于企业级部署，MCP 实现通常需要处理大量请求并保持极低的延迟。
 
-## Introduction
+## 介绍
 
-In this lesson, we will explore strategies for scaling MCP servers to handle large workloads efficiently. We will cover horizontal and vertical scaling, resource optimization, and distributed architectures.
+本课将探讨扩展 MCP 服务器以高效处理大规模工作负载的策略。内容涵盖水平扩展与垂直扩展、资源优化以及分布式架构。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lesson, you will be able to:
+完成本课后，您将能够：
 
-- Implement horizontal scaling using load balancing and distributed caching.
-- Optimize MCP servers for vertical scaling and resource management.
-- Design distributed MCP architectures for high availability and fault tolerance.
-- Utilize advanced tools and techniques for performance monitoring and optimization.
-- Apply best practices for scaling MCP servers in production environments.
+- 使用负载均衡和分布式缓存实现水平扩展。
+- 优化 MCP 服务器以支持垂直扩展和资源管理。
+- 设计具备高可用性和容错能力的分布式 MCP 架构。
+- 利用先进工具和技术进行性能监控与优化。
+- 应用生产环境中 MCP 服务器扩展的最佳实践。
 
-## Scalability Strategies
+## 扩展策略
 
-There are several strategies to scale MCP servers effectively:
+有效扩展 MCP 服务器的策略包括：
 
-- **Horizontal Scaling**: Deploy multiple instances of MCP servers behind a load balancer to distribute incoming requests evenly.
-- **Vertical Scaling**: Optimize a single MCP server instance to handle more requests by increasing resources (CPU, memory) and fine-tuning configurations.
-- **Resource Optimization**: Use efficient algorithms, caching, and asynchronous processing to reduce resource consumption and improve response times.
-- **Distributed Architecture**: Implement a distributed system where multiple MCP nodes work together, sharing the load and providing redundancy.
+- **水平扩展**：在负载均衡器后部署多个 MCP 服务器实例，均匀分配请求。
+- **垂直扩展**：通过增加资源（CPU、内存）和调整配置，优化单个 MCP 服务器实例以处理更多请求。
+- **资源优化**：采用高效算法、缓存和异步处理，降低资源消耗并提升响应速度。
+- **分布式架构**：构建多个 MCP 节点协同工作，分担负载并提供冗余保障。
 
-## Horizontal Scaling
+## 水平扩展
 
-Horizontal scaling involves deploying multiple instances of MCP servers and using a load balancer to distribute incoming requests. This approach allows you to handle more requests simultaneously and provides fault tolerance.
+水平扩展指部署多个 MCP 服务器实例，并通过负载均衡器分配请求。此方法可同时处理更多请求，并增强容错能力。
 
-Let's look at an example of how to configure horizontal scaling and MCP.
+下面是配置水平扩展和 MCP 的示例。
 
-### [.NET](#tab/dotnet)
+### [.NET](../../../../05-AdvancedTopics/mcp-scaling)
 
 ```csharp
 // ASP.NET Core MCP load balancing configuration
@@ -61,21 +70,21 @@ public class McpLoadBalancedStartup
 }
 ```
 
-In the preceding code we've:
+上述代码中，我们：
 
-- Configured a distributed cache using Redis to store session state and tool data.
-- Enabled distributed caching in the MCP server configuration.
-- Registered a high-performance tool that can be used across multiple MCP instances.
+- 使用 Redis 配置了分布式缓存，用于存储会话状态和工具数据。
+- 在 MCP 服务器配置中启用了分布式缓存。
+- 注册了可跨多个 MCP 实例使用的高性能工具。
 
 ---
 
-## Vertical Scaling and Resource Optimization
+## 垂直扩展与资源优化
 
-Vertical scaling focuses on optimizing a single MCP server instance to handle more requests efficiently. This can be achieved by fine-tuning configurations, using efficient algorithms, and managing resources effectively. For example, you can adjust thread pools, request timeouts, and memory limits to improve performance.
+垂直扩展侧重于优化单个 MCP 服务器实例以更高效地处理请求。可通过调整配置、采用高效算法和有效管理资源实现。例如，调整线程池、请求超时和内存限制以提升性能。
 
-Let's look at an example of how to optimize an MCP server for vertical scaling and resource management.
+下面是优化 MCP 服务器以支持垂直扩展和资源管理的示例。
 
-# [Java](#tab/java)
+# [Java](../../../../05-AdvancedTopics/mcp-scaling)
 
 ```java
 // Java MCP server with resource optimization
@@ -108,21 +117,21 @@ public class OptimizedMcpServer {
 }
 ```
 
-In the preceding code, we have:
+上述代码中，我们：
 
-- Configured a thread pool with an optimal number of threads based on the number of available processors.
-- Set resource constraints such as maximum request size, maximum concurrent requests, and request timeout.
-- Used a backpressure strategy to handle overload situations gracefully.
+- 根据可用处理器数量配置了线程池的最优线程数。
+- 设置了资源限制，如最大请求大小、最大并发请求数和请求超时。
+- 使用背压策略优雅地处理过载情况。
 
 ---
 
-## Distributed Architecture
+## 分布式架构
 
-Distributed architectures involve multiple MCP nodes working together to handle requests, share resources, and provide redundancy. This approach enhances scalability and fault tolerance by allowing nodes to communicate and coordinate through a distributed system.
+分布式架构由多个 MCP 节点协同工作，处理请求、共享资源并提供冗余。该方法通过节点间的通信与协调，提升扩展性和容错能力。
 
-Let's look at an example of how to implement a distributed MCP server architecture using Redis for coordination.
+下面是使用 Redis 进行协调，实现分布式 MCP 服务器架构的示例。
 
-# [Python](#tab/python)
+# [Python](../../../../05-AdvancedTopics/mcp-scaling)
 
 ```python
 # Python MCP server in distributed architecture
@@ -205,18 +214,20 @@ class DistributedMcpServer:
         await self.redis.wait_closed()
 ```
 
-In the preceding code, we have:
+上述代码中，我们：
 
-- Created a distributed MCP server that registers itself with a Redis instance for coordination.
-- Implemented a heartbeat mechanism to update the node's status and load in Redis.
-- Registered tools that can be specialized based on the node's ID, allowing for load distribution across nodes.
-- Provided a shutdown method to clean up resources and deregister the node from the cluster.
-- Used asynchronous programming to handle requests efficiently and maintain responsiveness.
-- Utilized Redis for coordination and state management across distributed nodes.
+- 创建了一个分布式 MCP 服务器，注册到 Redis 实例以实现协调。
+- 实现了心跳机制，定期更新节点在 Redis 中的状态和负载。
+- 注册了可根据节点 ID 专门化的工具，实现节点间负载分配。
+- 提供了关闭方法，用于清理资源并从集群注销节点。
+- 采用异步编程高效处理请求，保持响应性。
+- 利用 Redis 实现分布式节点间的协调和状态管理。
 
 ---
 
+## 后续内容
 
-## What's next
+- [5.8 安全](../mcp-security/README.md)
 
-- [5.8 Security](../mcp-security/README.md)
+**免责声明**：  
+本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。虽然我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用本翻译而产生的任何误解或误释承担责任。

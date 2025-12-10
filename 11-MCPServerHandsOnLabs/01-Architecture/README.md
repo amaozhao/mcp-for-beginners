@@ -1,32 +1,41 @@
-# Core Architecture Concepts
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "d72a1d9e9ad1a7cc8d40d05d546b5ca0",
+  "translation_date": "2025-09-30T12:44:39+00:00",
+  "source_file": "11-MCPServerHandsOnLabs/01-Architecture/README.md",
+  "language_code": "zh"
+}
+-->
+# 核心架构概念
 
-## 🎯 What This Lab Covers
+## 🎯 本实验内容
 
-This lab provides an in-depth exploration of MCP server architecture patterns, database design principles, and the technical implementation strategies that power robust, scalable database-integrated AI applications.
+本实验深入探讨了 MCP 服务器架构模式、数据库设计原则，以及支持强大、可扩展的数据库集成 AI 应用的技术实现策略。
 
-## Overview
+## 概述
 
-Building a production-ready MCP server with database integration requires careful architectural decisions. This lab breaks down the key components, design patterns, and technical considerations that make our Zava Retail analytics solution robust, secure, and scalable.
+构建一个生产级 MCP 服务器并集成数据库需要慎重的架构决策。本实验分解了关键组件、设计模式和技术考量，使我们的 Zava Retail 分析解决方案具有稳健性、安全性和可扩展性。
 
-You'll understand how each layer interacts, why specific technologies were chosen, and how to apply these patterns to your own MCP implementations.
+您将了解每一层如何交互、为何选择特定技术，以及如何将这些模式应用到您自己的 MCP 实现中。
 
-## Learning Objectives
+## 学习目标
 
-By the end of this lab, you will be able to:
+完成本实验后，您将能够：
 
-- **Analyze** the layered architecture of an MCP server with database integration
-- **Understand** the role and responsibilities of each architectural component
-- **Design** database schemas that support multi-tenant MCP applications
-- **Implement** connection pooling and resource management strategies
-- **Apply** error handling and logging patterns for production systems
-- **Evaluate** trade-offs between different architectural approaches
+- **分析** MCP 服务器的分层架构及其数据库集成
+- **理解**每个架构组件的角色和职责
+- **设计**支持多租户 MCP 应用的数据库模式
+- **实现**连接池和资源管理策略
+- **应用**生产系统的错误处理和日志记录模式
+- **评估**不同架构方法之间的权衡
 
-## 🏗️ MCP Server Architecture Layers
+## 🏗️ MCP 服务器架构层
 
-Our MCP server implements a **layered architecture** that separates concerns and promotes maintainability:
+我们的 MCP 服务器采用了**分层架构**，以分离关注点并促进可维护性：
 
-### Layer 1: Protocol Layer (FastMCP)
-**Responsibility**: Handle MCP protocol communication and message routing
+### 第一层：协议层 (FastMCP)
+**职责**：处理 MCP 协议通信和消息路由
 
 ```python
 # FastMCP server setup
@@ -44,14 +53,14 @@ async def execute_sales_query(
     return await query_executor.execute(postgresql_query, ctx)
 ```
 
-**Key Features**:
-- **Protocol Compliance**: Full MCP specification support
-- **Type Safety**: Pydantic models for request/response validation
-- **Async Support**: Non-blocking I/O for high concurrency
-- **Error Handling**: Standardized error responses
+**主要特点**：
+- **协议合规性**：完全支持 MCP 规范
+- **类型安全**：使用 Pydantic 模型进行请求/响应验证
+- **异步支持**：非阻塞 I/O 提供高并发能力
+- **错误处理**：标准化错误响应
 
-### Layer 2: Business Logic Layer
-**Responsibility**: Implement business rules and coordinate between protocol and data layers
+### 第二层：业务逻辑层
+**职责**：实现业务规则并协调协议层与数据层之间的交互
 
 ```python
 class SalesAnalyticsService:
@@ -80,14 +89,14 @@ class SalesAnalyticsService:
         }
 ```
 
-**Key Features**:
-- **Business Rule Enforcement**: Store access validation and data integrity
-- **Service Coordination**: Orchestration between database and AI services
-- **Data Transformation**: Converting raw data to business insights
-- **Caching Strategy**: Performance optimization for frequent queries
+**主要特点**：
+- **业务规则执行**：验证存储访问和数据完整性
+- **服务协调**：在数据库和 AI 服务之间进行编排
+- **数据转换**：将原始数据转化为业务洞察
+- **缓存策略**：优化频繁查询的性能
 
-### Layer 3: Data Access Layer
-**Responsibility**: Manage database connections, query execution, and data mapping
+### 第三层：数据访问层
+**职责**：管理数据库连接、查询执行和数据映射
 
 ```python
 class PostgreSQLProvider:
@@ -122,14 +131,14 @@ class PostgreSQLProvider:
                 raise QueryTimeoutError("Query execution exceeded timeout")
 ```
 
-**Key Features**:
-- **Connection Pooling**: Efficient resource management
-- **Transaction Management**: ACID compliance and rollback handling
-- **Query Optimization**: Performance monitoring and optimization
-- **RLS Integration**: Row-level security context management
+**主要特点**：
+- **连接池**：高效的资源管理
+- **事务管理**：支持 ACID 合规性和回滚处理
+- **查询优化**：性能监控和优化
+- **RLS 集成**：行级安全上下文管理
 
-### Layer 4: Infrastructure Layer
-**Responsibility**: Handle cross-cutting concerns like logging, monitoring, and configuration
+### 第四层：基础设施层
+**职责**：处理日志记录、监控和配置等跨领域问题
 
 ```python
 class InfrastructureManager:
@@ -169,11 +178,11 @@ class InfrastructureManager:
         ).observe(duration)
 ```
 
-## 🗄️ Database Design Patterns
+## 🗄️ 数据库设计模式
 
-Our PostgreSQL schema implements several key patterns for multi-tenant MCP applications:
+我们的 PostgreSQL 模式实现了多租户 MCP 应用的几个关键设计模式：
 
-### 1. Multi-Tenant Schema Design
+### 1. 多租户模式设计
 
 ```sql
 -- Core retail entities with store-based partitioning
@@ -204,13 +213,13 @@ CREATE TABLE retail.orders (
 );
 ```
 
-**Design Principles**:
-- **Foreign Key Consistency**: Ensure data integrity across tables
-- **Store ID Propagation**: Every transactional table includes store_id
-- **UUID Primary Keys**: Globally unique identifiers for distributed systems
-- **Timestamp Tracking**: Audit trail for all data changes
+**设计原则**：
+- **外键一致性**：确保跨表数据完整性
+- **存储 ID 传播**：每个事务表都包含 store_id
+- **UUID 主键**：分布式系统的全局唯一标识符
+- **时间戳跟踪**：记录所有数据更改的审计轨迹
 
-### 2. Row Level Security Implementation
+### 2. 行级安全 (RLS) 实现
 
 ```sql
 -- Enable RLS on multi-tenant tables
@@ -243,13 +252,13 @@ END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 ```
 
-**RLS Benefits**:
-- **Automatic Filtering**: Database enforces data isolation
-- **Application Simplicity**: No complex WHERE clauses needed
-- **Security by Default**: Impossible to accidentally access wrong data
-- **Audit Compliance**: Clear data access boundaries
+**RLS 优势**：
+- **自动过滤**：数据库强制数据隔离
+- **应用简化**：无需复杂的 WHERE 子句
+- **默认安全性**：避免意外访问错误数据
+- **审计合规**：明确的数据访问边界
 
-### 3. Vector Search Schema
+### 3. 向量搜索模式
 
 ```sql
 -- Product embeddings for semantic search
@@ -292,11 +301,11 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-## 🔌 Connection Management Patterns
+## 🔌 连接管理模式
 
-Efficient database connection management is critical for MCP server performance:
+高效的数据库连接管理对 MCP 服务器性能至关重要：
 
-### Connection Pool Configuration
+### 连接池配置
 
 ```python
 class ConnectionPoolManager:
@@ -352,7 +361,7 @@ class ConnectionPoolManager:
                 logger.warning(f"Database connection failed, retrying ({attempt + 1}/{max_retries})")
 ```
 
-### Resource Lifecycle Management
+### 资源生命周期管理
 
 ```python
 class MCPServerManager:
@@ -412,11 +421,11 @@ class MCPServerManager:
         return status
 ```
 
-## 🛡️ Error Handling and Resilience Patterns
+## 🛡️ 错误处理和弹性模式
 
-Robust error handling ensures reliable MCP server operation:
+强大的错误处理确保 MCP 服务器的可靠运行：
 
-### Hierarchical Error Types
+### 分层错误类型
 
 ```python
 class MCPError(Exception):
@@ -453,7 +462,7 @@ class ValidationError(MCPError):
         self.value = value
 ```
 
-### Error Handling Middleware
+### 错误处理中间件
 
 ```python
 @contextmanager
@@ -508,9 +517,9 @@ async def error_handling_context(operation_name: str, user_id: str = None):
         raise MCPError(f"Internal server error in {operation_name}")
 ```
 
-## 📊 Performance Optimization Strategies
+## 📊 性能优化策略
 
-### Query Performance Monitoring
+### 查询性能监控
 
 ```python
 class QueryPerformanceMonitor:
@@ -573,7 +582,7 @@ class QueryPerformanceMonitor:
         return summary
 ```
 
-### Caching Strategy
+### 缓存策略
 
 ```python
 class QueryCache:
@@ -614,43 +623,48 @@ class QueryCache:
         return hashlib.sha256(key_data.encode()).hexdigest()
 ```
 
-## 🎯 Key Takeaways
+## 🎯 关键要点
 
-After completing this lab, you should understand:
+完成本实验后，您应该了解：
 
-✅ **Layered Architecture**: How to separate concerns in MCP server design  
-✅ **Database Patterns**: Multi-tenant schema design and RLS implementation  
-✅ **Connection Management**: Efficient pooling and resource lifecycle  
-✅ **Error Handling**: Hierarchical error types and resilience patterns  
-✅ **Performance Optimization**: Monitoring, caching, and query optimization  
-✅ **Production Readiness**: Infrastructure concerns and operational patterns  
+✅ **分层架构**：如何在 MCP 服务器设计中分离关注点  
+✅ **数据库模式**：多租户模式设计和 RLS 实现  
+✅ **连接管理**：高效的连接池和资源生命周期管理  
+✅ **错误处理**：分层错误类型和弹性模式  
+✅ **性能优化**：监控、缓存和查询优化  
+✅ **生产准备**：基础设施问题和操作模式  
 
-## 🚀 What's Next
+## 🚀 下一步
 
-Continue with **[Lab 02: Security and Multi-Tenancy](../02-Security/README.md)** to dive deep into:
+继续学习 **[实验 02：安全性和多租户](../02-Security/README.md)**，深入了解：
 
-- Row Level Security implementation details
-- Authentication and authorization patterns
-- Multi-tenant data isolation strategies
-- Security audit and compliance considerations
+- 行级安全实现细节
+- 身份验证和授权模式
+- 多租户数据隔离策略
+- 安全审计和合规性考量
 
-## 📚 Additional Resources
+## 📚 额外资源
 
-### Architecture Patterns
-- [Clean Architecture in Python](https://github.com/cosmic-python/code) - Architectural patterns for Python applications
-- [Database Design Patterns](https://en.wikipedia.org/wiki/Database_design) - Relational database design principles
-- [Microservices Patterns](https://microservices.io/patterns/) - Service architecture patterns
+### 架构模式
+- [Python 中的清晰架构](https://github.com/cosmic-python/code) - Python 应用的架构模式
+- [数据库设计模式](https://en.wikipedia.org/wiki/Database_design) - 关系数据库设计原则
+- [微服务模式](https://microservices.io/patterns/) - 服务架构模式
 
-### PostgreSQL Advanced Topics
-- [PostgreSQL Performance Tuning](https://wiki.postgresql.org/wiki/Performance_Optimization) - Database optimization guide
-- [Connection Pooling Best Practices](https://www.postgresql.org/docs/current/runtime-config-connection.html) - Connection management
-- [Query Planning and Optimization](https://www.postgresql.org/docs/current/planner-optimizer.html) - Query performance
+### PostgreSQL 高级主题
+- [PostgreSQL 性能调优](https://wiki.postgresql.org/wiki/Performance_Optimization) - 数据库优化指南
+- [连接池最佳实践](https://www.postgresql.org/docs/current/runtime-config-connection.html) - 连接管理
+- [查询规划和优化](https://www.postgresql.org/docs/current/planner-optimizer.html) - 查询性能
 
-### Python Async Patterns
-- [AsyncIO Best Practices](https://docs.python.org/3/library/asyncio.html) - Async programming patterns
-- [FastAPI Architecture](https://fastapi.tiangolo.com/advanced/) - Modern Python web architecture
-- [Pydantic Models](https://pydantic-docs.helpmanual.io/) - Data validation and serialization
+### Python 异步模式
+- [AsyncIO 最佳实践](https://docs.python.org/3/library/asyncio.html) - 异步编程模式
+- [FastAPI 架构](https://fastapi.tiangolo.com/advanced/) - 现代 Python Web 架构
+- [Pydantic 模型](https://pydantic-docs.helpmanual.io/) - 数据验证和序列化
 
 ---
 
-**Next**: Ready to explore security patterns? Continue with [Lab 02: Security and Multi-Tenancy](../02-Security/README.md)
+**下一步**：准备探索安全模式？继续学习 [实验 02：安全性和多租户](../02-Security/README.md)
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。

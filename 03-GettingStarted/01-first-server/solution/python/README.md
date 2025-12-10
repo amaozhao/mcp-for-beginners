@@ -1,59 +1,67 @@
-# Running this sample
+<!--
+CO_OP_TRANSLATOR_METADATA:
+{
+  "original_hash": "d4c162484df410632550a4a357d40341",
+  "translation_date": "2025-09-03T15:58:34+00:00",
+  "source_file": "03-GettingStarted/01-first-server/solution/python/README.md",
+  "language_code": "zh"
+}
+-->
+# 运行此示例
 
-You're recommended to install `uv` but it's not a must, see [instructions](https://docs.astral.sh/uv/#highlights)
+建议安装 `uv`，但不是必须的，详见 [说明](https://docs.astral.sh/uv/#highlights)
 
-## -0- Create a virtual environment
+## -0- 创建虚拟环境
 
 ```bash
 python -m venv venv
 ```
 
-## -1- Activate the virtual environment
+## -1- 激活虚拟环境
 
 ```bash
 venv\Scripts\activate
 ```
 
-## -2- Install the dependencies
+## -2- 安装依赖项
 
 ```bash
 pip install "mcp[cli]"
 ```
 
-## -3- Run the sample
-
+## -3- 运行示例
 
 ```bash
 mcp run server.py
 ```
 
-## -4- Test the sample
+## -4- 测试示例
 
-With the server running in one terminal, open another terminal and run the following command:
+在一个终端中运行服务器后，打开另一个终端并运行以下命令：
 
 ```bash
 mcp dev server.py
 ```
 
-This should start a web server with a visual interface allowing you to test the sample.
+这将启动一个带有可视化界面的网络服务器，允许你测试该示例。
 
-Once the server is connected: 
+服务器连接后：
 
-- try listing tools and run `add`, with args 2 and 4, you should see 6 in the result.
+- 尝试列出工具并运行 `add`，参数为 2 和 4，你应该在结果中看到 6。
 
-- go to resources and resource template and call get_greeting, type in a name and you should see a greeting with the name you provided.
+- 转到资源和资源模板，调用 `get_greeting`，输入一个名字，你应该会看到包含你提供的名字的问候语。
 
-### Testing in ClI mode
+### 在 CLI 模式下测试
 
-The inspector you ran is actually a Node.js app and `mcp dev` is a wrapper around it. 
+你运行的 inspector 实际上是一个 Node.js 应用程序，而 `mcp dev` 是它的一个封装。
 
-You can launch it directly in CLI mode by running the following command:
+你可以通过运行以下命令直接以 CLI 模式启动它：
 
 ```bash
 npx @modelcontextprotocol/inspector --cli mcp run server.py --method tools/list
 ```
 
-This will list all the tools available in the server. You should see the following output:
+这将列出服务器中所有可用的工具。你应该会看到以下输出：
 
 ```text
 {
@@ -84,13 +92,13 @@ This will list all the tools available in the server. You should see the followi
 }
 ```
 
-To invoke a tool type:
+要调用某个工具，请输入：
 
 ```bash
 npx @modelcontextprotocol/inspector --cli mcp run server.py --method tools/call --tool-name add --tool-arg a=1 --tool-arg b=2
 ```
 
-You should see the following output:
+你应该会看到以下输出：
 
 ```text
 {
@@ -105,5 +113,10 @@ You should see the following output:
 ```
 
 > [!TIP]
-> It's usually a lot faster to run the ispector in CLI mode than in the browser.
-> Read more about the inspector [here](https://github.com/modelcontextprotocol/inspector).
+> 通常在 CLI 模式下运行 inspector 比在浏览器中快得多。
+> 在 [这里](https://github.com/modelcontextprotocol/inspector) 阅读更多关于 inspector 的信息。
+
+---
+
+**免责声明**：  
+本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
