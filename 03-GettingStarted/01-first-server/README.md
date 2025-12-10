@@ -9,37 +9,37 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # 开始使用 MCP
 
-欢迎踏上 Model Context Protocol (MCP) 的第一步！无论您是 MCP 的新手还是希望深入了解它的用户，本指南将引导您完成基本的设置和开发过程。您将发现 MCP 如何实现 AI 模型与应用程序之间的无缝集成，并学习如何快速准备环境以构建和测试基于 MCP 的解决方案。
+欢迎踏上 Model Context Protocol (MCP) 的第一步！无论你是 MCP 的新手还是希望深入了解它的用户，本指南将引导你完成基本的设置和开发过程。你将发现 MCP 如何实现 AI 模型与应用程序之间的无缝集成，并学习如何快速准备环境以构建和测试基于 MCP 的解决方案。
 
-> 简而言之：如果您开发 AI 应用程序，您知道可以为 LLM（大型语言模型）添加工具和其他资源，使其更具知识性。然而，如果您将这些工具和资源放置在服务器上，任何客户端（无论是否使用 LLM）都可以使用该应用程序和服务器功能。
+> 简而言之：如果你开发 AI 应用程序，你知道可以为 LLM（大型语言模型）添加工具和其他资源，使其更具知识性。然而，如果你将这些工具和资源放置在服务器上，任何客户端（无论是否使用 LLM）都可以使用该应用程序和服务器功能。
 
 ## 概述
 
-本课程提供了设置 MCP 环境和构建第一个 MCP 应用程序的实用指导。您将学习如何设置必要的工具和框架，构建基本的 MCP 服务器，创建主机应用程序，并测试您的实现。
+本课程提供了设置 MCP 环境和构建第一个 MCP 应用程序的实用指导。你将学习如何设置必要的工具和框架，构建基本的 MCP 服务器，创建主机应用程序，并测试你的实现。
 
 Model Context Protocol (MCP) 是一种开放协议，标准化了应用程序向 LLM 提供上下文的方式。可以将 MCP 想象成 AI 应用程序的 USB-C 接口——它提供了一种标准化的方式，将 AI 模型连接到不同的数据源和工具。
 
 ## 学习目标
 
-完成本课程后，您将能够：
+完成本课程后，你将能够：
 
 - 为 C#、Java、Python、TypeScript 和 Rust 设置 MCP 开发环境
 - 构建和部署具有自定义功能（资源、提示和工具）的基本 MCP 服务器
 - 创建连接到 MCP 服务器的主机应用程序
 - 测试和调试 MCP 实现
 
-## 设置您的 MCP 环境
+## 设置你的 MCP 环境
 
-在开始使用 MCP 之前，准备好开发环境并了解基本工作流程非常重要。本节将指导您完成初始设置步骤，以确保顺利开始使用 MCP。
+在开始使用 MCP 之前，准备好开发环境并了解基本工作流程非常重要。本节将指导你完成初始设置步骤，以确保顺利开始使用 MCP。
 
 ### 前置条件
 
-在开始 MCP 开发之前，请确保您具备以下条件：
+在开始 MCP 开发之前，请确保你具备以下条件：
 
-- **开发环境**：支持您选择的编程语言（C#、Java、Python、TypeScript 或 Rust）
+- **开发环境**：支持你选择的编程语言（C#、Java、Python、TypeScript 或 Rust）
 - **IDE/编辑器**：Visual Studio、Visual Studio Code、IntelliJ、Eclipse、PyCharm 或任何现代代码编辑器
 - **包管理器**：NuGet、Maven/Gradle、pip、npm/yarn 或 Cargo
-- **API 密钥**：用于您计划在主机应用程序中使用的任何 AI 服务
+- **API 密钥**：用于你计划在主机应用程序中使用的任何 AI 服务
 
 ## 基本 MCP 服务器结构
 
@@ -132,16 +132,16 @@ await server.connect(transport);
 
 ## 测试和调试
 
-在开始测试 MCP 服务器之前，了解可用工具和调试的最佳实践非常重要。有效的测试可以确保您的服务器按预期运行，并帮助您快速识别和解决问题。以下部分概述了验证 MCP 实现的推荐方法。
+在开始测试 MCP 服务器之前，了解可用工具和调试的最佳实践非常重要。有效的测试可以确保你的服务器按预期运行，并帮助你快速识别和解决问题。以下部分概述了验证 MCP 实现的推荐方法。
 
-MCP 提供了帮助您测试和调试服务器的工具：
+MCP 提供了帮助你测试和调试服务器的工具：
 
-- **Inspector 工具**：这个图形界面允许您连接到服务器并测试工具、提示和资源。
-- **curl**：您也可以使用命令行工具如 curl 或其他能够创建和运行 HTTP 命令的客户端连接到服务器。
+- **Inspector 工具**：这个图形界面允许你连接到服务器并测试工具、提示和资源。
+- **curl**：你也可以使用命令行工具如 curl 或其他能够创建和运行 HTTP 命令的客户端连接到服务器。
 
 ### 使用 MCP Inspector
 
-[MCP Inspector](https://github.com/modelcontextprotocol/inspector) 是一个可视化测试工具，可帮助您：
+[MCP Inspector](https://github.com/modelcontextprotocol/inspector) 是一个可视化测试工具，可帮助你：
 
 1. **发现服务器功能**：自动检测可用的资源、工具和提示
 2. **测试工具执行**：尝试不同的参数并实时查看响应
@@ -152,7 +152,7 @@ MCP 提供了帮助您测试和调试服务器的工具：
 npx @modelcontextprotocol/inspector node build/index.js
 ```
 
-运行上述命令时，MCP Inspector 将在浏览器中启动一个本地网页界面。您可以看到一个仪表板，显示已注册的 MCP 服务器及其可用工具、资源和提示。界面允许您交互式测试工具执行、检查服务器元数据并查看实时响应，从而更轻松地验证和调试 MCP 服务器实现。
+运行上述命令时，MCP Inspector 将在浏览器中启动一个本地网页界面。你可以看到一个仪表板，显示已注册的 MCP 服务器及其可用工具、资源和提示。界面允许你交互式测试工具执行、检查服务器元数据并查看实时响应，从而更轻松地验证和调试 MCP 服务器实现。
 
 以下是界面可能的截图：
 
@@ -172,9 +172,9 @@ npx @modelcontextprotocol/inspector node build/index.js
 
 ## 本地开发
 
-对于本地开发和测试，您可以直接在机器上运行 MCP 服务器：
+对于本地开发和测试，你可以直接在机器上运行 MCP 服务器：
 
-1. **启动服务器进程**：运行您的 MCP 服务器应用程序
+1. **启动服务器进程**：运行你的 MCP 服务器应用程序
 2. **配置网络**：确保服务器可以通过预期的端口访问
 3. **连接客户端**：使用本地连接 URL，例如 `http://localhost:3000`
 
@@ -184,7 +184,7 @@ npm run start
 # Server running at http://localhost:3000
 ```
 
-## 构建您的第一个 MCP 服务器
+## 构建你的第一个 MCP 服务器
 
 我们在之前的课程中已经介绍了[核心概念](/01-CoreConcepts/README.md)，现在是时候将这些知识付诸实践了。
 
@@ -204,7 +204,7 @@ npm run start
 
 ## 练习：创建服务器
 
-要创建服务器，您需要遵循以下步骤：
+要创建服务器，你需要遵循以下步骤：
 
 - 安装 MCP SDK。
 - 创建项目并设置项目结构。
@@ -264,7 +264,7 @@ cd calculator-server
 rm -rf src/test/java
 ```
 
-将以下完整配置添加到您的 *pom.xml* 文件中：
+将以下完整配置添加到你的 *pom.xml* 文件中：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -374,7 +374,7 @@ cargo init
 
 ### -2- 添加依赖项
 
-现在您已经创建了项目，接下来添加依赖项：
+现在你已经创建了项目，接下来添加依赖项：
 
 #### TypeScript
 
@@ -415,7 +415,7 @@ cargo add tokio --features rt-multi-thread
 
 #### TypeScript
 
-打开 *package.json* 文件，并将内容替换为以下内容，以确保您可以构建和运行服务器：
+打开 *package.json* 文件，并将内容替换为以下内容，以确保你可以构建和运行服务器：
 
 ```json
 {
@@ -462,7 +462,7 @@ cargo add tokio --features rt-multi-thread
 }
 ```
 
-为您的源代码创建一个目录：
+为你的源代码创建一个目录：
 
 ```sh
 mkdir src
@@ -492,7 +492,7 @@ dotnet add package Microsoft.Extensions.Hosting
 
 #### Rust
 
-对于 Rust，当您运行 `cargo init` 时会默认创建一个 *src/main.rs* 文件。打开文件并删除默认代码。
+对于 Rust，当你运行 `cargo init` 时会默认创建一个 *src/main.rs* 文件。打开文件并删除默认代码。
 
 ### -4- 创建服务器代码
 
@@ -512,7 +512,7 @@ const server = new McpServer({
 });
 ```
 
-现在您有了一个服务器，但它功能有限，让我们来改进它。
+现在你有了一个服务器，但它功能有限，让我们来改进它。
 
 #### Python
 
@@ -929,7 +929,7 @@ server.resource(
 );
 ```
 
-您的工具接收参数 `a` 和 `b`，并运行一个函数，生成如下形式的响应：
+你的工具接收参数 `a` 和 `b`，并运行一个函数，生成如下形式的响应：
 
 ```typescript
 {
@@ -939,7 +939,7 @@ server.resource(
 }
 ```
 
-您的资源通过字符串 "greeting" 访问，并接收参数 `name`，生成与工具类似的响应：
+你的资源通过字符串 "greeting" 访问，并接收参数 `name`，生成与工具类似的响应：
 
 ```typescript
 {
@@ -972,7 +972,7 @@ def get_greeting(name: str) -> str:
 
 #### .NET
 
-将以下内容添加到您的 Program.cs 文件中：
+将以下内容添加到你的 Program.cs 文件中：
 
 ```csharp
 [McpServerToolType]
@@ -1115,7 +1115,7 @@ public static class CalculatorTool
 
 #### Java
 
-您的完整主应用程序类应如下所示：
+你的完整主应用程序类应如下所示：
 
 ```java
 // McpServerApplication.java
@@ -1219,11 +1219,11 @@ npm run build
 mcp run server.py
 ```
 
-> 使用 MCP Inspector 时，请使用 `mcp dev server.py`，它会自动启动 Inspector 并提供所需的代理会话令牌。如果使用 `mcp run server.py`，您需要手动启动 Inspector 并配置连接。
+> 使用 MCP Inspector 时，请使用 `mcp dev server.py`，它会自动启动 Inspector 并提供所需的代理会话令牌。如果使用 `mcp run server.py`，你需要手动启动 Inspector 并配置连接。
 
 #### .NET
 
-确保您在项目目录中：
+确保你在项目目录中：
 
 ```sh
 cd McpCalculatorServer
@@ -1248,7 +1248,7 @@ cargo run
 
 ### -8- 使用 Inspector 运行
 
-Inspector 是一个非常棒的工具，可以启动您的服务器并让您与之交互，以测试其是否正常工作。让我们启动它：
+Inspector 是一个非常棒的工具，可以启动你的服务器并让你与之交互，以测试其是否正常工作。让我们启动它：
 
 > [!NOTE]
 > 在 "command" 字段中可能会有所不同，因为它包含了使用特定运行时运行服务器的命令。
@@ -1259,7 +1259,7 @@ Inspector 是一个非常棒的工具，可以启动您的服务器并让您与�
 npx @modelcontextprotocol/inspector node build/index.js
 ```
 
-或者将其添加到您的 *package.json* 中，例如：`"inspector": "npx @modelcontextprotocol/inspector node build/index.js"`，然后运行 `npm run inspector`
+或者将其添加到你的 *package.json* 中，例如：`"inspector": "npx @modelcontextprotocol/inspector node build/index.js"`，然后运行 `npm run inspector`
 
 Python 包装了一个名为 inspector 的 Node.js 工具。可以像这样调用该工具：
 
@@ -1273,7 +1273,7 @@ mcp dev server.py
 npx @modelcontextprotocol/inspector mcp run server.py
 ```
 
-如果您使用支持配置命令和参数运行脚本的工具或 IDE，
+如果你使用支持配置命令和参数运行脚本的工具或 IDE，
 确保在 `Command` 字段中设置为 `python`，并将 `Arguments` 设置为 `server.py`。这可以确保脚本正确运行。
 
 #### .NET

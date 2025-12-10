@@ -28,7 +28,7 @@ pip install "mcp[cli]"
 python client.py
 ```
 
-您应该会看到以下文本：
+你应该会看到以下文本：
 
 ```text
 Available tools: ['add']

@@ -13,11 +13,11 @@ CO_OP_TRANSLATOR_METADATA:
 
 _（点击上方图片观看本课视频）_
 
-实践应用是让模型上下文协议（MCP）的强大功能变得具体可见的地方。虽然理解 MCP 的理论和架构很重要，但真正的价值在于将这些概念应用于构建、测试和部署解决实际问题的解决方案。本章将理论知识与实际开发之间的鸿沟弥合，指导您如何将基于 MCP 的应用程序付诸实践。
+实践应用是让模型上下文协议（MCP）的强大功能变得具体可见的地方。虽然理解 MCP 的理论和架构很重要，但真正的价值在于将这些概念应用于构建、测试和部署解决实际问题的解决方案。本章将理论知识与实际开发之间的鸿沟弥合，指导你如何将基于 MCP 的应用程序付诸实践。
 
-无论您是在开发智能助手、将 AI 集成到业务工作流程中，还是构建用于数据处理的定制工具，MCP 都提供了一个灵活的基础。其与语言无关的设计以及针对流行编程语言的官方 SDK，使得 MCP 对各种开发者都易于使用。通过利用这些 SDK，您可以快速原型设计、迭代并在不同平台和环境中扩展您的解决方案。
+无论你是在开发智能助手、将 AI 集成到业务工作流程中，还是构建用于数据处理的定制工具，MCP 都提供了一个灵活的基础。其与语言无关的设计以及针对流行编程语言的官方 SDK，使得 MCP 对各种开发者都易于使用。通过利用这些 SDK，你可以快速原型设计、迭代并在不同平台和环境中扩展你的解决方案。
 
-在接下来的章节中，您将看到实践示例、代码样例和部署策略，展示如何在 C#、Java（结合 Spring）、TypeScript、JavaScript 和 Python 中实现 MCP。您还将学习如何调试和测试 MCP 服务器、管理 API，并使用 Azure 将解决方案部署到云端。这些实践资源旨在加速您的学习，帮助您自信地构建强大、可投入生产的 MCP 应用程序。
+在接下来的章节中，你将看到实践示例、代码样例和部署策略，展示如何在 C#、Java（结合 Spring）、TypeScript、JavaScript 和 Python 中实现 MCP。你还将学习如何调试和测试 MCP 服务器、管理 API，并使用 Azure 将解决方案部署到云端。这些实践资源旨在加速你的学习，帮助你自信地构建强大、可投入生产的 MCP 应用程序。
 
 ## 概述
 
@@ -25,7 +25,7 @@ _（点击上方图片观看本课视频）_
 
 ## 学习目标
 
-完成本课后，您将能够：
+完成本课后，你将能够：
 
 - 使用官方 SDK 在多种编程语言中实现 MCP 解决方案
 - 系统地调试和测试 MCP 服务器
@@ -45,7 +45,7 @@ _（点击上方图片观看本课视频）_
 
 ## 使用 MCP SDK
 
-本节提供了在多种编程语言中实现 MCP 的实践示例。您可以在 `samples` 目录中按语言找到代码样例。
+本节提供了在多种编程语言中实现 MCP 的实践示例。你可以在 `samples` 目录中按语言找到代码样例。
 
 ### 可用样例
 
@@ -104,7 +104,7 @@ C# MCP SDK 目前处于预览阶段，API 可能会发生变化。我们将随�
 ### 关键功能
 
 - [C# MCP Nuget ModelContextProtocol](https://www.nuget.org/packages/ModelContextProtocol)
-- 构建您的 [第一个 MCP 服务器](https://devblogs.microsoft.com/dotnet/build-a-model-context-protocol-mcp-server-in-csharp/)。
+- 构建你的 [第一个 MCP 服务器](https://devblogs.microsoft.com/dotnet/build-a-model-context-protocol-mcp-server-in-csharp/)。
 
 有关完整的 C# 实现样例，请访问 [官方 C# SDK 样例仓库](https://github.com/modelcontextprotocol/csharp-sdk)。
 
@@ -149,7 +149,7 @@ Python SDK 提供了一种符合 Python 习惯的 MCP 实现方法，并与优�
 
 ## API 管理
 
-Azure API 管理是保护 MCP 服务器的绝佳解决方案。其核心思想是将 Azure API 管理实例置于 MCP 服务器前端，并让其处理您可能需要的功能，例如：
+Azure API 管理是保护 MCP 服务器的绝佳解决方案。其核心思想是将 Azure API 管理实例置于 MCP 服务器前端，并让其处理你可能需要的功能，例如：
 
 - 限流
 - 令牌管理
@@ -194,8 +194,8 @@ Azure API 管理是保护 MCP 服务器的绝佳解决方案。其核心思想�
 
 1. 注册 `Microsoft.App` 资源提供者。
 
-   - 如果您使用 Azure CLI，请运行 `az provider register --namespace Microsoft.App --wait`。
-   - 如果您使用 Azure PowerShell，请运行 `Register-AzResourceProvider -ProviderNamespace Microsoft.App`。然后稍后运行 `(Get-AzResourceProvider -ProviderNamespace Microsoft.App).RegistrationState` 检查注册是否完成。
+   - 如果你使用 Azure CLI，请运行 `az provider register --namespace Microsoft.App --wait`。
+   - 如果你使用 Azure PowerShell，请运行 `Register-AzResourceProvider -ProviderNamespace Microsoft.App`。然后稍后运行 `(Get-AzResourceProvider -ProviderNamespace Microsoft.App).RegistrationState` 检查注册是否完成。
 
 1. 运行此 [azd](https://aka.ms/azd) 命令以配置 API 管理服务、函数应用（包含代码）以及所有其他所需的 Azure 资源。
 
@@ -205,7 +205,7 @@ Azure API 管理是保护 MCP 服务器的绝佳解决方案。其核心思想�
 
     此命令应在 Azure 上部署所有云资源。
 
-### 使用 MCP Inspector 测试您的服务器
+### 使用 MCP Inspector 测试你的服务器
 
 1. 在**新终端窗口**中安装并运行 MCP Inspector
 
@@ -213,7 +213,7 @@ Azure API 管理是保护 MCP 服务器的绝佳解决方案。其核心思想�
     npx @modelcontextprotocol/inspector
     ```
 
-    您应该看到类似以下的界面：
+    你应该看到类似以下的界面：
 
     ![连接到 Node Inspector](../translated_images/connect.141db0b2bd05f096fb1dd91273771fd8b2469d6507656c3b0c9df4b3c5473929.zh.png)
 
@@ -227,7 +227,7 @@ Azure API 管理是保护 MCP 服务器的绝佳解决方案。其核心思想�
 
 1. **列出工具**。点击一个工具并**运行工具**。
 
-如果所有步骤都成功，您现在应该已连接到 MCP 服务器，并能够调用工具。
+如果所有步骤都成功，你现在应该已连接到 MCP 服务器，并能够调用工具。
 
 ## Azure 的 MCP 服务器
 
@@ -248,7 +248,7 @@ Azure API 管理是保护 MCP 服务器的绝佳解决方案。其核心思想�
 - 本地开发：全面的本地开发和调试支持
 - 简单部署：简化的 Azure 部署流程
 
-仓库包含所有必要的配置文件、源代码和基础设施定义，帮助您快速开始生产级 MCP 服务器实现。
+仓库包含所有必要的配置文件、源代码和基础设施定义，帮助你快速开始生产级 MCP 服务器实现。
 
 - [Azure Remote MCP Functions Python](https://github.com/Azure-Samples/remote-mcp-functions-python) - 使用 Python 和 Azure Functions 实现 MCP 的样例
 
@@ -266,12 +266,12 @@ Azure API 管理是保护 MCP 服务器的绝佳解决方案。其核心思想�
 
 ## 练习
 
-设计一个解决您领域内实际问题的 MCP 工作流程：
+设计一个解决你领域内实际问题的 MCP 工作流程：
 
 1. 确定 3-4 个解决问题有用的工具
 2. 创建一个工作流程图，展示这些工具如何交互
-3. 使用您偏好的语言实现其中一个工具的基础版本
-4. 创建一个提示模板，帮助模型有效使用您的工具
+3. 使用你偏好的语言实现其中一个工具的基础版本
+4. 创建一个提示模板，帮助模型有效使用你的工具
 
 ## 其他资源
 

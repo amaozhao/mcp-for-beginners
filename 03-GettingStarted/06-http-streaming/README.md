@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # 使用模型上下文协议 (MCP) 的 HTTPS 流式传输
 
-本章提供了使用 HTTPS 实现安全、可扩展和实时流式传输的全面指南，基于模型上下文协议 (MCP)。内容涵盖了流式传输的动机、可用的传输机制、如何在 MCP 中实现可流式的 HTTP、安全最佳实践、从 SSE 的迁移，以及构建您自己的 MCP 流式应用程序的实用指导。
+本章提供了使用 HTTPS 实现安全、可扩展和实时流式传输的全面指南，基于模型上下文协议 (MCP)。内容涵盖了流式传输的动机、可用的传输机制、如何在 MCP 中实现可流式的 HTTP、安全最佳实践、从 SSE 的迁移，以及构建你自己的 MCP 流式应用程序的实用指导。
 
 ## MCP 中的传输机制与流式传输
 
@@ -224,7 +224,7 @@ public class CalculatorClientApplication implements CommandLineRunner {
 
 ## MCP 中的流式传输
 
-好了，您已经看到了经典流式传输与 MCP 流式传输的对比和建议。接下来，我们将详细介绍如何在 MCP 中利用流式传输。
+好了，你已经看到了经典流式传输与 MCP 流式传输的对比和建议。接下来，我们将详细介绍如何在 MCP 中利用流式传输。
 
 在 MCP 框架中，流式传输的重点不是将主响应分块发送，而是在工具处理请求时向客户端发送**通知**。这些通知可以包括进度更新、日志或其他事件。
 
@@ -282,11 +282,11 @@ public class CalculatorClientApplication implements CommandLineRunner {
 
 ## 在 MCP 中实现通知
 
-要在 MCP 中实现通知，您需要在服务器端和客户端设置处理实时更新的功能。这使您的应用程序能够在长时间运行的操作期间向用户提供即时反馈。
+要在 MCP 中实现通知，你需要在服务器端和客户端设置处理实时更新的功能。这使你的应用程序能够在长时间运行的操作期间向用户提供即时反馈。
 
 ### 服务器端：发送通知
 
-从服务器端开始。在 MCP 中，您可以定义工具，在处理请求时发送通知。服务器使用上下文对象（通常是 `ctx`）向客户端发送消息。
+从服务器端开始。在 MCP 中，你可以定义工具，在处理请求时发送通知。服务器使用上下文对象（通常是 `ctx`）向客户端发送消息。
 
 #### Python
 
@@ -301,7 +301,7 @@ async def process_files(message: str, ctx: Context) -> TextContent:
 
 在上述示例中，`process_files` 工具在处理每个文件时向客户端发送三条通知。`ctx.info()` 方法用于发送信息性消息。
 
-此外，为了启用通知，请确保您的服务器使用流式传输（如 `streamable-http`），并且客户端实现了消息处理器来处理通知。以下是设置服务器使用 `streamable-http` 传输的方法：
+此外，为了启用通知，请确保你的服务器使用流式传输（如 `streamable-http`），并且客户端实现了消息处理器来处理通知。以下是设置服务器使用 `streamable-http` 传输的方法：
 
 ```python
 mcp.run(transport="streamable-http")
@@ -326,7 +326,7 @@ public async Task<TextContent> ProcessFiles(string message, ToolContext ctx)
 
 在此 .NET 示例中，`ProcessFiles` 工具通过 `Tool` 属性定义，并在处理每个文件时向客户端发送三条通知。`ctx.Info()` 方法用于发送信息性消息。
 
-要在 .NET MCP 服务器中启用通知，请确保您使用流式传输：
+要在 .NET MCP 服务器中启用通知，请确保你使用流式传输：
 
 ```csharp
 var builder = McpBuilder.Create();
@@ -390,11 +390,11 @@ await client.InitializeAsync();
 
 在此 .NET 示例中，`MessageHandler` 函数检查传入消息是否为通知。如果是，则打印通知；否则将其作为常规服务器消息处理。通过 `ClientSessionOptions` 将消息处理器与 `ClientSession` 一起初始化。
 
-为了启用通知，请确保您的服务器使用流式传输（如 `streamable-http`），并且客户端实现了消息处理器来处理通知。
+为了启用通知，请确保你的服务器使用流式传输（如 `streamable-http`），并且客户端实现了消息处理器来处理通知。
 
 ## 进度通知与场景
 
-本节解释了 MCP 中进度通知的概念、重要性，以及如何使用可流式 HTTP 实现它们。您还将找到一个实践任务来巩固您的理解。
+本节解释了 MCP 中进度通知的概念、重要性，以及如何使用可流式 HTTP 实现它们。你还将找到一个实践任务来巩固你的理解。
 
 进度通知是服务器在长时间运行的操作期间发送给客户端的实时消息。服务器在整个过程完成之前向客户端更新当前状态。这提高了透明度、用户体验，并使调试更容易。
 

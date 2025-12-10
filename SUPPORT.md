@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 如何提交问题和获取帮助  
 
-本项目使用 GitHub Issues 来跟踪错误和功能请求。请在提交新问题前先搜索现有问题，以避免重复。对于新问题，请将您的错误报告或功能请求作为新的 Issue 提交。
+本项目使用 GitHub Issues 来跟踪错误和功能请求。请在提交新问题前先搜索现有问题，以避免重复。对于新问题，请将你的错误报告或功能请求作为新的 Issue 提交。
 
 如需帮助或有使用相关问题，请：
 - 访问 [Azure AI Foundry Discord](https://discord.com/invite/ByRwuEEgH4)，这里聚集了专家和开发者

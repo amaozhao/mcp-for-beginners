@@ -23,7 +23,7 @@ stdio 传输允许 MCP 服务器通过标准输入和输出流与客户端通信
 
 ## 学习目标
 
-完成本课程后，您将能够：
+完成本课程后，你将能够：
 
 - 使用 stdio 传输构建 MCP 服务器。
 - 使用 Inspector 调试 MCP 服务器。
@@ -280,11 +280,11 @@ python server.py
 
 ### 第四步：使用 Inspector 测试
 
-您可以使用 MCP Inspector 测试您的服务器：
+你可以使用 MCP Inspector 测试你的服务器：
 
 1. 安装 Inspector：`npx @modelcontextprotocol/inspector`
-2. 运行 Inspector 并指向您的服务器。
-3. 测试您创建的工具。
+2. 运行 Inspector 并指向你的服务器。
+3. 测试你创建的工具。
 
 ### .NET 示例
 
@@ -294,11 +294,11 @@ builder.Services
     .AddMcpServer();
  ```
 
-## 调试您的 stdio 服务器
+## 调试你的 stdio 服务器
 
 ### 使用 MCP Inspector
 
-MCP Inspector 是调试和测试 MCP 服务器的有力工具。以下是如何将其与您的 stdio 服务器一起使用：
+MCP Inspector 是调试和测试 MCP 服务器的有力工具。以下是如何将其与你的 stdio 服务器一起使用：
 
 1. **安装 Inspector**：
    ```bash
@@ -310,7 +310,7 @@ MCP Inspector 是调试和测试 MCP 服务器的有力工具。以下是如何�
    npx @modelcontextprotocol/inspector python server.py
    ```
 
-3. **测试您的服务器**：Inspector 提供了一个 Web 界面，您可以：
+3. **测试你的服务器**：Inspector 提供了一个 Web 界面，你可以：
    - 查看服务器功能。
    - 使用不同参数测试工具。
    - 监控 JSON-RPC 消息。
@@ -318,7 +318,7 @@ MCP Inspector 是调试和测试 MCP 服务器的有力工具。以下是如何�
 
 ### 使用 VS Code
 
-您还可以直接在 VS Code 中调试您的 MCP 服务器：
+你还可以直接在 VS Code 中调试你的 MCP 服务器：
 
 1. 在 `.vscode/launch.json` 中创建一个启动配置：
    ```json
@@ -346,9 +346,9 @@ MCP Inspector 是调试和测试 MCP 服务器的有力工具。以下是如何�
 - 先测试简单工具，再添加复杂功能。
 - 使用 Inspector 验证消息格式。
 
-## 在 VS Code 中使用您的 stdio 服务器
+## 在 VS Code 中使用你的 stdio 服务器
 
-构建 MCP stdio 服务器后，您可以将其集成到 VS Code 中，与 Claude 或其他兼容 MCP 的客户端一起使用。
+构建 MCP stdio 服务器后，你可以将其集成到 VS Code 中，与 Claude 或其他兼容 MCP 的客户端一起使用。
 
 ### 配置
 
@@ -367,7 +367,7 @@ MCP Inspector 是调试和测试 MCP 服务器的有力工具。以下是如何�
 
 2. **重启 Claude**：关闭并重新打开 Claude 以加载新的服务器配置。
 
-3. **测试连接**：与 Claude 开始对话并尝试使用您的服务器工具：
+3. **测试连接**：与 Claude 开始对话并尝试使用你的服务器工具：
    - “你能用问候工具向我问好吗？”
    - “计算 15 和 27 的和。”
    - “服务器信息是什么？”
@@ -476,13 +476,13 @@ public class Tools
 
 ## 总结
 
-在本更新课程中，您学习了如何：
+在本更新课程中，你学习了如何：
 
 - 使用当前推荐的 **stdio 传输** 构建 MCP 服务器。
 - 理解为什么 SSE 传输被弃用，转而推荐使用 stdio 和可流式 HTTP。
 - 创建可供 MCP 客户端调用的工具。
-- 使用 MCP Inspector 调试您的服务器。
-- 将您的 stdio 服务器集成到 VS Code 和 Claude 中。
+- 使用 MCP Inspector 调试你的服务器。
+- 将你的 stdio 服务器集成到 VS Code 和 Claude 中。
 
 与已弃用的 SSE 方法相比，stdio 传输提供了一种更简单、更安全且性能更高的方式来构建 MCP 服务器。根据 2025-06-18 规范，这是大多数 MCP 服务器实现的推荐传输方式。
 
@@ -496,9 +496,9 @@ public class Tools
   using ModelContextProtocol.Server;
   ```
 
-## 练习：测试您的 stdio 服务器
+## 练习：测试你的 stdio 服务器
 
-现在您已经构建了 stdio 服务器，让我们测试它以确保其正常工作。
+现在你已经构建了 stdio 服务器，让我们测试它以确保其正常工作。
 
 ### 前置条件
 
@@ -507,16 +507,16 @@ public class Tools
    npm install -g @modelcontextprotocol/inspector
    ```
 
-2. 确保您的服务器代码已保存（例如，保存为 `server.py`）。
+2. 确保你的服务器代码已保存（例如，保存为 `server.py`）。
 
 ### 使用 Inspector 测试
 
-1. **使用您的服务器启动 Inspector**：
+1. **使用你的服务器启动 Inspector**：
    ```bash
    npx @modelcontextprotocol/inspector python server.py
    ```
 
-2. **打开 Web 界面**：Inspector 将打开一个浏览器窗口，显示您的服务器功能。
+2. **打开 Web 界面**：Inspector 将打开一个浏览器窗口，显示你的服务器功能。
 
 3. **测试工具**：
    - 使用不同的名称尝试 `get_greeting` 工具。
@@ -525,9 +525,9 @@ public class Tools
 
 4. **监控通信**：Inspector 显示客户端和服务器之间交换的 JSON-RPC 消息。
 
-### 您应该看到的内容
+### 你应该看到的内容
 
-当您的服务器正确启动时，您应该看到：
+当你的服务器正确启动时，你应该看到：
 - Inspector 中列出的服务器功能。
 - 可供测试的工具。
 - 成功的 JSON-RPC 消息交换。
@@ -552,7 +552,7 @@ public class Tools
 
 ## 作业
 
-尝试为您的服务器添加更多功能。例如，访问 [这个页面](https://api.chucknorris.io/) 添加一个调用 API 的工具。您可以自由决定服务器的功能。玩得开心 :)
+尝试为你的服务器添加更多功能。例如，访问 [这个页面](https://api.chucknorris.io/) 添加一个调用 API 的工具。你可以自由决定服务器的功能。玩得开心 :)
 
 ## 解决方案
 
@@ -564,7 +564,7 @@ public class Tools
 
 - stdio 传输是本地 MCP 服务器的推荐机制。
 - stdio 传输允许 MCP 服务器和客户端通过标准输入和输出流无缝通信。
-- 您可以直接使用 Inspector 和 Visual Studio Code 消费 stdio 服务器，使调试和集成变得简单。
+- 你可以直接使用 Inspector 和 Visual Studio Code 消费 stdio 服务器，使调试和集成变得简单。
 
 ## 示例
 
@@ -582,11 +582,11 @@ public class Tools
 
 ## 下一步
 
-现在您已经学习了如何使用 stdio 传输构建 MCP 服务器，可以探索更高级的主题：
+现在你已经学习了如何使用 stdio 传输构建 MCP 服务器，可以探索更高级的主题：
 
 - **下一步**：[MCP 的 HTTP 流式传输（可流式 HTTP）](../06-http-streaming/README.md) - 了解远程服务器支持的另一种传输机制。
 - **高级**：[MCP 安全最佳实践](../../02-Security/README.md) - 在 MCP 服务器中实现安全性。
-- **生产环境**：[部署策略](../09-deployment/README.md) - 将您的服务器部署到生产环境。
+- **生产环境**：[部署策略](../09-deployment/README.md) - 将你的服务器部署到生产环境。
 
 ## 其他资源
 

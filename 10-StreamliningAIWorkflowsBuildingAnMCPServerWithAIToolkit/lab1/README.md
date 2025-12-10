@@ -15,7 +15,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 📋 学习目标
 
-完成本模块后，您将能够：
+完成本模块后，你将能够：
 - ✅ 安装并配置 Visual Studio Code 的 AI 工具包
 - ✅ 浏览模型目录并了解不同的模型来源
 - ✅ 使用 Playground 进行模型测试和实验
@@ -32,7 +32,7 @@ CO_OP_TRANSLATOR_METADATA:
 | 功能 | 描述 | 使用场景 |
 |---------|-------------|----------|
 | **🗂️ 模型目录** | 访问来自 GitHub、ONNX、OpenAI、Anthropic、Google 的 100+ 模型 | 模型发现与选择 |
-| **🔌 BYOM 支持** | 集成您自己的模型（本地/远程） | 自定义模型部署 |
+| **🔌 BYOM 支持** | 集成你自己的模型（本地/远程） | 自定义模型部署 |
 | **🎮 交互式 Playground** | 通过聊天界面实时测试模型 | 快速原型设计与测试 |
 | **📎 多模态支持** | 处理文本、图像和附件 | 复杂的 AI 应用 |
 | **⚡ 批量处理** | 同时运行多个提示 | 高效测试流程 |
@@ -69,11 +69,11 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 🧪 实操练习 1：探索 GitHub 模型
 
-**🎯 目标**：掌握模型目录并测试您的第一个 AI 模型
+**🎯 目标**：掌握模型目录并测试你的第一个 AI 模型
 
 ### 📊 第 1 步：浏览模型目录
 
-模型目录是您进入 AI 生态系统的门户。它汇聚了多个提供商的模型，方便您发现和比较选项。
+模型目录是你进入 AI 生态系统的门户。它汇聚了多个提供商的模型，方便你发现和比较选项。
 
 **🔍 导航指南：**
 
@@ -81,11 +81,11 @@ CO_OP_TRANSLATOR_METADATA:
 
 ![Model Catalog](../../translated_images/aimodel.263ed2be013d8fb0e2265c4f742cfe490f6f00eca5e132ec50438c8e826e34ed.zh.png)
 
-**💡 小贴士**：寻找具备特定功能且符合您用例的模型（例如代码生成、创意写作、分析）。
+**💡 小贴士**：寻找具备特定功能且符合你用例的模型（例如代码生成、创意写作、分析）。
 
-**⚠️ 注意**：GitHub 托管的模型（即 GitHub 模型）免费使用，但请求和令牌有速率限制。如果您想访问非 GitHub 模型（即通过 Azure AI 或其他端点托管的外部模型），需要提供相应的 API 密钥或认证信息。
+**⚠️ 注意**：GitHub 托管的模型（即 GitHub 模型）免费使用，但请求和令牌有速率限制。如果你想访问非 GitHub 模型（即通过 Azure AI 或其他端点托管的外部模型），需要提供相应的 API 密钥或认证信息。
 
-### 🚀 第 2 步：添加并配置您的第一个模型
+### 🚀 第 2 步：添加并配置你的第一个模型
 
 **模型选择策略：**
 - **GPT-4.1**：适合复杂推理和分析
@@ -93,7 +93,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 **🔧 配置流程：**
 1. 从目录中选择 **OpenAI GPT-4.1**
-2. 点击 **Add to My Models** —— 将模型注册到您的模型列表
+2. 点击 **Add to My Models** —— 将模型注册到你的模型列表
 3. 选择 **Try in Playground** 启动测试环境
 4. 等待模型初始化（首次设置可能需要一些时间）
 
@@ -106,12 +106,12 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### 🎯 第 3 步：掌握 Playground 界面
 
-Playground 是您的 AI 实验室。以下是最大化其潜力的方法：
+Playground 是你的 AI 实验室。以下是最大化其潜力的方法：
 
 **🎨 提示工程最佳实践：**
 1. **具体明确**：清晰详细的指令效果更好
 2. **提供上下文**：包含相关背景信息
-3. **使用示例**：用示例告诉模型您的需求
+3. **使用示例**：用示例告诉模型你的需求
 4. **反复迭代**：根据初步结果优化提示
 
 **🧪 测试场景：**
@@ -133,13 +133,13 @@ Playground 是您的 AI 实验室。以下是最大化其潜力的方法：
 **🎯 目标**：使用相同提示比较不同模型，了解它们的优势
 
 **📋 操作说明：**
-1. 将 **Phi-4-mini** 添加到您的工作区
+1. 将 **Phi-4-mini** 添加到你的工作区
 2. 对 GPT-4.1 和 Phi-4-mini 使用相同的提示
 
 ![set](../../translated_images/set.88132df189ecde2cbbda256c1841db5aac8e9bdeba1a4e343dfa031b9545d6c9.zh.png)
 
 3. 比较响应质量、速度和准确性
-4. 在结果部分记录您的发现
+4. 在结果部分记录你的发现
 
 ![Model Comparison](../../translated_images/compare.97746cd0f907495503c1fc217739f3890dc76ea5f6fd92379a6db0cc331feb58.zh.png)
 
@@ -154,7 +154,7 @@ Playground 是您的 AI 实验室。以下是最大化其潜力的方法：
 
 ### 🏗️ 第 1 步：了解 Agent Builder
 
-Agent Builder 是 AI 工具包的核心亮点。它允许您创建定制的 AI 助手，将大型语言模型的强大能力与自定义指令、特定参数和专业知识结合起来。
+Agent Builder 是 AI 工具包的核心亮点。它允许你创建定制的 AI 助手，将大型语言模型的强大能力与自定义指令、特定参数和专业知识结合起来。
 
 **🧠 代理架构组成：**
 - **核心模型**：基础 LLM（GPT-4、Groks、Phi 等）
@@ -187,7 +187,7 @@ You are a [specific role] with expertise in [domain].
 Provide 2-3 examples of ideal interactions
 ```
 
-*当然，您也可以使用 Generate System Prompt 让 AI 帮助生成和优化提示*
+*当然，你也可以使用 Generate System Prompt 让 AI 帮助生成和优化提示*
 
 **🔧 参数优化：**
 | 参数 | 推荐范围 | 使用场景 |
@@ -239,7 +239,7 @@ You are a senior Python developer with 10+ years of experience. You excel at wri
 
 ![Python Agent Configuration](../../translated_images/pythonagent.5e51b406401c165fcabfd66f2d943c27f46b5fed0f9fb73abefc9e91ca3489d4.zh.png)
 
-### 🧪 第 4 步：测试您的 Python 代理
+### 🧪 第 4 步：测试你的 Python 代理
 
 **测试场景：**
 1. **基础功能**：“创建一个判断质数的函数”
@@ -258,7 +258,7 @@ You are a senior Python developer with 10+ years of experience. You excel at wri
 
 ### 📊 知识检测
 
-测试您的理解：
+测试你的理解：
 - [ ] 能否解释目录中模型的区别？
 - [ ] 是否成功创建并测试了自定义代理？
 - [ ] 是否理解如何针对不同用例优化参数？
@@ -270,15 +270,15 @@ You are a senior Python developer with 10+ years of experience. You excel at wri
 - **提示工程指南**：[最佳实践](https://platform.openai.com/docs/guides/prompt-engineering)
 - **AI 工具包中的模型**：[开发中的模型](https://github.com/microsoft/vscode-ai-toolkit/blob/main/doc/models.md)
 
-**🎉 恭喜！** 您已掌握 AI 工具包的基础知识，准备好构建更高级的 AI 应用！
+**🎉 恭喜！** 你已掌握 AI 工具包的基础知识，准备好构建更高级的 AI 应用！
 
 ### 🔜 继续下一模块
 
-准备好学习更高级功能了吗？请继续阅读 **[模块 2：MCP 与 AI 工具包基础](../lab2/README.md)**，您将学习如何：
+准备好学习更高级功能了吗？请继续阅读 **[模块 2：MCP 与 AI 工具包基础](../lab2/README.md)**，你将学习如何：
 - 使用模型上下文协议（MCP）连接代理与外部工具
 - 使用 Playwright 构建浏览器自动化代理
 - 将 MCP 服务器与 AI 工具包代理集成
-- 利用外部数据和能力增强您的代理
+- 利用外部数据和能力增强你的代理
 
 **免责声明**：  
 本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。虽然我们力求准确，但请注意自动翻译可能包含错误或不准确之处。原始文件的母语版本应被视为权威来源。对于重要信息，建议使用专业人工翻译。对于因使用本翻译而产生的任何误解或误释，我们概不负责。

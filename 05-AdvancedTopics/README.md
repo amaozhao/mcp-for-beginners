@@ -21,7 +21,7 @@ _（点击上方图片观看本课视频）_
 
 ## 学习目标
 
-完成本课后，您将能够：
+完成本课后，你将能够：
 
 - 在 MCP 框架中实现多模态功能
 - 为高需求场景设计可扩展的 MCP 架构
@@ -33,18 +33,18 @@ _（点击上方图片观看本课视频）_
 
 | 链接 | 标题 | 描述 |
 |------|-------|-------------|
-| [5.1 与 Azure 集成](./mcp-integration/README.md) | 与 Azure 集成 | 学习如何在 Azure 上集成您的 MCP 服务器 |
+| [5.1 与 Azure 集成](./mcp-integration/README.md) | 与 Azure 集成 | 学习如何在 Azure 上集成你的 MCP 服务器 |
 | [5.2 多模态示例](./mcp-multi-modality/README.md) | MCP 多模态示例 | 提供音频、图像和多模态响应的示例 |
 | [5.3 MCP OAuth2 示例](../../../05-AdvancedTopics/mcp-oauth2-demo) | MCP OAuth2 演示 | 一个最小化的 Spring Boot 应用，展示了 MCP 中的 OAuth2，既作为授权服务器又作为资源服务器。演示了安全令牌签发、受保护端点、Azure 容器应用部署以及 API 管理集成。 |
 | [5.4 根上下文](./mcp-root-contexts/README.md) | 根上下文 | 了解更多关于根上下文及其实现方法 |
 | [5.5 路由](./mcp-routing/README.md) | 路由 | 学习不同类型的路由 |
 | [5.6 采样](./mcp-sampling/README.md) | 采样 | 学习如何处理采样 |
 | [5.7 扩展](./mcp-scaling/README.md) | 扩展 | 学习关于扩展的内容 |
-| [5.8 安全性](./mcp-security/README.md) | 安全性 | 保护您的 MCP 服务器 |
+| [5.8 安全性](./mcp-security/README.md) | 安全性 | 保护你的 MCP 服务器 |
 | [5.9 网络搜索示例](./web-search-mcp/README.md) | 网络搜索 MCP | 一个 Python MCP 服务器和客户端，集成了 SerpAPI，用于实时网络、新闻、产品搜索和问答。展示了多工具编排、外部 API 集成以及强大的错误处理。 |
 | [5.10 实时流处理](./mcp-realtimestreaming/README.md) | 流处理 | 在当今数据驱动的世界中，实时数据流处理已成为必需，企业和应用需要即时获取信息以做出及时决策。 |
 | [5.11 实时网络搜索](./mcp-realtimesearch/README.md) | 网络搜索 | MCP 如何通过提供跨 AI 模型、搜索引擎和应用的标准化上下文管理方法，变革实时网络搜索。 |
-| [5.12 Model Context Protocol 服务器的 Entra ID 身份验证](./mcp-security-entra/README.md) | Entra ID 身份验证 | Microsoft Entra ID 提供了一个强大的基于云的身份和访问管理解决方案，确保只有授权用户和应用能够与您的 MCP 服务器交互。 |
+| [5.12 Model Context Protocol 服务器的 Entra ID 身份验证](./mcp-security-entra/README.md) | Entra ID 身份验证 | Microsoft Entra ID 提供了一个强大的基于云的身份和访问管理解决方案，确保只有授权用户和应用能够与你的 MCP 服务器交互。 |
 | [5.13 Azure AI Foundry 代理集成](./mcp-foundry-agent-integration/README.md) | Azure AI Foundry 集成 | 学习如何将模型上下文协议服务器与 Azure AI Foundry 代理集成，实现强大的工具编排和企业 AI 功能，并支持标准化的外部数据源连接。 |
 | [5.14 上下文工程](./mcp-contextengineering/README.md) | 上下文工程 | 探讨 MCP 服务器上下文工程技术的未来机会，包括上下文优化、动态上下文管理以及在 MCP 框架中有效提示工程的策略。 |
 

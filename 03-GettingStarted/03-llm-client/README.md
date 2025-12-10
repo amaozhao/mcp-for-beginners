@@ -9,15 +9,15 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # 创建一个带有 LLM 的客户端
 
-到目前为止，您已经了解了如何创建服务器和客户端。客户端可以显式调用服务器以列出其工具、资源和提示。然而，这种方法并不太实用。您的用户生活在代理时代，期望通过提示与 LLM 进行交流。对于用户来说，他们并不关心您是否使用 MCP 来存储功能，但他们确实希望通过自然语言进行交互。那么我们该如何解决这个问题呢？解决方案是将 LLM 添加到客户端中。
+到目前为止，你已经了解了如何创建服务器和客户端。客户端可以显式调用服务器以列出其工具、资源和提示。然而，这种方法并不太实用。你的用户生活在代理时代，期望通过提示与 LLM 进行交流。对于用户来说，他们并不关心你是否使用 MCP 来存储功能，但他们确实希望通过自然语言进行交互。那么我们该如何解决这个问题呢？解决方案是将 LLM 添加到客户端中。
 
 ## 概述
 
-在本课程中，我们将重点讲解如何将 LLM 添加到您的客户端，并展示这如何为用户提供更好的体验。
+在本课程中，我们将重点讲解如何将 LLM 添加到你的客户端，并展示这如何为用户提供更好的体验。
 
 ## 学习目标
 
-完成本课程后，您将能够：
+完成本课程后，你将能够：
 
 - 创建一个带有 LLM 的客户端。
 - 使用 LLM 无缝与 MCP 服务器交互。
@@ -50,7 +50,7 @@ CO_OP_TRANSLATOR_METADATA:
 - 进入 GitHub 设置 – 点击右上角的个人头像并选择“设置”。
 - 导航到开发者设置 – 向下滚动并点击“开发者设置”。
 - 选择个人访问令牌 – 点击“细粒度令牌”，然后生成新令牌。
-- 配置您的令牌 – 添加备注以供参考，设置过期日期，并选择必要的权限（Scopes）。在本例中，请确保添加“Models”权限。
+- 配置你的令牌 – 添加备注以供参考，设置过期日期，并选择必要的权限（Scopes）。在本例中，请确保添加“Models”权限。
 - 生成并复制令牌 – 点击“生成令牌”，并确保立即复制，因为之后无法再次查看。
 
 ### -1- 连接到服务器
@@ -156,7 +156,7 @@ await using var mcpClient = await McpClientFactory.CreateAsync(clientTransport);
 
 #### Java
 
-首先，您需要将 LangChain4j 依赖项添加到您的 `pom.xml` 文件中。添加这些依赖项以启用 MCP 集成和 GitHub Models 支持：
+首先，你需要将 LangChain4j 依赖项添加到你的 `pom.xml` 文件中。添加这些依赖项以启用 MCP 集成和 GitHub Models 支持：
 
 ```xml
 <properties>
@@ -193,7 +193,7 @@ await using var mcpClient = await McpClientFactory.CreateAsync(clientTransport);
 </dependencies>
 ```
 
-然后创建您的 Java 客户端类：
+然后创建你的 Java 客户端类：
 
 ```java
 import dev.langchain4j.mcp.McpToolProvider;
@@ -239,16 +239,16 @@ public class LangChain4jClient {
 
 - **添加了 LangChain4j 依赖项**：用于 MCP 集成、OpenAI 官方客户端和 GitHub Models 支持。
 - **导入了 LangChain4j 库**：用于 MCP 集成和 OpenAI 聊天模型功能。
-- **创建了一个 `ChatLanguageModel`**：配置为使用 GitHub Models 和您的 GitHub 令牌。
+- **创建了一个 `ChatLanguageModel`**：配置为使用 GitHub Models 和你的 GitHub 令牌。
 - **设置了 HTTP 传输**：使用服务器发送事件（SSE）连接到 MCP 服务器。
 - **创建了一个 MCP 客户端**：用于处理与服务器的通信。
 - **使用了 LangChain4j 的内置 MCP 支持**：简化了 LLM 与 MCP 服务器之间的集成。
 
 #### Rust
 
-此示例假设您有一个基于 Rust 的 MCP 服务器在运行。如果没有，请参考 [01-first-server](../01-first-server/README.md) 课程以创建服务器。
+此示例假设你有一个基于 Rust 的 MCP 服务器在运行。如果没有，请参考 [01-first-server](../01-first-server/README.md) 课程以创建服务器。
 
-在您拥有 Rust MCP 服务器后，打开终端并导航到与服务器相同的目录。然后运行以下命令以创建一个新的 LLM 客户端项目：
+在你拥有 Rust MCP 服务器后，打开终端并导航到与服务器相同的目录。然后运行以下命令以创建一个新的 LLM 客户端项目：
 
 ```bash
 mkdir calculator-llmclient
@@ -256,7 +256,7 @@ cd calculator-llmclient
 cargo init
 ```
 
-将以下依赖项添加到您的 `Cargo.toml` 文件中：
+将以下依赖项添加到你的 `Cargo.toml` 文件中：
 
 ```toml
 [dependencies]
@@ -322,7 +322,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
 此代码设置了一个基本的 Rust 应用程序，用于连接 MCP 服务器和 GitHub Models 以进行 LLM 交互。
 
 > [!IMPORTANT]
-> 在运行应用程序之前，请确保使用您的 GitHub 令牌设置 `OPENAI_API_KEY` 环境变量。
+> 在运行应用程序之前，请确保使用你的 GitHub 令牌设置 `OPENAI_API_KEY` 环境变量。
 
 很好，接下来我们将列出服务器上的功能。
 
@@ -425,7 +425,7 @@ ToolProvider toolProvider = McpToolProvider.builder()
 
 #### Rust
 
-从 MCP 服务器检索工具是通过 `list_tools` 方法完成的。在您的 `main` 函数中，在设置 MCP 客户端之后，添加以下代码：
+从 MCP 服务器检索工具是通过 `list_tools` 方法完成的。在你的 `main` 函数中，在设置 MCP 客户端之后，添加以下代码：
 
 ```rust
 // Get MCP tool listing 
@@ -617,7 +617,7 @@ Bot bot = AiServices.builder(Bot.class)
 
 #### Rust
 
-为了将 MCP 工具响应转换为 LLM 能够理解的格式，我们将添加一个辅助函数，用于格式化工具列表。在您的 `main.rs` 文件中，在 `main` 函数下方添加以下代码。这将在向 LLM 发出请求时调用：
+为了将 MCP 工具响应转换为 LLM 能够理解的格式，我们将添加一个辅助函数，用于格式化工具列表。在你的 `main.rs` 文件中，在 `main` 函数下方添加以下代码。这将在向 LLM 发出请求时调用：
 
 ```rust
 async fn format_tools(tools: &ListToolsResult) -> Result<Vec<Value>, Box<dyn Error>> {
@@ -1261,7 +1261,7 @@ public class LangChain4jClient {
 
 这是主要工作发生的地方。我们将使用初始用户提示调用 LLM，然后处理响应以查看是否需要调用任何工具。如果需要，我们将调用这些工具并继续与 LLM 的对话，直到不再需要工具调用并获得最终响应。
 
-我们将多次调用 LLM，因此定义一个函数来处理 LLM 调用。将以下函数添加到您的 `main.rs` 文件中：
+我们将多次调用 LLM，因此定义一个函数来处理 LLM 调用。将以下函数添加到你的 `main.rs` 文件中：
 
 ```rust
 async fn call_llm(

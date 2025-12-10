@@ -17,7 +17,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 🎯 学习目标
 
-完成本实验后，您将能够：
+完成本实验后，你将能够：
 
 - ✅ 使用 AI 工具包创建自定义 MCP 服务器
 - ✅ 配置并使用最新的 MCP Python SDK（v1.9.3）
@@ -32,9 +32,9 @@ CO_OP_TRANSLATOR_METADATA:
 - Python 3.10+ 环境
 - 用于 Inspector 设置的 Node.js 和 npm
 
-## 🏗️ 您将构建的内容
+## 🏗️ 你将构建的内容
 
-在本实验中，您将创建一个 **天气 MCP 服务器**，演示：
+在本实验中，你将创建一个 **天气 MCP 服务器**，演示：
 
 - 自定义 MCP 服务器实现
 - 与 AI 工具包 Agent Builder 集成
@@ -46,7 +46,7 @@ CO_OP_TRANSLATOR_METADATA:
 ## 🔧 核心组件概览
 
 ### 🐍 MCP Python SDK
-Model Context Protocol Python SDK 是构建自定义 MCP 服务器的基础。您将使用带有增强调试功能的 1.9.3 版本。
+Model Context Protocol Python SDK 是构建自定义 MCP 服务器的基础。你将使用带有增强调试功能的 1.9.3 版本。
 
 ### 🔍 MCP Inspector
 一款强大的调试工具，提供：
@@ -304,7 +304,7 @@ Model Context Protocol Python SDK 是构建自定义 MCP 服务器的基础。�
 
 ---
 
-## 🚀 运行和测试您的 MCP 服务器
+## 🚀 运行和测试你的 MCP 服务器
 
 ### 第 6 步：安装依赖
 
@@ -326,7 +326,7 @@ npm install
 1. **按 F5** 或使用 **“在 Agent Builder 中调试”** 配置
 2. **从调试面板选择复合配置**
 3. **等待服务器启动并打开 Agent Builder**
-4. **使用自然语言查询测试您的天气 MCP 服务器**
+4. **使用自然语言查询测试你的天气 MCP 服务器**
 
 输入提示如下
 
@@ -360,7 +360,7 @@ How's the weather like in Seattle
 
 ## 🎯 关键学习成果
 
-完成本实验后，您已经：
+完成本实验后，你已经：
 
 - [x] **使用 AI 工具包模板创建了自定义 MCP 服务器**
 - [x] **升级到最新 MCP SDK**（v1.9.3），实现更强功能
@@ -386,11 +386,11 @@ How's the weather like in Seattle
 
 ---
 
-**🎉 恭喜！** 您已成功完成实验 3，现在可以使用专业开发流程创建、调试和部署自定义 MCP 服务器。
+**🎉 恭喜！** 你已成功完成实验 3，现在可以使用专业开发流程创建、调试和部署自定义 MCP 服务器。
 
 ### 🔜 继续下一个模块
 
-准备将您的 MCP 技能应用于真实开发流程？继续学习 **[模块 4：实用 MCP 开发 - 自定义 GitHub 克隆服务器](../lab4/README.md)**，您将：
+准备将你的 MCP 技能应用于真实开发流程？继续学习 **[模块 4：实用 MCP 开发 - 自定义 GitHub 克隆服务器](../lab4/README.md)**，你将：
 
 - 构建一个生产级 MCP 服务器，实现 GitHub 仓库操作自动化
 - 通过 MCP 实现 GitHub 仓库克隆功能

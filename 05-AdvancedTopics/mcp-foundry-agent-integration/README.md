@@ -17,11 +17,11 @@ Model Context Protocol (MCP) 是一种开放标准，允许 AI 应用安全地�
 
 此集成结合了 MCP 工具生态系统的灵活性和 Azure AI Foundry 强大的代理框架，提供具有广泛定制能力的企业级 AI 解决方案。
 
-**Note:** 如果您想在 Azure AI Foundry Agent Service 中使用 MCP，目前仅支持以下区域：westus、westus2、uaenorth、southindia 和 switzerlandnorth
+**Note:** 如果你想在 Azure AI Foundry Agent Service 中使用 MCP，目前仅支持以下区域：westus、westus2、uaenorth、southindia 和 switzerlandnorth
 
 ## 学习目标
 
-完成本指南后，您将能够：
+完成本指南后，你将能够：
 
 - 了解 Model Context Protocol 及其优势
 - 设置 MCP 服务器以供 Azure AI Foundry 代理使用
@@ -31,7 +31,7 @@ Model Context Protocol (MCP) 是一种开放标准，允许 AI 应用安全地�
 
 ## 前提条件
 
-开始之前，请确保您具备：
+开始之前，请确保你具备：
 
 - 拥有 AI Foundry 访问权限的 Azure 订阅
 - Python 3.10+ 或 .NET 8.0+
@@ -51,7 +51,7 @@ Model Context Protocol 是 AI 应用连接外部数据源和工具的标准化�
 
 ### 环境配置
 
-请选择您偏好的开发环境：
+请选择你偏好的开发环境：
 
 - [Python 实现](../../../../05-AdvancedTopics/mcp-foundry-agent-integration)
 - [.NET 实现](../../../../05-AdvancedTopics/mcp-foundry-agent-integration)
@@ -60,7 +60,7 @@ Model Context Protocol 是 AI 应用连接外部数据源和工具的标准化�
 
 ## Python 实现
 
-***Note*** 您可以运行此 [notebook](mcp_support_python.ipynb)
+***Note*** 你可以运行此 [notebook](mcp_support_python.ipynb)
 
 ### 1. 安装所需包
 
@@ -189,7 +189,7 @@ with project_client:
 
 ## .NET 实现
 
-***Note*** 您可以运行此 [notebook](mcp_support_dotnet.ipynb)
+***Note*** 你可以运行此 [notebook](mcp_support_dotnet.ipynb)
 
 ### 1. 安装所需包
 
@@ -308,7 +308,7 @@ await foreach (PersistentThreadMessage threadMessage in messages)
 
 ## MCP 工具配置选项
 
-配置 MCP 工具时，您可以指定多个重要参数：
+配置 MCP 工具时，你可以指定多个重要参数：
 
 ### Python 配置
 
@@ -363,7 +363,7 @@ mcpToolResource.UpdateHeader("SuperSecret", "123456");
 
 ## 后续步骤
 
-进一步提升您的 MCP 集成：
+进一步提升你的 MCP 集成：
 
 1. **探索自定义 MCP 服务器**：为专有数据源构建自己的 MCP 服务器
 2. **实现高级安全**：添加 OAuth2 或自定义认证机制

@@ -13,7 +13,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### 概述
 
-- 您将设置一个 MCP 服务器，该服务器在处理项目时向客户端流式发送进度通知。
+- 你将设置一个 MCP 服务器，该服务器在处理项目时向客户端流式发送进度通知。
 - 客户端将实时显示每条通知。
 - 本指南涵盖了前提条件、设置、运行和故障排除。
 
@@ -80,7 +80,7 @@ CO_OP_TRANSLATOR_METADATA:
    python client.py
    ```
 
-2. 您应该会看到流式消息按顺序打印：
+2. 你应该会看到流式消息按顺序打印：
 
    ```text
    Running classic HTTP streaming client...
@@ -116,7 +116,7 @@ CO_OP_TRANSLATOR_METADATA:
    cd 03-GettingStarted/06-http-streaming/solution
    python client.py mcp
    ```
-2. 您应该会看到通知随着服务器处理每个项目实时打印：
+2. 你应该会看到通知随着服务器处理每个项目实时打印：
    ```
    Running MCP client...
    Starting client...
@@ -145,7 +145,7 @@ CO_OP_TRANSLATOR_METADATA:
 - 使用 `async/await` 进行非阻塞操作。
 - 在服务器和客户端中始终处理异常以提高健壮性。
 - 使用多个客户端进行测试以观察实时更新。
-- 如果遇到错误，请检查您的 Python 版本并确保所有依赖项已安装。
+- 如果遇到错误，请检查你的 Python 版本并确保所有依赖项已安装。
 
 **免责声明**：  
 本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保准确性，但请注意，自动翻译可能包含错误或不准确之处。应以原始语言的文档作为权威来源。对于关键信息，建议使用专业人工翻译。对于因使用本翻译而引起的任何误解或误读，我们概不负责。

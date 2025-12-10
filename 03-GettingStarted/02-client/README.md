@@ -13,11 +13,11 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 概述
 
-本课程介绍了 Model Context Protocol (MCP) 生态系统中的客户端概念。您将学习如何编写自己的客户端并将其连接到 MCP 服务器。
+本课程介绍了 Model Context Protocol (MCP) 生态系统中的客户端概念。你将学习如何编写自己的客户端并将其连接到 MCP 服务器。
 
 ## 学习目标
 
-完成本课程后，您将能够：
+完成本课程后，你将能够：
 
 - 了解客户端的功能。
 - 编写自己的客户端。
@@ -25,12 +25,12 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 编写客户端需要做什么？
 
-要编写客户端，您需要完成以下步骤：
+要编写客户端，你需要完成以下步骤：
 
-- **导入正确的库**。您将使用之前相同的库，但需要不同的构造。
+- **导入正确的库**。你将使用之前相同的库，但需要不同的构造。
 - **实例化客户端**。这包括创建客户端实例并将其连接到选定的传输方法。
-- **决定要列出的资源**。您的 MCP 服务器提供资源、工具和提示，您需要决定列出哪些内容。
-- **将客户端集成到主机应用程序中**。一旦了解了服务器的功能，您需要将其集成到主机应用程序中，以便用户输入提示或其他命令时，调用相应的服务器功能。
+- **决定要列出的资源**。你的 MCP 服务器提供资源、工具和提示，你需要决定列出哪些内容。
+- **将客户端集成到主机应用程序中**。一旦了解了服务器的功能，你需要将其集成到主机应用程序中，以便用户输入提示或其他命令时，调用相应的服务器功能。
 
 现在我们已经了解了即将进行的操作的总体概况，接下来让我们看一个示例。
 
@@ -98,11 +98,11 @@ const result = await client.callTool({
 
 ## 练习：编写客户端
 
-如上所述，我们将逐步解释代码，当然，如果您愿意，可以跟着一起编写代码。
+如上所述，我们将逐步解释代码，当然，如果你愿意，可以跟着一起编写代码。
 
 ### -1- 导入库
 
-让我们导入所需的库，我们需要引用客户端和选定的传输协议 stdio。stdio 是一种用于本地运行的协议。SSE 是另一种传输协议，我们将在后续章节中展示，但这是您的另一个选择。现在，让我们继续使用 stdio。
+让我们导入所需的库，我们需要引用客户端和选定的传输协议 stdio。stdio 是一种用于本地运行的协议。SSE 是另一种传输协议，我们将在后续章节中展示，但这是你的另一个选择。现在，让我们继续使用 stdio。
 
 #### TypeScript
 
@@ -130,7 +130,7 @@ using ModelContextProtocol.Protocol.Transport;
 
 #### Java
 
-对于 Java，您将创建一个客户端，该客户端连接到之前练习中的 MCP 服务器。使用 [MCP 服务器入门](../../../../03-GettingStarted/01-first-server/solution/java) 中的 Java Spring Boot 项目结构，在 `src/main/java/com/microsoft/mcp/sample/client/` 文件夹中创建一个名为 `SDKClient` 的新 Java 类，并添加以下导入：
+对于 Java，你将创建一个客户端，该客户端连接到之前练习中的 MCP 服务器。使用 [MCP 服务器入门](../../../../03-GettingStarted/01-first-server/solution/java) 中的 Java Spring Boot 项目结构，在 `src/main/java/com/microsoft/mcp/sample/client/` 文件夹中创建一个名为 `SDKClient` 的新 Java 类，并添加以下导入：
 
 ```java
 import java.util.Map;
@@ -145,7 +145,7 @@ import io.modelcontextprotocol.spec.McpSchema.ListToolsResult;
 
 #### Rust
 
-您需要在 `Cargo.toml` 文件中添加以下依赖项。
+你需要在 `Cargo.toml` 文件中添加以下依赖项。
 
 ```toml
 [package]
@@ -159,7 +159,7 @@ serde_json = "1.0.141"
 tokio = { version = "1.46.1", features = ["rt-multi-thread"] }
 ```
 
-然后，您可以在客户端代码中导入必要的库。
+然后，你可以在客户端代码中导入必要的库。
 
 ```rust
 use rmcp::{
@@ -290,7 +290,7 @@ await using var mcpClient = await McpClientFactory.CreateAsync(clientTransport);
 - 导入了所需的库。
 - 创建了一个 stdio 传输，并创建了一个客户端 `mcpClient`。后者是我们用来列出和调用 MCP 服务器功能的工具。
 
-注意，在 "Arguments" 中，您可以指向 *.csproj* 或可执行文件。
+注意，在 "Arguments" 中，你可以指向 *.csproj* 或可执行文件。
 
 #### Java
 
@@ -513,7 +513,7 @@ const promptResult = await client.getPrompt({
     );
     ```
 
-    因此，为了匹配服务器上声明的内容，您的客户端代码如下所示：
+    因此，为了匹配服务器上声明的内容，你的客户端代码如下所示：
 
     ```typescript
     const promptResult = await client.getPrompt({
@@ -634,7 +634,7 @@ dotnet run
 
 #### Java
 
-首先，确保您的 MCP 服务器正在 `http://localhost:8080` 上运行。然后运行客户端：
+首先，确保你的 MCP 服务器正在 `http://localhost:8080` 上运行。然后运行客户端：
 
 ```bash
 # Build you project
@@ -644,7 +644,7 @@ dotnet run
 ./mvnw exec:java -Dexec.mainClass="com.microsoft.mcp.sample.client.SDKClient"
 ```
 
-或者，您可以运行解决方案文件夹 `03-GettingStarted\02-client\solution\java` 中提供的完整客户端项目：
+或者，你可以运行解决方案文件夹 `03-GettingStarted\02-client\solution\java` 中提供的完整客户端项目：
 
 ```bash
 # Navigate to the solution directory
@@ -664,9 +664,9 @@ cargo run
 
 ## 作业
 
-在本次作业中，您将使用所学内容创建自己的客户端。
+在本次作业中，你将使用所学内容创建自己的客户端。
 
-以下是您可以使用的服务器，您需要通过客户端代码调用它，看看是否可以为服务器添加更多功能，使其更有趣。
+以下是你可以使用的服务器，你需要通过客户端代码调用它，看看是否可以为服务器添加更多功能，使其更有趣。
 
 ### TypeScript
 
@@ -776,7 +776,7 @@ public static class CalculatorTool
 
 ### Rust
 
-在 [上一节](../../../../03-GettingStarted/01-first-server) 中，您学习了如何使用 Rust 创建一个简单的 MCP 服务器。您可以继续基于此构建，或者查看此链接以获取更多基于 Rust 的 MCP 服务器示例：[MCP 服务器示例](https://github.com/modelcontextprotocol/rust-sdk/tree/main/examples/servers)。
+在 [上一节](../../../../03-GettingStarted/01-first-server) 中，你学习了如何使用 Rust 创建一个简单的 MCP 服务器。你可以继续基于此构建，或者查看此链接以获取更多基于 Rust 的 MCP 服务器示例：[MCP 服务器示例](https://github.com/modelcontextprotocol/rust-sdk/tree/main/examples/servers)。
 
 ## 解决方案
 
@@ -826,7 +826,7 @@ solution/
 
 ### 📖 使用解决方案
 
-1. **导航到您选择的语言文件夹**：
+1. **导航到你选择的语言文件夹**：
 
    ```bash
    cd solution/typescript/    # For TypeScript
@@ -840,7 +840,7 @@ solution/
    - 构建项目
    - 运行客户端
 
-3. **您应该看到的示例输出**：
+3. **你应该看到的示例输出**：
 
    ```text
    Prompt: Please review this code: console.log("hello");
@@ -852,7 +852,7 @@ solution/
 
 ## 🎯 完整示例
 
-我们提供了所有编程语言的完整、可运行的客户端实现。这些示例展示了上述功能的全部内容，可用作参考实现或您自己项目的起点。
+我们提供了所有编程语言的完整、可运行的客户端实现。这些示例展示了上述功能的全部内容，可用作参考实现或你自己项目的起点。
 
 ### 可用的完整示例
 
@@ -874,10 +874,10 @@ solution/
 
 ### 开始使用完整示例
 
-1. **从上表中选择您偏好的语言**  
+1. **从上表中选择你偏好的语言**  
 2. **查看完整示例文件**，以了解完整实现  
 3. **按照[`complete_examples.md`](./complete_examples.md)中的说明运行示例**  
-4. **根据您的具体用例修改和扩展**示例  
+4. **根据你的具体用例修改和扩展**示例  
 
 有关运行和自定义这些示例的详细文档，请参阅：**[📖 完整示例文档](./complete_examples.md)**
 

@@ -10,7 +10,7 @@ CO_OP_TRANSLATOR_METADATA:
 # 运行此示例
 
 > [!NOTE]
-> 此 Rust 客户端假设您已安装 dotnet 8.0 SDK，用于运行位于 [server](../../../../../../03-GettingStarted/02-client/solution/server) 目录中的示例 MCP 服务器，该目录是此项目的同级目录。
+> 此 Rust 客户端假设你已安装 dotnet 8.0 SDK，用于运行位于 [server](../../../../../../03-GettingStarted/02-client/solution/server) 目录中的示例 MCP 服务器，该目录是此项目的同级目录。
 
 ## -1- 安装依赖项并构建项目
 

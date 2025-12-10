@@ -29,22 +29,22 @@ dotnet run
 npx @modelcontextprotocol/inspector dotnet run
 ```
 
-这将启动一个带有可视化界面的网络服务器，允许您测试该示例。
+这将启动一个带有可视化界面的网络服务器，允许你测试该示例。
 
 服务器连接后：
 
 - 尝试列出工具并运行 `add`，参数为 2 和 4，结果应该显示为 6。
-- 进入资源和资源模板，调用 "greeting"，输入一个名字，您应该会看到包含您提供名字的问候语。
+- 进入资源和资源模板，调用 "greeting"，输入一个名字，你应该会看到包含你提供名字的问候语。
 
 ### 在 CLI 模式下测试
 
-您可以通过运行以下命令直接以 CLI 模式启动：
+你可以通过运行以下命令直接以 CLI 模式启动：
 
 ```bash
 npx @modelcontextprotocol/inspector --cli dotnet run --method tools/list
 ```
 
-这将列出服务器中所有可用的工具。您应该会看到以下输出：
+这将列出服务器中所有可用的工具。你应该会看到以下输出：
 
 ```text
 {
@@ -80,7 +80,7 @@ npx @modelcontextprotocol/inspector --cli dotnet run --method tools/list
 npx @modelcontextprotocol/inspector --cli dotnet run --method tools/call --tool-name Add --tool-arg a=1 --tool-arg b=2
 ```
 
-您应该会看到以下输出：
+你应该会看到以下输出：
 
 ```text
 {

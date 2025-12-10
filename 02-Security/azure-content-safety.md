@@ -9,7 +9,7 @@ CO_OP_TRANSLATOR_METADATA:
 -->
 # 使用 Azure Content Safety 实现高级 MCP 安全
 
-Azure Content Safety 提供了多种强大工具，可增强您的 MCP 实现的安全性：
+Azure Content Safety 提供了多种强大工具，可增强你的 MCP 实现的安全性：
 
 ## Prompt Shields
 

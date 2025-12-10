@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 微软非常重视我们软件产品和服务的安全性，这包括通过我们的 GitHub 组织管理的所有源代码仓库，这些组织包括 [Microsoft](https://github.com/Microsoft)、[Azure](https://github.com/Azure)、[DotNet](https://github.com/dotnet)、[AspNet](https://github.com/aspnet) 和 [Xamarin](https://github.com/xamarin)。
 
-如果您认为在任何微软拥有的仓库中发现了符合 [微软安全漏洞定义](https://aka.ms/security.md/definition) 的安全漏洞，请按照以下说明向我们报告。
+如果你认为在任何微软拥有的仓库中发现了符合 [微软安全漏洞定义](https://aka.ms/security.md/definition) 的安全漏洞，请按照以下说明向我们报告。
 
 ## 报告安全问题
 
@@ -19,9 +19,9 @@ CO_OP_TRANSLATOR_METADATA:
 
 请改为通过微软安全响应中心 (MSRC) 在 [https://msrc.microsoft.com/create-report](https://aka.ms/security.md/msrc/create-report) 报告。
 
-如果您希望无需登录即可提交，请发送邮件至 [secure@microsoft.com](mailto:secure@microsoft.com)。如果可能，请使用我们的 PGP 密钥加密您的邮件；您可以从 [微软安全响应中心 PGP 密钥页面](https://aka.ms/security.md/msrc/pgp) 下载该密钥。
+如果你希望无需登录即可提交，请发送邮件至 [secure@microsoft.com](mailto:secure@microsoft.com)。如果可能，请使用我们的 PGP 密钥加密你的邮件；你可以从 [微软安全响应中心 PGP 密钥页面](https://aka.ms/security.md/msrc/pgp) 下载该密钥。
 
-您应在 24 小时内收到回复。如果因某种原因未收到回复，请通过邮件跟进，以确保我们已收到您的原始信息。更多信息请访问 [microsoft.com/msrc](https://www.microsoft.com/msrc)。
+你应在 24 小时内收到回复。如果因某种原因未收到回复，请通过邮件跟进，以确保我们已收到你的原始信息。更多信息请访问 [microsoft.com/msrc](https://www.microsoft.com/msrc)。
 
 请尽可能提供以下信息，以帮助我们更好地了解问题的性质和范围：
 
@@ -33,9 +33,9 @@ CO_OP_TRANSLATOR_METADATA:
   * 概念验证或利用代码（如果可能）
   * 问题的影响，包括攻击者可能如何利用该问题
 
-这些信息将帮助我们更快地处理您的报告。
+这些信息将帮助我们更快地处理你的报告。
 
-如果您是为漏洞赏金计划报告，提供更完整的报告有助于获得更高的赏金奖励。有关我们活跃计划的更多详情，请访问我们的 [微软漏洞赏金计划](https://aka.ms/security.md/msrc/bounty) 页面。
+如果你是为漏洞赏金计划报告，提供更完整的报告有助于获得更高的赏金奖励。有关我们活跃计划的更多详情，请访问我们的 [微软漏洞赏金计划](https://aka.ms/security.md/msrc/bounty) 页面。
 
 ## 首选语言
 

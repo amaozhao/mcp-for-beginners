@@ -35,7 +35,7 @@ pip install mcp>=1.18.0
 python mcp_calculator_server.py
 ```
 
-**注意**：直接在终端运行时，您可能会看到JSON-RPC验证错误。这是正常现象——服务器正在等待格式正确的MCP客户端消息。
+**注意**：直接在终端运行时，你可能会看到JSON-RPC验证错误。这是正常现象——服务器正在等待格式正确的MCP客户端消息。
 
 ### 测试功能
 
@@ -49,7 +49,7 @@ python test_calculator.py
 
 ### 导入错误
 
-如果您看到`ModuleNotFoundError: No module named 'mcp'`，请安装MCP Python SDK：
+如果你看到`ModuleNotFoundError: No module named 'mcp'`，请安装MCP Python SDK：
 
 ```bash
 pip install mcp>=1.18.0

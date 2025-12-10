@@ -28,7 +28,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 学习目标
 
-完成本高级课程后，您将能够：
+完成本高级课程后，你将能够：
 
 - **理解自定义传输要求**：在任何传输层上实现MCP协议，同时保持规范一致性
 - **构建Azure Event Grid传输**：使用Azure Event Grid创建事件驱动的MCP服务器，实现无服务器扩展性
@@ -828,7 +828,7 @@ public async Task EventHubsTransport_IntegrationTest()
 
 ## **总结**
 
-自定义MCP传输使得使用Azure消息服务的强大企业场景成为可能。通过实现Event Grid或Event Hubs传输，您可以构建可扩展、可靠的MCP解决方案，并与现有Azure基础设施无缝集成。
+自定义MCP传输使得使用Azure消息服务的强大企业场景成为可能。通过实现Event Grid或Event Hubs传输，你可以构建可扩展、可靠的MCP解决方案，并与现有Azure基础设施无缝集成。
 
 提供的示例展示了生产级模式，用于实现自定义传输，同时保持MCP协议一致性和Azure最佳实践。
 
@@ -844,7 +844,7 @@ public async Task EventHubsTransport_IntegrationTest()
 
 ---
 
-> *本指南专注于生产MCP系统的实际实现模式。始终根据您的具体需求和Azure服务限制验证传输实现。*
+> *本指南专注于生产MCP系统的实际实现模式。始终根据你的具体需求和Azure服务限制验证传输实现。*
 > **当前标准**：本指南反映了[MCP规范 2025-06-18](https://spec.modelcontextprotocol.io/specification/2025-06-18/)的传输要求和企业环境的高级传输模式。
 
 ## 下一步

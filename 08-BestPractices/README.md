@@ -15,11 +15,11 @@ _（点击上方图片观看本课视频）_
 
 ## 概述
 
-本课重点介绍在生产环境中开发、测试和部署MCP服务器及功能的高级最佳实践。随着MCP生态系统的复杂性和重要性不断增加，遵循既定模式可以确保其可靠性、可维护性和互操作性。本课汇集了从实际MCP实施中获得的实用经验，指导您创建强大、高效的服务器，并提供有效的资源、提示和工具。
+本课重点介绍在生产环境中开发、测试和部署MCP服务器及功能的高级最佳实践。随着MCP生态系统的复杂性和重要性不断增加，遵循既定模式可以确保其可靠性、可维护性和互操作性。本课汇集了从实际MCP实施中获得的实用经验，指导你创建强大、高效的服务器，并提供有效的资源、提示和工具。
 
 ## 学习目标
 
-完成本课后，您将能够：
+完成本课后，你将能够：
 
 - 在MCP服务器和功能设计中应用行业最佳实践
 - 制定全面的MCP服务器测试策略
@@ -2270,7 +2270,7 @@ jobs:
 
 ## 测试 MCP 规范的合规性  
 
-验证您的服务器是否正确实现了 MCP 规范。  
+验证你的服务器是否正确实现了 MCP 规范。  
 
 ### 关键合规领域  
 
@@ -2330,7 +2330,7 @@ public async Task Server_ResourceEndpoint_ReturnsCorrectSchema()
 
 ## 结论  
 
-全面的测试策略对于开发可靠、高质量的 MCP 服务器至关重要。通过实施本指南中概述的最佳实践和技巧，您可以确保 MCP 实现达到最高的质量、可靠性和性能标准。  
+全面的测试策略对于开发可靠、高质量的 MCP 服务器至关重要。通过实施本指南中概述的最佳实践和技巧，你可以确保 MCP 实现达到最高的质量、可靠性和性能标准。  
 
 ## 关键要点  
 
@@ -2357,10 +2357,10 @@ public async Task Server_ResourceEndpoint_ReturnsCorrectSchema()
 
 1. 加入 [Azure AI Foundry Discord 社区](https://aka.ms/foundrydevs)，了解最新动态  
 2. 为开源 [MCP 项目](https://github.com/modelcontextprotocol) 做贡献  
-3. 在您自己的组织的 AI 项目中应用 MCP 原则  
-4. 探索针对您行业的专用 MCP 实现  
+3. 在你自己的组织的 AI 项目中应用 MCP 原则  
+4. 探索针对你行业的专用 MCP 实现  
 5. 考虑参加关于特定 MCP 主题的高级课程，例如多模态集成或企业应用集成  
-6. 通过 [实践实验室](../10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/README.md) 学到的原则，尝试构建您自己的 MCP 工具和工作流  
+6. 通过 [实践实验室](../10-StreamliningAIWorkflowsBuildingAnMCPServerWithAIToolkit/README.md) 学到的原则，尝试构建你自己的 MCP 工具和工作流  
 
 下一步：最佳实践 [案例研究](../09-CaseStudy/README.md)  
 

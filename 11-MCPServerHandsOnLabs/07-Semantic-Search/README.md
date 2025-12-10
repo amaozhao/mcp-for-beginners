@@ -11,7 +11,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 🎯 本实验内容
 
-本实验提供了全面的指导，帮助您使用 Azure OpenAI 嵌入和 PostgreSQL 的 pgvector 扩展实现语义搜索功能。您将学习如何构建基于 AI 的产品搜索，理解自然语言查询，并根据语义相似性提供相关结果。
+本实验提供了全面的指导，帮助你使用 Azure OpenAI 嵌入和 PostgreSQL 的 pgvector 扩展实现语义搜索功能。你将学习如何构建基于 AI 的产品搜索，理解自然语言查询，并根据语义相似性提供相关结果。
 
 ## 概述
 
@@ -21,7 +21,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 学习目标
 
-完成本实验后，您将能够：
+完成本实验后，你将能够：
 
 - **集成** Azure OpenAI 嵌入模型进行文本向量化
 - **实现** pgvector 以高效执行相似性搜索操作
@@ -1468,7 +1468,7 @@ cache_manager = EmbeddingCacheManager()
 
 ## 🎯 关键收获
 
-完成本实验后，您应该具备以下能力：
+完成本实验后，你应该具备以下能力：
 
 ✅ **Azure OpenAI 集成**：完成嵌入生成并实现缓存和优化  
 ✅ **向量搜索实现**：基于 pgvector 的生产级语义搜索  

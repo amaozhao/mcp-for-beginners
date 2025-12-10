@@ -10,10 +10,10 @@ CO_OP_TRANSLATOR_METADATA:
 # 保护 AI 工作流：Model Context Protocol 服务器的 Entra ID 认证
 
 ## 介绍
-保护您的 Model Context Protocol (MCP) 服务器就像锁好家门一样重要。将 MCP 服务器暴露在外会使您的工具和数据面临未经授权的访问，进而导致安全漏洞。Microsoft Entra ID 提供了强大的云端身份和访问管理解决方案，帮助确保只有授权的用户和应用程序能够与您的 MCP 服务器交互。本节将教您如何使用 Entra ID 认证来保护您的 AI 工作流。
+保护你的 Model Context Protocol (MCP) 服务器就像锁好家门一样重要。将 MCP 服务器暴露在外会使你的工具和数据面临未经授权的访问，进而导致安全漏洞。Microsoft Entra ID 提供了强大的云端身份和访问管理解决方案，帮助确保只有授权的用户和应用程序能够与你的 MCP 服务器交互。本节将教你如何使用 Entra ID 认证来保护你的 AI 工作流。
 
 ## 学习目标
-完成本节后，您将能够：
+完成本节后，你将能够：
 
 - 理解保护 MCP 服务器的重要性。
 - 解释 Microsoft Entra ID 和 OAuth 2.0 认证的基础知识。
@@ -23,19 +23,19 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 安全性与 MCP
 
-正如您不会把家门敞开不锁一样，也不应让 MCP 服务器对任何人开放。保护您的 AI 工作流对于构建稳健、可信赖且安全的应用至关重要。本章将介绍如何使用 Microsoft Entra ID 来保护您的 MCP 服务器，确保只有授权的用户和应用程序能够访问您的工具和数据。
+正如你不会把家门敞开不锁一样，也不应让 MCP 服务器对任何人开放。保护你的 AI 工作流对于构建稳健、可信赖且安全的应用至关重要。本章将介绍如何使用 Microsoft Entra ID 来保护你的 MCP 服务器，确保只有授权的用户和应用程序能够访问你的工具和数据。
 
 ## 为什么 MCP 服务器的安全性很重要
 
-想象一下，您的 MCP 服务器拥有一个可以发送电子邮件或访问客户数据库的工具。如果服务器没有安全保护，任何人都可能使用该工具，导致未经授权的数据访问、垃圾邮件或其他恶意行为。
+想象一下，你的 MCP 服务器拥有一个可以发送电子邮件或访问客户数据库的工具。如果服务器没有安全保护，任何人都可能使用该工具，导致未经授权的数据访问、垃圾邮件或其他恶意行为。
 
-通过实施认证，您可以确保每个请求都经过验证，确认发起请求的用户或应用程序的身份。这是保护 AI 工作流的第一步，也是最关键的一步。
+通过实施认证，你可以确保每个请求都经过验证，确认发起请求的用户或应用程序的身份。这是保护 AI 工作流的第一步，也是最关键的一步。
 
 ## Microsoft Entra ID 简介
 
-[**Microsoft Entra ID**](https://adoption.microsoft.com/microsoft-security/entra/) 是一项基于云的身份和访问管理服务。可以把它看作是您应用程序的通用安全守卫。它负责处理验证用户身份（认证）和确定用户权限（授权）的复杂过程。
+[**Microsoft Entra ID**](https://adoption.microsoft.com/microsoft-security/entra/) 是一项基于云的身份和访问管理服务。可以把它看作是你应用程序的通用安全守卫。它负责处理验证用户身份（认证）和确定用户权限（授权）的复杂过程。
 
-使用 Entra ID，您可以：
+使用 Entra ID，你可以：
 
 - 实现用户的安全登录。
 - 保护 API 和服务。
@@ -51,17 +51,17 @@ Entra ID 使用像 **OAuth 2.0** 这样的开放标准来处理认证。虽然�
 
 ### OAuth 2.0 简介：代客钥匙
 
-把 OAuth 2.0 想象成您汽车的代客泊车服务。当您到达餐厅时，您不会把汽车的主钥匙交给代客，而是给他一把**代客钥匙**，这把钥匙权限有限——它可以启动车辆并锁车门，但不能打开后备箱或手套箱。
+把 OAuth 2.0 想象成你汽车的代客泊车服务。当你到达餐厅时，你不会把汽车的主钥匙交给代客，而是给他一把**代客钥匙**，这把钥匙权限有限——它可以启动车辆并锁车门，但不能打开后备箱或手套箱。
 
 在这个类比中：
 
-- **您** 是 **用户**。
-- **您的车** 是拥有宝贵工具和数据的 **MCP 服务器**。
+- **你** 是 **用户**。
+- **你的车** 是拥有宝贵工具和数据的 **MCP 服务器**。
 - **代客** 是 **Microsoft Entra ID**。
 - **停车员** 是尝试访问服务器的 **MCP 客户端**（应用程序）。
 - **代客钥匙** 是 **访问令牌**。
 
-访问令牌是一串安全的文本，MCP 客户端在您登录后从 Entra ID 获取。客户端随后在每次请求时将该令牌发送给 MCP 服务器。服务器可以验证令牌，确保请求合法且客户端拥有必要权限，而无需处理您的实际凭据（如密码）。
+访问令牌是一串安全的文本，MCP 客户端在你登录后从 Entra ID 获取。客户端随后在每次请求时将该令牌发送给 MCP 服务器。服务器可以验证令牌，确保请求合法且客户端拥有必要权限，而无需处理你的实际凭据（如密码）。
 
 ### 认证流程
 
@@ -89,15 +89,15 @@ sequenceDiagram
 
 在深入代码之前，先介绍一个示例中会用到的重要组件：**Microsoft Authentication Library (MSAL)**。
 
-MSAL 是微软开发的一个库，极大简化了开发者处理认证的工作。您无需编写复杂的代码来管理安全令牌、登录和会话刷新，MSAL 会帮您完成这些繁重任务。
+MSAL 是微软开发的一个库，极大简化了开发者处理认证的工作。你无需编写复杂的代码来管理安全令牌、登录和会话刷新，MSAL 会帮你完成这些繁重任务。
 
 推荐使用 MSAL 的原因：
 
 - **安全可靠**：它实现了行业标准协议和安全最佳实践，降低代码中出现漏洞的风险。
-- **简化开发**：它封装了 OAuth 2.0 和 OpenID Connect 协议的复杂性，让您只需几行代码即可为应用添加强大的认证功能。
+- **简化开发**：它封装了 OAuth 2.0 和 OpenID Connect 协议的复杂性，让你只需几行代码即可为应用添加强大的认证功能。
 - **持续维护**：微软会持续维护和更新 MSAL，以应对新的安全威胁和平台变化。
 
-MSAL 支持多种语言和应用框架，包括 .NET、JavaScript/TypeScript、Python、Java、Go 以及 iOS 和 Android 等移动平台。这意味着您可以在整个技术栈中使用一致的认证模式。
+MSAL 支持多种语言和应用框架，包括 .NET、JavaScript/TypeScript、Python、Java、Go 以及 iOS 和 Android 等移动平台。这意味着你可以在整个技术栈中使用一致的认证模式。
 
 想了解更多 MSAL 信息，请参阅官方 [MSAL 概览文档](https://learn.microsoft.com/entra/identity-platform/msal-overview)。
 
@@ -113,7 +113,7 @@ MSAL 支持多种语言和应用框架，包括 .NET、JavaScript/TypeScript、P
 
 #### 1. 在 Entra ID 中注册应用
 
-在编写代码之前，您需要在 Microsoft Entra ID 中注册应用，告知 Entra ID 您的应用信息并授予认证权限。
+在编写代码之前，你需要在 Microsoft Entra ID 中注册应用，告知 Entra ID 你的应用信息并授予认证权限。
 
 1. 访问 **[Microsoft Entra 门户](https://entra.microsoft.com/)**。
 2. 进入 **应用注册**，点击 **新注册**。
@@ -132,7 +132,7 @@ MSAL 支持多种语言和应用框架，包括 .NET、JavaScript/TypeScript、P
 
 该类负责与 Entra ID 交互。
 
-- **`CreateAsync`**：初始化 MSAL 的 `PublicClientApplication`，配置您的 `clientId` 和 `tenantId`。
+- **`CreateAsync`**：初始化 MSAL 的 `PublicClientApplication`，配置你的 `clientId` 和 `tenantId`。
 - **`WithBroker`**：启用使用代理（如 Windows Web Account Manager），提供更安全、无缝的单点登录体验。
 - **`AcquireTokenAsync`**：核心方法。它首先尝试静默获取令牌（如果已有有效会话，用户无需再次登录）。若静默获取失败，则会提示用户交互式登录。
 
@@ -224,7 +224,7 @@ public static async Task<string> GetUserDetailsFromGraph(
 5. 工具接收令牌，使用它安全调用 Microsoft Graph API。
 6. 用户信息返回给 MCP 客户端。
 
-此流程确保只有经过认证的用户才能使用该工具，有效保护您的本地 MCP 服务器。
+此流程确保只有经过认证的用户才能使用该工具，有效保护你的本地 MCP 服务器。
 
 ### 场景二：保护远程 MCP 服务器（机密客户端）
 

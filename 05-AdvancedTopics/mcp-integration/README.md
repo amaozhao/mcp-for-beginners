@@ -13,11 +13,11 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 简介
 
-在本课程中，您将学习如何将模型上下文协议（MCP）与企业 AI 系统集成，重点关注 Azure OpenAI 和 Microsoft AI Foundry。这些集成使您能够利用强大的 AI 模型和工具，同时保持 MCP 的灵活性和可扩展性。
+在本课程中，你将学习如何将模型上下文协议（MCP）与企业 AI 系统集成，重点关注 Azure OpenAI 和 Microsoft AI Foundry。这些集成使你能够利用强大的 AI 模型和工具，同时保持 MCP 的灵活性和可扩展性。
 
 ## 学习目标
 
-完成本课程后，您将能够：
+完成本课程后，你将能够：
 
 - 将 MCP 与 Azure OpenAI 集成，以利用其 AI 功能。
 - 使用 Azure OpenAI 实现 MCP 工具编排。
@@ -100,7 +100,7 @@ namespace EnterpriseIntegration
 - 创建了一个方法 `GetCompletionWithToolsAsync`，用于获取支持工具的补全结果。
 - 处理了响应中的工具调用。
 
-建议您根据具体的 MCP 服务器设置实现实际的工具处理逻辑。
+建议你根据具体的 MCP 服务器设置实现实际的工具处理逻辑。
 
 ## Microsoft AI Foundry 集成
 

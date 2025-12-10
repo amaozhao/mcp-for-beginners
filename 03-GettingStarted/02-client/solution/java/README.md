@@ -13,7 +13,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 前提条件
 
-在运行此客户端之前，您需要：
+在运行此客户端之前，你需要：
 
 1. **启动第01章的计算器服务器**：
    - 进入计算器服务器目录：`03-GettingStarted/01-first-server/solution/java/`

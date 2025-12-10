@@ -15,7 +15,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 📋 学习目标
 
-完成本模块后，您将能够：
+完成本模块后，你将能够：
 - ✅ 理解 Model Context Protocol (MCP) 的架构及其优势
 - ✅ 探索微软的 MCP 服务器生态系统
 - ✅ 将 MCP 服务器与 AI Toolkit Agent Builder 集成
@@ -25,9 +25,9 @@ CO_OP_TRANSLATOR_METADATA:
 
 ## 🎯 基于模块 1 的进阶
 
-在模块 1 中，我们掌握了 AI Toolkit 的基础知识，并创建了第一个 Python 代理。现在，我们将通过革命性的 **Model Context Protocol (MCP)**，将您的代理连接到外部工具和服务，实现**能力升级**。
+在模块 1 中，我们掌握了 AI Toolkit 的基础知识，并创建了第一个 Python 代理。现在，我们将通过革命性的 **Model Context Protocol (MCP)**，将你的代理连接到外部工具和服务，实现**能力升级**。
 
-可以把这看作是从基础计算器升级到完整计算机——您的 AI 代理将具备以下能力：
+可以把这看作是从基础计算器升级到完整计算机——你的 AI 代理将具备以下能力：
 - 🌐 浏览并与网站交互
 - 📁 访问和操作文件
 - 🔧 集成企业系统
@@ -216,7 +216,7 @@ graph TB
 **🔍 理解工具类型：**
 - **内置工具**：预配置的 AI Toolkit 功能
 - **MCP 服务器**：外部服务集成
-- **自定义 API**：您自己的服务端点
+- **自定义 API**：你自己的服务端点
 - **函数调用**：直接访问模型函数
 
 #### 步骤 4：选择 MCP 服务器
@@ -364,11 +364,11 @@ Agent Builder 支持多种部署选项：
 - **🏢 微软 MCP 服务器**：[企业集成指南](https://github.com/microsoft/mcp-servers)
 - **🌍 社区示例**：[MCP 服务器画廊](https://github.com/modelcontextprotocol/servers)
 
-**🎉 恭喜！** 您已成功掌握 MCP 集成，现可构建具备外部工具能力的生产级 AI 代理！
+**🎉 恭喜！** 你已成功掌握 MCP 集成，现可构建具备外部工具能力的生产级 AI 代理！
 
 ### 🔜 继续下一个模块
 
-准备好提升您的 MCP 技能了吗？请前往 **[模块 3：使用 AI Toolkit 进行高级 MCP 开发](../lab3/README.md)**，您将学习如何：
+准备好提升你的 MCP 技能了吗？请前往 **[模块 3：使用 AI Toolkit 进行高级 MCP 开发](../lab3/README.md)**，你将学习如何：
 - 创建自定义 MCP 服务器
 - 配置并使用最新 MCP Python SDK
 - 设置 MCP Inspector 进行调试

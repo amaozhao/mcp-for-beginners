@@ -15,15 +15,15 @@ _（点击上方图片观看本课视频）_
 
 ## 🎯 本模块涵盖内容
 
-本模块探讨了真实的组织和开发者如何利用 Model Context Protocol (MCP) 来解决实际问题并推动创新。通过详细的案例研究和实践项目，您将了解 MCP 如何实现安全、可扩展的 AI 集成，将语言模型、工具和企业数据连接在一起。
+本模块探讨了真实的组织和开发者如何利用 Model Context Protocol (MCP) 来解决实际问题并推动创新。通过详细的案例研究和实践项目，你将了解 MCP 如何实现安全、可扩展的 AI 集成，将语言模型、工具和企业数据连接在一起。
 
 ### 📚 了解 MCP 的实际应用
 
-想看看这些原则如何应用于生产工具？请查看我们的 [**10 个正在改变开发者生产力的 Microsoft MCP 服务器**](microsoft-mcp-servers.md)，其中展示了您今天就可以使用的真实 Microsoft MCP 服务器。
+想看看这些原则如何应用于生产工具？请查看我们的 [**10 个正在改变开发者生产力的 Microsoft MCP 服务器**](microsoft-mcp-servers.md)，其中展示了你今天就可以使用的真实 Microsoft MCP 服务器。
 
 ## 概述
 
-本课程探讨了早期采用者如何利用 Model Context Protocol (MCP) 来解决现实中的挑战，并推动各行业的创新。通过详细的案例研究和实践项目，您将看到 MCP 如何实现标准化、安全且可扩展的 AI 集成——在一个统一框架中连接大型语言模型、工具和企业数据。您将获得设计和构建基于 MCP 的解决方案的实践经验，学习经过验证的实施模式，并发现将 MCP 部署到生产环境中的最佳实践。本课程还重点介绍了新兴趋势、未来方向以及帮助您保持 MCP 技术及其生态系统前沿的开源资源。
+本课程探讨了早期采用者如何利用 Model Context Protocol (MCP) 来解决现实中的挑战，并推动各行业的创新。通过详细的案例研究和实践项目，你将看到 MCP 如何实现标准化、安全且可扩展的 AI 集成——在一个统一框架中连接大型语言模型、工具和企业数据。你将获得设计和构建基于 MCP 的解决方案的实践经验，学习经过验证的实施模式，并发现将 MCP 部署到生产环境中的最佳实践。本课程还重点介绍了新兴趋势、未来方向以及帮助你保持 MCP 技术及其生态系统前沿的开源资源。
 
 ## 学习目标
 
@@ -233,7 +233,7 @@ Microsoft 开发了 [Playwright MCP 服务器](https://github.com/microsoft/play
 
 > **🎯 生产级工具**
 > 
-> 本案例展示了一个您今天就可以使用的真实 MCP 服务器！了解更多关于 Playwright MCP 服务器及其他 9 个生产级 Microsoft MCP 服务器的信息，请参阅我们的 [**Microsoft MCP 服务器指南**](microsoft-mcp-servers.md#8--playwright-mcp-server)。
+> 本案例展示了一个你今天就可以使用的真实 MCP 服务器！了解更多关于 Playwright MCP 服务器及其他 9 个生产级 Microsoft MCP 服务器的信息，请参阅我们的 [**Microsoft MCP 服务器指南**](microsoft-mcp-servers.md#8--playwright-mcp-server)。
 
 **主要功能：**
 - 将浏览器自动化功能（导航、表单填写、截图捕获等）作为 MCP 工具暴露
@@ -296,7 +296,7 @@ Azure MCP ([https://aka.ms/azmcp](https://aka.ms/azmcp)) 是 Microsoft 提供的
 
 > **🎯 生产级工具**
 > 
-> 这是一个您今天就可以使用的真实 MCP 服务器！了解更多关于 Azure AI Foundry MCP 服务器的信息，请参阅我们的 [**Microsoft MCP 服务器指南**](microsoft-mcp-servers.md)。
+> 这是一个你今天就可以使用的真实 MCP 服务器！了解更多关于 Azure AI Foundry MCP 服务器的信息，请参阅我们的 [**Microsoft MCP 服务器指南**](microsoft-mcp-servers.md)。
 
 - 提供内置扩展、监控和安全功能的完全托管 MCP 服务器托管服务
 - 与 Azure OpenAI、Azure AI Search 和其他 Azure 服务的原生集成
@@ -361,7 +361,7 @@ Azure AI Foundry MCP 服务器展示了 MCP 如何用于在企业环境中编排
 
 > **🎯 生产级工具**
 > 
-> 这是一个您今天就可以使用的真实 MCP 服务器！了解更多关于 Azure AI Foundry MCP 服务器的信息，请参阅我们的 [**Microsoft MCP 服务器指南**](microsoft-mcp-servers.md#9--azure-ai-foundry-mcp-server)。
+> 这是一个你今天就可以使用的真实 MCP 服务器！了解更多关于 Azure AI Foundry MCP 服务器的信息，请参阅我们的 [**Microsoft MCP 服务器指南**](microsoft-mcp-servers.md#9--azure-ai-foundry-mcp-server)。
 
 **主要功能：**
 - 全面访问 Azure 的 AI 生态系统，包括模型目录和部署管理

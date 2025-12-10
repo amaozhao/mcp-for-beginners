@@ -33,7 +33,7 @@ CO_OP_TRANSLATOR_METADATA:
    ```bash
    python scenario1.py
    ```  
-2. 在提示符中输入您的文档问题。  
+2. 在提示符中输入你的文档问题。  
 
 ### 场景 2：学习计划生成器（基于 Chainlit 的 Web 应用）  
 一个基于 Web 的界面（使用 Chainlit），允许用户为任何技术主题生成个性化的逐周学习计划。  
@@ -43,12 +43,12 @@ CO_OP_TRANSLATOR_METADATA:
    chainlit run scenario2.py
    ```  
 2. 在浏览器中打开终端中提供的本地 URL（例如：http://localhost:8000）。  
-3. 在聊天窗口中输入您的学习主题和学习周数（例如，“AI-900 认证，8 周”）。  
+3. 在聊天窗口中输入你的学习主题和学习周数（例如，“AI-900 认证，8 周”）。  
 4. 应用将返回一个逐周的学习计划，包括相关的 Microsoft Learn 文档链接。  
 
 **所需环境变量：**  
 
-要使用场景 2（带有 Azure OpenAI 的 Chainlit Web 应用），您需要在 `python` 目录下的 `.env` 文件中设置以下环境变量：  
+要使用场景 2（带有 Azure OpenAI 的 Chainlit Web 应用），你需要在 `python` 目录下的 `.env` 文件中设置以下环境变量：  
 
 ```
 AZURE_OPENAI_CHAT_DEPLOYMENT_NAME=
@@ -57,14 +57,14 @@ AZURE_OPENAI_ENDPOINT=
 AZURE_OPENAI_API_VERSION=
 ```  
 
-在运行应用之前，请用您的 Azure OpenAI 资源详细信息填写这些值。  
+在运行应用之前，请用你的 Azure OpenAI 资源详细信息填写这些值。  
 
 > [!TIP]  
-> 您可以通过 [Azure AI Foundry](https://ai.azure.com/) 轻松部署自己的模型。  
+> 你可以通过 [Azure AI Foundry](https://ai.azure.com/) 轻松部署自己的模型。  
 
 ### 场景 3：在 VS Code 中使用 MCP 服务器查看文档  
 
-无需切换浏览器标签即可搜索文档，您可以直接在 VS Code 中引入 Microsoft Learn Docs。这使您能够：  
+无需切换浏览器标签即可搜索文档，你可以直接在 VS Code 中引入 Microsoft Learn Docs。这使你能够：  
 - 在不离开编码环境的情况下，在 VS Code 中搜索和阅读文档。  
 - 引用文档并将链接直接插入到 README 或课程文件中。  
 - 将 GitHub Copilot 和 MCP 结合使用，实现无缝的 AI 驱动文档工作流。  
@@ -75,15 +75,15 @@ AZURE_OPENAI_API_VERSION=
 - 保持专注于编辑器，提高生产力。  
 
 > [!IMPORTANT]  
-> 确保您的工作区中有有效的 [`mcp.json`](../../../../../../09-CaseStudy/docs-mcp/solution/scenario3/mcp.json) 配置文件（位置为 `.vscode/mcp.json`）。  
+> 确保你的工作区中有有效的 [`mcp.json`](../../../../../../09-CaseStudy/docs-mcp/solution/scenario3/mcp.json) 配置文件（位置为 `.vscode/mcp.json`）。  
 
 ## 为什么场景 2 使用 Chainlit？
 
-Chainlit 是一个现代的开源框架，用于构建对话式 Web 应用。它使创建连接到后端服务（如 Microsoft Learn Docs MCP 服务器）的聊天用户界面变得简单。此项目使用 Chainlit 提供了一种简单、交互式的方式来实时生成个性化学习计划。通过利用 Chainlit，您可以快速构建和部署基于聊天的工具，从而提升生产力和学习效果。  
+Chainlit 是一个现代的开源框架，用于构建对话式 Web 应用。它使创建连接到后端服务（如 Microsoft Learn Docs MCP 服务器）的聊天用户界面变得简单。此项目使用 Chainlit 提供了一种简单、交互式的方式来实时生成个性化学习计划。通过利用 Chainlit，你可以快速构建和部署基于聊天的工具，从而提升生产力和学习效果。  
 
 ## 功能概述
 
-此应用允许用户通过简单输入主题和学习时长来创建个性化学习计划。应用会解析您的输入，查询 Microsoft Learn Docs MCP 服务器以获取相关内容，并将结果组织成结构化的逐周计划。每周的推荐内容会显示在聊天窗口中，方便您跟随计划并跟踪进度。集成确保您始终获得最新、最相关的学习资源。  
+此应用允许用户通过简单输入主题和学习时长来创建个性化学习计划。应用会解析你的输入，查询 Microsoft Learn Docs MCP 服务器以获取相关内容，并将结果组织成结构化的逐周计划。每周的推荐内容会显示在聊天窗口中，方便你跟随计划并跟踪进度。集成确保你始终获得最新、最相关的学习资源。  
 
 ## 示例查询
 

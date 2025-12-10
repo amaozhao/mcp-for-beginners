@@ -195,9 +195,9 @@ VS Code 的基本流程如下：
 
 [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_Azure_MCP-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://vscode.dev/redirect/mcp/install?name=Azure%20MCP&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40azure%2Fazure-mcp%40latest%22%5D%7D) [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install_Azure_MCP-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=Azure%20MCP&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40azure%2Fazure-mcp%40latest%22%5D%7D&quality=insiders) [![GitHub](https://img.shields.io/badge/GitHub-View_Repository-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Azure/azure-mcp)
 
-**功能介绍**：Azure MCP 服务器是一套包含15个以上专用 Azure 服务连接器的综合工具，将整个 Azure 生态系统无缝融入您的 AI 工作流。这不仅仅是一个单一服务器——它是一个强大的集合，涵盖资源管理、数据库连接（PostgreSQL、SQL Server）、基于 KQL 的 Azure Monitor 日志分析、Cosmos DB 集成等多种功能。
+**功能介绍**：Azure MCP 服务器是一套包含15个以上专用 Azure 服务连接器的综合工具，将整个 Azure 生态系统无缝融入你的 AI 工作流。这不仅仅是一个单一服务器——它是一个强大的集合，涵盖资源管理、数据库连接（PostgreSQL、SQL Server）、基于 KQL 的 Azure Monitor 日志分析、Cosmos DB 集成等多种功能。
 
-**为什么有用**：除了管理 Azure 资源外，该服务器还能显著提升使用 Azure SDK 编写代码的质量。当您以 Agent 模式使用 Azure MCP 时，它不仅帮助您写代码，更帮助您写出符合当前认证模式、错误处理最佳实践并利用最新 SDK 功能的*更优质* Azure 代码。您得到的不是可能可用的通用代码，而是符合 Azure 推荐生产环境模式的代码。
+**为什么有用**：除了管理 Azure 资源外，该服务器还能显著提升使用 Azure SDK 编写代码的质量。当你以 Agent 模式使用 Azure MCP 时，它不仅帮助你写代码，更帮助你写出符合当前认证模式、错误处理最佳实践并利用最新 SDK 功能的*更优质* Azure 代码。你得到的不是可能可用的通用代码，而是符合 Azure 推荐生产环境模式的代码。
 
 **主要模块包括**：
 - **🗄️ 数据库连接器**：通过自然语言直接访问 Azure Database for PostgreSQL 和 SQL Server
@@ -222,11 +222,11 @@ Azure MCP 服务器将生成一个完整的、可用于生产的 Python 脚本�
 - 提供详细日志和信息丰富的控制台输出
 - 脚本结构合理，包含函数、文档和类型提示
 
-令人印象深刻的是，没有 Azure MCP，您可能只能得到通用的 Blob 存储代码，虽然能用但不符合当前 Azure 模式。而有了 Azure MCP，您获得的代码能利用最新认证方法，处理 Azure 特有的错误场景，并遵循微软推荐的生产应用实践。
+令人印象深刻的是，没有 Azure MCP，你可能只能得到通用的 Blob 存储代码，虽然能用但不符合当前 Azure 模式。而有了 Azure MCP，你获得的代码能利用最新认证方法，处理 Azure 特有的错误场景，并遵循微软推荐的生产应用实践。
 
 **特色示例**：我经常忘记 `az` 和 `azd` CLI 的具体命令，通常是先查语法再执行命令。很多时候我直接登录门户点击操作，因为不想承认自己记不住命令。能够直接用自然语言描述需求非常棒，更棒的是还能在 IDE 里完成！
 
-[Azure MCP 仓库](https://github.com/Azure/azure-mcp?tab=readme-ov-file#-what-can-you-do-with-the-azure-mcp-server) 中有丰富的用例列表供您入门。想了解详细的安装指南和高级配置选项，请访问[官方 Azure MCP 文档](https://learn.microsoft.com/azure/developer/azure-mcp-server/)。
+[Azure MCP 仓库](https://github.com/Azure/azure-mcp?tab=readme-ov-file#-what-can-you-do-with-the-azure-mcp-server) 中有丰富的用例列表供你入门。想了解详细的安装指南和高级配置选项，请访问[官方 Azure MCP 文档](https://learn.microsoft.com/azure/developer/azure-mcp-server/)。
 
 ### 3. 🐙 GitHub MCP 服务器
 
@@ -234,7 +234,7 @@ Azure MCP 服务器将生成一个完整的、可用于生产的 Python 脚本�
 
 **功能介绍**：官方 GitHub MCP 服务器实现了与 GitHub 全生态的无缝集成，支持托管远程访问和本地 Docker 部署。它不仅限于基本的仓库操作，还包括 GitHub Actions 管理、拉取请求工作流、问题跟踪、安全扫描、通知和高级自动化功能。
 
-**为什么有用**：该服务器彻底改变了您与 GitHub 的交互方式，将完整的平台体验直接带入开发环境。无需频繁在 VS Code 和 GitHub.com 之间切换进行项目管理、代码审查和 CI/CD 监控，您可以通过自然语言命令一站式完成所有操作，专注于代码本身。
+**为什么有用**：该服务器彻底改变了你与 GitHub 的交互方式，将完整的平台体验直接带入开发环境。无需频繁在 VS Code 和 GitHub.com 之间切换进行项目管理、代码审查和 CI/CD 监控，你可以通过自然语言命令一站式完成所有操作，专注于代码本身。
 
 > **ℹ️ 注意：不同类型的“Agent”**
 > 
@@ -256,7 +256,7 @@ Azure MCP 服务器将生成一个完整的、可用于生产的 Python 脚本�
 > “我需要为冲刺评审做准备。帮我列出本周我创建的所有拉取请求，检查 CI/CD 管道状态，汇总需要处理的安全警报，并根据带有‘feature’标签的已合并 PR 帮我起草发布说明。”
 
 GitHub MCP 服务器将会：
-- 查询您最近的拉取请求及其详细状态
+- 查询你最近的拉取请求及其详细状态
 - 分析工作流运行，突出显示失败或性能问题
 - 汇总安全扫描结果，优先处理关键警报
 - 从已合并的 PR 中提取信息，生成全面的发布说明
@@ -264,7 +264,7 @@ GitHub MCP 服务器将会：
 
 **特色示例**：我非常喜欢用它来处理代码审查工作流。无需在 VS Code、GitHub 通知和拉取请求页面间切换，我只需说“显示所有等待我审查的 PR”，然后“给 PR #123 添加评论，询问认证方法中的错误处理”。服务器负责调用 GitHub API，维护讨论上下文，甚至帮我写出更有建设性的审查评论。
 
-**认证选项**：服务器支持 OAuth（在 VS Code 中无缝体验）和个人访问令牌，且可配置只启用所需的 GitHub 功能模块。您可以选择远程托管服务快速部署，或通过 Docker 本地运行以获得完全控制。
+**认证选项**：服务器支持 OAuth（在 VS Code 中无缝体验）和个人访问令牌，且可配置只启用所需的 GitHub 功能模块。你可以选择远程托管服务快速部署，或通过 Docker 本地运行以获得完全控制。
 
 > **💡 专业提示**
 > 
@@ -276,11 +276,11 @@ GitHub MCP 服务器将会：
 
 **功能介绍**：连接 Azure DevOps 服务，实现全面的项目管理、工作项跟踪、构建管道管理和仓库操作。
 
-**为什么有用**：对于以 Azure DevOps 作为主要 DevOps 平台的团队，这个 MCP 服务器消除了在开发环境和 Azure DevOps 网页界面之间频繁切换的麻烦。您可以直接通过 AI 助手管理工作项、查看构建状态、查询仓库和处理项目管理任务。
+**为什么有用**：对于以 Azure DevOps 作为主要 DevOps 平台的团队，这个 MCP 服务器消除了在开发环境和 Azure DevOps 网页界面之间频繁切换的麻烦。你可以直接通过 AI 助手管理工作项、查看构建状态、查询仓库和处理项目管理任务。
 
 **实际应用示例**：“显示当前冲刺中 WebApp 项目的所有活跃工作项”、“为我刚发现的登录问题创建一个缺陷报告”，或“检查构建管道状态并显示最近的失败”。
 
-**特色示例**：您可以轻松通过简单查询查看团队当前冲刺的状态，比如“显示当前冲刺中 WebApp 项目的所有活跃工作项”或“为我刚发现的登录问题创建一个缺陷报告”，无需离开开发环境。
+**特色示例**：你可以轻松通过简单查询查看团队当前冲刺的状态，比如“显示当前冲刺中 WebApp 项目的所有活跃工作项”或“为我刚发现的登录问题创建一个缺陷报告”，无需离开开发环境。
 
 ### 5. 📝 MarkItDown MCP 服务器
 [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_MarkItDown_MCP-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://vscode.dev/redirect/mcp/install?name=MarkItDown%20MCP&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40microsoft%2Fmcp-markitdown%40latest%22%5D%7D) [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install_MarkItDown_MCP-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=MarkItDown%20MCP&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40microsoft%2Fmcp-markitdown%40latest%22%5D%7D&quality=insiders) [![GitHub](https://img.shields.io/badge/GitHub-View_Repository-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/microsoft/markitdown)

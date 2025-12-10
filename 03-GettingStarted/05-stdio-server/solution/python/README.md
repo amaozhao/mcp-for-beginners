@@ -65,13 +65,13 @@ npx @modelcontextprotocol/inspector python server.py
 ```
 
 这将会：
-1. 将您的服务器作为子进程启动
+1. 将你的服务器作为子进程启动
 2. 打开一个用于测试的 Web 界面
-3. 允许您交互式测试所有服务器工具
+3. 允许你交互式测试所有服务器工具
 
 ### 方法 2: 直接进行 JSON-RPC 测试
 
-您也可以通过直接发送 JSON-RPC 消息进行测试：
+你也可以通过直接发送 JSON-RPC 消息进行测试：
 
 1. 启动服务器: `python server.py`
 2. 发送一个 JSON-RPC 消息（示例）：
@@ -93,7 +93,7 @@ npx @modelcontextprotocol/inspector python server.py
 
 ### 使用 Claude Desktop 进行测试
 
-要在 Claude Desktop 中使用此服务器，请将以下配置添加到您的 `claude_desktop_config.json` 文件中：
+要在 Claude Desktop 中使用此服务器，请将以下配置添加到你的 `claude_desktop_config.json` 文件中：
 
 ```json
 {

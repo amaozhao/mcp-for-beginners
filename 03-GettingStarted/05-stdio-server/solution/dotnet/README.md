@@ -55,11 +55,11 @@ npx @modelcontextprotocol/inspector dotnet run
 此操作将：
 1. 将服务器作为子进程启动
 2. 打开一个用于测试的 Web 界面
-3. 允许您交互式测试所有服务器工具
+3. 允许你交互式测试所有服务器工具
 
 ### 方法 2：直接使用命令行测试
 
-您也可以通过直接启动 Inspector 进行测试：
+你也可以通过直接启动 Inspector 进行测试：
 
 ```bash
 npx @modelcontextprotocol/inspector dotnet run --project .
@@ -76,7 +76,7 @@ npx @modelcontextprotocol/inspector dotnet run --project .
 
 ### 使用 Claude Desktop 测试
 
-要在 Claude Desktop 中使用此服务器，请将以下配置添加到您的 `claude_desktop_config.json` 文件中：
+要在 Claude Desktop 中使用此服务器，请将以下配置添加到你的 `claude_desktop_config.json` 文件中：
 
 ```json
 {

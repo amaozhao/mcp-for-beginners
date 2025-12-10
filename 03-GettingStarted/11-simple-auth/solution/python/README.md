@@ -24,7 +24,7 @@ pip install "mcp[cli]" dotenv PyJWT requeests
 
 ## 生成令牌
 
-您需要生成一个令牌，供客户端与服务器通信使用。
+你需要生成一个令牌，供客户端与服务器通信使用。
 
 调用：
 
@@ -46,7 +46,7 @@ python server.py
 python client.py
 ```
 
-在服务器终端中，您应该会看到类似以下内容：
+在服务器终端中，你应该会看到类似以下内容：
 
 ```text
 Valid token, proceeding...
@@ -54,7 +54,7 @@ User exists, proceeding...
 User has required scope, proceeding...
 ```
 
-在客户端窗口中，您应该会看到类似以下的文本：
+在客户端窗口中，你应该会看到类似以下的文本：
 
 ```text
 Tool result: meta=None content=[TextContent(type='text', text='{\n  "current_time": "2025-10-06T17:37:39.847457",\n  "timezone": "UTC",\n  "timestamp": 1759772259.847457,\n  "formatted": "2025-10-06 17:37:39"\n}', annotations=None, meta=None)] structuredContent={'current_time': '2025-10-06T17:37:39.847457', 'timezone': 'UTC', 'timestamp': 1759772259.847457, 'formatted': '2025-10-06 17:37:39'} isError=False
@@ -70,7 +70,7 @@ Tool result: meta=None content=[TextContent(type='text', text='{\n  "current_tim
  if not has_scope(has_header, "Admin.Write"):
 ```
 
-将其修改为 "User.Write"。当前令牌没有该权限级别，因此如果您重新启动服务器并再次尝试运行客户端，您应该会在服务器终端中看到类似以下的错误：
+将其修改为 "User.Write"。当前令牌没有该权限级别，因此如果你重新启动服务器并再次尝试运行客户端，你应该会在服务器终端中看到类似以下的错误：
 
 ```text
 Valid token, proceeding...
@@ -78,7 +78,7 @@ User exists, proceeding...
 -> Missing required scope!
 ```
 
-您可以选择将服务器代码改回原样，或者生成一个包含额外权限范围的新令牌，取决于您的需求。
+你可以选择将服务器代码改回原样，或者生成一个包含额外权限范围的新令牌，取决于你的需求。
 
 ---
 
