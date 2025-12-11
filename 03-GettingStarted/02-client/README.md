@@ -858,11 +858,11 @@ solution/
 
 | 语言       | 文件                          | 描述                                     |
 |------------|-------------------------------|------------------------------------------|
-| **Java**   | [`client_example_java.java`](../../../../03-GettingStarted/02-client/client_example_java.java) | 使用 SSE 传输的完整 Java 客户端，包含全面的错误处理 |
-| **C#**     | [`client_example_csharp.cs`](../../../../03-GettingStarted/02-client/client_example_csharp.cs) | 使用 stdio 传输的完整 C# 客户端，支持自动服务器启动 |
-| **TypeScript** | [`client_example_typescript.ts`](../../../../03-GettingStarted/02-client/client_example_typescript.ts) | 完整的 TypeScript 客户端，支持所有 MCP 协议功能 |
-| **Python** | [`client_example_python.py`](../../../../03-GettingStarted/02-client/client_example_python.py) | 使用 async/await 模式的完整 Python 客户端 |
-| **Rust**   | [`client_example_rust.rs`](../../../../03-GettingStarted/02-client/client_example_rust.rs) | 使用 Tokio 进行异步操作的完整 Rust 客户端 |
+| **Java**   | [`client_example_java.java`](./client_example_java.java) | 使用 SSE 传输的完整 Java 客户端，包含全面的错误处理 |
+| **C#**     | [`client_example_csharp.cs`](./client_example_csharp.cs) | 使用 stdio 传输的完整 C# 客户端，支持自动服务器启动 |
+| **TypeScript** | [`client_example_typescript.ts`](./client_example_typescript.ts) | 完整的 TypeScript 客户端，支持所有 MCP 协议功能 |
+| **Python** | [`client_example_python.py`](./client_example_python.py) | 使用 async/await 模式的完整 Python 客户端 |
+| **Rust**   | [`client_example_rust.rs`](./client_example_rust.rs) | 使用 Tokio 进行异步操作的完整 Rust 客户端 |
 每个完整示例包括：
 
 - ✅ **连接建立**和错误处理  
